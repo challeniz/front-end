@@ -7,12 +7,14 @@ import './App.css';
 // pages
 import ListPage from './pages/list_page';
 import NewPage from './pages/new_page';
+import LoginPage from './pages/login/login_page';
 
 function App() {
   return (
     <Routes>
-        <Route path="/newpage" element={<NewPage />} />
-        <Route path="/listpage" element={<ListPage />} />
+      <Route path="/newpage" element={<NewPage />} />
+      <Route path="/listpage" element={<ListPage />} />
+      <Route path="/loginpage" element={<LoginPage />} />
     </Routes>
   );
 }
