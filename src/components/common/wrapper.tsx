@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const WrapperBlock = styled.div`
   width: 1400px;
   margin: 60px auto;
-  background-color: #fff;
 `;
 
 interface WrapperProps {
