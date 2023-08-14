@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const WhiteContentsBlock = styled.div`
   padding: 35px 40px;
+  line-height:30px;
+  color:#545454;
 `
 
 interface WhiteContentsProps {
