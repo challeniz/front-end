@@ -42,8 +42,13 @@ export const FormButton: React.FC<FormButtonProps> = ({ children }) => {
 };
 
 export const FormCancelButton: React.FC<CancelButtonProps> = ({ children }) => {
+  const handleCancel = () => {
+    if (window.confirm('챌린지 개설을 취소하시겠습니까?')) {
+      window.location.href = '/';
+    }
+  };
   return (
-    <CancelButton>
+    <CancelButton onClick={handleCancel}>
       {children}
     </CancelButton>
   );
