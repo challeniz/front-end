@@ -1,5 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, ChangeEvent } from 'react';
 import styled from 'styled-components';
+
+interface TagBoxProps {
+  tags: string[];
+  onChangeTags: (tags: string[]) => void;
+}
 
 const TagBoxBlock = styled.div`
 `;
@@ -55,13 +60,11 @@ const TagListBlock = styled.div`
   margin-top: 10px;
 `;
 
-// React.memo를 사용하여 tag 값이 바뀔 때만 리렌더링되도록 처리
-const TagItem = React.memo(({ tag, onRemove, onChangeTags }) => (
+const TagItem: React.FC<{ tag: string; onRemove: (tag: string) => void }> = React.memo(({ tag, onRemove }) => (
   <Tag onClick={() => onRemove(tag)}>#{tag}</Tag>
 ));
 
-// React.memo를 사용하여 tags 값이 바뀔 때만 리렌더링되도록 처리
-const TagList = React.memo(({ tags, onRemove }) => (
+const TagList: React.FC<{ tags: string[]; onRemove: (tag: string) => void }> = React.memo(({ tags, onRemove }) => (
   <TagListBlock>
     {tags.map(tag => (
       <TagItem key={tag} tag={tag} onRemove={onRemove} />
@@ -69,12 +72,12 @@ const TagList = React.memo(({ tags, onRemove }) => (
   </TagListBlock>
 ));
 
-const TagBox = ({ tags, onChangeTags }) => {
-  const [input, setInput] = useState('');
-  const [localTags, setLocalTags] = useState([]);
+const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
+  const [input, setInput] = useState<string>('');
+  const [localTags, setLocalTags] = useState<string[]>([]);
 
   const insertTag = useCallback(
-    tag => {
+    (tag: string) => {
       if (!tag) return; // 공백이라면 추가하지 않음
       if (localTags.includes(tag)) return; // 이미 존재한다면 추가하지 않음
       if (localTags.length === 3 || tag.length >= 5) {
@@ -91,7 +94,7 @@ const TagBox = ({ tags, onChangeTags }) => {
   );
 
   const onRemove = useCallback(
-    tag => {
+    (tag: string) => {
       const nextTags = localTags.filter(t => t !== tag);
       setLocalTags(nextTags);
       onChangeTags(nextTags);
@@ -99,12 +102,12 @@ const TagBox = ({ tags, onChangeTags }) => {
     [localTags, onChangeTags],
   );
 
-  const onChange = useCallback(e => {
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   }, []);
 
   const onSubmit = useCallback(
-    e => {
+    (e: React.FormEvent) => {
       e.preventDefault();
       insertTag(input.trim()); // 앞뒤 공백 없앤 후 등록
       setInput(''); // input 초기화
