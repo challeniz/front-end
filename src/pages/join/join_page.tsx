@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../../components/common/wrapper';
+import { stringLiteral } from '@babel/types';
+import { Routes, Route, Link } from 'react-router-dom';
 
 //더미데이터 테스트용
 const User = {
@@ -13,10 +15,12 @@ const JoinPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPw, setConfirmPw] = useState('')
+  const [name, setName] = useState('')
 
   const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
   const [ConfirmPwValid, setConfirmPwValid] = useState(false);
+  const [ConfirmNameValid, setConfirmNameValid] = useState(false)
   const [notAllow, setNotAllow] = useState(true); //이메일, 패스워드가 맞게 작동할때 버튼이 활성화 되는 기능
 
    //submit 버튼 활성화 기능 구현 코드
@@ -73,6 +77,23 @@ const JoinPage = () => {
       setConfirmPwValid(false);
     }
   };
+
+  //이름 validation 유효성 검사
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+
+    
+    {
+      /* 이름 valid 유효성 검사 */
+    }
+    
+    if (name.length === 3) {
+      setConfirmNameValid(true);
+    } else {
+      setConfirmNameValid(false);
+    }
+  };
+
 
   //이메일 입력 후 중복확인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = () => {
@@ -157,8 +178,32 @@ const JoinPage = () => {
             <div>비밀번호가 일치하지 않습니다.</div>
           )}
         </ErrorMessageWrap>
-        
+
+        {/* 이름 입력칸 */}
+        <InputTitle style={{ marginTop: '26px' }}>이름</InputTitle>
+        <InputWrap>
+          <Input2 
+          type="text"
+          value={name}
+          onChange={handleName}
+          placeholder="이름을 입력해주세요."
+          />
+        </InputWrap>
+        {/* 비밀번호 에러메세지 입력칸 */}
+        <ErrorMessageWrap>
+          {!ConfirmNameValid && name.length > 0 && (
+            <div>비밀번호가 일치하지 않습니다.</div>
+          )}
+        </ErrorMessageWrap>
       </EmailPW>
+
+      {/* 가입하기, 가입취소 버튼 */}
+      <BtnWrap>
+        <LoginBtn>가입하기</LoginBtn>
+        <Link to="/loginpage">
+          <Cancel>가입취소</Cancel>
+        </Link>
+      </BtnWrap>
       </Body>
       
     </Wrapper>
@@ -288,5 +333,37 @@ const ErrorMessageWrap = styled.div`
   font-size: 14px;
 `;
 
+//가입하기 취소하기 버튼 틀 구조
+const BtnWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
+const LoginBtn = styled.button`
+  border-radius: 3px;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #e2e0e0;
+  border-radius: 6px;
+  background-color: #339af0;
+  font-size: 20px;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+  margin-top: 30px;
+`
 
+const Cancel =styled.button`
+  border-radius: 3px;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #e2e0e0;
+  border-radius: 6px;
+  background-color: #cde8ac;
+  font-size: 20px;
+  color: black;
+  font-weight: 400;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-left: 20px;
+`
