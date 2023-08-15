@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../../components/common/wrapper';
+import { Routes, Route, Link } from 'react-router-dom';
+
 
 //더미데이터 테스트용
 const User = {
@@ -123,7 +125,10 @@ const LoginPage = () => {
       {/* 계정이 없을경우 회원가입 페이지 리로드 */}
       <NoMemberShipWrap>
         <NoMemberShip>계정이 없으신가요?</NoMemberShip>
-        <JoinMemberBtn>회원가입</JoinMemberBtn>
+        <Link to={"/joinpage"}>
+          <JoinMemberBtn>회원가입</JoinMemberBtn>
+        </Link>
+        
       </NoMemberShipWrap>
 
       {/* 구분선 */}
@@ -178,15 +183,15 @@ const InputWrap = styled.div`
   margin-top: 5px;
   display: flex;
   align-items: center;
-  border-radius: 12px;
+  border-radius: 3px;
   width: 400px;
   padding: 16px;
   border: 1px solid #e2e0e0;
   background-color: white;
-  box-shadow: 2px 2px 1px 2px gray;
+  box-shadow: 1px 1px 0.5px 0.5px gray;
 
   &:focus-within {
-    border: 1px solid #339af0;
+    border: 1.5px solid #339af0;
   }
 `;
 
@@ -223,6 +228,7 @@ const ErrorMessageWrap = styled.div`
   color: #ef0000;
   font-size: 14px;
 `;
+
 //버튼 정렬해주는 기능
 const BtnCenter = styled.div`
   display: flex;
@@ -236,7 +242,7 @@ const SubmitBtn = styled.button`
   margin-top: 5px;
   margin-bottom: 40px;
   display: flex;
-  border-radius: 12px;
+  border-radius: 3px;
   width: 400px;
   padding: 16px;
   border: 1px solid #e2e0e0;
@@ -279,7 +285,7 @@ const JoinMemberBtn = styled.p`
 //구분선
 const Divider = styled.div`
   width: 100%;
-  height: 3px;
+  height: 1px;
   background-color: #e2e2e2;
   margin-top: 30px;
 `;
@@ -317,7 +323,6 @@ const Kakao = styled.image`
 const Google = styled.image`
   flex-wrap: nowrap;
 
-  
   img {
     width: 80px; 
     height: 80px; 
