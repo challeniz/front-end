@@ -73,12 +73,16 @@ const LoginPage = () => {
         {/* 이메일 입력칸 */}
         <InputTitle>이메일 주소</InputTitle>
         <InputWrap>
+          <UserIcon>
+            <a href="https://www.flaticon.com/kr/free-icons/" title="사람 아이콘"></a>
+            <img src={require('../../assets/icon/free-icon-user-5264565.png')} alt="아이콘" />
+            </UserIcon>
           <Input
             type="text"
             value={email}
             onChange={handleEmail}
             placeholder="test@gmail.com"
-          />
+          />   
         </InputWrap>
         {/* 이메일 에러메세지 입력칸 */}
         <ErrorMessageWrap>
@@ -90,6 +94,10 @@ const LoginPage = () => {
         {/* 비밀번호 입력칸 */}
         <InputTitle style={{ marginTop: '26px' }}>비밀번호</InputTitle>
         <InputWrap>
+          <UserIcon>
+            <a href="https://www.flaticon.com/kr/free-icons/" title="키 아이콘"></a>
+            <img src={require('../../assets/icon/free-icon-key-566076.png')} alt="아이콘" />
+          </UserIcon>
           <Input
             type="password"
             value={password}
@@ -123,6 +131,20 @@ const LoginPage = () => {
 
       {/* 소셜로그인 */}
       <SocialLogin>SNS계정으로 로그인</SocialLogin>
+
+      {/* 소셜로그인 이모티콘 틀*/}
+      <IconWrap>
+            <Kakao>
+              <a href="https://www.flaticon.com/kr/free-icons/-" title="카카오 톡 아이콘"></a>
+              <img src={require('../../assets/icon/free-icon-kakao-talk-4494622.png')} alt="아이콘" />
+            </Kakao>
+            <Google>
+            <a href="https://www.flaticon.com/kr/free-icons/" title="구글 아이콘"></a>
+              <img src={require('../../assets/icon/free-icon-search-281764.png')} alt="아이콘" />
+            </Google>
+      </IconWrap>
+
+
     </Wrapper>
   );
 };
@@ -155,12 +177,13 @@ const InputTitle = styled.div`
 const InputWrap = styled.div`
   margin-top: 5px;
   display: flex;
+  align-items: center;
   border-radius: 12px;
-  width: 700px;
+  width: 500px;
   padding: 16px;
   border: 1px solid #e2e0e0;
   background-color: white;
-  box-shadow: 8px 8px 5px 2px gray;
+  box-shadow: 2px 2px 1px 2px gray;
 
   &:focus-within {
     border: 1px solid #339af0;
@@ -181,6 +204,19 @@ const Input = styled.input`
   }
 `;
 
+//이메일 아이콘
+const UserIcon = styled.image`
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 24px; 
+    height: 24px; 
+    margin-right: 20px; 
+  
+  }
+`
+
 //이메일, 비밀번호 에러 메세지
 const ErrorMessageWrap = styled.div`
   margin-top: 10px;
@@ -193,7 +229,7 @@ const BtnCenter = styled.div`
   justify-content: center;
 `;
 
-//이메일, 비밀번호 입력 후 submit 버튼
+//이메일, 비밀번호 입력 후 로그인 submit 버튼
 const SubmitBtn = styled.button`
   display: flex;
   justify-content: center;
@@ -201,7 +237,7 @@ const SubmitBtn = styled.button`
   margin-bottom: 40px;
   display: flex;
   border-radius: 12px;
-  width: 700px;
+  width: 500px;
   padding: 16px;
   border: 1px solid #e2e0e0;
   background-color: #339af0;
@@ -210,7 +246,7 @@ const SubmitBtn = styled.button`
   color: white;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 8px 8px 5px 2px gray;
+  
 
   &:disabled {
     background-color: #dadada;
@@ -257,5 +293,37 @@ const SocialLogin = styled.div`
   margin-top: 50px;
   color: #339af0;
 `;
+
+//소셜 로그인 아이콘 틀
+const IconWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+`
+
+//카카오 로그인 아이콘
+const Kakao = styled.image`
+  flex-wrap: nowrap;
+  
+  img {
+    width: 80px; 
+    height: 80px; 
+    margin-right: 50px; 
+  
+  }
+`
+
+//구글 로그인 아이콘
+const Google = styled.image`
+  flex-wrap: nowrap;
+
+  
+  img {
+    width: 80px; 
+    height: 80px; 
+    margin-right: 20px; 
+  
+  }
+`
 
 export default LoginPage;
