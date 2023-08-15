@@ -60,11 +60,24 @@ const LoginPage = () => {
 
   //이메일, 비밀번호 입력 후 로그인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = () => {
-    if (email === User.email && password === User.password) {
-      alert('로그인에 성공했습니다.');
+    
+    //로컬스토리지.getItem --> 회원가입해서 로컬스토리지 저장한 데이터 가져오기
+    const localEmail = localStorage.getItem('email');
+    const localPassword = localStorage.getItem('password');
+    if(email === localEmail && password === localPassword) {
+      alert("로그인에 성공하였습니다.")
     } else {
-      alert('등록되지 않은 회원입니다.');
+      alert("로그인에 실패하였습니다.")
     }
+
+
+    
+    
+    // if (email === User.email && password === User.password) {
+    //   alert('로그인에 성공했습니다.');
+    // } else {
+    //   alert('등록되지 않은 회원입니다.');
+    // }
   };
 
   return (
