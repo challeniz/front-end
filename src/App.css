@@ -46,3 +46,15 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+input:focus-visible {
+	outline-color: #339af0;;
+}
+
+select:focus-visible {
+	outline-color: #339af0;;
+}
+
+textarea:focus-visible {
+	outline-color: #339af0;;
+}
