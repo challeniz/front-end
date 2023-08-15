@@ -4,7 +4,7 @@ import banner1 from '../../assets/image/banner.png';
 import banner2 from '../../assets/image/banner_2.png';
 import banner3 from '../../assets/image/banner_3.png';
 
-import { AiOutlineDoubleLeft, AiOutlineDoubleRight} from "react-icons/ai";
+import { AiOutlineLeft, AiOutlineRight} from "react-icons/ai";
 const SlideBnner = () => {
   const SlideRef = useRef<HTMLDivElement | null>(null); 
   const [CurrentImg, setCurrentImg] = useState(0);
@@ -48,8 +48,8 @@ const nextSlide = () => {
           </SlideBox>
         </SlideInner>
       </BannerSlide>
-      <SlideBtnLeft onClick={prevSlide}><AiOutlineDoubleLeft /></SlideBtnLeft>
-      <SlideBtnRight onClick={nextSlide}><AiOutlineDoubleRight /></SlideBtnRight>
+      <SlideBtnLeft onClick={prevSlide}><AiOutlineLeft/></SlideBtnLeft>
+      <SlideBtnRight onClick={nextSlide}><AiOutlineRight /></SlideBtnRight>
     </div>
   );
 };

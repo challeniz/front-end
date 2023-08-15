@@ -5,6 +5,7 @@ import './App.css';
 // components
 import  Header   from './components/common/header';
 import  SlideBnner   from './components/common/slide';
+import  Footer   from './components/common/footer';
 // pages
 import ListPage from './pages/list_page';
 import NewPage from './pages/new_page';
@@ -17,11 +18,14 @@ function App() {
     <div>
       <Header />
       <SlideBnner />
+      <MainPage />
       <Routes>
         <Route path="/newpage" element={<NewPage />} />
         <Route path="/listpage" element={<ListPage />} />
-        <Route path="/mainpage" element={<MainPage />} />
+       
       </Routes>
+      
+      <Footer />
     </div>
   );
 }

@@ -49,25 +49,20 @@ table {
 	
 }
 
-
-.Search h1 {
-	
-	font-size: 34px;
-	font-style: normal;
-	font-weight: 600;
-	line-height: normal;
-	margin-bottom: 20px;
-	
+input:focus-visible {
+	outline-color: #339af0;;
 }
 
-.Search span {
-	color: #339AF0;
+select:focus-visible {
+	outline-color: #339af0;;
 }
 
-.SearchBox input{
- width: 623px;
- border: none;
- border-bottom: 1px solid #030303;
- background-color: transparent;
+textarea:focus-visible {
+	outline-color: #339af0;
 
 }
+
+
+
+
+
