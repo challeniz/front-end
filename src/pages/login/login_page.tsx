@@ -151,7 +151,7 @@ const LoginPage = () => {
 
 // 회원 로그인 메인 글
 const Memvership = styled.div`
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -162,7 +162,7 @@ const EmailPW = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 70px;
 `;
 
 // 이메일주소 , 비밀번호
@@ -170,7 +170,7 @@ const InputTitle = styled.div`
   font-size: 18px;
   font-weight: 600;
   color: #262626;
-  text-align: left;
+  
 `;
 
 //이메일, 비밀번호 입력창 틀
@@ -179,7 +179,7 @@ const InputWrap = styled.div`
   display: flex;
   align-items: center;
   border-radius: 12px;
-  width: 500px;
+  width: 400px;
   padding: 16px;
   border: 1px solid #e2e0e0;
   background-color: white;
@@ -237,7 +237,7 @@ const SubmitBtn = styled.button`
   margin-bottom: 40px;
   display: flex;
   border-radius: 12px;
-  width: 500px;
+  width: 400px;
   padding: 16px;
   border: 1px solid #e2e0e0;
   background-color: #339af0;
