@@ -13,7 +13,7 @@ import { AiOutlineSearch, AiOutlineLeft, AiOutlineRight, AiOutlineSwapRight} fro
 const MainPage = () => {
   const SlideRef = useRef<HTMLDivElement | null>(null);
   const [CurrentImg, setCurrentImg] = useState(0);
-  const IMG_WIDTH = 100;
+  const IMG_WIDTH = 50;
   const slideRange = CurrentImg * IMG_WIDTH;
   const TotalImg = 4;
 
@@ -22,7 +22,7 @@ const MainPage = () => {
       SlideRef.current.style.transition = 'transform 0.5s ease-in-out';
       SlideRef.current.style.transform = `translateX(-${slideRange}px)`;
     }
-  }, [slideRange]); // Use slideRange instead of CurrentImg
+  }, [slideRange]); 
 
   const prevSlide = () => {
     setCurrentImg(prevIndex => (prevIndex - 1 + TotalImg) % TotalImg);
@@ -52,7 +52,7 @@ const MainPage = () => {
       <ContentsList>
         <ProgressList>
           <li><h2>진행중인 챌린지</h2></li>
-          <li onClick={prevSlide}><AiOutlineLeft/>/</li>
+          <li onClick={prevSlide}><AiOutlineLeft/></li>
            <li onClick={nextSlide}><AiOutlineRight /></li>
           <li><h3>전체보기</h3></li>
           </ProgressList>
@@ -67,10 +67,11 @@ const MainPage = () => {
      <PopularList>
         <ProgressList>
           <li><h2><PopularListSpan>HOT!</PopularListSpan> 인기 챌린지</h2></li>
-          <li><AiOutlineLeft/></li> <li><AiOutlineRight/></li>
+          <li onClick={prevSlide}><AiOutlineLeft/></li>
+           <li onClick={nextSlide}><AiOutlineRight /></li>
           <li><h3>전체보기</h3></li>
           </ProgressList>
-          <ContentsWrap>
+          <ContentsWrap ref={SlideRef}>
           <ListContent />
           <ListContent />
           <ListContent />
@@ -78,19 +79,20 @@ const MainPage = () => {
         </ContentsWrap>
      </PopularList>
 
-     <NewList>
+     {/* <NewList>
         <ProgressList>
           <li><h2><NewListSpan>NEW!</NewListSpan> 인기 챌린지</h2></li>
-          <li><AiOutlineLeft/></li> <li><AiOutlineRight/></li>
+          <li onClick={prevSlide}><AiOutlineLeft/></li>
+           <li onClick={nextSlide}><AiOutlineRight /></li>
           <li><h3>전체보기</h3></li>
           </ProgressList>
-          <ContentsWrap>
+          <ContentsWrap ref={SlideRef}>
           <ListContent />
           <ListContent />
           <ListContent />
           <ListContent />
         </ContentsWrap>
-     </NewList>
+     </NewList> */}
      </Wrapper>
 
     <BottomBannerr>
@@ -154,6 +156,7 @@ const ContentsList = styled.div `
 position: relative;
 top: 16rem;
 left: 4rem;
+overflow: hidden;
 `
 
 const PopularList= styled.div `
