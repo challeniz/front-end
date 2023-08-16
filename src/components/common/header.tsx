@@ -5,12 +5,15 @@ const HeaderWrapper = styled.div`
   padding: 40px 80px;
   position: relative;
   cursor: pointer;
+  height: 90px;
+  
 `;
 
 const HeaderContainer = styled.header`
   display: flex;
   transform: translateY(-50%);
   align-items: center;
+ 
 `;
 
 const Logo = styled.div`

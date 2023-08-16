@@ -5,10 +5,11 @@ import banner2 from '../../assets/image/banner_2.png';
 import banner3 from '../../assets/image/banner_3.png';
 
 import { AiOutlineLeft, AiOutlineRight} from "react-icons/ai";
+import { relative } from 'path';
 const SlideBnner = () => {
   const SlideRef = useRef<HTMLDivElement | null>(null); 
   const [CurrentImg, setCurrentImg] = useState(0);
-  const IMG_WIDTH = '100vw'; 
+  const IMG_WIDTH = '110vw'; 
   const slideRange = CurrentImg * 100; 
   const TotalImg = 3;
 
@@ -34,7 +35,7 @@ const nextSlide = () => {
 
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <BannerSlide>
         <SlideInner ref={SlideRef}>
           <SlideBox style={{ width: IMG_WIDTH }}>

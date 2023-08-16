@@ -1,16 +1,45 @@
-import React from 'react';
+import React, {useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import ListContent from '../components/form/list_content';
 import banner4 from '../assets/image/banner_4.png';
+import Header from '../components/common/header';
+import Footer from '../components/common/footer';
+import SlideBnner from '../components/common/slide';
+import Wrapper from '../components/common/wrapper';
 import { AiOutlineSearch, AiOutlineLeft, AiOutlineRight, AiOutlineSwapRight} from "react-icons/ai";
 
 
 
-
-
 const MainPage = () => {
+  const SlideRef = useRef<HTMLDivElement | null>(null);
+  const [CurrentImg, setCurrentImg] = useState(0);
+  const IMG_WIDTH = 100;
+  const slideRange = CurrentImg * IMG_WIDTH;
+  const TotalImg = 4;
+
+  useEffect(() => {
+    if (SlideRef.current) {
+      SlideRef.current.style.transition = 'transform 0.5s ease-in-out';
+      SlideRef.current.style.transform = `translateX(-${slideRange}px)`;
+    }
+  }, [slideRange]); // Use slideRange instead of CurrentImg
+
+  const prevSlide = () => {
+    setCurrentImg(prevIndex => (prevIndex - 1 + TotalImg) % TotalImg);
+  };
+
+  const nextSlide = () => {
+    setCurrentImg(prevIndex => (prevIndex + 1) % TotalImg);
+  };
+
+
+
+
   return (
   <div>
+     <Header />
+     <SlideBnner />
+     <Wrapper>
      <Search>
       <SearchTitle>찾고 있는 <SearchTitleColor>챌린지</SearchTitleColor>가 있다면?</SearchTitle>
       <SearchBox >
@@ -19,20 +48,22 @@ const MainPage = () => {
       </SearchBox>
      </Search>
      
+  
       <ContentsList>
         <ProgressList>
           <li><h2>진행중인 챌린지</h2></li>
-          <li><AiOutlineLeft/></li> <li><AiOutlineRight/></li>
+          <li onClick={prevSlide}><AiOutlineLeft/>/</li>
+           <li onClick={nextSlide}><AiOutlineRight /></li>
           <li><h3>전체보기</h3></li>
           </ProgressList>
-          <ContentsWrap>
-          <ListContent />
+          <ContentsWrap ref={SlideRef}>
+          <ListContent  />
           <ListContent />
           <ListContent />
           <ListContent />
         </ContentsWrap>
      </ContentsList>
-
+   
      <PopularList>
         <ProgressList>
           <li><h2><PopularListSpan>HOT!</PopularListSpan> 인기 챌린지</h2></li>
@@ -60,7 +91,7 @@ const MainPage = () => {
           <ListContent />
         </ContentsWrap>
      </NewList>
- 
+     </Wrapper>
 
     <BottomBannerr>
       <BottomInner>
@@ -73,12 +104,15 @@ const MainPage = () => {
       </BottomInner>
     </BottomBannerr>
 
-
+    <Footer />
+ 
   </div>
   
    
    )
 };
+
+
 
 
 const Search = styled.div`
@@ -102,6 +136,7 @@ color: #339AF0;
 `
  const SearchBox = styled.div`
  box-sizing: border-box;
+ font-size:25px;
  `
 
  const SearchBoxInput = styled.input `
@@ -109,6 +144,7 @@ color: #339AF0;
  border: none;
  border-bottom: 1px solid #030303;
  background-color: transparent;
+
  `
  const ContentsWrap = styled.div`
  display:grid;
@@ -260,6 +296,8 @@ font-size: 30px;
 
 	
 `
+
+
 
 
 
