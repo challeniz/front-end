@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Wrapper from '../../components/common/wrapper';
 import { Routes, Route, Link } from 'react-router-dom';
 
-
 //더미데이터 테스트용
 const User = {
   email: 'test@test.com',
@@ -60,19 +59,15 @@ const LoginPage = () => {
 
   //이메일, 비밀번호 입력 후 로그인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = () => {
-    
     //로컬스토리지.getItem --> 회원가입해서 로컬스토리지 저장한 데이터 가져오기
     const localEmail = localStorage.getItem('email');
     const localPassword = localStorage.getItem('password');
-    if(email === localEmail && password === localPassword) {
-      alert("로그인에 성공하였습니다.")
+    if (email === localEmail && password === localPassword) {
+      alert('로그인에 성공하였습니다.');
     } else {
-      alert("로그인에 실패하였습니다.")
+      alert('로그인에 실패하였습니다.');
     }
 
-
-    
-    
     // if (email === User.email && password === User.password) {
     //   alert('로그인에 성공했습니다.');
     // } else {
@@ -89,15 +84,21 @@ const LoginPage = () => {
         <InputTitle>이메일 주소</InputTitle>
         <InputWrap>
           <UserIcon>
-            <a href="https://www.flaticon.com/kr/free-icons/" title="사람 아이콘"></a>
-            <img src={require('../../assets/icon/free-icon-user-5264565.png')} alt="아이콘" />
-            </UserIcon>
+            <a
+              href="https://www.flaticon.com/kr/free-icons/"
+              title="사람 아이콘"
+            ></a>
+            <img
+              src={require('../../assets/icon/free-icon-user-5264565.png')}
+              alt="아이콘"
+            />
+          </UserIcon>
           <Input
             type="text"
             value={email}
             onChange={handleEmail}
             placeholder="test@gmail.com"
-          />   
+          />
         </InputWrap>
         {/* 이메일 에러메세지 입력칸 */}
         <ErrorMessageWrap>
@@ -110,20 +111,26 @@ const LoginPage = () => {
         <InputTitle style={{ marginTop: '26px' }}>비밀번호</InputTitle>
         <InputWrap>
           <UserIcon>
-            <a href="https://www.flaticon.com/kr/free-icons/" title="키 아이콘"></a>
-            <img src={require('../../assets/icon/free-icon-key-566076.png')} alt="아이콘" />
+            <a
+              href="https://www.flaticon.com/kr/free-icons/"
+              title="키 아이콘"
+            ></a>
+            <img
+              src={require('../../assets/icon/free-icon-key-566076.png')}
+              alt="아이콘"
+            />
           </UserIcon>
           <Input
             type="password"
             value={password}
             onChange={handlePassword}
-            placeholder="영문, 숫자, 특수문자 포함 8자 이상"
+            placeholder="영문, 숫자, 특수문자 포함 10자 이상"
           />
         </InputWrap>
         {/* 비밀번호 에러메세지 입력칸 */}
         <ErrorMessageWrap>
           {!passwordValid && password.length > 0 && (
-            <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
+            <div>영문, 숫자, 특수문자 포함 10자 이상 입력해주세요.</div>
           )}
         </ErrorMessageWrap>
       </EmailPW>
@@ -138,10 +145,9 @@ const LoginPage = () => {
       {/* 계정이 없을경우 회원가입 페이지 리로드 */}
       <NoMemberShipWrap>
         <NoMemberShip>계정이 없으신가요?</NoMemberShip>
-        <Link to={"/joinpage"}>
+        <Link to={'/joinpage'}>
           <JoinMemberBtn>회원가입</JoinMemberBtn>
         </Link>
-        
       </NoMemberShipWrap>
 
       {/* 구분선 */}
@@ -152,17 +158,27 @@ const LoginPage = () => {
 
       {/* 소셜로그인 이모티콘 틀*/}
       <IconWrap>
-            <Kakao>
-              <a href="https://www.flaticon.com/kr/free-icons/-" title="카카오 톡 아이콘"></a>
-              <img src={require('../../assets/icon/free-icon-kakao-talk-4494622.png')} alt="아이콘" />
-            </Kakao>
-            <Google>
-            <a href="https://www.flaticon.com/kr/free-icons/" title="구글 아이콘"></a>
-              <img src={require('../../assets/icon/free-icon-search-281764.png')} alt="아이콘" />
-            </Google>
+        <Kakao>
+          <a
+            href="https://www.flaticon.com/kr/free-icons/-"
+            title="카카오 톡 아이콘"
+          ></a>
+          <img
+            src={require('../../assets/icon/free-icon-kakao-talk-4494622.png')}
+            alt="아이콘"
+          />
+        </Kakao>
+        <Google>
+          <a
+            href="https://www.flaticon.com/kr/free-icons/"
+            title="구글 아이콘"
+          ></a>
+          <img
+            src={require('../../assets/icon/free-icon-search-281764.png')}
+            alt="아이콘"
+          />
+        </Google>
       </IconWrap>
-
-
     </Wrapper>
   );
 };
@@ -188,7 +204,6 @@ const InputTitle = styled.div`
   font-size: 18px;
   font-weight: 600;
   color: #262626;
-  
 `;
 
 //이메일, 비밀번호 입력창 틀
@@ -228,12 +243,11 @@ const UserIcon = styled.image`
   align-items: center;
 
   img {
-    width: 24px; 
-    height: 24px; 
-    margin-right: 20px; 
-  
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
   }
-`
+`;
 
 //이메일, 비밀번호 에러 메세지
 const ErrorMessageWrap = styled.div`
@@ -265,7 +279,6 @@ const SubmitBtn = styled.button`
   color: white;
   font-weight: bold;
   cursor: pointer;
-  
 
   &:disabled {
     background-color: #dadada;
@@ -318,30 +331,28 @@ const IconWrap = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 30px;
-`
+`;
 
 //카카오 로그인 아이콘
 const Kakao = styled.image`
   flex-wrap: nowrap;
-  
+
   img {
-    width: 80px; 
-    height: 80px; 
-    margin-right: 50px; 
-  
+    width: 80px;
+    height: 80px;
+    margin-right: 50px;
   }
-`
+`;
 
 //구글 로그인 아이콘
 const Google = styled.image`
   flex-wrap: nowrap;
 
   img {
-    width: 80px; 
-    height: 80px; 
-    margin-right: 20px; 
-  
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
   }
-`
+`;
 
 export default LoginPage;
