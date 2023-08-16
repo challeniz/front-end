@@ -45,6 +45,8 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	
+	
 }
 
 input:focus-visible {
@@ -56,5 +58,11 @@ select:focus-visible {
 }
 
 textarea:focus-visible {
-	outline-color: #339af0;;
+	outline-color: #339af0;
+
 }
+
+
+
+
+
