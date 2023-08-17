@@ -5,19 +5,6 @@ import { stringLiteral } from '@babel/types';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 
 
-//더미데이터 테스트용
-const User = [
-  {
-    email: 'test@test.com',
-    password: 'qwer1234!!',
-  },
-  {
-    email: '1004@test.com',
-    password: '1004qwer!!',
-  },
-];
-
-
 
 const JoinPage = () => {
   const [email, setEmail] = useState(''); // 이메일 상태, 상태변경
@@ -25,7 +12,6 @@ const JoinPage = () => {
   const [confirmPw, setConfirmPw] = useState(''); // 비밀번호 재입력 상태, 상태변경
   const [name, setName] = useState(''); // 이름 상태, 상태변경
   const [number, setNumber] = useState(''); // 전화번호 상태, 상태변경
-  
 
   const [emailValid, setEmailValid] = useState(false); // 이메일 벨리데이션 유효성 검사
   const [passwordValid, setPasswordValid] = useState(false); // 비밀번호 벨리데이션 유효성 검사
@@ -34,7 +20,7 @@ const JoinPage = () => {
   const [numberValid, setNumberValid] = useState(false); // 전화번호 유효성 검사
   const [notAllow, setNotAllow] = useState(true); //이메일, 패스워드가 맞게 작동할때 버튼이 활성화 되는 기능
 
-  const navigate  = useNavigate();// 회원가입 페이지에서 회원가입 버튼 누르고 성공할 시 로그인 페이지로 넘어가는 기능
+  const navigate = useNavigate(); // 회원가입 페이지에서 회원가입 버튼 누르고 성공할 시 로그인 페이지로 넘어가는 기능
 
   //submit 버튼 활성화 기능 구현 코드
   useEffect(() => {
@@ -97,7 +83,7 @@ const JoinPage = () => {
     {
       /* 이름 valid 유효성 검사 */
     }
-    const regex = /^[가-힣]{3,4}$/
+    const regex = /^[가-힣]{3,4}$/;
     if (regex.test(name)) {
       setConfirmNameValid(true);
     } else {
@@ -124,7 +110,20 @@ const JoinPage = () => {
 
   //이메일 입력 후 중복확인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = () => {
-    const foundUser = User.find(userData => userData.email === email)
+
+    //더미데이터 테스트용
+const User = [
+  {
+    email: 'test@test.com',
+    password: 'qwer1234!!',
+  },
+  {
+    email: '1004@test.com',
+    password: '1004qwer!!',
+  },
+];
+
+    const foundUser = User.find((userData) => userData.email === email);
     if (foundUser) {
       alert('사용가능한 이메일입니다.');
     } else {
@@ -141,27 +140,25 @@ const JoinPage = () => {
       !ConfirmNameValid ||
       !numberValid
     ) {
-      alert("모든 항목을 입력해주세요.");
+      alert('모든 항목 및 정보를 올바르게 입력해주세요.');
     } else {
       // 모든 유효성 검사 통과한 경우
       const user = {
         email,
-        password
-      }
-  
+        password,
+      };
+
       localStorage.setItem('user', JSON.stringify(user));
-      
 
       // localStorage.setItem('email', email);
       // localStorage.setItem('password', password);
-      
-      alert("회원가입에 성공하였습니다.");
+
+      alert('회원가입에 성공하였습니다.');
 
       navigate('/loginpage'); // 가입 성공 시 로그인 페이지로 이동
     }
-  }
+  };
 
-  
   return (
     <Wrapper>
       <Body>
@@ -287,7 +284,6 @@ const JoinPage = () => {
               <div>전화번호가 올바르지 않습니다.</div>
             )}
           </ErrorMessageWrap>
-
         </EmailPW>
 
         {/* 가입하기, 가입취소 버튼 */}
