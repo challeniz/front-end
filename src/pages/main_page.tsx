@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ListContent from '../components/form/list_content';
+import ListContent from '../components/challenge/list_content';
 import banner4 from '../assets/image/banner_4.png';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
@@ -146,7 +146,6 @@ color: #339AF0;
  border: none;
  border-bottom: 1px solid #030303;
  background-color: transparent;
-
  `
  const ContentsWrap = styled.div`
  display:grid;
