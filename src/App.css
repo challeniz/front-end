@@ -15,12 +15,12 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, button, textarea {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font-family: 'Pretendard';
+	font-family: 'Pretendard' !important;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -45,6 +45,8 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	
+	
 }
 
 input:focus-visible {
@@ -56,5 +58,11 @@ select:focus-visible {
 }
 
 textarea:focus-visible {
-	outline-color: #339af0;;
+	outline-color: #339af0;
+
 }
+
+
+
+
+

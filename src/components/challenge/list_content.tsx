@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HeartButton from './heart';
-import axios from 'axios'; // axios를 임포트해야 합니다.
+// import axios from 'axios'; // axios를 임포트해야 합니다.
 
 const ContentWrap = styled.div`
   text-align: left;
