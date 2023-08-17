@@ -166,7 +166,7 @@ const JoinPage = () => {
           </ErrorMessageWrap>
 
           {/* 비밀번호 입력칸 */}
-          <InputTitle style={{ marginTop: '26px' }}>비밀번호</InputTitle>
+          <InputTitle style={{ marginTop: '20px' }}>비밀번호</InputTitle>
           <InputWrap>
             <UserIcon>
               <a
@@ -240,7 +240,7 @@ const JoinPage = () => {
           <InputTitle style={{ marginTop: '26px' }}>전화번호</InputTitle>
           <InputWrap>
             <Input2
-              type="text"
+              type="tel"
               value={number}
               onChange={handleNumber}
               placeholder="전화번호를 입력해주세요."
@@ -250,10 +250,10 @@ const JoinPage = () => {
 
         {/* 가입하기, 가입취소 버튼 */}
         <BtnWrap>
-          <LoginBtn onClick={() => handleJoin()}>가입하기</LoginBtn>
           <Link to="/loginpage">
             <Cancel>가입취소</Cancel>
           </Link>
+          <LoginBtn onClick={() => handleJoin()}>가입하기</LoginBtn>
         </BtnWrap>
       </Body>
     </Wrapper>
@@ -272,6 +272,7 @@ const Body = styled.div`
 const JoinText = styled.p`
   font-size: 30px;
   font-weight: 700;
+  text-align:center;
 `;
 
 //회원가입 부가설명
@@ -279,6 +280,7 @@ const JoinText1 = styled.p`
   font-size: 14px;
   margin-top: 10px;
   margin-bottom: 40px;
+  text-align: center;
 `;
 
 // 이메일 주소, 비밀번호 전체 틀
@@ -290,9 +292,10 @@ const EmailPW = styled.div`
 
 // 이메일주소 , 비밀번호
 const InputTitle = styled.div`
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   color: #262626;
+  padding-bottom:6px;
 `;
 
 //이메일, 비밀번호 입력창 틀
@@ -305,7 +308,7 @@ const InputWrap = styled.div`
   padding: 8px;
   border: 1px solid #e2e0e0;
   background-color: white;
-  box-shadow: 1px 1px 0.5px 0.5px gray;
+  border-radius:10px;
 
   &:focus-within {
     border: 1.5px solid #339af0;
@@ -354,7 +357,7 @@ const ConfrimBtn = styled.button`
   cursor: pointer;
 
   &:disabled {
-    background-color: #dadada;
+    background-color: #a1a1a1;
     color: white;
   }
 `;
@@ -382,33 +385,30 @@ const ErrorMessageWrap = styled.div`
 const BtnWrap = styled.div`
   display: flex;
   justify-content: center;
+  margin-top:45px;
 `;
 
 const LoginBtn = styled.button`
-  border-radius: 3px;
-  width: 200px;
-  padding: 10px;
-  border: 1px solid #e2e0e0;
-  border-radius: 6px;
+  border-radius: 10px;
+  padding: 18px 52px;
+  border: none;
+  cursor:pointer;
+  font-size:18px;
   background-color: #339af0;
-  font-size: 20px;
   color: white;
-  font-weight: 400;
-  cursor: pointer;
-  margin-top: 30px;
+  margin-left:30px;
+  font-weight:600;
 `;
 
 const Cancel = styled.button`
-  border-radius: 3px;
-  width: 200px;
-  padding: 10px;
-  border: 1px solid #e2e0e0;
-  border-radius: 6px;
-  background-color: #cde8ac;
-  font-size: 20px;
-  color: black;
-  font-weight: 400;
-  cursor: pointer;
-  margin-top: 30px;
-  margin-left: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 52px;
+  border: none;
+  cursor:pointer;
+  font-size:18px;
+  color: white;
+  margin-left:30px;
+  font-weight:600;
+  color:#000;
 `;
