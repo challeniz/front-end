@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import banner1 from '../../assets/image/banner.png';
 import banner2 from '../../assets/image/banner_2.png';
@@ -40,10 +39,21 @@ const SlideBnner = () => {
 
 const BannerSlide = styled.div`
   overflow: hidden;
+  .slick-next {
+    right: 50px;
+  }
+  .slick-prev {
+    left: 50px;
+    z-index: 9999;
+  }
+
+  .slick-dots {
+    bottom: 0px;
+  }
 `;
-const BannerSlider = styled(Slider) `
-display: flex;
-`
+const BannerSlider = styled(Slider)`
+  display: flex;
+`;
 // const SlideInner = styled.div`
 //   display: flex;
 // `;
@@ -53,7 +63,5 @@ const SlideBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-
 
 export default SlideBnner;

@@ -2,26 +2,39 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../../components/common/wrapper';
 import { stringLiteral } from '@babel/types';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+
 
 //더미데이터 테스트용
-const User = {
-  email: 'test@test.com',
-  password: 'qwer1234!!',
-};
+const User = [
+  {
+    email: 'test@test.com',
+    password: 'qwer1234!!',
+  },
+  {
+    email: '1004@test.com',
+    password: '1004qwer!!',
+  },
+];
+
+
 
 const JoinPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPw, setConfirmPw] = useState('');
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [email, setEmail] = useState(''); // 이메일 상태, 상태변경
+  const [password, setPassword] = useState(''); // 비밀번호 상태, 상태변경
+  const [confirmPw, setConfirmPw] = useState(''); // 비밀번호 재입력 상태, 상태변경
+  const [name, setName] = useState(''); // 이름 상태, 상태변경
+  const [number, setNumber] = useState(''); // 전화번호 상태, 상태변경
+  
 
-  const [emailValid, setEmailValid] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
-  const [ConfirmPwValid, setConfirmPwValid] = useState(false);
-  const [ConfirmNameValid, setConfirmNameValid] = useState(false);
+  const [emailValid, setEmailValid] = useState(false); // 이메일 벨리데이션 유효성 검사
+  const [passwordValid, setPasswordValid] = useState(false); // 비밀번호 벨리데이션 유효성 검사
+  const [ConfirmPwValid, setConfirmPwValid] = useState(false); // 비밀번호 재입력 벨리데이션 유효성 검사
+  const [ConfirmNameValid, setConfirmNameValid] = useState(false); // 이름 벨리데이션 유효성 검사
+  const [numberValid, setNumberValid] = useState(false); // 전화번호 유효성 검사
   const [notAllow, setNotAllow] = useState(true); //이메일, 패스워드가 맞게 작동할때 버튼이 활성화 되는 기능
+
+  const navigate  = useNavigate();// 회원가입 페이지에서 회원가입 버튼 누르고 성공할 시 로그인 페이지로 넘어가는 기능
 
   //submit 버튼 활성화 기능 구현 코드
   useEffect(() => {
@@ -81,12 +94,11 @@ const JoinPage = () => {
   //이름 validation 유효성 검사
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
-
     {
       /* 이름 valid 유효성 검사 */
     }
-
-    if (name.length === 3) {
+    const regex = /^[가-힣]{3,4}$/
+    if (regex.test(name)) {
       setConfirmNameValid(true);
     } else {
       setConfirmNameValid(false);
@@ -95,22 +107,25 @@ const JoinPage = () => {
 
   //이름 validation 유효성 검사
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNumber(e.target.value);
+    const numberValue = e.target.value;
+    setNumber(numberValue);
+    {
+      /* 이름 valid 유효성 검사 */
+    }
 
-    // {
-    //   /* 이름 valid 유효성 검사 */
-    // }
+    const regex = /^\d{11}$/;
 
-    // if (name.length === 3) {
-    //   setConfirmNameValid(true);
-    // } else {
-    //   setConfirmNameValid(false);
-    // }
+    if (regex.test(numberValue)) {
+      setNumberValid(true);
+    } else {
+      setNumberValid(false);
+    }
   };
 
   //이메일 입력 후 중복확인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = () => {
-    if (email === User.email) {
+    const foundUser = User.find(userData => userData.email === email)
+    if (foundUser) {
       alert('사용가능한 이메일입니다.');
     } else {
       alert('사용할 수 없는 이메일입니다.');
@@ -119,10 +134,31 @@ const JoinPage = () => {
 
   //가입하기 버튼 로컬스토리지.setItem
   const handleJoin = () => {
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
+    if (
+      !emailValid ||
+      !passwordValid ||
+      !ConfirmPwValid ||
+      !ConfirmNameValid ||
+      !numberValid
+    ) {
+      alert("모든 항목을 입력해주세요.");
+    } else {
+      // 모든 유효성 검사 통과한 경우
+      const user = {
+        email,
+        password
+      }
+  
+      localStorage.setItem('user', JSON.stringify(user));
+      
 
-    alert("회원가입에 성공하였습니다.")
+      // localStorage.setItem('email', email);
+      // localStorage.setItem('password', password);
+      
+      alert("회원가입에 성공하였습니다.");
+
+      navigate('/loginpage'); // 가입 성공 시 로그인 페이지로 이동
+    }
   }
 
   
@@ -229,14 +265,14 @@ const JoinPage = () => {
               placeholder="이름을 입력해주세요."
             />
           </InputWrap>
-          {/* 비밀번호 에러메세지 입력칸 */}
+          {/* 이름 에러메세지 입력칸 */}
           <ErrorMessageWrap>
             {!ConfirmNameValid && name.length > 0 && (
               <div>비밀번호가 일치하지 않습니다.</div>
             )}
           </ErrorMessageWrap>
 
-          {/* 이름 입력칸 */}
+          {/* 전화번호 입력칸 */}
           <InputTitle style={{ marginTop: '26px' }}>전화번호</InputTitle>
           <InputWrap>
             <Input2
@@ -246,6 +282,12 @@ const JoinPage = () => {
               placeholder="전화번호를 입력해주세요."
             />
           </InputWrap>
+          <ErrorMessageWrap>
+            {!numberValid && number.length > 0 && (
+              <div>전화번호가 올바르지 않습니다.</div>
+            )}
+          </ErrorMessageWrap>
+
         </EmailPW>
 
         {/* 가입하기, 가입취소 버튼 */}

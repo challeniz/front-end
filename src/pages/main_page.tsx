@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ListContent from '../components/form/list_content';
+import ListContent from '../components/challenge/list_content';
 import banner4 from '../assets/image/banner_4.png';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
@@ -181,17 +181,19 @@ const ContentsList = styled.div`
   overflow: hidden;
 `;
 
-const PopularList = styled.div`
-  position: relative;
-  top: 30rem;
-  left: 4rem;
-`;
 
-const NewList = styled.div`
-  position: relative;
-  top: 44rem;
-  left: 4rem;
-`;
+
+const PopularList= styled.div `
+position: relative;
+top: 30rem;
+left: 4rem;
+`
+
+const NewList= styled.div `
+position: relative;
+top: 44rem;
+left: 4rem;
+`
 
 const ProgressList = styled.ul`
   display: flex;

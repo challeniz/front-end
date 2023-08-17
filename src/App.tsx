@@ -11,6 +11,8 @@ import MainPage from './pages/main_page';
 import LoginPage from './pages/login/login_page';
 import JoinPage from './pages/join/join_page';
 import MyPage from './pages/my_page';
+import AuthPage from './pages/auth_page';
+
 function App() {
   return (
     <div>
@@ -22,6 +24,10 @@ function App() {
         <Route path="/loginpage" element={<LoginPage />} />
         <Route path="/joinpage" element={<JoinPage />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/authpage" element={<AuthPage />} />
+        <Route path="/applicationpage" element={<ApplicationPage />} />
+        <Route path="/loginpage" element={<LoginPage />} />
+        <Route path="/joinpage" element={<JoinPage />} />
       </Routes>
       
     </div>
