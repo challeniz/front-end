@@ -63,6 +63,200 @@ textarea:focus-visible {
 }
 
 
+h1{
+	font-weight: 800;
+	font-size: 48px;
+}
 
 
+.MapageTab {
+	border-bottom: 1px solid #000;
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+	margin-bottom: 60px;
+	margin-top: 60px;
+	justify-content: left;
+	width: 800px;
+  }
+  
+  .MapageTab button {
+	display: flex;
+	padding: 0 20px 15px;
+	font-size: 20px;
+	border-radius: 10px 10px 0px 0px;
+	text-align: center;
+	color: #787878;
+	cursor: pointer;
+	font-weight: 600;
+	background-color: transparent;
+	border: none;
+  }
+  
+  .MapageTab .focused {
+	color: #339af0;
+	position: relative;
+	font-weight: 600;
+  }
+  
+  .MapageTab .focused::before {
+	content: '';
+	position: absolute;
+	bottom: -3px;
+	left: 0;
+	width: 100%;
+	background-color: #339af0;
+	height: 5px;
+	border-radius: 10px;
+  }
+  
+
+
+.MyChall{
+	text-align: left;
+	position: absolute;
+	top: 16rem;
+}
+
+.MyChall h2{
+	font-size: 24px;
+	
+}
+
+.Chall{
+	position: relative;
+	top: 1.6rem;
+}
+
+.ChallContents{
+	display:  flex;
+	justify-content: space-between;
+	position: relative;
+}
+.ContentsInner1{
+	margin-right: 20px;
+}
+
+.ChallImg{
+	position: relative;
+  width: 300px;
+  height: 117px;
+  border-radius: 20px;
+  background-color: #d9d9d9;
+  margin-bottom: 20px;
+}
+
+
+.ChallTxt a{
+	background-color: #d9d9d9;
+	border-radius: 10px;
+	padding: 4px 15px;
+	font-size: 13px;
+	margin-right: 5px;
+
+	
+}
+
+.ContentsInner1 h3{  font-size: 14px;
+	padding-top: 10px;
+	max-width: 300px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;}
+
+.ContentsInner1 h4{
+	font-size: 11px;
+	font-weight: 500;
+}
+
+.ContentsInner1 p{position: absolute;
+	float: left;
+	left: 14rem;
+	top: 8.5rem;
+	font-size: 14px;
+	letter-spacing: 3px;
+}
+
+.ContentsInner1 span{
+	display: block;
+	font-size: 28px;
+	font-weight: 600;
+	margin-top: 5px;
+	
+}
+
+.ChallBox{
+	width: 294px;
+	height: 55px;
+	font-size: 20px;
+	font-weight: 600;
+	text-align: center;
+	border: 1px solid #d9d9d9;
+	border-radius: 15px;
+	position: relative;
+	top: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ChallBox:hover{
+	background: linear-gradient(90deg, #74c0fc 0%, #228be6 100%);
+	color: #fff;
+	
+}
+
+
+.StyledH2{
+	color: #3D3D3D;
+	font-size: 24px;
+	top: 5em;
+	position: relative;
+	margin-bottom: 5rem;
+}
+
+
+.ContentsInner2 h3{  font-size: 14px;
+	padding-top: 10px;
+	max-width: 300px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;}
+
+.ContentsInner2 h4{
+	font-size: 11px;
+	font-weight: 500;
+}
+
+.ContentsInner2 p{position: absolute;
+	float: left;
+	left: 34rem;
+	top: 8.5rem;
+	font-size: 14px;
+	letter-spacing: 3px;
+}
+
+.ContentsInner2 span{
+	display: block;
+	font-size: 28px;
+	font-weight: 600;
+	margin-top: 5px;
+	
+}
+.ChallBox2{
+	width: 294px;
+	height: 55px;
+	font-size: 20px;
+	font-weight: 600;
+	text-align: center;
+	border-radius: 15px;
+	position: relative;
+	top: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(90deg, #74c0fc 0%, #228be6 100%);
+	color: #fff;
+	
+}
 
