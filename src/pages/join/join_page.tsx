@@ -144,8 +144,16 @@ const JoinPage = () => {
       alert("모든 항목을 입력해주세요.");
     } else {
       // 모든 유효성 검사 통과한 경우
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
+      const user = {
+        email,
+        password
+      }
+  
+      localStorage.setItem('user', JSON.stringify(user));
+      
+
+      // localStorage.setItem('email', email);
+      // localStorage.setItem('password', password);
       
       alert("회원가입에 성공하였습니다.");
 
