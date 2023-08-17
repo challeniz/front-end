@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../../components/common/wrapper';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 
 //더미데이터 테스트용
 const User = {
@@ -17,6 +17,8 @@ const LoginPage = () => {
   const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true); //이메일, 패스워드가 맞게 작동할때 버튼이 활성화 되는 기능
+
+  const navigate  = useNavigate();// 로그인 페이지에서 로그인 버튼 누르고 성공할 시 메인 페이지로 넘어가는 기능
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -64,6 +66,7 @@ const LoginPage = () => {
     const localPassword = localStorage.getItem('password');
     if (email === localEmail && password === localPassword) {
       alert('로그인에 성공하였습니다.');
+      navigate('/'); //  로그인 성공 시 홈 메인페이지로 이동
     } else {
       alert('로그인에 실패하였습니다.');
     }
