@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CiUser } from "react-icons/ci";
 
 const HeaderWrapper = styled.div`
   padding: 40px 80px;
   position: relative;
   cursor: pointer;
   height: 90px;
-  
+  box-sizing:border-box;
 `;
 
 const HeaderContainer = styled.header`
@@ -64,15 +65,17 @@ const LoginItem = styled.li`
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  width: 120px;
-  height: 35px;
   margin: 10px 5px;
   font-weight: 600;
   transition: background-color 0.2s;
 
+  &:not(:last-child) {
+    padding:0 15px;
+  }
+
   &:hover {
-    background-color: #d8d8d8c5;
-    border-radius: 10px;
+    text-decoration:underline;
+    transition:.2s;
   }
 `;
 
@@ -87,6 +90,11 @@ const ChallMakeButton = styled.li`
   align-items: center;
   justify-content: center;
 `;
+
+const StyledCiUser = styled(CiUser)`
+  width:2em;
+  height:2em;
+`
 
 const Header = () => {
   return (
@@ -105,7 +113,7 @@ const Header = () => {
             <ChallMakeButton>챌린지 만들기</ChallMakeButton>
             <LoginItem>로그인</LoginItem>
             <LoginItem>회원가입</LoginItem>
-            <LoginItem>회원가입</LoginItem>
+            <LoginItem><StyledCiUser /></LoginItem>
           </LoginList>
         </LoginBox>
       </HeaderContainer>

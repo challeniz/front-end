@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Calendar from 'react-calendar'; // Import Calendar from react-calendar
+import 'react-calendar/dist/Calendar.css';
+import moment from 'moment';
 
 
 const TabMenu = styled.ul`
@@ -77,6 +80,10 @@ const H2Styled = styled.div`
 
 
 export const Tab: React.FC = () => {
+  // Define onChange, value, and mark here
+  const [value, setValue] = useState(new Date()); // Example initial value
+  const mark = ["2023-08-15", "2023-08-16"]; // Example mark array
+
   // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
   const [currentTab, clickTab] = useState<number>(0);
 
@@ -117,9 +124,24 @@ export const Tab: React.FC = () => {
             </ul>
           </DetailWrap>
           <DetailWrap>
-          <h2>챌린지 기간</h2>
-          
-          </DetailWrap>
+              {/* ... (이전 코드 생략) */}
+              <h2>챌린지 기간</h2>
+              <Calendar
+                // onChange={setValue}
+                value={value}
+                minDetail="month"
+                maxDetail="month"
+                showNeighboringMonth={false}
+                className="mx-auto w-full text-sm border-b"
+                tileContent={({ date, view }: { date: Date; view: string }) => {
+                  let html: JSX.Element[] = [];
+                  if (mark.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
+                    html.push(<div className="dot"></div>);
+                  }
+                  return <div>{html}</div>;
+                }}
+              />
+            </DetailWrap>
           </>
         ) : (
           // 인증 목록 내용
