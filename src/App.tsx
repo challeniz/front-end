@@ -12,7 +12,7 @@ import LoginPage from './pages/login/login_page';
 import JoinPage from './pages/join/join_page';
 import MyPage from './pages/my_page';
 import AuthPage from './pages/auth_page';
-
+console.log('helllo');
 function App() {
   return (
     <div>
