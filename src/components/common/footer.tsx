@@ -99,6 +99,6 @@ const Copyright = styled.p`
   font-weight: 500;
   color: #d8d8d8;
   left: 12rem;
-  top: 8.5girem;
+  top: 8.5rem;
 `;
 export default Footer;
