@@ -14,27 +14,60 @@ import {
 } from 'react-icons/ai';
 
 const MainPage = () => {
-  const SlideRef = useRef<HTMLDivElement | null>(null);
-  const [CurrentImg, setCurrentImg] = useState(0);
+  const SlideRef1 = useRef<HTMLDivElement | null>(null);
+  const SlideRef2 = useRef<HTMLDivElement | null>(null);
+  const SlideRef3 = useRef<HTMLDivElement | null>(null);
+  const [CurrentImg1, setCurrentImg1] = useState(0);
+  const [CurrentImg2, setCurrentImg2] = useState(0);
+  const [CurrentImg3, setCurrentImg3] = useState(0);
   const IMG_WIDTH = 50;
-  const slideRange = CurrentImg * IMG_WIDTH;
+  const slideRange1 = CurrentImg1 * IMG_WIDTH;
+  const slideRange2 = CurrentImg2 * IMG_WIDTH;
+  const slideRange3 = CurrentImg3 * IMG_WIDTH;
   const TotalImg = 4;
 
   useEffect(() => {
-    if (SlideRef.current) {
-      SlideRef.current.style.transition = 'transform 0.5s ease-in-out';
-      SlideRef.current.style.transform = `translateX(-${slideRange}px)`;
+    if (SlideRef1.current) {
+      SlideRef1.current.style.transition = 'transform 0.5s ease-in-out';
+      SlideRef1.current.style.transform = `translateX(-${slideRange1}px)`;
     }
-  }, [slideRange]);
+  }, [slideRange1]);
 
-  const prevSlide = () => {
-    setCurrentImg((prevIndex) => (prevIndex - 1 + TotalImg) % TotalImg);
+  useEffect(() => {
+    if (SlideRef2.current) {
+      SlideRef2.current.style.transition = 'transform 0.5s ease-in-out';
+      SlideRef2.current.style.transform = `translateX(-${slideRange2}px)`;
+    }
+  }, [slideRange2]);
+
+  useEffect(() => {
+    if (SlideRef3.current) {
+      SlideRef3.current.style.transition = 'transform 0.5s ease-in-out';
+      SlideRef3.current.style.transform = `translateX(-${slideRange3}px)`;
+    }
+  }, [slideRange3]);
+
+  const prevSlide = (idx: number) => {
+    if (idx === 1) {
+      setCurrentImg1((prevIndex) => (prevIndex - 1 + TotalImg) % TotalImg);
+    } else if (idx === 2) {
+      setCurrentImg2((prevIndex) => (prevIndex - 1 + TotalImg) % TotalImg);
+    } else if (idx === 3) {
+      setCurrentImg3((prevIndex) => (prevIndex - 1 + TotalImg) % TotalImg);
+    }
   };
 
-  const nextSlide = () => {
-    setCurrentImg((prevIndex) => (prevIndex + 1) % TotalImg);
+  const nextSlide = (idx: number) => {
+    if (idx === 1) {
+      setCurrentImg1((prevIndex) => (prevIndex + 1) % TotalImg);
+    } else if (idx === 2) {
+      setCurrentImg2((prevIndex) => (prevIndex + 1) % TotalImg);
+    } else if (idx === 3) {
+      setCurrentImg3((prevIndex) => (prevIndex + 1) % TotalImg);
+    }
   };
 
+ 
   return (
     <div>
       <Header />
@@ -55,17 +88,17 @@ const MainPage = () => {
             <li>
               <h2>진행중인 챌린지</h2>
             </li>
-            <li onClick={prevSlide}>
+            <li   onClick={() => prevSlide(1)}>
               <AiOutlineLeft />
             </li>
-            <li onClick={nextSlide}>
+            <li   onClick={() => nextSlide(1)}>
               <AiOutlineRight />
             </li>
             <li>
               <h3>전체보기</h3>
             </li>
           </ProgressList>
-          <ContentsWrap ref={SlideRef}>
+          <ContentsWrap ref={SlideRef1}>
             <ListContent />
             <ListContent />
             <ListContent />
@@ -80,17 +113,17 @@ const MainPage = () => {
                 <PopularListSpan>HOT!</PopularListSpan> 인기 챌린지
               </h2>
             </li>
-            <li onClick={prevSlide}>
+            <li  onClick={() => prevSlide(2)}>
               <AiOutlineLeft />
             </li>
-            <li onClick={nextSlide}>
+            <li onClick={() => nextSlide(2)}>
               <AiOutlineRight />
             </li>
             <li>
               <h3>전체보기</h3>
             </li>
           </ProgressList>
-          <ContentsWrap ref={SlideRef}>
+          <ContentsWrap ref={SlideRef2}>
             <ListContent />
             <ListContent />
             <ListContent />
@@ -105,17 +138,17 @@ const MainPage = () => {
                 <NewListSpan>NEW!</NewListSpan> 인기 챌린지
               </h2>
             </li>
-            <li onClick={prevSlide}>
+            <li   onClick={() => prevSlide(3)}>
               <AiOutlineLeft />
             </li>
-            <li onClick={nextSlide}>
+            <li onClick={() => nextSlide(3)}>
               <AiOutlineRight />
             </li>
             <li>
               <h3>전체보기</h3>
             </li>
           </ProgressList>
-          <ContentsWrap ref={SlideRef}>
+          <ContentsWrap ref={SlideRef3}>
             <ListContent />
             <ListContent />
             <ListContent />
@@ -187,12 +220,14 @@ const PopularList= styled.div `
 position: relative;
 top: 30rem;
 left: 4rem;
+overflow: hidden;
 `
 
 const NewList= styled.div `
 position: relative;
 top: 44rem;
 left: 4rem;
+overflow: hidden;
 `
 
 const ProgressList = styled.ul`
