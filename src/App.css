@@ -49,10 +49,6 @@ table {
 	
 }
 
-input:focus-visible {
-	outline-color: #339af0;;
-}
-
 select:focus-visible {
 	outline-color: #339af0;;
 }

@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { Tab } from './detail_tab';
 
 const DetailContents = styled.div`
-  width:70%;
+  width:67%;
   height:3000px;
 `
 
 const H2Styled = styled.h2`
   font-size:35px;
   padding-bottom:12px;
+  font-weight:700;
 `
 const H4Styled = styled.h4`
   font-size:15px;
