@@ -11,6 +11,8 @@ import JoinPage from './pages/join/join_page';
 import MyPage from './pages/my_page';
 import AuthPage from './pages/auth_page';
 import MyPrivacy from './pages/ my_privacy';
+import DetailPage from './pages/detail_page';
+import ApplicationPage from './pages/app_page';
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
         <Route path="/authpage" element={<AuthPage />} />
         <Route path="/detailpage" element={<DetailPage />} />
         <Route path="/loginpage" element={<LoginPage />} />
+        <Route path="/applicationpage" element={<ApplicationPage />} />
         <Route path="/joinpage" element={<JoinPage />} />
       </Routes>
     </div>
