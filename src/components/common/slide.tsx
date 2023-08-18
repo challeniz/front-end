@@ -16,6 +16,9 @@ const SlideBnner = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     centerPadding: '0px',
+    centerMode: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
   };
 
   return (
@@ -49,6 +52,10 @@ const BannerSlide = styled.div`
 
   .slick-dots {
     bottom: 0px;
+  }
+  .slick-list{ //얘로 크기조정 했음
+    width: 110vw;
+      
   }
 `;
 const BannerSlider = styled(Slider)`
