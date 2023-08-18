@@ -106,7 +106,12 @@ const ApplicationPage = () => {
   const [name, setName] = useState('');
   const [tel, setTel] = useState('');
   const [email, setEmail] = useState('');
+  const history = useHistory();
+  const [isAgreed, setIsAgreed] = useState(false); // 약관 동의 여부를 관리하는 상태 추가
 
+  const handleAgreeChange = (isChecked) => {
+    setIsAgreed(isChecked);
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userData = { name, tel, email };
@@ -114,19 +119,20 @@ const ApplicationPage = () => {
     axios
       .post('submit API주소', userData)
       .then((response) => {
-        // 서버로부터의 응답에 따른 처리
         console.log('참가 신청이 완료되었습니다.');
       })
       .catch((error) => {
         console.error('참가 신청이 실패하였습니다', error);
         // 오류 처리
       });
+    // history.push('/success'); // 성공 페이지로 이동
   };
-  // 여기서 사용자 정보를 서버로 전송하면 됩니다.
-  // 서버로 전송하는 코드를 추가하세요.
+  const handleCancel = () => {
+    // 취소 버튼을 클릭 이전 페이지로 이동
+    history.push(/홈경로);
+  };
 
   useEffect(() => {
-    // API 호출
     axios
       .get<Challenge>('API주소')
       .then((response) => {
@@ -206,12 +212,16 @@ const ApplicationPage = () => {
       <WhiteBox>
         <WhiteBoxTitle>약관 정보</WhiteBoxTitle>
         <WhiteBoxContents>
-          <FormAgreeBox>약관</FormAgreeBox>
+          <FormAgreeBox onAgreeChange={handleAgreeChange} />
         </WhiteBoxContents>
       </WhiteBox>
       <FormButton>
-        <FormCancelButton>취소하기</FormCancelButton>
-        <FormSubmitButton>참가하기</FormSubmitButton>
+        <FormCancelButton type="button" onClick={handleCancel}>
+          취소하기
+        </FormCancelButton>
+        <FormSubmitButton type="submit" disabled={!isAgreed}>
+          참가하기
+        </FormSubmitButton>
       </FormButton>
     </Wrapper>
   );
