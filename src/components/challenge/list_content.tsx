@@ -78,7 +78,7 @@ const ListContent: React.FC = () => {
       <H3Styled>하루 만보 걷기 챌린지</H3Styled>
       <H4Styled>2023.08.01 ~ 2023.08.31</H4Styled>
     </ContentWrap>
-  );
+  );    
 };
 
 export default ListContent;
