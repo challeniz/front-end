@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../components/common/wrapper';
 import FormAgreeBox from '../components/form/form_agree';
@@ -10,104 +10,156 @@ import WhiteBoxContents from '../components/form/white_box_contents';
 import { FormButton } from '../components/form/form_button';
 import { FormCancelButton } from '../components/form/form_button';
 import { FormSubmitButton } from '../components/form/form_button';
-import { CiShare2, CiHeart, CiCalendarDate, CiUser } from "react-icons/ci";// 아이콘 이름 수정
+import { CiShare2, CiHeart, CiCalendarDate, CiUser } from 'react-icons/ci'; // 아이콘 이름 수정
+import axios from 'axios';
 
 const InputContent = styled.div`
-  display:flex;
-  margin-bottom:25px;
-  align-items:center;
+  display: flex;
+  margin-bottom: 25px;
+  align-items: center;
   &.flex-start {
-    align-items:flex-start;
+    align-items: flex-start;
   }
-`
+`;
 const LabelStyled = styled.label`
-font-size:18px;
-width:160px;
+  font-size: 18px;
+  width: 160px;
 `;
 
 const InputStyled = styled.input`
-  width:406px;
-  height:45px;
-  background-color:#f6f6f6;
-  border-radius:5px;
-  border:1px solid #cfcfcf;
-  font-size:16px;
+  width: 406px;
+  height: 45px;
+  background-color: #f6f6f6;
+  border-radius: 5px;
+  border: 1px solid #cfcfcf;
+  font-size: 16px;
   padding: 0 15px;
 
   &:focus {
-    outline:none;
+    outline: none;
   }
-`
+`;
 
 const ImgWrap = styled.div`
   width: 454px;
-  height:270px;
-  background-color:#d9d9d9;
-  margin-right:60px;
-  border-right:1px solid #d9d9d9;
-`
+  height: 270px;
+  background-color: #d9d9d9;
+  margin-right: 60px;
+  border-right: 1px solid #d9d9d9;
+`;
 
 const ContentWrap = styled.div`
-  display:flex;
-`
+  display: flex;
+`;
 const TextWrap = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
-  width:60%;
+  width: 60%;
 
-  h5{
-    font-size:15px;
-    font-weight:400;
-    padding-bottom:15px;
-    display:flex;
-    align-items:center;
+  h5 {
+    font-size: 15px;
+    font-weight: 400;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
   }
   h2 {
     font-size: 35px;
     font-weight: 700;
-    padding-bottom:15px;
+    padding-bottom: 15px;
   }
   h4 {
-    color:#5e5e5e;
-    font-size:16px;
-    font-weight:400;
-    line-height:23px;
+    color: #5e5e5e;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23px;
   }
   h6 {
-    margin-top:auto;
-    font-weight:400;
-    display:flex;
-    align-items:center;
+    margin-top: auto;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
   }
-`
+`;
 
 const StyledCiUser = styled(CiUser)`
   padding-right: 5px;
-  width:1.8em;
-  height:1.8em;
+  width: 1.8em;
+  height: 1.8em;
 `;
 
 const StyledCiCalendar = styled(CiCalendarDate)`
   padding-right: 5px;
-  width:1.8em;
-  height:1.8em;
+  width: 1.8em;
+  height: 1.8em;
 `;
 
+interface Challenge {
+  title: string;
+  participants: number;
+  description: string;
+  date: string;
+}
+
 const ApplicationPage = () => {
+  const [challengeInfo, setChallengeInfo] = useState<Challenge | null>(null);
+  const [name, setName] = useState('');
+  const [tel, setTel] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const userData = { name, tel, email };
+
+    axios
+      .post('submit API주소', userData)
+      .then((response) => {
+        // 서버로부터의 응답에 따른 처리
+        console.log('참가 신청이 완료되었습니다.');
+      })
+      .catch((error) => {
+        console.error('참가 신청이 실패하였습니다', error);
+        // 오류 처리
+      });
+  };
+  // 여기서 사용자 정보를 서버로 전송하면 됩니다.
+  // 서버로 전송하는 코드를 추가하세요.
+
+  useEffect(() => {
+    // API 호출
+    axios
+      .get<Challenge>('API주소')
+      .then((response) => {
+        setChallengeInfo(response.data);
+      })
+      .catch((error) => {
+        console.error('챌린지 정보가 없습니다', error);
+      });
+  }, []);
   return (
     <Wrapper>
       <div>
         <WhiteBox>
           <WhiteBoxContents>
             <ContentWrap>
-              <ImgWrap>
-              </ImgWrap>
+              <ImgWrap></ImgWrap>
               <TextWrap>
-                <h5><StyledCiUser />현재 18명 참여 중</h5>
-                <h2>만보 걷기 챌린지</h2>
-                <h4>챌린지 설명 챌린지 설명 챌린지 설명 챌린지 설명 챌린지 설명 챌린지 설명 챌린지 설명 챌린지 설명 
-                  챌린지 설명 챌린지 설명 챌린지 설명 챌린지 설명 챌린지 설명 챌린지 설명 </h4>
-                <h6><StyledCiCalendar />2023.08.01 ~ 2023.08.31</h6>
+                {challengeInfo ? (
+                  <>
+                    <h5>
+                      <StyledCiUser />
+                      현재 {challengeInfo.participants}명 참여 중
+                    </h5>
+                    <h2>{challengeInfo.title}</h2>
+                    <h4>{challengeInfo.description}</h4>
+                    <h6>
+                      <StyledCiCalendar />
+                      {challengeInfo.date}
+                    </h6>
+                  </>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </TextWrap>
             </ContentWrap>
           </WhiteBoxContents>
@@ -117,19 +169,36 @@ const ApplicationPage = () => {
         <WhiteBox>
           <WhiteBoxTitle>참가자 정보</WhiteBoxTitle>
           <WhiteBoxContents>
-          < div>
-              <InputContent>
-                <LabelStyled htmlFor="formName">이름</LabelStyled>
-                <InputStyled type="text" value="엘리스" id="formName" readOnly/>
-              </InputContent>
-              <InputContent>
-                <LabelStyled htmlFor="formTel">휴대폰번호</LabelStyled>
-                <InputStyled type="text" value="010-0000-0000" id="formTel" readOnly/>
-              </InputContent>
-              <InputContent>
-                <LabelStyled htmlFor="formMail">이메일</LabelStyled>
-                <InputStyled type="text" value="elice@elice.com" id="formMail" readOnly/>
-              </InputContent>
+            <div>
+              <form onSubmit={handleSubmit}>
+                <InputContent>
+                  <LabelStyled htmlFor="formName">이름</LabelStyled>
+                  <InputStyled
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    id="formName"
+                  />
+                </InputContent>
+                <InputContent>
+                  <LabelStyled htmlFor="formTel">휴대폰번호</LabelStyled>
+                  <InputStyled
+                    type="text"
+                    value={tel}
+                    onChange={(e) => setTel(e.target.value)}
+                    id="formTel"
+                  />
+                </InputContent>
+                <InputContent>
+                  <LabelStyled htmlFor="formMail">이메일</LabelStyled>
+                  <InputStyled
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    id="formMail"
+                  />
+                </InputContent>
+              </form>
             </div>
           </WhiteBoxContents>
         </WhiteBox>
