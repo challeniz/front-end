@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../components/common/wrapper';
 import WhiteBox from '../components/form/white_box';
 import WhiteBoxTitle from '../components/form/white_box_title';
 import WhiteBoxContents from '../components/form/white_box_contents';
+import DetailPage from "./detail_page";
+
+import { useNavigate } from "react-router-dom";
+
 
 const TextInput = styled.textarea`
   width: 620px;
@@ -62,6 +66,12 @@ const FormButton = styled.div`
 
 const AuthPage: React.FC = () => {
 
+  const navigate = useNavigate();
+ 
+  const navigateToDetail_page = () => {
+    navigate("/detail_page");
+  };
+
   return (
     <Wrapper>
       <WhiteBox>
@@ -73,8 +83,8 @@ const AuthPage: React.FC = () => {
             <TextInput></TextInput>
           </AuthWrapper>
           <FormButton>
-            <FormCancelButton>취소하기</FormCancelButton>
-            <FormSubmitButton>챌린지 인증하기</FormSubmitButton>
+            <FormCancelButton onClick = {navigateToDetail_page} >취소하기</FormCancelButton>
+            <FormSubmitButton onClick = {navigateToDetail_page} >등록하기</FormSubmitButton>
           </FormButton>
         </WhiteBoxContents>
       </WhiteBox>
