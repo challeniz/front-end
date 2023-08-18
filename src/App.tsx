@@ -10,7 +10,7 @@ import LoginPage from './pages/login/login_page';
 import JoinPage from './pages/join/join_page';
 import MyPage from './pages/my_page';
 import AuthPage from './pages/auth_page';
-import DetailPage from './pages/detail_page';
+import MyPrivacy from './pages/ my_privacy';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
         <Route path="/loginpage" element={<LoginPage />} />
         <Route path="/joinpage" element={<JoinPage />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/myprivacy" element={<MyPrivacy />} />
         <Route path="/authpage" element={<AuthPage />} />
         <Route path="/detailpage" element={<DetailPage />} />
         <Route path="/loginpage" element={<LoginPage />} />

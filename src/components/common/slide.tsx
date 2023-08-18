@@ -53,9 +53,9 @@ const BannerSlide = styled.div`
   .slick-dots {
     bottom: 0px;
   }
-  .slick-list {
-    //얘로 크기조정 했음
+  .slick-list{ //얘로 크기조정 했음
     width: 110vw;
+      
   }
 `;
 const BannerSlider = styled(Slider)`
