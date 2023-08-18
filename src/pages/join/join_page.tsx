@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../../components/common/wrapper';
-import { stringLiteral } from '@babel/types';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
-
-
 
 const JoinPage = () => {
   const [email, setEmail] = useState(''); // 이메일 상태, 상태변경
@@ -110,18 +107,17 @@ const JoinPage = () => {
 
   //이메일 입력 후 중복확인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = () => {
-
     //더미데이터 테스트용
-const User = [
-  {
-    email: 'test@test.com',
-    password: 'qwer1234!!',
-  },
-  {
-    email: '1004@test.com',
-    password: '1004qwer!!',
-  },
-];
+    const User = [
+      {
+        email: 'test@test.com',
+        password: 'qwer1234!!',
+      },
+      {
+        email: '1004@test.com',
+        password: '1004qwer!!',
+      },
+    ];
 
     const foundUser = User.find((userData) => userData.email === email);
     if (foundUser) {
