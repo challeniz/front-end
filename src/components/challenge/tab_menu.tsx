@@ -2,42 +2,41 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ListContent from './list_content';
 
-
 const TabMenu = styled.ul`
-  border-bottom:1px solid #000;
+  border-bottom: 1px solid #000;
   display: flex;
   flex-direction: row;
   align-items: center;
   list-style: none;
   margin-bottom: 60px;
   margin-top: 10px;
-  justify-contents:center;
+  justify-contents: center;
 
   .submenu {
     display: flex;
     padding: 0 20px 15px;
     font-size: 20px;
     border-radius: 10px 10px 0px 0px;
-    text-align:center;
-    color:#787878;
-    cursor:pointer;
-    font-weight:600;
+    text-align: center;
+    color: #787878;
+    cursor: pointer;
+    font-weight: 600;
   }
 
   .focused {
-    color:#339af0;
-    position:relative;
-    font-weight:600;
+    color: #339af0;
+    position: relative;
+    font-weight: 600;
 
     &::before {
-      content:'';
-      position:absolute;
-      bottom:-3px;
-      left:0;
-      width:100%;
-      background-color:#339af0;
-      height:5px;
-      border-radius:10px;
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      background-color: #339af0;
+      height: 5px;
+      border-radius: 10px;
     }
   }
 
@@ -51,9 +50,9 @@ const Desc = styled.div`
 `;
 
 const ContentsWrap = styled.div`
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
-`
+`;
 
 export const Tab: React.FC = () => {
   // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
