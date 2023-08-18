@@ -18,7 +18,7 @@ const LoginPage = () => {
   const [passwordValid, setPasswordValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true); //이메일, 패스워드가 맞게 작동할때 버튼이 활성화 되는 기능
 
-  const navigate  = useNavigate();// 로그인 페이지에서 로그인 버튼 누르고 성공할 시 메인 페이지로 넘어가는 기능
+  const navigate = useNavigate(); // 로그인 페이지에서 로그인 버튼 누르고 성공할 시 메인 페이지로 넘어가는 기능
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -62,14 +62,25 @@ const LoginPage = () => {
   //이메일, 비밀번호 입력 후 로그인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = () => {
     //로컬스토리지.getItem --> 회원가입해서 로컬스토리지 저장한 데이터 가져오기
-    const localEmail = localStorage.getItem('email');
-    const localPassword = localStorage.getItem('password');
-    if (email === localEmail && password === localPassword) {
-      alert('로그인에 성공하였습니다.');
-      navigate('/'); //  로그인 성공 시 홈 메인페이지로 이동
-    } else {
-      alert('로그인에 실패하였습니다.');
+    const localUserJSON = localStorage.getItem('user');
+
+    if (localUserJSON) {
+      const localUser = JSON.parse(localUserJSON);
+
+      if (email === localUser.email && password === localUser.password) {
+        alert('로그인에 성공하였습니다.');
+        navigate('/'); // 로그인 성공 시 홈 메인페이지로 이동
+      } else {
+        alert('등록되지 않은 회원입니다.');
+      }
     }
+
+    // if (email === localUserJSON && password === localUserJSON ) {
+    //   alert('로그인에 성공하였습니다.');
+    //   navigate('/'); //  로그인 성공 시 홈 메인페이지로 이동
+    // } else {
+    //   alert('로그인에 실패하였습니다.');
+    // }
 
     // if (email === User.email && password === User.password) {
     //   alert('로그인에 성공했습니다.');
@@ -189,14 +200,13 @@ const Memvership = styled.div`
   font-weight: bold;
   display: flex;
   justify-content: center;
-  padding-top:60px;
+  padding-top: 60px;
 `;
 
 // 이메일 주소, 비밀번호 전체 틀
 const EmailPW = styled.div`
   margin: 70px auto 0;
-  width:400px;
-
+  width: 400px;
 `;
 
 // 이메일주소 , 비밀번호
@@ -204,7 +214,7 @@ const InputTitle = styled.div`
   font-size: 16px;
   font-weight: 500;
   color: #262626;
-  padding-bottom:6px;
+  padding-bottom: 6px;
 `;
 
 //이메일, 비밀번호 입력창 틀
@@ -217,7 +227,7 @@ const InputWrap = styled.div`
   padding: 16px;
   border: 1px solid #e2e0e0;
   background-color: white;
-  border-radius:10px;
+  border-radius: 10px;
 
   &:focus-within {
     border: 1.5px solid #339af0;

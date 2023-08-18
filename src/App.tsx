@@ -18,7 +18,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<MainPage  />} />
+        <Route path="/" element={<MainPage />} />
         <Route path="/newpage" element={<NewPage />} />
         <Route path="/listpage" element={<ListPage />} />
         <Route path="/applicationpage" element={<ApplicationPage />} />
@@ -27,11 +27,10 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/myprivacy" element={<MyPrivacy />} />
         <Route path="/authpage" element={<AuthPage />} />
-        <Route path="/applicationpage" element={<ApplicationPage />} />
+        <Route path="/application_page" element={<ApplicationPage />} />
         <Route path="/loginpage" element={<LoginPage />} />
         <Route path="/joinpage" element={<JoinPage />} />
       </Routes>
-      
     </div>
   );
 }
