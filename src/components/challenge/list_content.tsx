@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import HeartButton from './heart';
-// import axios from 'axios'; // axios를 임포트해야 합니다.
+import challengeData from '../../data/data.json';
 
 const ContentWrap = styled.div`
   text-align: left;
@@ -44,22 +44,9 @@ const H4Styled = styled.h4`
 const ListContent: React.FC = () => {
   const [like, setLike] = useState(false);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       // const res = await axios.get(/* ... */); // API 엔드포인트를 입력하세요
-  //       if (res.data.type === 'liked') setLike(true);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   const toggleLike = async () => {
     try {
-      // const res = await axios.post(/* ... */); // [POST] 사용자가 좋아요를 누름 -> DB 갱신
+      // 여기서 좋아요 관련 처리를 진행
       setLike(!like);
     } catch (error) {
       console.error('Error toggling like:', error);
@@ -72,13 +59,16 @@ const ListContent: React.FC = () => {
         <HeartButton like={like} onClick={toggleLike} />
       </ImgStyled>
       <TabWrap>
-        <TabStyled>#운동</TabStyled>
-        <TabStyled>#걷기</TabStyled>
+        {challengeData[1].tag.split(',').map((tag, index) => (
+          <TabStyled key={index}>{tag}</TabStyled>
+        ))}
       </TabWrap>
-      <H3Styled>하루 만보 걷기 챌린지</H3Styled>
-      <H4Styled>2023.08.01 ~ 2023.08.31</H4Styled>
+      <H3Styled>{challengeData[1].title}</H3Styled>
+      <H4Styled>
+        {challengeData[1].startdate} ~ {challengeData[1].enddate}
+      </H4Styled>
     </ContentWrap>
-  );    
+  );
 };
 
 export default ListContent;
