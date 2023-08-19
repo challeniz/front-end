@@ -7,13 +7,15 @@ const JoinPage = () => {
   const [email, setEmail] = useState(''); // 이메일 상태, 상태변경
   const [password, setPassword] = useState(''); // 비밀번호 상태, 상태변경
   const [confirmPw, setConfirmPw] = useState(''); // 비밀번호 재입력 상태, 상태변경
-  const [name, setName] = useState(''); // 이름 상태, 상태변경
+  //const [name, setName] = useState(''); // 이름 상태, 상태변경
+  const [nickName, setNickName] = useState(''); // 닉네임 상태, 상태변경
   const [number, setNumber] = useState(''); // 전화번호 상태, 상태변경
 
   const [emailValid, setEmailValid] = useState(false); // 이메일 벨리데이션 유효성 검사
   const [passwordValid, setPasswordValid] = useState(false); // 비밀번호 벨리데이션 유효성 검사
   const [ConfirmPwValid, setConfirmPwValid] = useState(false); // 비밀번호 재입력 벨리데이션 유효성 검사
-  const [ConfirmNameValid, setConfirmNameValid] = useState(false); // 이름 벨리데이션 유효성 검사
+  //const [ConfirmNameValid, setConfirmNameValid] = useState(false); // 이름 벨리데이션 유효성 검사
+  const [ConfirmNickNameValid, setConfirmNickNameValid] = useState(false); // 닉네임 벨리데이션 유효성 검사
   const [numberValid, setNumberValid] = useState(false); // 전화번호 유효성 검사
   const [notAllow, setNotAllow] = useState(true); //이메일, 패스워드가 맞게 작동할때 버튼이 활성화 되는 기능
 
@@ -74,26 +76,64 @@ const JoinPage = () => {
     }
   };
 
-  //이름 validation 유효성 검사
-  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+
+  //닉네임 validation 유효성 검사
+  const handleNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNickName(e.target.value);
     {
-      /* 이름 valid 유효성 검사 */
+      /* 닉네임 valid 유효성 검사 */
     }
-    const regex = /^[가-힣]{3,4}$/;
-    if (regex.test(name)) {
-      setConfirmNameValid(true);
+    const regex = /^(?=.*[a-zA-Z0-9\u3131-\uD79D])[\w\u3131-\uD79D]{2,8}$/;
+    if (regex.test(nickName)) {
+      setConfirmNickNameValid(true);
     } else {
-      setConfirmNameValid(false);
+      setConfirmNickNameValid(false);
     }
   };
 
+  
+
+
+
+  ////////////////////
   //이름 validation 유효성 검사
+  // const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setName(e.target.value);
+    {
+      /* 이름 valid 유효성 검사 */
+    }
+  //   const regex = /^[가-힣]{3,4}$/;
+  //   if (regex.test(name)) {
+  //     setConfirmNameValid(true);
+  //   } else {
+  //     setConfirmNameValid(false);
+  //   }
+  // };
+
+  //이름 validation 유효성 검사
+  // const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const numberValue = e.target.value;
+  //   setNumber(numberValue);
+    {
+      /* 이름 valid 유효성 검사 */
+    }
+
+  //   const regex = /^\d{11}$/;
+
+  //   if (regex.test(numberValue)) {
+  //     setNumberValid(true);
+  //   } else {
+  //     setNumberValid(false);
+  //   }
+  // };
+  ////////////////////
+
+    //전화번호 validation 유효성 검사
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const numberValue = e.target.value;
     setNumber(numberValue);
     {
-      /* 이름 valid 유효성 검사 */
+      /* 전화번호 valid 유효성 검사 */
     }
 
     const regex = /^\d{11}$/;
@@ -104,6 +144,10 @@ const JoinPage = () => {
       setNumberValid(false);
     }
   };
+  
+
+
+  
 
   //이메일 입력 후 중복확인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = () => {
@@ -133,7 +177,7 @@ const JoinPage = () => {
       !emailValid ||
       !passwordValid ||
       !ConfirmPwValid ||
-      !ConfirmNameValid ||
+      !ConfirmNickNameValid ||
       !numberValid
     ) {
       alert('모든 항목 및 정보를 올바르게 입력해주세요.');
@@ -248,8 +292,25 @@ const JoinPage = () => {
             )}
           </ErrorMessageWrap>
 
+          {/* 닉네임 입력칸 */}
+          <InputTitle style={{ marginTop: '26px' }}>닉네임</InputTitle>
+          <InputWrap>
+            <Input2
+              type="text"
+              value={nickName}
+              onChange={handleNickName}
+              placeholder="닉네임을 입력해주세요."
+            />
+          </InputWrap>
+          {/* 닉네임 에러메세지 입력칸 */}
+          <ErrorMessageWrap>
+            {!ConfirmNickNameValid && nickName.length > 0 && (
+              <div>2자 이상 8자 이하, 영어 or 숫자 or 한글로 입력해주세요.</div>
+            )}
+          </ErrorMessageWrap>
+
           {/* 이름 입력칸 */}
-          <InputTitle style={{ marginTop: '26px' }}>이름</InputTitle>
+          {/* <InputTitle style={{ marginTop: '26px' }}>이름</InputTitle>
           <InputWrap>
             <Input2
               type="text"
@@ -257,13 +318,15 @@ const JoinPage = () => {
               onChange={handleName}
               placeholder="이름을 입력해주세요."
             />
-          </InputWrap>
+          </InputWrap> */}
           {/* 이름 에러메세지 입력칸 */}
-          <ErrorMessageWrap>
+          {/* <ErrorMessageWrap>
             {!ConfirmNameValid && name.length > 0 && (
-              <div>비밀번호가 일치하지 않습니다.</div>
+              <div>4자외로 입력해 주세요.</div>
             )}
-          </ErrorMessageWrap>
+          </ErrorMessageWrap> */}
+
+
 
           {/* 전화번호 입력칸 */}
           <InputTitle style={{ marginTop: '26px' }}>전화번호</InputTitle>
