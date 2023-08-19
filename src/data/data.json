@@ -1,0 +1,48 @@
+[
+    {
+      "title": "만보 걷기 챌린지!",
+      "category": "운동",
+      "startdate": "2023.08.01",
+      "enddate": "2023.08.08",
+      "img": "https://cdn.pixabay.com/photo/2020/04/22/10/14/running-5077128_1280.jpg",
+      "coment":"건강한 몸을 원하는 분들",
+      "tag":"#건강,#운동,#갓생"
+    },
+    {
+        "title": "모던자바스크립트딥다이브 완독 챌린지",
+        "category": "공부",
+        "startdate": "2023.08.01",
+        "enddate": "2023.10.31",
+        "img": "https://image.yes24.com/goods/92742567/XL",
+        "coment":"갓 시작하는 개발자들과 같이 공부해요",
+        "tag":"#공부,#독서,#IT"
+    },
+    {
+        "title": "미리 시작하는 따뜻한 겨울, 목도리 뜨개질 챌린지!",
+        "category": "취미",
+        "startdate": "2023.08.01",
+        "enddate": "2023.08.31",
+        "img": "https://cdn.pixabay.com/photo/2019/12/08/13/38/handmade-4681198_1280.jpg",
+        "coment":"갓 시작하는 개발자들과 같이 공부해요",
+        "tag":"목도리,#겨울,#취미"
+    },
+    {
+        "title": "매일 물 2L 뿌시는 챌린지",
+        "category": "습관",
+        "startdate": "2023.08.08",
+        "enddate": "2023.08.22",
+        "img": "https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_1280.jpg",
+        "coment":"2주동안 물 마시는 습관을 만들어봐요",
+        "tag":"#습관,#물,#건강"
+    },
+    {
+        "title": "매일하는 필사 챌린지",
+        "category": "공부",
+        "startdate": "2023.08.19",
+        "enddate": "2023.09.20",
+        "img": "https://cdn.liveklass.com/course/1681807989993.png.large",
+        "coment":"필사를 통해 문장력을 높여봐요!",
+        "tag":"#공부,#독서,#습관,#한달챌린지"
+    }
+  
+  ]
