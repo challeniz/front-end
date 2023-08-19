@@ -62,8 +62,12 @@ const MainPage = () => {
     }
   };
 
+  const BackWhite = styled.div`
+    background-color: #fff !important;
+  `;
+
   return (
-    <div>
+    <BackWhite>
       <Header />
       <SlideBnner />
       <Wrapper>
@@ -90,7 +94,7 @@ const MainPage = () => {
         <ContentsList>
           <ProgressList>
             <li>
-              <h2>진행중인 챌린지</h2>
+              <h2>🗓️ 진행중인 챌린지</h2>
             </li>
             <li onClick={() => prevSlide(1)}>
               <StyledSlideCircleLeft />
@@ -102,19 +106,14 @@ const MainPage = () => {
               <h3>전체보기</h3>
             </li>
           </ProgressList>
-          <ContentsWrap ref={SlideRef1}>
-            <ListContent />
-            <ListContent />
-            <ListContent />
-            <ListContent />
-          </ContentsWrap>
+          <ContentsWrap ref={SlideRef1}></ContentsWrap>
         </ContentsList>
 
         <PopularList>
           <ProgressList>
             <li>
               <h2>
-                <PopularListSpan>HOT!</PopularListSpan> 인기 챌린지
+                <PopularListSpan>🔥HOT!</PopularListSpan> 인기 챌린지
               </h2>
             </li>
             <li onClick={() => prevSlide(2)}>
@@ -127,19 +126,14 @@ const MainPage = () => {
               <h3>전체보기</h3>
             </li>
           </ProgressList>
-          <ContentsWrap ref={SlideRef2}>
-            <ListContent />
-            <ListContent />
-            <ListContent />
-            <ListContent />
-          </ContentsWrap>
+          <ContentsWrap ref={SlideRef2}></ContentsWrap>
         </PopularList>
 
         <NewList>
           <ProgressList>
             <li>
               <h2>
-                <NewListSpan>NEW!</NewListSpan> 인기 챌린지
+                <NewListSpan>⭐️NEW!</NewListSpan> 인기 챌린지
               </h2>
             </li>
             <li onClick={() => prevSlide(3)}>
@@ -152,56 +146,40 @@ const MainPage = () => {
               <h3>전체보기</h3>
             </li>
           </ProgressList>
-          <ContentsWrap ref={SlideRef3}>
-            <ListContent />
-            <ListContent />
-            <ListContent />
-            <ListContent />
-          </ContentsWrap>
+          <ContentsWrap ref={SlideRef3}></ContentsWrap>
         </NewList>
       </Wrapper>
 
-      <BottomBannerr>
-        <BottomInner>
-          <img src={banner4} alt="banner" />
-          <BannerTxt>
-            <h3>찾고 있는 챌린지가 없나요?</h3>
-            <p>
-              챌린지 만들기
-              <BannerLine>
-                <StyledStyledSlideCircleRight />
-              </BannerLine>
-            </p>
-          </BannerTxt>
-        </BottomInner>
-      </BottomBannerr>
+      {/* <BottomBannerr>
+        <BottomInner></BottomInner>
+      </BottomBannerr> */}
 
       <Footer />
-    </div>
+    </BackWhite>
   );
 };
 
 const Search = styled.div`
   text-align: center;
-  position: relative;
-  top: 5rem;
+  padding-top: 60px;
 `;
 const SearchTitle = styled.h1`
-  font-size: 34px;
+  font-size: 40px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 40px;
+  margin-bottom: 70px;
+  letter-spacing: -0.5px;
 `;
 const SearchTitleColor = styled.span`
   color: #339af0;
 `;
 const SearchBox = styled.div`
-  position: relative;
   box-sizing: border-box;
   font-size: 25px;
   width: 623px;
   margin: 0 auto;
+  position: relative;
 `;
 
 const SearchBoxInput = styled.input`
@@ -219,6 +197,7 @@ const SearchBoxInput = styled.input`
 const ContentsWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 40px;
 `;
 
 const StyledCiSearch = styled(CiSearch)`
@@ -231,28 +210,22 @@ const StyledCiSearch = styled(CiSearch)`
 `;
 
 const ContentsList = styled.div`
-  position: relative;
-  top: 16rem;
-  left: 4rem;
-  overflow: hidden;
+  margin: 180px auto;
 `;
 
 const PopularList = styled.div`
-  position: relative;
-  top: 30rem;
-  left: 4rem;
+  margin-bottom: 180px;
 `;
 
 const NewList = styled.div`
-  position: relative;
-  top: 44rem;
-  left: 4rem;
+  margin-bottom: 180px;
 `;
 
 const ProgressList = styled.ul`
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 45px;
   font-size: 20px;
+  align-items: center;
 
   li {
     margin: 0 8px;
@@ -276,10 +249,13 @@ const ProgressList = styled.ul`
   }
 
   li:nth-child(4) {
-    float: right;
-    right: 4rem;
-    position: absolute;
+    margin-left: auto;
     cursor: pointer;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 400;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -301,17 +277,18 @@ const KeywordWrap = styled.div`
   align-items: center;
 
   h5 {
-    font-size: 18px;
+    font-size: 15px;
     color: #fff;
     background-color: #339af0;
     border-radius: 20px;
     margin-right: 15px;
     padding: 8px 12px;
-    font-weight: 600;
+    font-weight: 500;
   }
   p {
-    font-size: 17px;
-    padding: 0 8px;
+    font-size: 20px;
+    padding: 0 10px;
+    color: #515151;
   }
 `;
 const StyledSlideCircleLeft = styled(CiCircleChevLeft)`
@@ -323,16 +300,13 @@ const StyledSlideCircleLeft = styled(CiCircleChevLeft)`
 `;
 
 const PopularListSpan = styled.span`
-  color: #00daa6;
+  color: #ff003d;
 `;
 const NewListSpan = styled.span`
-  color: #24ff00;
+  color: #ffe500;
 `;
 
-const BottomBannerr = styled.div`
-  position: relative;
-  top: 54rem;
-`;
+const BottomBannerr = styled.div``;
 
 const BottomInner = styled.div`
   img {
@@ -343,45 +317,7 @@ const BottomInner = styled.div`
     max-width: 100%;
   }
 `;
-const BannerTxt = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  align-items: center;
-  transform: translate(-50%, -50%);
-  text-align: center;
 
-  h3 {
-    font-size: 40px;
-    letter-spacing: 4px;
-    margin-bottom: 40px;
-    font-weight: 600;
-  }
-
-  a {
-    cursor: pointer;
-    font-size: 28px;
-    text-align: center;
-    letter-spacing: 4px;
-    padding: 8px 15px;
-    font-weight: 500;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    line-height: 30px;
-    align-items: center;
-    svg {
-      transition: 0.2s;
-    }
-    &:hover {
-      text-decoration: underline;
-    }
-    &:hover svg {
-      transform: translateX(8px);
-      transition: 0.2s;
-    }
-  }
-`;
 const StyledStyledSlideCircleRight = styled(StyledSlideCircleRight)`
   width: 1.5em;
   height: 1.5em;

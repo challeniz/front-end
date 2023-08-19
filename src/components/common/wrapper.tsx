@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const WrapperBlock = styled.div`
   width: 1400px;
-  margin: 60px auto;
+  margin: 0 auto;
+  padding: 60px 0;
 `;
 
 interface WrapperProps {

@@ -4,6 +4,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { AiOutlineLeft } from 'react-icons/ai';
+
 import banner1 from '../../assets/image/banner.png';
 import banner2 from '../../assets/image/banner_2.png';
 import banner3 from '../../assets/image/banner_3.png';
@@ -18,7 +20,7 @@ const SlideBnner = () => {
     centerPadding: '0px',
     centerMode: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 9000,
   };
 
   return (
@@ -53,9 +55,18 @@ const BannerSlide = styled.div`
   .slick-dots {
     bottom: 0px;
   }
-  .slick-list{ //얘로 크기조정 했음
+  .slick-list {
+    //얘로 크기조정 했음
     width: 110vw;
-      
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 45px;
+  }
+
+  .slick-dots li button:before {
+    top: -20px;
   }
 `;
 const BannerSlider = styled(Slider)`
@@ -69,6 +80,10 @@ const SlideBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  img {
+    width: 100%;
+  }
 `;
 
 export default SlideBnner;
