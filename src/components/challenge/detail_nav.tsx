@@ -5,7 +5,7 @@ import { CiShare2, CiHeart, CiCalendarDate, CiUser } from "react-icons/ci";// ì•
 const DetailNavs = styled.div`
   position:sticky;
   top:147px;
-  width:27%;
+  width:28%;
   height:480px;
   border-radius:20px;
   box-shadow: 0 -2px 9px 0 rgba(0, 0, 0, 20%);
@@ -24,6 +24,7 @@ const DetailTag = styled.a`
 const H3Styled = styled.h3`
   font-size:32px;
   padding:25px 0 60px;
+  font-weight:600;
 `
 
 const SubButton = styled.button`
