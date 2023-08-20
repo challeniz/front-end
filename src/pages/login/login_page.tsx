@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../../components/common/wrapper';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { emailRegex, passwordRegex, nickNameRegex, numberRegex} from '../../components/common/validation'
 
 //더미데이터 테스트용
 const User = {
@@ -26,9 +27,7 @@ const LoginPage = () => {
     {
       /* 이메일 valid 유효성 검사 */
     }
-    const regex =
-      /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-    if (regex.test(email)) {
+    if (emailRegex.test(email)) {
       setEmailValid(true);
     } else {
       setEmailValid(false);
@@ -41,9 +40,7 @@ const LoginPage = () => {
     {
       /* 비밀번호 valid 유효성 검사 */
     }
-    const regex =
-      /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
-    if (regex.test(password)) {
+    if (passwordRegex.test(password)) {
       setPasswordValid(true);
     } else {
       setPasswordValid(false);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../../components/common/wrapper';
+import { emailRegex, passwordRegex, nickNameRegex, numberRegex} from '../../components/common/validation'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 
 const JoinPage = () => {
@@ -36,9 +37,8 @@ const JoinPage = () => {
     {
       /* 이메일 valid 유효성 검사 */
     }
-    const regex =
-      /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-    if (regex.test(email)) {
+      
+    if (emailRegex.test(email)) {
       setEmailValid(true);
     } else {
       setEmailValid(false);
@@ -52,9 +52,7 @@ const JoinPage = () => {
     {
       /* 비밀번호 valid 유효성 검사 */
     }
-    const regex =
-      /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
-    if (regex.test(password)) {
+    if (passwordRegex.test(password)) {
       setPasswordValid(true);
     } else {
       setPasswordValid(false);
@@ -66,7 +64,7 @@ const JoinPage = () => {
     const confirmPasswordValue = e.target.value;
     setConfirmPw(confirmPasswordValue);
     {
-      /* 비밀번호 valid 유효성 검사 */
+      /* 비밀번호 재입력 valid 유효성 검사 */
     }
 
     if (password === confirmPasswordValue) {
@@ -83,8 +81,7 @@ const JoinPage = () => {
     {
       /* 닉네임 valid 유효성 검사 */
     }
-    const regex = /^(?=.*[a-zA-Z0-9\u3131-\uD79D])[\w\u3131-\uD79D]{2,8}$/;
-    if (regex.test(nickName)) {
+    if (nickNameRegex.test(nickName)) {
       setConfirmNickNameValid(true);
     } else {
       setConfirmNickNameValid(false);
@@ -135,7 +132,6 @@ const JoinPage = () => {
     {
       /* 전화번호 valid 유효성 검사 */
     }
-
     const regex = /^\d{11}$/;
 
     if (regex.test(numberValue)) {
