@@ -26,20 +26,12 @@ const Footer = () => {
 };
 
 const FooterBox = styled.div`
-  position: relative;
-  top: 54rem;
-  bottom: 0;
-  width: 100vw;
-  height: 180px;
-  background-color: #339af0;
+  background-color: #ccc;
   text-align: center;
 
   h1 {
     color: #eaeaea;
-    position: absolute;
-    top: 4rem;
     text-align: center;
-    left: 4rem;
     font-size: 40px;
     margin: 0;
   }
@@ -56,9 +48,6 @@ const FooterTxt = styled.div`
     color: #eaeaea;
     margin-right: 15px;
     margin-bottom: 4px;
-    position: relative;
-    top: 2rem;
-    left: 12rem;
     display: block;
   }
 `;
@@ -72,10 +61,6 @@ const FooterAddress = styled.div`
     font-size: 14px;
     line-height: 1.5em;
     color: #eaeaea;
-    position: relative;
-    margin-right: 8px;
-    top: 2rem;
-    left: 12rem;
     letter-spacing: 1px;
   }
   span {
@@ -85,20 +70,14 @@ const FooterAddress = styled.div`
     font-size: 14px;
     line-height: 1.5em;
     color: #eaeaea;
-    position: relative;
     margin-right: 8px;
-    top: 2.2rem;
-    left: 12rem;
     letter-spacing: 1px;
   }
 `;
 
 const Copyright = styled.p`
-  position: absolute;
   font-size: 12px;
   font-weight: 500;
   color: #d8d8d8;
-  left: 12rem;
-  top: 8.5rem;
 `;
 export default Footer;

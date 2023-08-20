@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../components/common/wrapper';
 import { Tab } from '../components/challenge/tab_menu';
@@ -10,10 +10,20 @@ const H2 = styled.h2`
 `;
 
 const ListPage = () => {
+  const menuArr = [
+    { name: '전체', content: '전체' },
+    { name: '건강', content: '건강' },
+    { name: '취미', content: '취미' },
+    { name: '식습관', content: '식습관' },
+    { name: '공부', content: '공부' },
+    { name: '환경', content: '환경' },
+  ];
+
+  const [currentTab, setCurrentTab] = useState<number>(0);
   return (
     <Wrapper>
-      <H2>전체보기</H2>
-      <Tab></Tab>
+      <H2>{menuArr[currentTab].name}</H2>
+      <Tab currentTab={currentTab} />
     </Wrapper>
   );
 };
