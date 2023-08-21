@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HeartButton from './heart';
-import axios from 'axios'; // axios를 임포트해야 합니다.
+// import axios from 'axios'; // axios를 임포트해야 합니다.
 
 const ContentWrap = styled.div`
   text-align: left;
@@ -78,7 +78,7 @@ const ListContent: React.FC = () => {
       <H3Styled>하루 만보 걷기 챌린지</H3Styled>
       <H4Styled>2023.08.01 ~ 2023.08.31</H4Styled>
     </ContentWrap>
-  );
+  );    
 };
 
 export default ListContent;
