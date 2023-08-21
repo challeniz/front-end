@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Header from '../components/common/header';
+import Footer from '../components/common/footer';
 import Wrapper from '../components/common/wrapper';
 import DetailContent from '../components/challenge/detail_content';
 import DetailNav from '../components/challenge/detail_nav';
@@ -16,14 +18,18 @@ const PageBack = styled.div`
 
 const DetailPage = () => {
   return (
-    <PageBack>
-      <Wrapper>
-        <Detail>
-          <DetailContent></DetailContent>
-          <DetailNav></DetailNav>
-        </Detail>
-      </Wrapper>
-    </PageBack>
+    <>
+      <Header />
+      <PageBack>
+        <Wrapper>
+          <Detail>
+            <DetailContent></DetailContent>
+            <DetailNav></DetailNav>
+          </Detail>
+        </Wrapper>
+      </PageBack>
+      <Footer />
+    </>
   );
 };
 

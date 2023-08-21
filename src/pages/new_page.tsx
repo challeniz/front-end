@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import Header from '../components/common/header';
+import Footer from '../components/common/footer';
 import Wrapper from '../components/common/wrapper';
 import WhiteBox from '../components/form/white_box';
 import WhiteBoxTitle from '../components/form/white_box_title';
@@ -12,6 +14,10 @@ import {
 import FormAgreeBox from '../components/form/form_agree';
 import ReactDatePicker from '../components/calendar/calendar';
 import TagBox from '../components/form/tag_box';
+
+const PageBack = styled.div`
+  background-color: #f4f4f4;
+`;
 
 const InputContent = styled.div`
   display: flex;
@@ -82,66 +88,74 @@ const NewPage: React.FC = () => {
   };
 
   return (
-    <Wrapper>
-      <WhiteBox>
-        <WhiteBoxTitle>챌린지 개설</WhiteBoxTitle>
-        <WhiteBoxContents>
-          <div>
-            <InputContent>
-              <LabelStyled htmlFor="formName">주제</LabelStyled>
-              <InputStyled
-                type="text"
-                id="formName"
-                placeholder="주제를 입력하세요."
-              />
-            </InputContent>
-            <InputContent>
-              <LabelStyled htmlFor="formCate">카테고리</LabelStyled>
-              <SelectStyled id="formCate">
-                <option value="운동">운동</option>
-                <option value="습관">습관</option>
-                <option value="취미">취미</option>
-                <option value="공부">공부</option>
-              </SelectStyled>
-            </InputContent>
-            <InputContent>
-              <LabelStyled htmlFor="formDage">챌린지 기간</LabelStyled>
-              <ReactDatePicker></ReactDatePicker>
-            </InputContent>
-            <InputContent>
-              <LabelStyled htmlFor="formImg">대표 이미지</LabelStyled>
-              <InputStyled type="file" id="formName" />
-            </InputContent>
-            <InputContent className="flex-start">
-              <LabelStyled htmlFor="forDescription">챌린지 설명</LabelStyled>
-              <TextareaStyled
-                placeholder="여기에 입력하세요"
-                value={textValue}
-                onChange={handleSetValue}
-              ></TextareaStyled>
-            </InputContent>
-            <InputContent className="flex-start">
-              <LabelStyled htmlFor="formTag">
-                태그
-                <br />
-                <SpanStyled>(최대 3개까지 추가)</SpanStyled>
-              </LabelStyled>
-              <TagBox tags={tags} onChangeTags={handleChangeTags} />
-            </InputContent>
-          </div>
-        </WhiteBoxContents>
-      </WhiteBox>
-      <WhiteBox>
-        <WhiteBoxTitle>약관 동의</WhiteBoxTitle>
-        <WhiteBoxContents>
-          {/* <FormAgreeBox></FormAgreeBox> */}
-        </WhiteBoxContents>
-      </WhiteBox>
-      <FormButton>
-        <FormCancelButton>취소하기</FormCancelButton>
-        <FormSubmitButton>챌린지 개설하기</FormSubmitButton>
-      </FormButton>
-    </Wrapper>
+    <>
+      <Header />
+      <PageBack>
+        <Wrapper>
+          <WhiteBox>
+            <WhiteBoxTitle>챌린지 개설</WhiteBoxTitle>
+            <WhiteBoxContents>
+              <div>
+                <InputContent>
+                  <LabelStyled htmlFor="formName">주제</LabelStyled>
+                  <InputStyled
+                    type="text"
+                    id="formName"
+                    placeholder="주제를 입력하세요."
+                  />
+                </InputContent>
+                <InputContent>
+                  <LabelStyled htmlFor="formCate">카테고리</LabelStyled>
+                  <SelectStyled id="formCate">
+                    <option value="운동">운동</option>
+                    <option value="습관">습관</option>
+                    <option value="취미">취미</option>
+                    <option value="공부">공부</option>
+                  </SelectStyled>
+                </InputContent>
+                <InputContent>
+                  <LabelStyled htmlFor="formDage">챌린지 기간</LabelStyled>
+                  <ReactDatePicker></ReactDatePicker>
+                </InputContent>
+                <InputContent>
+                  <LabelStyled htmlFor="formImg">대표 이미지</LabelStyled>
+                  <InputStyled type="file" id="formName" />
+                </InputContent>
+                <InputContent className="flex-start">
+                  <LabelStyled htmlFor="forDescription">
+                    챌린지 설명
+                  </LabelStyled>
+                  <TextareaStyled
+                    placeholder="여기에 입력하세요"
+                    value={textValue}
+                    onChange={handleSetValue}
+                  ></TextareaStyled>
+                </InputContent>
+                <InputContent className="flex-start">
+                  <LabelStyled htmlFor="formTag">
+                    태그
+                    <br />
+                    <SpanStyled>(최대 3개까지 추가)</SpanStyled>
+                  </LabelStyled>
+                  <TagBox tags={tags} onChangeTags={handleChangeTags} />
+                </InputContent>
+              </div>
+            </WhiteBoxContents>
+          </WhiteBox>
+          <WhiteBox>
+            <WhiteBoxTitle>약관 동의</WhiteBoxTitle>
+            <WhiteBoxContents>
+              {/* <FormAgreeBox></FormAgreeBox> */}
+            </WhiteBoxContents>
+          </WhiteBox>
+          <FormButton>
+            <FormCancelButton>취소하기</FormCancelButton>
+            <FormSubmitButton>챌린지 개설하기</FormSubmitButton>
+          </FormButton>
+        </Wrapper>
+      </PageBack>
+      <Footer />
+    </>
   );
 };
 

@@ -58,6 +58,7 @@ const DetailWrap = styled.div`
   background-color: #fff;
   padding: 30px;
   margin-bottom: 30px;
+  border-radius: 10px;
 
   h2 {
     font-size: 25px;
@@ -69,6 +70,24 @@ const DetailWrap = styled.div`
     line-height: 35px;
     list-style-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' height='20' width='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'><polyline points='20 6 9 17 4 12'></polyline></svg>");
     margin-left: 20px;
+  }
+`;
+
+const StyledCalendar = styled(Calendar)`
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  .react-calendar__navigation button:disabled {
+    background-color: #fff;
+  }
+  .react-calendar__navigation__label > span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    background-color: #fff;
+  }
+  .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus {
+    color: red;
   }
 `;
 
@@ -125,11 +144,8 @@ export const Tab: React.FC = () => {
               </ul>
             </DetailWrap>
             <DetailWrap>
-              {/* ... (이전 코드 생략) */}
               <h2>챌린지 기간</h2>
-              <Calendar
-                // onChange={setValue}
-                calendarType="US" // 일요일부터 표시하는법!
+              <StyledCalendar
                 value={value}
                 minDetail="month"
                 maxDetail="month"

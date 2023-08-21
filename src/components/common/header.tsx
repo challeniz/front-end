@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { ROUTE } from '../../routes';
+import { Link } from 'react-router-dom';
 import LogoImage from '../../assets/image/logo.png';
 import {
   FaHeartPulse,
@@ -11,11 +13,25 @@ import {
 import { FaUserCircle } from 'react-icons/fa';
 
 const HeaderWrapper = styled.div`
+  position: sticky;
+  top: 0px;
   padding: 0px 80px;
-  position: relative;
   cursor: pointer;
   height: 90px;
   box-sizing: border-box;
+  border-bottom: 1px solid #e6e6e6;
+  z-index: 99999;
+
+  &.original_header {
+    background-color: #fff;
+    transition: 0.3s;
+  }
+
+  &.change_header {
+    background-color: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+  }
 `;
 
 const HeaderContainer = styled.header`
@@ -134,11 +150,22 @@ const InnerLi = styled.li`
 `;
 
 const Header = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', updateScroll);
+  });
   return (
-    <HeaderWrapper>
+    <HeaderWrapper
+      className={scrollPosition < 100 ? 'original_header' : 'change_header'}
+    >
       <HeaderContainer>
         <Logo>
-          <LogoImg src={LogoImage} alt="Logo" />
+          <Link to={ROUTE.MAIN.link}>
+            <LogoImg src={LogoImage} alt="Logo" />
+          </Link>
         </Logo>
         <HeaderNav>
           <NavList>
