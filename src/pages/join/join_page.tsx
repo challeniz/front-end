@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { 
+  Body ,JoinText, JoinText1, EmailPW, InputTitle, InputWrap, Input, Input2,
+  Input3, ConfrimBtn, UserIcon, ErrorMessageWrap, BtnWrap, LoginBtn, Cancel} from './join_page.styles';
 import Wrapper from '../../components/common/wrapper';
 import { emailRegex, passwordRegex, nickNameRegex, numberRegex} from '../../components/common/validation'
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { ROUTE } from "../../routes";
+
 
 const JoinPage = () => {
+
+  
   const [email, setEmail] = useState(''); // 이메일 상태, 상태변경
   const [password, setPassword] = useState(''); // 비밀번호 상태, 상태변경
   const [confirmPw, setConfirmPw] = useState(''); // 비밀번호 재입력 상태, 상태변경
   //const [name, setName] = useState(''); // 이름 상태, 상태변경
   const [nickName, setNickName] = useState(''); // 닉네임 상태, 상태변경
   const [number, setNumber] = useState(''); // 전화번호 상태, 상태변경
+
 
   const [emailValid, setEmailValid] = useState(false); // 이메일 벨리데이션 유효성 검사
   const [passwordValid, setPasswordValid] = useState(false); // 비밀번호 벨리데이션 유효성 검사
@@ -132,18 +139,13 @@ const JoinPage = () => {
     {
       /* 전화번호 valid 유효성 검사 */
     }
-    const regex = /^\d{11}$/;
 
-    if (regex.test(numberValue)) {
+    if (numberRegex.test(numberValue)) {
       setNumberValid(true);
     } else {
       setNumberValid(false);
     }
   };
-  
-
-
-  
 
   //이메일 입력 후 중복확인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = () => {
@@ -191,7 +193,7 @@ const JoinPage = () => {
 
       alert('회원가입에 성공하였습니다.');
 
-      navigate('/loginpage'); // 가입 성공 시 로그인 페이지로 이동
+      navigate(ROUTE.LOGIN.link); // 가입 성공 시 로그인 페이지로 이동
     }
   };
 
@@ -235,7 +237,7 @@ const JoinPage = () => {
           </ErrorMessageWrap>
 
           {/* 비밀번호 입력칸 */}
-          <InputTitle style={{ marginTop: '26px' }}>비밀번호</InputTitle>
+          <InputTitle>비밀번호</InputTitle>
           <InputWrap>
             <UserIcon>
               <a
@@ -262,7 +264,7 @@ const JoinPage = () => {
           </ErrorMessageWrap>
 
           {/* 비밀번호 확인 */}
-          <InputTitle style={{ marginTop: '26px' }}>비밀번호 확인</InputTitle>
+          <InputTitle>비밀번호 확인</InputTitle>
           <InputWrap>
             <UserIcon>
               <a
@@ -289,9 +291,9 @@ const JoinPage = () => {
           </ErrorMessageWrap>
 
           {/* 닉네임 입력칸 */}
-          <InputTitle style={{ marginTop: '26px' }}>닉네임</InputTitle>
+          <InputTitle>닉네임</InputTitle>
           <InputWrap>
-            <Input2
+            <Input3
               type="text"
               value={nickName}
               onChange={handleNickName}
@@ -325,9 +327,9 @@ const JoinPage = () => {
 
 
           {/* 전화번호 입력칸 */}
-          <InputTitle style={{ marginTop: '26px' }}>전화번호</InputTitle>
+          <InputTitle>전화번호</InputTitle>
           <InputWrap>
-            <Input2
+            <Input3
               type="text"
               value={number}
               onChange={handleNumber}
@@ -344,7 +346,7 @@ const JoinPage = () => {
         {/* 가입하기, 가입취소 버튼 */}
         <BtnWrap>
           <LoginBtn onClick={() => handleJoin()}>가입하기</LoginBtn>
-          <Link to="/loginpage">
+          <Link to={ROUTE.LOGIN.link}>
             <Cancel>가입취소</Cancel>
           </Link>
         </BtnWrap>
@@ -355,153 +357,3 @@ const JoinPage = () => {
 
 export default JoinPage;
 
-//전체 틀 잡기
-const Body = styled.div`
-  margin-left: 400px;
-  margin-right: 400px;
-`;
-
-//회원가입 문구
-const JoinText = styled.p`
-  font-size: 30px;
-  font-weight: 700;
-`;
-
-//회원가입 부가설명
-const JoinText1 = styled.p`
-  font-size: 14px;
-  margin-top: 10px;
-  margin-bottom: 40px;
-`;
-
-// 이메일 주소, 비밀번호 전체 틀
-const EmailPW = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-`;
-
-// 이메일주소 , 비밀번호
-const InputTitle = styled.div`
-  font-size: 18px;
-  font-weight: 600;
-  color: #262626;
-`;
-
-//이메일, 비밀번호 입력창 틀
-const InputWrap = styled.div`
-  margin-top: 5px;
-  display: flex;
-  align-items: center;
-  border-radius: 3px;
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #e2e0e0;
-  background-color: white;
-  box-shadow: 1px 1px 0.5px 0.5px gray;
-
-  &:focus-within {
-    border: 1.5px solid #339af0;
-  }
-`;
-
-//이메일, 비밀번호 입력창
-const Input = styled.input`
-  width: 100%;
-  outline: none;
-  border: none;
-  height: 40px;
-  font-size: 18px;
-  font-weight: 400;
-
-  &::placeholder {
-    color: #dadada;
-  }
-`;
-
-// 비밀번호 재입력 확인창
-const Input2 = styled.input`
-  width: 100%;
-  outline: none;
-  border: none;
-  height: 40px;
-  font-size: 18px;
-  font-weight: 400;
-
-  &::placeholder {
-    color: #dadada;
-  }
-`;
-
-//이메일 중복확인 버튼
-const ConfrimBtn = styled.button`
-  border-radius: 3px;
-  width: 350px;
-  padding: 5px;
-  border: 1px solid #e2e0e0;
-  border-radius: 6px;
-  background-color: #339af0;
-  font-size: 20px;
-  color: white;
-  font-weight: 400;
-  cursor: pointer;
-
-  &:disabled {
-    background-color: #dadada;
-    color: white;
-  }
-`;
-
-//이메일 아이콘
-const UserIcon = styled.image`
-  display: flex;
-  align-items: center;
-
-  img {
-    width: 24px;
-    height: 24px;
-    margin-right: 20px;
-  }
-`;
-
-//이메일, 비밀번호 에러 메세지
-const ErrorMessageWrap = styled.div`
-  margin-top: 10px;
-  color: #ef0000;
-  font-size: 14px;
-`;
-
-//가입하기 취소하기 버튼 틀 구조
-const BtnWrap = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const LoginBtn = styled.button`
-  border-radius: 3px;
-  width: 200px;
-  padding: 10px;
-  border: 1px solid #e2e0e0;
-  border-radius: 6px;
-  background-color: #339af0;
-  font-size: 20px;
-  color: white;
-  font-weight: 400;
-  cursor: pointer;
-  margin-top: 30px;
-`;
-
-const Cancel = styled.button`
-  border-radius: 3px;
-  width: 200px;
-  padding: 10px;
-  border: 1px solid #e2e0e0;
-  border-radius: 6px;
-  background-color: #cde8ac;
-  font-size: 20px;
-  color: black;
-  font-weight: 400;
-  cursor: pointer;
-  margin-top: 30px;
-  margin-left: 20px;
-`;
