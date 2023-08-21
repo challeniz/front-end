@@ -1,27 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import Wrapper from '../components/common/wrapper';
+import Header from '../components/common/header';
+import Footer from '../components/common/footer';
 
 const MyPrivacy = () => {
   return (
-    <div>
+    <>
+      <Header />
       <Wrapper>
         <StyleH1>마이 페이지</StyleH1>
-
-        <PageBox>
-          <PageImg></PageImg>
-          <PageTxt>
-            <ul>
-              <li>김챌린지님</li>
-              <li>
-                현재등급은 <span>신입챌리니즈</span>입니다.
-              </li>
-            </ul>
-          </PageTxt>
-
-          <PageBtn>내 정보 수정하기</PageBtn>
-        </PageBox>
-
         <MyInfo>
           <InfoTitle>
             <h3>내정보 수정</h3>
@@ -53,72 +41,14 @@ const MyPrivacy = () => {
           </InfoBox>
         </MyInfo>
       </Wrapper>
-    </div>
+      <Footer />
+    </>
   );
 };
-
-const PageBox = styled.div`
-  position: relative;
-  width: 1400px;
-  height: 299px;
-  border-radius: 10px;
-  background-color: #d3d3d3;
-  display: flex;
-  top: 5rem;
-`;
-
-const PageImg = styled.div`
-  position: absolute;
-  border-radius: 50%;
-  background-color: #b0b4b6;
-  width: 226px;
-  height: 226px;
-  left: 50px;
-  top: 40px;
-`;
 
 const StyleH1 = styled.h1`
   font-weight: 800;
   font-size: 48px;
-`;
-const PageTxt = styled.div`
-  display: flex;
-  position: absolute;
-  left: 22rem;
-  top: 7rem;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-
-  li:nth-child(1) {
-    margin-bottom: 16px;
-    font-weight: bold;
-    font-size: 40px;
-    letter-spacing: 5px;
-  }
-
-  li:nth-child(2) {
-    font-size: 30px;
-    letter-spacing: 2px;
-  }
-  span {
-    font-size: 30px;
-    font-weight: 700;
-  }
-`;
-
-const PageBtn = styled.button`
-  width: 295px;
-  height: 69px;
-  border-radius: 20px;
-  background-color: #339af0;
-  color: #fff;
-  font-size: 23px;
-  font-weight: 600;
-  position: relative;
-  left: 60rem;
-  top: 7rem;
-  cursor: pointer;
 `;
 
 const MyInfo = styled.div`

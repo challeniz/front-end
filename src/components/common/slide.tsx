@@ -65,6 +65,12 @@ const BannerSlide = styled.div`
     font-size: 45px;
   }
 
+  .slick-prev,
+  .slick-next {
+    width: 45px;
+    height: 45px;
+  }
+
   .slick-dots li button:before {
     top: -20px;
   }

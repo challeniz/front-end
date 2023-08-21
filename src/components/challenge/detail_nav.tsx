@@ -1,29 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CiShare2, CiHeart, CiCalendarDate, CiUser } from 'react-icons/ci'; // 아이콘 이름 수정
+import {
+  CiShare2,
+  CiHeart,
+  CiCalendarDate,
+  CiUser,
+  CiStar,
+} from 'react-icons/ci'; // 아이콘 이름 수정
 
 const DetailNavs = styled.div`
   position: sticky;
   top: 60px;
   width: 28%;
-  height: 480px;
+  height: 450px;
   border-radius: 20px;
-  box-shadow: 0 -2px 9px 0 rgba(0, 0, 0, 20%);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 20%);
   padding: 37px 40px;
   background-color: #fff;
+
+  h5 {
+    font-size: 13px;
+    color: #868686;
+    font-weight: 400;
+    padding-bottom: 50px;
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 1.5em;
+      height: 1.5em;
+      padding-right: 4px;
+    }
+  }
 `;
 const DetailTag = styled.a`
-  font-size: 14px;
+  font-size: 16px;
   background-color: #787878;
   margin-right: 5px;
   color: #fff;
   border-radius: 15px;
-  padding: 3px 15px;
+  padding: 4px 16px;
 `;
 
 const H3Styled = styled.h3`
   font-size: 32px;
-  padding: 25px 0 60px;
+  padding: 25px 0 15px;
   font-weight: 600;
 `;
 
@@ -42,7 +63,7 @@ const ButtonWrap = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 23px;
+  margin-bottom: 15px;
 `;
 const ButtonFlex = styled.div`
   display: flex;
@@ -71,7 +92,7 @@ const MainButton = styled.button`
   font-size: 22px;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: 30px;
+  margin-bottom: 23px;
   transition: 0.2s;
 
   &:hover {
@@ -82,11 +103,11 @@ const MainButton = styled.button`
 
 const DetailInfo = styled.div`
   border-top: 1px solid #dbdbdb;
-  padding-top: 20px;
+  padding-top: 25px;
 `;
 const PStyled = styled.p`
   color: #868686;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   padding-bottom: 4px;
   display: flex;
@@ -113,6 +134,7 @@ const DetailNav = () => {
         <DetailTag>#걷기</DetailTag>
       </div>
       <H3Styled>만보 걷기 챌린지</H3Styled>
+      <h5>개설 챌리니 : 윥이님</h5>
       <ButtonWrap>
         <SubButton>
           <ButtonFlex>
@@ -129,10 +151,6 @@ const DetailNav = () => {
       </ButtonWrap>
       <MainButton>챌린지 참여하기</MainButton>
       <DetailInfo>
-        <PStyled>
-          <StyledCiCalendar />
-          2023.08.01 ~ 2023.08.31
-        </PStyled>
         <PStyled>
           <StyledCiUser />
           현재 18명 참여 중

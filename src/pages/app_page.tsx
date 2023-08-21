@@ -13,6 +13,10 @@ import { FormSubmitButton } from '../components/form/form_button';
 import { CiCalendarDate, CiUser } from 'react-icons/ci'; // 아이콘 이름 수정
 import axios from 'axios';
 
+const PageBack = styled.div`
+  background-color: #f4f4f4;
+`;
+
 const InputContent = styled.div`
   display: flex;
   margin-bottom: 25px;
@@ -142,83 +146,89 @@ const ApplicationPage = () => {
       });
   }, []);
   return (
-    <Wrapper>
-      <div>
-        <WhiteBox>
-          <WhiteBoxContents>
-            <ContentWrap>
-              <ImgWrap></ImgWrap>
-              <TextWrap>
-                {challengeInfo ? (
-                  <>
-                    <h5>
-                      <StyledCiUser />
-                      현재 {challengeInfo.participants}명 참여 중
-                    </h5>
-                    <h2>{challengeInfo.title}</h2>
-                    <h4>{challengeInfo.description}</h4>
-                    <h6>
-                      <StyledCiCalendar />
-                      {challengeInfo.date}
-                    </h6>
-                  </>
-                ) : (
-                  <p>Loading...</p>
-                )}
-              </TextWrap>
-            </ContentWrap>
-          </WhiteBoxContents>
-        </WhiteBox>
-      </div>
-      <div>
-        <WhiteBox>
-          <WhiteBoxTitle>참가자 정보</WhiteBoxTitle>
-          <WhiteBoxContents>
-            <div>
-              <form>
-                <InputContent>
-                  <LabelStyled htmlFor="formName">이름</LabelStyled>
-                  <InputStyled
-                    type="text"
-                    value={name}
-                    // onChange={(e) => setName(e.target.value)}
-                    id="formName"
-                  />
-                </InputContent>
-                <InputContent>
-                  <LabelStyled htmlFor="formTel">휴대폰번호</LabelStyled>
-                  <InputStyled
-                    type="text"
-                    value={tel}
-                    // onChange={(e) => setTel(e.target.value)}
-                    id="formTel"
-                  />
-                </InputContent>
-                <InputContent>
-                  <LabelStyled htmlFor="formMail">이메일</LabelStyled>
-                  <InputStyled
-                    type="text"
-                    value={email}
-                    // onChange={(e) => setEmail(e.target.value)}
-                    id="formMail"
-                  />
-                </InputContent>
-              </form>
-            </div>
-          </WhiteBoxContents>
-        </WhiteBox>
-      </div>
-      <WhiteBox>
-        <WhiteBoxTitle>약관 정보</WhiteBoxTitle>
-        <WhiteBoxContents>
-          {/* <FormAgreeBox></FormAgreeBox> */}
-        </WhiteBoxContents>
-      </WhiteBox>
-      <FormButton>
-        <FormCancelButton>취소하기</FormCancelButton>
-        <FormSubmitButton>참가하기</FormSubmitButton>
-      </FormButton>
-    </Wrapper>
+    <>
+      <Header />
+      <PageBack>
+        <Wrapper>
+          <div>
+            <WhiteBox>
+              <WhiteBoxContents>
+                <ContentWrap>
+                  <ImgWrap></ImgWrap>
+                  <TextWrap>
+                    {challengeInfo ? (
+                      <>
+                        <h5>
+                          <StyledCiUser />
+                          현재 {challengeInfo.participants}명 참여 중
+                        </h5>
+                        <h2>{challengeInfo.title}</h2>
+                        <h4>{challengeInfo.description}</h4>
+                        <h6>
+                          <StyledCiCalendar />
+                          {challengeInfo.date}
+                        </h6>
+                      </>
+                    ) : (
+                      <p>Loading...</p>
+                    )}
+                  </TextWrap>
+                </ContentWrap>
+              </WhiteBoxContents>
+            </WhiteBox>
+          </div>
+          <div>
+            <WhiteBox>
+              <WhiteBoxTitle>참가자 정보</WhiteBoxTitle>
+              <WhiteBoxContents>
+                <div>
+                  <form>
+                    <InputContent>
+                      <LabelStyled htmlFor="formName">이름</LabelStyled>
+                      <InputStyled
+                        type="text"
+                        value={name}
+                        // onChange={(e) => setName(e.target.value)}
+                        id="formName"
+                      />
+                    </InputContent>
+                    <InputContent>
+                      <LabelStyled htmlFor="formTel">휴대폰번호</LabelStyled>
+                      <InputStyled
+                        type="text"
+                        value={tel}
+                        // onChange={(e) => setTel(e.target.value)}
+                        id="formTel"
+                      />
+                    </InputContent>
+                    <InputContent>
+                      <LabelStyled htmlFor="formMail">이메일</LabelStyled>
+                      <InputStyled
+                        type="text"
+                        value={email}
+                        // onChange={(e) => setEmail(e.target.value)}
+                        id="formMail"
+                      />
+                    </InputContent>
+                  </form>
+                </div>
+              </WhiteBoxContents>
+            </WhiteBox>
+          </div>
+          <WhiteBox>
+            <WhiteBoxTitle>약관 정보</WhiteBoxTitle>
+            <WhiteBoxContents>
+              {/* <FormAgreeBox></FormAgreeBox> */}
+            </WhiteBoxContents>
+          </WhiteBox>
+          <FormButton>
+            <FormCancelButton>취소하기</FormCancelButton>
+            <FormSubmitButton>참가하기</FormSubmitButton>
+          </FormButton>
+        </Wrapper>
+      </PageBack>
+      <Footer />
+    </>
   );
 };
 

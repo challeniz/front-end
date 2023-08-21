@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import Header from '../components/common/header';
+import Footer from '../components/common/footer';
 import styled from 'styled-components';
+
 import Wrapper from '../components/common/wrapper';
 import { Tab } from '../components/challenge/tab_menu';
 
@@ -21,10 +24,14 @@ const ListPage = () => {
 
   const [currentTab, setCurrentTab] = useState<number>(0);
   return (
-    <Wrapper>
-      <H2>{menuArr[currentTab].name}</H2>
-      <Tab currentTab={currentTab} />
-    </Wrapper>
+    <>
+      <Header />
+      <Wrapper>
+        <H2>{menuArr[currentTab].name}</H2>
+        <Tab currentTab={currentTab} />
+      </Wrapper>
+      <Footer />
+    </>
   );
 };
 

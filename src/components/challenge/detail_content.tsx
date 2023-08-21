@@ -4,7 +4,6 @@ import { Tab } from './detail_tab';
 
 const DetailContents = styled.div`
   width: 67%;
-  height: 3000px;
 `;
 
 const H2Styled = styled.h2`
