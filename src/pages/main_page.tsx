@@ -133,7 +133,7 @@ const MainPage = () => {
           <ProgressList>
             <li>
               <h2>
-                <NewListSpan>⭐️NEW!</NewListSpan> 인기 챌린지
+                <NewListSpan>⭐️NEW!</NewListSpan> 신규 챌린지
               </h2>
             </li>
             <li onClick={() => prevSlide(3)}>

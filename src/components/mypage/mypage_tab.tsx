@@ -78,6 +78,29 @@ const StatusGrid = styled.div`
   grid-column-gap: 40px;
 `;
 
+const AuthInfo = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 40px;
+
+
+  h4{
+    font-size:18px;
+    font-weight:500;
+    padding-bottom:10px;
+    text-align:center;
+  }
+  h3 {
+    text-align:center;
+    font-size: 31px;
+    font-weight: 600;
+  }
+  }
+`;
+
 export const MyPageTab: React.FC = () => {
   // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
   const [currentTab, clickTab] = useState<number>(0);
@@ -134,9 +157,23 @@ export const MyPageTab: React.FC = () => {
           </>
         ) : (
           // 인증 목록 내용
-          <div>
+          <StatusWrap>
+            <AuthInfo>
+              <div>
+                <h4>모은 스탬프</h4>
+                <h3>8개</h3>
+              </div>
+              <div>
+                <h4>내 등급</h4>
+                <h3>신입 챌리니</h3>
+              </div>
+              <div>
+                <h4>다음 등급까지 남은 스탬프</h4>
+                <h3>22개</h3>
+              </div>
+            </AuthInfo>
             <AuthList />
-          </div>
+          </StatusWrap>
         )}
       </Desc>
     </div>
