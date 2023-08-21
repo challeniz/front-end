@@ -73,7 +73,7 @@ const MyInfo = () => {
               <span>김챌린지</span> 님
             </li>
             <li>
-              현재등급은 <span>신입챌리니즈</span>입니다.
+              현재등급은 <span>신입챌리니</span>입니다.
             </li>
           </ul>
         </PageTxt>
