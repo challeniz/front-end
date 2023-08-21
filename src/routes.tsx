@@ -7,6 +7,7 @@ import MyPage from './pages/my_page';
 import AuthPage from './pages/auth_page';
 import DetailPage from './pages/detail_page';
 import ApplicationPage from './pages/app_page';
+import Day from './ex';
 
 export const ROUTE = {
   MAIN: {
@@ -54,6 +55,7 @@ export const ROUTE = {
     link: '/authpage',
     element: AuthPage,
   },
+  
 };
 
 export const ROUTE_ARR = Object.values(ROUTE);
