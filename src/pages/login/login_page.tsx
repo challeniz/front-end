@@ -178,6 +178,7 @@ const LoginPage = () => {
           />
         </Google>
       </IconWrap> */}
+      
     </Wrapper>
   );
 };
