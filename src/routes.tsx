@@ -7,7 +7,7 @@ import MyPage from './pages/my_page';
 import AuthPage from './pages/auth_page';
 import DetailPage from './pages/detail_page';
 import ApplicationPage from './pages/app_page';
-
+import AboutPage from './pages/aboutpage';
 
 export const ROUTE = {
   MAIN: {
@@ -55,7 +55,11 @@ export const ROUTE = {
     link: '/authpage',
     element: AuthPage,
   },
-  
+  AboutPage: {
+    path: '/aboutpage',
+    link: '/aboutpage',
+    element: AboutPage,
+  },
 };
 
 export const ROUTE_ARR = Object.values(ROUTE);
