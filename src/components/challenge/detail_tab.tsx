@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Calendar from 'react-calendar'; // Import Calendar from react-calendar
+import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 
@@ -151,14 +151,44 @@ export const Tab: React.FC = () => {
                 maxDetail="month"
                 showNeighboringMonth={false}
                 className="mx-auto w-full text-sm border-b"
+                formatDay={(locale, date) =>
+                  date.toLocaleString('en', { day: 'numeric' })
+                }
                 tileContent={({ date, view }: { date: Date; view: string }) => {
-                  let html: JSX.Element[] = [];
-                  if (
-                    mark.find((x) => x === moment(date).format('YYYY-MM-DD'))
-                  ) {
-                    html.push(<div className="dot"></div>);
-                  }
-                  return <div>{html}</div>;
+                  const dayList = [
+                    '2023-08-10',
+                    '2023-08-21',
+                    '2023-08-02',
+                    '2023-08-14',
+                    '2023-08-27',
+                  ];
+
+                  const addContent = ({ date }: any) => {
+                    const contents: JSX.Element[] = [];
+
+                    if (
+                      dayList.find(
+                        (day) => day === moment(date).format('YYYY-MM-DD')
+                      )
+                    ) {
+                      contents.push(
+                        <div
+                          key={moment(date).format('YYYY-MM-DD')}
+                          style={{
+                            height: '100%',
+                            width: '100%',
+                            background: '#f87171',
+                            borderRadius: '50%',
+                            display: 'flex',
+                            marginLeft: '15px',
+                          }} // style 속성이 <div> 엘리먼트 안에 와야 함
+                        ></div>
+                      );
+                    }
+                    return contents;
+                  };
+
+                  return <div>{addContent({ date })}</div>;
                 }}
               />
             </DetailWrap>

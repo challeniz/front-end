@@ -9,6 +9,7 @@ import DetailPage from './pages/detail_page';
 import ApplicationPage from './pages/app_page';
 import MyPrivacy from './pages/ my_privacy';
 
+
 export const ROUTE = {
   MAIN: {
     path: '/',

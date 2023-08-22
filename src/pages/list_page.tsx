@@ -21,8 +21,11 @@ const ListPage = () => {
     { name: '공부', content: '공부' },
     { name: '환경', content: '환경' },
   ];
+  const [currentTab, setCurrentTab] = useState(0);
 
-  const [currentTab, setCurrentTab] = useState<number>(0);
+  console.log('menuArr:', menuArr);
+  console.log('currentTab:', currentTab);
+
   return (
     <>
       <Header />
