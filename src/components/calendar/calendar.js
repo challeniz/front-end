@@ -34,24 +34,24 @@ const ReactDatePicker = () => {
   );
 };
 
-const ReactDatePicker2 = ({ endDate }) => { // Receive endDate as a prop
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate2] = dateRange;
+// const ReactDatePicker2 = ({ endDate }) => { 
+//   const [dateRange, setDateRange] = useState([null, null]);
+//   const [startDate, endDate2] = dateRange;
 
-  return (
-    <StyledDatePicker
-      selectsRange={true}
-      startDate={startDate}
-      endDate={endDate2}
-      dateFormat="yyyy년MM월dd일"
-      onChange={(update) => {
-        setDateRange(update);
-      }}
-      isClearable={true}
-      placeholderText="날짜를 선택하세요"
-      minDate={endDate} // Set the minDate using the received endDate prop
-    />
-  );
-};
+//   return (
+//     <StyledDatePicker
+//       selectsRange={true}
+//       startDate={startDate}
+//       endDate={endDate2}
+//       dateFormat="yyyy년MM월dd일"
+//       onChange={(update) => {
+//         setDateRange(update);
+//       }}
+//       isClearable={true}
+//       placeholderText="날짜를 선택하세요"
+//       minDate={endDate} // Set the minDate using the received endDate prop
+//     />
+//   );
+// };
 
-export { ReactDatePicker, ReactDatePicker2 };
+export default ReactDatePicker;
