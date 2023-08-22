@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
-
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import CommentBox from '../comment/comment';
 const TabMenu = styled.ul`
   border-bottom: 1px solid #000;
   display: flex;
@@ -73,32 +75,49 @@ const DetailWrap = styled.div`
   }
 `;
 
-const StyledCalendar = styled(Calendar)`
-  border-radius: 10px;
-  border: 1px solid #d1d1d1;
-  .react-calendar__navigation button:disabled {
-    background-color: #fff;
+const CalendarWrap = styled.div`
+  width: 100%;
+  height: 310px;
+
+  .fc {
+    width: 100%;
+    height: 100%;
   }
-  .react-calendar__navigation__label > span {
+  .fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0px;
+  }
+  .fc .fc-toolbar-title {
+    font-size: 15px;
+  }
+  .fc .fc-button {
     font-size: 14px;
-    font-weight: 500;
-    color: #000000;
-    background-color: #fff;
+    padding: 4px 10px;
   }
-  .react-calendar__tile--now:enabled:hover,
-  .react-calendar__tile--now:enabled:focus {
-    color: red;
+  .fc .fc-view-harness {
+    font-size: 11px;
+  }
+  .fc-event-main img {
+    width: 30px;
+    height: 30px;
+  }
+  
+
+
+  .event1-class {
+    background: rgba(255, 246, 40, 0.43);
+    border:none;
+   
+    .fc-event-title{
+      color: #000;
+    }
   }
 `;
 
+
 const H2Styled = styled.div``;
 
-export const Tab: React.FC = () => {
-  // Define onChange, value, and mark here
-  const [value, setValue] = useState(new Date()); // Example initial value
-  const mark = ['2023-08-15', '2023-08-16']; // Example mark array
 
-  // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
+export const Tab: React.FC = () => {
   const [currentTab, clickTab] = useState<number>(0);
 
   const menuArr = [
@@ -107,10 +126,28 @@ export const Tab: React.FC = () => {
   ];
 
   const selectMenuHandler = (index: number) => {
-    // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
-    // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
     clickTab(index);
   };
+
+  const event1 = [
+    {
+      title: '모집기간',
+      start: '2023-08-10',
+      end: '2023-08-15',
+      classNames: 'event1-class',
+    },
+
+
+  ];
+
+  const event2 = [
+    {
+      title: '진행기간',
+      start: '2023-08-15',
+      end: '2023-08-29',
+      classNames: 'event2-class',
+    },
+  ];
 
   return (
     <div>
@@ -127,75 +164,33 @@ export const Tab: React.FC = () => {
       </TabMenu>
       <Desc>
         {currentTab === 0 ? (
-          // 상세 설명 내용
           <>
             <DetailWrap>
               <h2>챌린지를 소개합니다.</h2>
               <ul>
-                <li>
-                  "오늘날짜"와 1만보이상걸음수가 기록된 스마트워치화면 또는
-                  웹화면을 올려주세요.
-                </li>
-                <li>
-                  다른 걷기챌린지(주 3일이내)외에 추가로 운동하실분들
-                  환영합니다~
-                </li>
+                <li>"오늘날짜"와 1만보이상걸음수가 기록된 스마트워치화면 또는 웹화면을 올려주세요.</li>
+                <li>다른 걷기챌린지(주 3일이내)외에 추가로 운동하실분들 환영합니다~</li>
                 <li>매일 걷고 인생체력 만드실분들 어서오세요~</li>
               </ul>
             </DetailWrap>
             <DetailWrap>
               <h2>챌린지 기간</h2>
-              <StyledCalendar
-                value={value}
-                minDetail="month"
-                maxDetail="month"
-                showNeighboringMonth={false}
-                className="mx-auto w-full text-sm border-b"
-                formatDay={(locale, date) =>
-                  date.toLocaleString('en', { day: 'numeric' })
-                }
-                tileContent={({ date, view }: { date: Date; view: string }) => {
-                  const dayList = [
-                    '2023-08-10',
-                    '2023-08-21',
-                    '2023-08-02',
-                    '2023-08-14',
-                    '2023-08-27',
-                  ];
-
-                  const addContent = ({ date }: any) => {
-                    const contents: JSX.Element[] = [];
-
-                    if (
-                      dayList.find(
-                        (day) => day === moment(date).format('YYYY-MM-DD')
-                      )
-                    ) {
-                      contents.push(
-                        <div
-                          key={moment(date).format('YYYY-MM-DD')}
-                          style={{
-                            height: '100%',
-                            width: '100%',
-                            background: '#f87171',
-                            borderRadius: '50%',
-                            display: 'flex',
-                            marginLeft: '15px',
-                          }} // style 속성이 <div> 엘리먼트 안에 와야 함
-                        ></div>
-                      );
-                    }
-                    return contents;
-                  };
-
-                  return <div>{addContent({ date })}</div>;
-                }}
-              />
+              <CalendarWrap>
+                <FullCalendar
+                  plugins={[dayGridPlugin]}
+                  initialView="dayGridMonth"
+                  weekends={true}
+                  locale="ko"
+                  titleFormat={{ year: 'numeric', month: 'long' }}
+                  events={event1.concat(event2)}
+                  
+                />
+              </CalendarWrap>
+            <CommentBox></CommentBox>
             </DetailWrap>
           </>
         ) : (
-          // 인증 목록 내용
-          <div></div>
+          <div>인증 목록 내용</div>
         )}
       </Desc>
     </div>
