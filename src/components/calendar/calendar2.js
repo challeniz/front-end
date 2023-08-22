@@ -14,18 +14,18 @@ const StyledDatePicker = styled(DatePicker)`
   padding: 0 15px;
 `;
 
-const ReactDatePicker2 = () => {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
-  
+const ReactDatePicker2 = ({ startDate, setDate }) => {
   return (
     <StyledDatePicker
       selectsRange={true}
-      startDate={startDate}
-      endDate={endDate}
+      startDate={startDate[0]}
+      endDate={startDate[1]}
       dateFormat="yyyy년MM월dd일"
       onChange={(update) => {
-        setDateRange(update);
+        setDate((prev) => ({
+          ...prev,
+          startDate: update,
+        }));
       }}
       isClearable={true}
       placeholderText="날짜를 선택하세요"

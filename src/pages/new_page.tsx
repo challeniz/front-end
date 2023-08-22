@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useReducer, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
@@ -6,6 +6,7 @@ import Wrapper from '../components/common/wrapper';
 import WhiteBox from '../components/form/white_box';
 import WhiteBoxTitle from '../components/form/white_box_title';
 import WhiteBoxContents from '../components/form/white_box_contents';
+import NoticeForm from '../components/form/notice_form';
 import {
   FormButton,
   FormCancelButton,
@@ -22,8 +23,6 @@ import useImageUploader from '../hook/imgfiler';
 const PageBack = styled.div`
   background-color: #f4f4f4;
 `;
-
-
 
 const InputContent = styled.div`
   display: flex;
@@ -94,6 +93,28 @@ const InputImg = styled.input`
 const NewPage: React.FC = () => {
   // 태그 관련 상태와 함수들을 정의
   const [tags, setTags] = useState<string[]>([]);
+  const [date, setDate] = useState({
+    joinningDate: [null, null],
+    startDate: [null, null],
+  });
+
+  useEffect(() => {
+    // joinningDate가 바뀌면 startDate를 자동 변환
+    if (date.joinningDate[1]) {
+      setDate((prev) => {
+        const date = new Date(
+          (new Date(prev.joinningDate[1] || '') as any).setDate(
+            (prev.joinningDate[1] as any).getDate() + 1
+          )
+        );
+        console.log('date', date);
+        return {
+          ...(prev as any),
+          startDate: [date, null],
+        };
+      });
+    }
+  }, [date.joinningDate]);
 
   const handleChangeTags = (newTags: string[]) => {
     setTags(newTags);
@@ -123,6 +144,7 @@ const NewPage: React.FC = () => {
       <Header />
       <PageBack>
         <Wrapper>
+          <NoticeForm />
           <WhiteBox>
             <WhiteBoxTitle>챌린지 개설</WhiteBoxTitle>
             <WhiteBoxContents>
@@ -138,19 +160,26 @@ const NewPage: React.FC = () => {
                 <InputContent>
                   <LabelStyled htmlFor="formCate">카테고리</LabelStyled>
                   <SelectStyled id="formCate">
-                    <option value="운동">운동</option>
-                    <option value="습관">습관</option>
+                    <option value="건강">건강</option>
                     <option value="취미">취미</option>
+                    <option value="식습관">식습관</option>
                     <option value="공부">공부</option>
+                    <option value="환경">환경</option>
                   </SelectStyled>
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formDage">챌린지 모집 기간</LabelStyled>
-                  <ReactDatePicker></ReactDatePicker>
+                  <ReactDatePicker
+                    joinningDate={date.joinningDate}
+                    setDate={setDate}
+                  ></ReactDatePicker>
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formDage">챌린지 기간</LabelStyled>
-                  <ReactDatePicker2></ReactDatePicker2>
+                  <ReactDatePicker2
+                    startDate={date.startDate}
+                    setDate={setDate}
+                  ></ReactDatePicker2>
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formImg">대표 이미지</LabelStyled>

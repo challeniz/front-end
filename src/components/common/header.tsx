@@ -170,32 +170,36 @@ const Header = () => {
         </Logo>
         <HeaderNav>
           <NavList>
-            <NavItem>
-              진행중인챌린지
-              <SubMenu>
-                <InnerLi>
-                  <FaHeartPulse />
-                  건강
-                </InnerLi>
-                <InnerLi>
-                  <FaCat />
-                  취미
-                </InnerLi>
-                <InnerLi>
-                  <FaBowlFood />
-                  식습관
-                </InnerLi>
-                <InnerLi>
-                  <FaBook />
-                  공부
-                </InnerLi>
-                <InnerLi>
-                  <FaLeaf />
-                  환경
-                </InnerLi>
-              </SubMenu>
-            </NavItem>
-            <NavItem>챌린지개설하기</NavItem>
+            <Link to={ROUTE.LISTPAGE.link}>
+              <NavItem>
+                진행중인챌린지
+                <SubMenu>
+                  <InnerLi>
+                    <FaHeartPulse />
+                    건강
+                  </InnerLi>
+                  <InnerLi>
+                    <FaCat />
+                    취미
+                  </InnerLi>
+                  <InnerLi>
+                    <FaBowlFood />
+                    식습관
+                  </InnerLi>
+                  <InnerLi>
+                    <FaBook />
+                    공부
+                  </InnerLi>
+                  <InnerLi>
+                    <FaLeaf />
+                    환경
+                  </InnerLi>
+                </SubMenu>
+              </NavItem>
+            </Link>
+            <Link to={ROUTE.NEWPAGE.link}>
+              <NavItem>챌린지개설하기</NavItem>
+            </Link>
           </NavList>
         </HeaderNav>
         <LoginBox>
