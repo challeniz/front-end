@@ -13,8 +13,8 @@ import {
 } from '../components/form/form_button';
 import FormAgreeBox from '../components/form/form_agree';
 
-import {ReactDatePicker, ReactDatePicker2 } from '../components/calendar/calendar';
-
+import ReactDatePicker from '../components/calendar/calendar';
+import ReactDatePicker2  from '../components/calendar/calendar2';
 import TagBox from '../components/form/tag_box';
 import addDays from 'date-fns/addDays';
 const PageBack = styled.div`
@@ -126,7 +126,7 @@ const NewPage: React.FC = () => {
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formDage">챌린지 기간</LabelStyled>
-                  <ReactDatePicker />
+                  <ReactDatePicker2></ReactDatePicker2>
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formImg">대표 이미지</LabelStyled>

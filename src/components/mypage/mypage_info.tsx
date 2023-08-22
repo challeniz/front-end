@@ -18,12 +18,17 @@ const PageBox = styled.div`
   }
 `;
 
-const Avatar = styled.div`
-  border-radius: 50%;
-  background-color: #c2daff;
+const AvatarWrapper = styled.div`
   width: 226px;
   height: 226px;
   margin-right: 86px;
+`;
+
+const AvatarImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 `;
 
 const PageTxt = styled.div`
@@ -68,7 +73,7 @@ const PageBtn = styled.button`
 interface MyInfoProps {}
 
 const MyInfo: React.FC<MyInfoProps> = () => {
-  const [Image, setImage] = useState<string>(
+  const [imgSrc, setImgSrc] = useState<string>(
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
   );
   const fileInput = useRef<HTMLInputElement>(null);
@@ -78,13 +83,12 @@ const MyInfo: React.FC<MyInfoProps> = () => {
       const reader = new FileReader();
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setImage(reader.result as string);
+          setImgSrc(reader.result as string);
         }
       };
       reader.readAsDataURL(e.target.files[0]);
     } else {
-      // 업로드 취소할 시
-      setImage(
+      setImgSrc(
         'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
       );
     }
@@ -93,14 +97,15 @@ const MyInfo: React.FC<MyInfoProps> = () => {
   return (
     <Wrapper>
       <PageBox>
-        <Avatar
-          src={Image}
-          style={{ margin: '20px' }}
-          size={200}
+        <AvatarWrapper
           onClick={() => {
-            fileInput.current?.click(); // 옵셔널 체이닝 사용
+            if (fileInput.current) {
+              fileInput.current.click();
+            }
           }}
-        />
+        >
+          <AvatarImage src={imgSrc} />
+        </AvatarWrapper>
         <input
           type="file"
           style={{ display: 'none' }}
