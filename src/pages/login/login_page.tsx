@@ -6,7 +6,7 @@ import Wrapper from '../../components/common/wrapper';
 import { Link, useNavigate } from 'react-router-dom';
 import { emailRegex, passwordRegex } from '../../components/common/validation'
 import { ROUTE } from "../../routes";
-
+import axios from 'axios';
 
 
 //로그인 페이지 컴포넌트
@@ -56,33 +56,25 @@ const LoginPage = () => {
   }, [emailValid, passwordValid]); // <- defendency 안에 2개의 이메일 유효성, 비밀번호 유효성의 스테이트 값이 변화 할때 useEffect 코드가 실행됨.
 
   //이메일, 비밀번호 입력 후 로그인 버튼 눌렀을때 맞게 되었는지 확인창 기능
-  const onClickLoginmBtn = () => {
-    //로컬스토리지.getItem --> 회원가입해서 로컬스토리지 저장한 데이터 가져오기
-    const localUserJSON = localStorage.getItem('user');
+  const onClickLoginBtn = async () => {
+    try {
+      const response = await axios.post('http://34.64.62.80:3000/users/login', {
+        email,
+        password
+      });
 
-    if (localUserJSON) {
-      const localUser = JSON.parse(localUserJSON);
-
-      if (email === localUser.email && password === localUser.password) {
+      if (response.status === 201) {
+        const token = response.data.token;
         alert('로그인에 성공하였습니다.');
+        localStorage.setItem('token', token);
         navigate('/'); // 로그인 성공 시 홈 메인페이지로 이동
       } else {
         alert('등록되지 않은 회원입니다.');
       }
+    } catch (error) {
+      console.error('로그인 에러:', error);
+      alert('로그인에 실패하였습니다.');
     }
-
-    // if (email === localUserJSON && password === localUserJSON ) {
-    //   alert('로그인에 성공하였습니다.');
-    //   navigate('/'); //  로그인 성공 시 홈 메인페이지로 이동
-    // } else {
-    //   alert('로그인에 실패하였습니다.');
-    // }
-
-    // if (email === User.email && password === User.password) {
-    //   alert('로그인에 성공했습니다.');
-    // } else {
-    //   alert('등록되지 않은 회원입니다.');
-    // }
   };
 
   return (
@@ -147,7 +139,7 @@ const LoginPage = () => {
 
       {/* 이메일, 비밀번호 입력 후 버튼 활성화 */}
       <BtnCenter>
-        <SubmitBtn onClick={onClickLoginmBtn} disabled={notAllow}>
+        <SubmitBtn onClick={onClickLoginBtn} disabled={notAllow}>
           로그인
         </SubmitBtn>
       </BtnCenter>
