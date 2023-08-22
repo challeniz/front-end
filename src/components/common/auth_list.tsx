@@ -6,7 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import HeartImg from '../../assets/image/heart_red.png';
 
 const AuthWrap = styled.div`
-  padding-top: 30px;
+  padding: 30px 0 100px;
 `;
 
 const AuthGrid = styled.div`
@@ -48,6 +48,18 @@ const CalendarWrap = styled.div`
     width: 30px;
     height: 30px;
   }
+  .fc-h-event {
+    background-color: #f9f518;
+    border: 1px solid #f9f518;
+    display: block;
+    height: 15px;
+  }
+  .fc-daygrid-event {
+    border-radius: 10px;
+  }
+  .event1-class {
+    /* 스타일 커스터마이징 */
+  }
   .event2-class {
     background-image: url(${HeartImg});
     background-size: cover;
@@ -57,7 +69,7 @@ const CalendarWrap = styled.div`
     background-color: transparent;
     position: absolute;
     top: -21px;
-    left: 7px;
+    left: 0px;
   }
 `;
 
@@ -77,6 +89,7 @@ const AuthList: React.FC<AuthListProps> = () => {
     {
       start: '2023-08-01',
       end: '2023-08-14',
+      classNames: ['event1-class'], // 클래스 이름 할당
     },
   ];
 
@@ -84,40 +97,51 @@ const AuthList: React.FC<AuthListProps> = () => {
     {
       start: '2023-08-07',
       end: '2023-08-10',
+      classNames: ['event2-class'], // 클래스 이름 할당
     },
   ];
 
-  // 시작 날짜부터 끝 날짜까지 날짜 배열 생성
-  // const dateRange = [];
-  // let currentDate = new Date(startDate);
-  // while (currentDate <= new Date(endDate)) {
-  //   dateRange.push(currentDate.toISOString().split('T')[0]);
-  //   currentDate.setDate(currentDate.getDate() + 1);
-  // }
-
-  // 이벤트 배열 생성
-  // const events = dateRange.map((date) => ({
-  //   start: date,
-  // }));
-
   return (
-    <AuthWrap>
-      <h2>만보 걷기 챌린지</h2>
-      <AuthGrid>
-        <CalendarWrap>
-          <FullCalendar
-            plugins={[dayGridPlugin]}
-            initialView="dayGridMonth"
-            weekends={true}
-            locale="ko"
-            titleFormat={{ year: 'numeric', month: 'long' }}
-            events={event1.concat(event2)}
-          />
-        </CalendarWrap>
-        <ImgWrap onClick={showModal}></ImgWrap>
-        {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
-      </AuthGrid>
-    </AuthWrap>
+    <>
+      <AuthWrap>
+        <h2>만보 걷기 챌린지</h2>
+        <AuthGrid>
+          <CalendarWrap>
+            <FullCalendar
+              plugins={[dayGridPlugin]}
+              initialView="dayGridMonth"
+              weekends={true}
+              locale="ko"
+              titleFormat={{ year: 'numeric', month: 'long' }}
+              events={event1.concat(event2)}
+            />
+          </CalendarWrap>
+          <ImgWrap onClick={showModal}></ImgWrap>
+          <ImgWrap onClick={showModal}></ImgWrap>
+          <ImgWrap onClick={showModal}></ImgWrap>
+          {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+        </AuthGrid>
+      </AuthWrap>
+      <AuthWrap>
+        <h2>영어 단어 하루에 100개 외우기</h2>
+        <AuthGrid>
+          <CalendarWrap>
+            <FullCalendar
+              plugins={[dayGridPlugin]}
+              initialView="dayGridMonth"
+              weekends={true}
+              locale="ko"
+              titleFormat={{ year: 'numeric', month: 'long' }}
+              events={event1.concat(event2)}
+            />
+          </CalendarWrap>
+          <ImgWrap onClick={showModal}></ImgWrap>
+          <ImgWrap onClick={showModal}></ImgWrap>
+          <ImgWrap onClick={showModal}></ImgWrap>
+          {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+        </AuthGrid>
+      </AuthWrap>
+    </>
   );
 };
 
