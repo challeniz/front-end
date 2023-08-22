@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
 import addDays from 'date-fns/addDays';
-
+import ReactDatePicker from './calendar';
 const StyledDatePicker = styled(DatePicker)`
   width: 406px;
   height: 45px;
@@ -14,44 +14,25 @@ const StyledDatePicker = styled(DatePicker)`
   padding: 0 15px;
 `;
 
-const ReactDatePicker = () => {
+const ReactDatePicker2 = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-
+  
   return (
     <StyledDatePicker
       selectsRange={true}
       startDate={startDate}
-      endDate={endDate ? addDays(startDate, 4) : null}
+      endDate={endDate}
       dateFormat="yyyy년MM월dd일"
       onChange={(update) => {
         setDateRange(update);
       }}
       isClearable={true}
       placeholderText="날짜를 선택하세요"
-      minDate={new Date()} // Set the minimum date
+      minDate={new Date()}
     />
   );
 };
+// endDate={endDate ? addDays(startDate, 4) : null} ->4일범위만설정됨
 
-// const ReactDatePicker2 = ({ endDate }) => { 
-//   const [dateRange, setDateRange] = useState([null, null]);
-//   const [startDate, endDate2] = dateRange;
-
-//   return (
-//     <StyledDatePicker
-//       selectsRange={true}
-//       startDate={startDate}
-//       endDate={endDate2}
-//       dateFormat="yyyy년MM월dd일"
-//       onChange={(update) => {
-//         setDateRange(update);
-//       }}
-//       isClearable={true}
-//       placeholderText="날짜를 선택하세요"
-//       minDate={endDate} // Set the minDate using the received endDate prop
-//     />
-//   );
-// };
-
-export default ReactDatePicker;
+export default ReactDatePicker2;

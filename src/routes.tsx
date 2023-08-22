@@ -7,6 +7,8 @@ import MyPage from './pages/my_page';
 import AuthPage from './pages/auth_page';
 import DetailPage from './pages/detail_page';
 import ApplicationPage from './pages/app_page';
+import MyPrivacy from './pages/ my_privacy';
+
 
 export const ROUTE = {
   MAIN: {
@@ -53,6 +55,11 @@ export const ROUTE = {
     path: '/authpage',
     link: '/authpage',
     element: AuthPage,
+  },
+  MYPRIVACY: {
+    path: '/myprivacy',
+    link: '/myprivacy',
+    element: MyPrivacy,
   },
 };
 

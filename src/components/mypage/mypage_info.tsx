@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { ROUTE } from '../../routes';
+import { Link } from 'react-router-dom';
 import Wrapper from '../common/wrapper';
-import { MyPageTab } from './mypage_tab';
 
 const PageBox = styled.div`
   width: 100%;
@@ -11,9 +12,13 @@ const PageBox = styled.div`
   display: flex;
   padding: 37px 86px;
   align-items: center;
+
+  a {
+    margin-left: auto;
+  }
 `;
 
-const PageImg = styled.div`
+const Avatar = styled.div`
   border-radius: 50%;
   background-color: #c2daff;
   width: 226px;
@@ -60,24 +65,62 @@ const PageBtn = styled.button`
   padding: 20px 50px;
 `;
 
-const StatusWrap = styled.div``;
+interface MyInfoProps {}
 
-const MyInfo = () => {
+const MyInfo: React.FC<MyInfoProps> = () => {
+  const [Image, setImage] = useState<string>(
+    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+  );
+  const fileInput = useRef<HTMLInputElement>(null);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImage(reader.result as string);
+        }
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      // 업로드 취소할 시
+      setImage(
+        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+      );
+    }
+  };
+
   return (
     <Wrapper>
       <PageBox>
-        <PageImg></PageImg>
+        <Avatar
+          onClick={() => {
+            if (fileInput.current) {
+              fileInput.current.click();
+            }
+          }}
+        />
+        <input
+          type="file"
+          style={{ display: 'none' }}
+          accept="image/jpg,image/png,image/jpeg"
+          name="profile_img"
+          onChange={onChange}
+          ref={fileInput}
+        />
         <PageTxt>
           <ul>
             <li>
               <span>김챌린지</span> 님
             </li>
             <li>
-              현재등급은 <span>신입챌리니즈</span>입니다.
+              현재등급은 <span>신입챌리니</span>입니다.
             </li>
           </ul>
         </PageTxt>
-        <PageBtn>내 정보 수정하기</PageBtn>
+        <Link to={ROUTE.MYPRIVACY.link}>
+          <PageBtn>내 정보 수정하기</PageBtn>
+        </Link>
       </PageBox>
     </Wrapper>
   );
