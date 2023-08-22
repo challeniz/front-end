@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ROUTE } from '../../routes';
 import { Link } from 'react-router-dom';
 import Wrapper from '../common/wrapper';
+import useImageUploader from '../../hook/imgfiler';
 
 const PageBox = styled.div`
   width: 100%;
@@ -70,29 +71,16 @@ const PageBtn = styled.button`
   padding: 20px 50px;
 `;
 
+const InputStyled = styled.input`
+  display: none;
+`;
+
 interface MyInfoProps {}
 
 const MyInfo: React.FC<MyInfoProps> = () => {
-  const [imgSrc, setImgSrc] = useState<string>(
+  const { imgSrc, fileInput, onChange } = useImageUploader(
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
   );
-  const fileInput = useRef<HTMLInputElement>(null);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImgSrc(reader.result as string);
-        }
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      setImgSrc(
-        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-      );
-    }
-  };
 
   return (
     <Wrapper>
@@ -106,14 +94,7 @@ const MyInfo: React.FC<MyInfoProps> = () => {
         >
           <AvatarImage src={imgSrc} />
         </AvatarWrapper>
-        <input
-          type="file"
-          style={{ display: 'none' }}
-          accept="image/jpg,image/png,image/jpeg"
-          name="profile_img"
-          onChange={onChange}
-          ref={fileInput}
-        />
+        <InputStyled type="file" ref={fileInput} onChange={onChange} />
         <PageTxt>
           <ul>
             <li>

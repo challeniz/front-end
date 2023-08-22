@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   CiShare2,
@@ -9,14 +9,28 @@ import {
 } from 'react-icons/ci'; // 아이콘 이름 수정
 
 const DetailNavs = styled.div`
-  position: sticky;
-  top: 60px;
-  width: 28%;
-  height: 450px;
-  border-radius: 20px;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 20%);
-  padding: 37px 40px;
-  background-color: #fff;
+  &.DetailNavs {
+    position: sticky;
+    top: 60px;
+    width: 28%;
+    height: 450px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 20%);
+    padding: 37px 40px;
+    background-color: #fff;
+  }
+
+  &.ScrollNavs {
+    position: sticky;
+    top: 110px;
+    width: 28%;
+    height: 450px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 20%);
+    padding: 37px 40px;
+    background-color: #fff;
+    transitioin: 0.3s;
+  }
 
   h5 {
     font-size: 13px;
@@ -127,8 +141,15 @@ const StyledCiUser = styled(CiUser)`
 `;
 
 const DetailNav = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', updateScroll);
+  });
   return (
-    <DetailNavs>
+    <DetailNavs className={scrollPosition < 100 ? 'DetailNavs' : 'ScrollNavs'}>
       <div>
         <DetailTag>#운동</DetailTag>
         <DetailTag>#걷기</DetailTag>

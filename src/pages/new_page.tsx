@@ -17,6 +17,8 @@ import ReactDatePicker from '../components/calendar/calendar';
 import ReactDatePicker2 from '../components/calendar/calendar2';
 import TagBox from '../components/form/tag_box';
 import addDays from 'date-fns/addDays';
+import useImageUploader from '../hook/imgfiler';
+
 const PageBack = styled.div`
   background-color: #f4f4f4;
 `;
@@ -70,6 +72,23 @@ const SpanStyled = styled.span`
   font-size: 13px;
 `;
 
+const AvatarWrapper = styled.div`
+  width: 406px;
+  height: 226px;
+  border: 1px solid #000;
+  border-radius: 10px;
+`;
+
+const AvatarImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const InputImg = styled.input`
+  display: none;
+`;
+
 const NewPage: React.FC = () => {
   // 태그 관련 상태와 함수들을 정의
   const [tags, setTags] = useState<string[]>([]);
@@ -92,6 +111,10 @@ const NewPage: React.FC = () => {
   // 챌린지모집기간+4일후 챌린지 시작됨
   // const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(new Date());
+
+  const { imgSrc, fileInput, onChange } = useImageUploader(
+    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+  );
 
   return (
     <>
@@ -129,7 +152,16 @@ const NewPage: React.FC = () => {
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formImg">대표 이미지</LabelStyled>
-                  <InputStyled type="file" id="formName" />
+                  <AvatarWrapper
+                    onClick={() => {
+                      if (fileInput.current) {
+                        fileInput.current.click();
+                      }
+                    }}
+                  >
+                    <AvatarImage src={imgSrc} />
+                  </AvatarWrapper>
+                  <InputImg type="file" ref={fileInput} onChange={onChange} />
                 </InputContent>
                 <InputContent className="flex-start">
                   <LabelStyled htmlFor="forDescription">
