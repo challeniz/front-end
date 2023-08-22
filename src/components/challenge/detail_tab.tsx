@@ -175,8 +175,8 @@ export const Tab: React.FC = () => {
                         <div
                           key={moment(date).format('YYYY-MM-DD')}
                           style={{
-                            height: '8px',
-                            width: '8px',
+                            height: '100%',
+                            width: '100%',
                             background: '#f87171',
                             borderRadius: '50%',
                             display: 'flex',

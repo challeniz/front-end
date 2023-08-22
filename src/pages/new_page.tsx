@@ -12,9 +12,11 @@ import {
   FormSubmitButton,
 } from '../components/form/form_button';
 import FormAgreeBox from '../components/form/form_agree';
-import ReactDatePicker from '../components/calendar/calendar';
-import TagBox from '../components/form/tag_box';
 
+import {ReactDatePicker, ReactDatePicker2 } from '../components/calendar/calendar';
+
+import TagBox from '../components/form/tag_box';
+import addDays from 'date-fns/addDays';
 const PageBack = styled.div`
   background-color: #f4f4f4;
 `;
@@ -87,6 +89,11 @@ const NewPage: React.FC = () => {
     setIsAgreed(isChecked);
   };
 
+  // 챌린지모집기간+4일후 챌린지 시작됨
+  // const [startDate, setStartDate] = useState(new Date());
+  // const [endDate, setEndDate] = useState(new Date());
+
+
   return (
     <>
       <Header />
@@ -114,8 +121,12 @@ const NewPage: React.FC = () => {
                   </SelectStyled>
                 </InputContent>
                 <InputContent>
-                  <LabelStyled htmlFor="formDage">챌린지 기간</LabelStyled>
+                  <LabelStyled htmlFor="formDage">챌린지 모집 기간</LabelStyled>
                   <ReactDatePicker></ReactDatePicker>
+                </InputContent>
+                <InputContent>
+                  <LabelStyled htmlFor="formDage">챌린지 기간</LabelStyled>
+                  <ReactDatePicker />
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formImg">대표 이미지</LabelStyled>
