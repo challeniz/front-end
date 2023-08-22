@@ -7,11 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { emailRegex, passwordRegex } from '../../components/common/validation'
 import { ROUTE } from "../../routes";
 
-//더미데이터 테스트용
-const User = {
-  email: 'test@test.com',
-  password: 'qwer1234!!',
-};
+
 
 //로그인 페이지 컴포넌트
 const LoginPage = () => {
@@ -60,7 +56,7 @@ const LoginPage = () => {
   }, [emailValid, passwordValid]); // <- defendency 안에 2개의 이메일 유효성, 비밀번호 유효성의 스테이트 값이 변화 할때 useEffect 코드가 실행됨.
 
   //이메일, 비밀번호 입력 후 로그인 버튼 눌렀을때 맞게 되었는지 확인창 기능
-  const onClickConfirmBtn = () => {
+  const onClickLoginmBtn = () => {
     //로컬스토리지.getItem --> 회원가입해서 로컬스토리지 저장한 데이터 가져오기
     const localUserJSON = localStorage.getItem('user');
 
@@ -151,7 +147,7 @@ const LoginPage = () => {
 
       {/* 이메일, 비밀번호 입력 후 버튼 활성화 */}
       <BtnCenter>
-        <SubmitBtn onClick={onClickConfirmBtn} disabled={notAllow}>
+        <SubmitBtn onClick={onClickLoginmBtn} disabled={notAllow}>
           로그인
         </SubmitBtn>
       </BtnCenter>

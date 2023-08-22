@@ -6,6 +6,8 @@ import Wrapper from '../../components/common/wrapper';
 import { emailRegex, passwordRegex, nickNameRegex, numberRegex} from '../../components/common/validation'
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTE } from "../../routes";
+import axios from 'axios';
+
 
 
 const JoinPage = () => {
@@ -148,29 +150,26 @@ const JoinPage = () => {
   };
 
   //이메일 입력 후 중복확인 버튼 눌렀을때 맞게 되었는지 확인창 기능
-  const onClickConfirmBtn = () => {
-    //더미데이터 테스트용
-    const User = [
-      {
-        email: 'test@test.com',
-        password: 'qwer1234!!',
-      },
-      {
-        email: '1004@test.com',
-        password: '1004qwer!!',
-      },
-    ];
-
-    const foundUser = User.find((userData) => userData.email === email);
-    if (foundUser) {
-      alert('사용가능한 이메일입니다.');
-    } else {
-      alert('사용할 수 없는 이메일입니다.');
+  const onClickConfirmBtn = async () => {
+    try {
+      const response = await axios.post('http://34.64.62.80:3000/users/check', {
+        email: email,
+      });
+      console.log(response.data)
+      if (response.data === true) {
+        
+        alert('사용할 수 없는 이메일입니다.');
+      } else {
+        alert('사용가능한 이메일입니다.');
+      }
+    } catch (error) {
+      alert('서버와의 통신 중 오류가 발생하였습니다.');
+      console.error(error);
     }
   };
 
   //가입하기 버튼 로컬스토리지.setItem
-  const handleJoin = () => {
+  const handleJoin = async () => {
     if (
       !emailValid ||
       !passwordValid ||
@@ -182,18 +181,28 @@ const JoinPage = () => {
     } else {
       // 모든 유효성 검사 통과한 경우
       const user = {
+        name: nickName, // 닉네임을 name으로 사용
         email,
         password,
+        phone: number, // 전화번호를 phone으로 사용
       };
 
-      localStorage.setItem('user', JSON.stringify(user));
+      try {
+        const response = await axios.post('http://34.64.62.80:3000/users/signup', user);
 
-      // localStorage.setItem('email', email);
-      // localStorage.setItem('password', password);
-
-      alert('회원가입에 성공하였습니다.');
-
-      navigate(ROUTE.LOGIN.link); // 가입 성공 시 로그인 페이지로 이동
+        if (response.status === 201) {
+          // 회원가입 성공 시 처리
+          alert('회원가입에 성공하였습니다.');
+          navigate(ROUTE.LOGIN.link); // 가입 성공 시 로그인 페이지로 이동
+        } else {
+          // 회원가입 실패 시 처리
+          alert('회원가입에 실패하였습니다.');
+        }
+      } catch (error) {
+        // API 호출 중 에러 발생 시 처리
+        alert('서버와의 통신 중 오류가 발생하였습니다.');
+        console.error(error);
+      }
     }
   };
 
