@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import HeartButton from './heart';
-// import axios from 'axios'; // axios를 임포트해야 합니다.
+import { BsCalendarRange } from 'react-icons/bs';
 
 const ContentWrap = styled.div`
   text-align: left;
@@ -9,10 +9,28 @@ const ContentWrap = styled.div`
 
 const ImgStyled = styled.div`
   position: relative;
-  width: 300px;
+  width: 100%;
   height: 300px;
   border-radius: 20px;
   background-color: #d9d9d9;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 1px solid #eeeeee;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const StyledHeartButton = styled(HeartButton)`
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
 `;
 
 const TabWrap = styled.div`
@@ -28,38 +46,52 @@ const TabStyled = styled.a`
 `;
 
 const H3Styled = styled.h3`
-  font-size: 23px;
-  padding-bottom: 10px;
+  font-size: 25px;
+  padding-bottom: 20px;
   max-width: 300px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 500;
+  letter-spacing: -0.8px;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 const H4Styled = styled.h4`
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
+  color: #686868;
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 1.2em;
+    height: 1.2em;
+    padding-right: 5px;
+  }
 `;
 
-const ListContent: React.FC = () => {
+interface ListContentProps {
+  challenge: {
+    title: string;
+    startdate: string;
+    enddate: string;
+    img: string;
+    coment: string;
+    tag: string;
+  };
+}
+
+const ListContent: React.FC<ListContentProps> = ({ challenge }) => {
   const [like, setLike] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       // const res = await axios.get(/* ... */); // API 엔드포인트를 입력하세요
-  //       if (res.data.type === 'liked') setLike(true);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   const toggleLike = async () => {
     try {
-      // const res = await axios.post(/* ... */); // [POST] 사용자가 좋아요를 누름 -> DB 갱신
+      // 좋아요 관련 처리를 진행
       setLike(!like);
     } catch (error) {
       console.error('Error toggling like:', error);
@@ -69,16 +101,21 @@ const ListContent: React.FC = () => {
   return (
     <ContentWrap>
       <ImgStyled>
-        <HeartButton like={like} onClick={toggleLike} />
+        <img src={challenge.img} alt={`Challenge`} />
+        <StyledHeartButton like={like} onClick={toggleLike} />
       </ImgStyled>
       <TabWrap>
-        <TabStyled>#운동</TabStyled>
-        <TabStyled>#걷기</TabStyled>
+        {challenge.tag.split(',').map((tag, index) => (
+          <TabStyled key={index}>{tag}</TabStyled>
+        ))}
       </TabWrap>
-      <H3Styled>하루 만보 걷기 챌린지</H3Styled>
-      <H4Styled>2023.08.01 ~ 2023.08.31</H4Styled>
+      <H3Styled>{challenge.title}</H3Styled>
+      <H4Styled>
+        <BsCalendarRange />
+        {challenge.startdate} ~ {challenge.enddate}
+      </H4Styled>
     </ContentWrap>
-  );    
+  );
 };
 
 export default ListContent;
