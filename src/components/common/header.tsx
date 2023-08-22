@@ -74,6 +74,7 @@ const NavItem = styled.li`
   font-size: 18px;
 
   &:hover {
+    // color: #339af0;
     ul {
       visibility: visible;
     }

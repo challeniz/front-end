@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ListContent from '../components/challenge/list_content';
-import banner4 from '../assets/image/banner_4.png';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
 import SlideBnner from '../components/common/slide';
@@ -149,11 +147,6 @@ const MainPage = () => {
           <ContentsWrap ref={SlideRef3}></ContentsWrap>
         </NewList>
       </Wrapper>
-
-      {/* <BottomBannerr>
-        <BottomInner></BottomInner>
-      </BottomBannerr> */}
-
       <Footer />
     </BackWhite>
   );
@@ -306,29 +299,29 @@ const NewListSpan = styled.span`
   color: #ffe500;
 `;
 
-const BottomBannerr = styled.div``;
+// const BottomBannerr = styled.div``;
 
-const BottomInner = styled.div`
-  img {
-    box-sizing: border-box;
-    vertical-align: bottom;
+// const BottomInner = styled.div`
+//   img {
+//     box-sizing: border-box;
+//     vertical-align: bottom;
 
-    width: 100vw;
-    max-width: 100%;
-  }
-`;
+//     width: 100vw;
+//     max-width: 100%;
+//   }
+// `;
 
-const StyledStyledSlideCircleRight = styled(StyledSlideCircleRight)`
-  width: 1.5em;
-  height: 1.5em;
-  padding-left: 4px;
-`;
+// const StyledStyledSlideCircleRight = styled(StyledSlideCircleRight)`
+//   width: 1.5em;
+//   height: 1.5em;
+//   padding-left: 4px;
+// `;
 
-const BannerLine = styled.div`
-  font-size: 30px;
-  position: absolute;
-  top: 68%;
-  left: 64%;
-`;
+// const BannerLine = styled.div`
+//   font-size: 30px;
+//   position: absolute;
+//   top: 68%;
+//   left: 64%;
+// `;
 
 export default MainPage;

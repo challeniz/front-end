@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../components/common/wrapper';
 import FormAgreeBox from '../components/form/form_agree';
@@ -7,10 +7,12 @@ import Header from '../components/common/header';
 import Footer from '../components/common/footer';
 import WhiteBoxTitle from '../components/form/white_box_title';
 import WhiteBoxContents from '../components/form/white_box_contents';
-import { FormButton } from '../components/form/form_button';
-import { FormCancelButton } from '../components/form/form_button';
-import { FormSubmitButton } from '../components/form/form_button';
-import { CiCalendarDate, CiUser } from 'react-icons/ci'; // 아이콘 이름 수정
+import {
+  FormButton,
+  FormCancelButton,
+  FormSubmitButton,
+} from '../components/form/form_button';
+import { CiCalendarDate, CiUser } from 'react-icons/ci';
 import axios from 'axios';
 
 const PageBack = styled.div`
@@ -104,46 +106,57 @@ interface Challenge {
   description: string;
   date: string;
 }
+interface FormButtonProps {
+  children: ReactNode;
+}
+
+interface CancelButtonProps extends FormButtonProps {}
+
+interface SubmitButtonProps extends FormButtonProps {}
 
 const ApplicationPage = () => {
   const [challengeInfo, setChallengeInfo] = useState<Challenge | null>(null);
-  const [name, setName] = useState('');
-  const [tel, setTel] = useState('');
-  const [email, setEmail] = useState('');
-  const [isAgreed, setIsAgreed] = useState(false); // 약관 동의 여부를 관리하는 상태 추가
 
-  const handleAgreeChange = (isChecked: boolean) => {
-    setIsAgreed(isChecked);
+  const [isAgreed, setIsAgreed] = useState(false); // 약관 동의 여부
+
+  const [form, setForm] = useState({
+    name: '',
+    tel: '',
+    email: '',
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!isAgreed) {
+      console.log('약관에 동의해야 합니다.');
+      return;
+    }
+    const userData = {
+      name: form.name,
+      tel: form.tel,
+      email: form.email,
+    };
+
+    try {
+      const response = await axios.post('submit API주소', userData);
+      console.log('참가 신청이 완료되었습니다.');
+    } catch (error) {
+      console.error('참가 신청이 실패하였습니다', error);
+    }
   };
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const userData = { name, tel, email };
-
-  //   axios
-  //     .post('submit API주소', userData)
-  //     .then((response) => {
-  //       console.log('참가 신청이 완료되었습니다.');
-  //     })
-  //     .catch((error) => {
-  //       console.error('참가 신청이 실패하였습니다', error);
-  //       // 오류 처리
-  //     });
-  //   // history.push('/success'); // 성공 페이지로 이동
-  // };
-  // const handleCancel = () => {
-  //   // 취소 버튼을 클릭 이전 페이지로 이동
-  //   history.push(/);
-  // };
 
   useEffect(() => {
-    axios
-      .get<Challenge>('API주소')
-      .then((response) => {
+    async function fetchChallengeInfo() {
+      try {
+        const response = await axios.get<Challenge>('API주소');
         setChallengeInfo(response.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('챌린지 정보가 없습니다', error);
-      });
+      }
+    }
+
+    fetchChallengeInfo();
   }, []);
   return (
     <>
@@ -182,13 +195,13 @@ const ApplicationPage = () => {
               <WhiteBoxTitle>참가자 정보</WhiteBoxTitle>
               <WhiteBoxContents>
                 <div>
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <InputContent>
                       <LabelStyled htmlFor="formName">이름</LabelStyled>
                       <InputStyled
                         type="text"
-                        value={name}
-                        // onChange={(e) => setName(e.target.value)}
+                        name="name"
+                        value={form.name}
                         id="formName"
                       />
                     </InputContent>
@@ -196,8 +209,8 @@ const ApplicationPage = () => {
                       <LabelStyled htmlFor="formTel">휴대폰번호</LabelStyled>
                       <InputStyled
                         type="text"
-                        value={tel}
-                        // onChange={(e) => setTel(e.target.value)}
+                        name="tel"
+                        value={form.tel}
                         id="formTel"
                       />
                     </InputContent>
@@ -205,8 +218,8 @@ const ApplicationPage = () => {
                       <LabelStyled htmlFor="formMail">이메일</LabelStyled>
                       <InputStyled
                         type="text"
-                        value={email}
-                        // onChange={(e) => setEmail(e.target.value)}
+                        name="email"
+                        value={form.email}
                         id="formMail"
                       />
                     </InputContent>
@@ -218,12 +231,12 @@ const ApplicationPage = () => {
           <WhiteBox>
             <WhiteBoxTitle>약관 정보</WhiteBoxTitle>
             <WhiteBoxContents>
-              {/* <FormAgreeBox></FormAgreeBox> */}
+              <FormAgreeBox />
             </WhiteBoxContents>
           </WhiteBox>
           <FormButton>
             <FormCancelButton>취소하기</FormCancelButton>
-            <FormSubmitButton>참가하기</FormSubmitButton>
+            <FormSubmitButton>챌린지 신청하기</FormSubmitButton>
           </FormButton>
         </Wrapper>
       </PageBack>
