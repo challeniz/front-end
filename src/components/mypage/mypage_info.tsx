@@ -94,10 +94,11 @@ const MyInfo: React.FC<MyInfoProps> = () => {
     <Wrapper>
       <PageBox>
         <Avatar
+          src={Image}
+          style={{ margin: '20px' }}
+          size={200}
           onClick={() => {
-            if (fileInput.current) {
-              fileInput.current.click();
-            }
+            fileInput.current?.click(); // 옵셔널 체이닝 사용
           }}
         />
         <input
