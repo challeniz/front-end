@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ROUTE } from '../routes';
+import { Link } from 'react-router-dom';
 import Wrapper from '../components/common/wrapper';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
+import MyInfo from '../components/mypage/mypage_info';
 
 const MyPrivacy = () => {
   return (
@@ -10,7 +13,8 @@ const MyPrivacy = () => {
       <Header />
       <Wrapper>
         <StyleH1>마이 페이지</StyleH1>
-        <MyInfo>
+        <MyInfo />
+        <div>
           <InfoTitle>
             <h3>내정보 수정</h3>
             <h4>회원탈퇴</h4>
@@ -18,28 +22,39 @@ const MyPrivacy = () => {
           <InfoBox>
             <ul>
               <InfoTxt>
-                이름 <span className="InfoSpan">김챌린지</span>
+                <label htmlFor="labelName">닉네임</label>
+                <input type="text" id="labelName" />
               </InfoTxt>
               <br />
               <InfoTxt>
-                전화번호 <span className="InfoSpan">010-1234-5678</span>
+                <label htmlFor="labelTel">전화번호</label>
+                <input type="text" id="labelTel" />
               </InfoTxt>
               <br />
               <InfoTxt>
-                이메일 <span className="InfoSpan">abcd123@gmail.com</span>
+                <label htmlFor="labeMail">이메일</label>
+                <input type="text" id="labelMail" readOnly />
               </InfoTxt>
               <br />
               <InfoTxt>
-                비밀번호 <span>비밀번호</span>
+                <label htmlFor="labelPassword">비밀번호</label>
+                <input type="password" id="labelPassword" />
               </InfoTxt>
               <br />
               <InfoTxt>
-                비밀번호 확인 <span>비밀번호 확인</span>
+                <label htmlFor="labelPasswordConfirm">비밀번호 확인</label>
+                <input type="password" id="labelPasswordConfirm" />
               </InfoTxt>
               <br />
             </ul>
           </InfoBox>
-        </MyInfo>
+          <ButtonWrap>
+            <Link to={ROUTE.MYPAGE.link}>
+              <BackButton>뒤로가기</BackButton>
+            </Link>
+            <CorrectionButton>수정하기</CorrectionButton>
+          </ButtonWrap>
+        </div>
       </Wrapper>
       <Footer />
     </>
@@ -47,46 +62,78 @@ const MyPrivacy = () => {
 };
 
 const StyleH1 = styled.h1`
-  font-weight: 800;
-  font-size: 48px;
-`;
-
-const MyInfo = styled.div`
-  position: relative;
-  top: 8rem;
+  font-size: 38px;
+  padding-bottom: 30px;
 `;
 
 const InfoTitle = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 60px;
   h3 {
-    font-size: 24px;
+    font-size: 30px;
+    font-weight: 500;
   }
   h4 {
     font-size: 20px;
     font-weight: normal;
     border-bottom: 1px solid #000;
-    float: right;
-    right: 10px;
-    position: absolute;
     cursor: pointer;
   }
 `;
 
-const InfoBox = styled.div`
-  position: relative;
-  top: 3rem;
+const InfoBox = styled.div``;
+
+const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+`;
+
+const CorrectionButton = styled.button`
+  padding: 18px 52px;
+  background-color: #339af0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  text-align: center;
+`;
+
+const BackButton = styled.button`
+  padding: 18px 52px;
+  background-color: #fff;
+  color: #339af0;
+  border: 1px solid #339af0;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  text-align: center;
+  margin-right: 15px;
 `;
 
 const InfoTxt = styled.li`
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 500;
   margin-bottom: 20px;
-  span {
+  input {
     display: block;
     font-weight: normal;
-    margin-top: 44px;
+    margin-top: 25px;
     border-bottom: 1px solid #dbdbdb;
     padding-bottom: 8px;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    font-size: 18px;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
   }
 `;
 

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { ROUTE } from '../../routes';
+import { Link } from 'react-router-dom';
 import Wrapper from '../common/wrapper';
-import { MyPageTab } from './mypage_tab';
+import useImageUploader from '../../hook/imgfiler';
 
 const PageBox = styled.div`
   width: 100%;
@@ -11,14 +13,23 @@ const PageBox = styled.div`
   display: flex;
   padding: 37px 86px;
   align-items: center;
+
+  a {
+    margin-left: auto;
+  }
 `;
 
-const PageImg = styled.div`
-  border-radius: 50%;
-  background-color: #c2daff;
+const AvatarWrapper = styled.div`
   width: 226px;
   height: 226px;
   margin-right: 86px;
+`;
+
+const AvatarImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 `;
 
 const PageTxt = styled.div`
@@ -60,13 +71,30 @@ const PageBtn = styled.button`
   padding: 20px 50px;
 `;
 
-const StatusWrap = styled.div``;
+const InputStyled = styled.input`
+  display: none;
+`;
 
-const MyInfo = () => {
+interface MyInfoProps {}
+
+const MyInfo: React.FC<MyInfoProps> = () => {
+  const { imgSrc, fileInput, onChange } = useImageUploader(
+    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+  );
+
   return (
     <Wrapper>
       <PageBox>
-        <PageImg></PageImg>
+        <AvatarWrapper
+          onClick={() => {
+            if (fileInput.current) {
+              fileInput.current.click();
+            }
+          }}
+        >
+          <AvatarImage src={imgSrc} />
+        </AvatarWrapper>
+        <InputStyled type="file" ref={fileInput} onChange={onChange} />
         <PageTxt>
           <ul>
             <li>
@@ -77,7 +105,9 @@ const MyInfo = () => {
             </li>
           </ul>
         </PageTxt>
-        <PageBtn>내 정보 수정하기</PageBtn>
+        <Link to={ROUTE.MYPRIVACY.link}>
+          <PageBtn>내 정보 수정하기</PageBtn>
+        </Link>
       </PageBox>
     </Wrapper>
   );
