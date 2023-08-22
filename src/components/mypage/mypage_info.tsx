@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ROUTE } from '../../routes';
 import { Link } from 'react-router-dom';
 import Wrapper from '../common/wrapper';
+import useImageUploader from '../../hook/imgfiler';
 
 const PageBox = styled.div`
   width: 100%;
@@ -18,12 +19,17 @@ const PageBox = styled.div`
   }
 `;
 
-const Avatar = styled.div`
-  border-radius: 50%;
-  background-color: #c2daff;
+const AvatarWrapper = styled.div`
   width: 226px;
   height: 226px;
   margin-right: 86px;
+`;
+
+const AvatarImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 `;
 
 const PageTxt = styled.div`
@@ -65,49 +71,30 @@ const PageBtn = styled.button`
   padding: 20px 50px;
 `;
 
+const InputStyled = styled.input`
+  display: none;
+`;
+
 interface MyInfoProps {}
 
 const MyInfo: React.FC<MyInfoProps> = () => {
-  const [Image, setImage] = useState<string>(
+  const { imgSrc, fileInput, onChange } = useImageUploader(
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
   );
-  const fileInput = useRef<HTMLInputElement>(null);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImage(reader.result as string);
-        }
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      // 업로드 취소할 시
-      setImage(
-        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-      );
-    }
-  };
 
   return (
     <Wrapper>
       <PageBox>
-        <Avatar
+        <AvatarWrapper
           onClick={() => {
             if (fileInput.current) {
               fileInput.current.click();
             }
           }}
-        />
-        <input
-          type="file"
-          style={{ display: 'none' }}
-          accept="image/jpg,image/png,image/jpeg"
-          name="profile_img"
-          onChange={onChange}
-          ref={fileInput}
-        />
+        >
+          <AvatarImage src={imgSrc} />
+        </AvatarWrapper>
+        <InputStyled type="file" ref={fileInput} onChange={onChange} />
         <PageTxt>
           <ul>
             <li>

@@ -85,15 +85,9 @@ const FooterAddress = styled.div`
     display: inline-block;
     vertical-align: top;
     font-style: normal;
-
     font-size: 15px;
     line-height: 1.5em;
     color: #eaeaea;
-
-    font-size: 15px;
-    line-height: 1.5em;
-    color: #eaeaea;
-
     letter-spacing: 1px;
   }
   span {
@@ -103,22 +97,16 @@ const FooterAddress = styled.div`
     font-size: 14px;
     line-height: 1.5em;
     color: #eaeaea;
-
     margin-right: 8px;
-
-    margin-right: 8px;
-
     letter-spacing: 1px;
   }
 `;
 
 const Copyright = styled.p`
-
   font-size: 12px;
   font-weight: 500;
   color: #d8d8d8;
   text-align: left;
   padding-top: 15px;
-
 `;
 export default Footer;
