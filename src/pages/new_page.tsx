@@ -14,7 +14,7 @@ import {
 import FormAgreeBox from '../components/form/form_agree';
 
 import ReactDatePicker from '../components/calendar/calendar';
-import ReactDatePicker2  from '../components/calendar/calendar2';
+import ReactDatePicker2 from '../components/calendar/calendar2';
 import TagBox from '../components/form/tag_box';
 import addDays from 'date-fns/addDays';
 const PageBack = styled.div`
@@ -93,7 +93,6 @@ const NewPage: React.FC = () => {
   // const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(new Date());
 
-
   return (
     <>
       <Header />
@@ -156,7 +155,7 @@ const NewPage: React.FC = () => {
           <WhiteBox>
             <WhiteBoxTitle>약관 동의</WhiteBoxTitle>
             <WhiteBoxContents>
-              {/* <FormAgreeBox></FormAgreeBox> */}
+              <FormAgreeBox />
             </WhiteBoxContents>
           </WhiteBox>
           <FormButton>

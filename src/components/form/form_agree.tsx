@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const AgreeBox = styled.div`
@@ -37,11 +37,7 @@ const StyledUl = styled.ul`
   list-style: disc;
 `;
 
-interface AgreeBoxProps {
-  children: ReactNode;
-}
-
-const FormAgreeBox: React.FC<AgreeBoxProps> = ({ children }) => {
+const FormAgreeBox = () => {
   return (
     <>
       <p>
