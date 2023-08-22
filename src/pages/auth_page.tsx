@@ -104,7 +104,8 @@ const AuthPage: React.FC = () => {
             <TextInput
             placeholder="70자 이내로 입력해주세요."
             value={text}
-            onChange={handleTextChange}></TextInput>
+            // onChange={handleTextChange}
+            ></TextInput>
           </AuthWrapper>
           <FormButton>
             <FormCancelButton onClick={handleCancelClick}><Link to={ROUTE.DETAILPAGE.link}>취소하기</Link></FormCancelButton>
