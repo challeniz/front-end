@@ -6,12 +6,7 @@ import Header from '../components/common/header';
 import Footer from '../components/common/footer';
 import SlideBnner from '../components/common/slide';
 import Wrapper from '../components/common/wrapper';
-import {
-  AiOutlineSearch,
-  AiOutlineLeft,
-  AiOutlineRight,
-  AiOutlineSwapRight,
-} from 'react-icons/ai';
+import { CiSearch, CiCircleChevLeft, CiCircleChevRight } from 'react-icons/ci';
 
 const MainPage = () => {
   const SlideRef1 = useRef<HTMLDivElement | null>(null);
@@ -67,127 +62,114 @@ const MainPage = () => {
     }
   };
 
- 
+  const BackWhite = styled.div`
+    background-color: #fff !important;
+  `;
+
   return (
-    <div>
+    <BackWhite>
       <Header />
       <SlideBnner />
       <Wrapper>
         <Search>
           <SearchTitle>
-            찾고 있는 <SearchTitleColor>챌린지</SearchTitleColor>가 있다면?
+            찾고 있는 <SearchTitleColor>챌린지</SearchTitleColor>를
+            검색해보세요!
           </SearchTitle>
           <SearchBox>
-            <SearchBoxInput type="text" />
-            <AiOutlineSearch />
+            <SearchBoxInput type="text" placeholder="#만보걷기" />
+            <StyledCiSearch />
+          </SearchBox>
+          <SearchBox>
+            <KeywordWrap>
+              <h5>추천 키워드</h5>
+              <p>#걷기</p>
+              <p>#물마시기</p>
+              <p>#영어공부</p>
+              <p>#운동</p>
+            </KeywordWrap>
           </SearchBox>
         </Search>
 
         <ContentsList>
           <ProgressList>
             <li>
-              <h2>진행중인 챌린지</h2>
+              <h2>🗓️ 진행중인 챌린지</h2>
             </li>
-            <li   onClick={() => prevSlide(1)}>
-              <AiOutlineLeft />
+            <li onClick={() => prevSlide(1)}>
+              <StyledSlideCircleLeft />
             </li>
-            <li   onClick={() => nextSlide(1)}>
-              <AiOutlineRight />
+            <li onClick={() => nextSlide(1)}>
+              <StyledSlideCircleRight />
             </li>
             <li>
               <h3>전체보기</h3>
             </li>
           </ProgressList>
-          <ContentsWrap ref={SlideRef1}>
-            <ListContent />
-            <ListContent />
-            <ListContent />
-            <ListContent />
-          </ContentsWrap>
+          <ContentsWrap ref={SlideRef1}></ContentsWrap>
         </ContentsList>
 
         <PopularList>
           <ProgressList>
             <li>
               <h2>
-                <PopularListSpan>HOT!</PopularListSpan> 인기 챌린지
+                <PopularListSpan>🔥HOT!</PopularListSpan> 인기 챌린지
               </h2>
             </li>
-            <li  onClick={() => prevSlide(2)}>
-              <AiOutlineLeft />
+            <li onClick={() => prevSlide(2)}>
+              <StyledSlideCircleLeft />
             </li>
             <li onClick={() => nextSlide(2)}>
-              <AiOutlineRight />
+              <StyledSlideCircleRight />
             </li>
             <li>
               <h3>전체보기</h3>
             </li>
           </ProgressList>
-          <ContentsWrap ref={SlideRef2}>
-            <ListContent />
-            <ListContent />
-            <ListContent />
-            <ListContent />
-          </ContentsWrap>
+          <ContentsWrap ref={SlideRef2}></ContentsWrap>
         </PopularList>
 
         <NewList>
           <ProgressList>
             <li>
               <h2>
-                <NewListSpan>NEW!</NewListSpan> 인기 챌린지
+                <NewListSpan>⭐️NEW!</NewListSpan> 신규 챌린지
               </h2>
             </li>
-            <li   onClick={() => prevSlide(3)}>
-              <AiOutlineLeft />
+            <li onClick={() => prevSlide(3)}>
+              <StyledSlideCircleLeft />
             </li>
             <li onClick={() => nextSlide(3)}>
-              <AiOutlineRight />
+              <StyledSlideCircleRight />
             </li>
             <li>
               <h3>전체보기</h3>
             </li>
           </ProgressList>
-          <ContentsWrap ref={SlideRef3}>
-            <ListContent />
-            <ListContent />
-            <ListContent />
-            <ListContent />
-          </ContentsWrap>
+          <ContentsWrap ref={SlideRef3}></ContentsWrap>
         </NewList>
       </Wrapper>
 
-      <BottomBannerr>
-        <BottomInner>
-          <img src={banner4} alt="banner" />
-          <BannerTxt>
-            <h3>찾고 있는 챌린지가 없나요?</h3>
-            <p>
-              챌린지 만들기{' '}
-              <BannerLine>
-                <AiOutlineSwapRight />
-              </BannerLine>
-            </p>
-          </BannerTxt>
-        </BottomInner>
-      </BottomBannerr>
+      {/* <BottomBannerr>
+        <BottomInner></BottomInner>
+      </BottomBannerr> */}
 
       <Footer />
-    </div>
+    </BackWhite>
   );
 };
 
 const Search = styled.div`
   text-align: center;
-  position: relative;
-  top: 5rem;
+  padding-top: 60px;
 `;
 const SearchTitle = styled.h1`
-  font-size: 34px;
+  font-size: 40px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 40px;
+  margin-bottom: 70px;
+  letter-spacing: -0.5px;
 `;
 const SearchTitleColor = styled.span`
   color: #339af0;
@@ -195,45 +177,55 @@ const SearchTitleColor = styled.span`
 const SearchBox = styled.div`
   box-sizing: border-box;
   font-size: 25px;
+  width: 623px;
+  margin: 0 auto;
+  position: relative;
 `;
 
 const SearchBoxInput = styled.input`
-  width: 623px;
+  width: 100%;
   border: none;
   border-bottom: 1px solid #030303;
   background-color: transparent;
+  font-size: 25px;
+  padding: 10px;
+
+  &:focus-visible {
+    outline: none;
+  }
 `;
 const ContentsWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 40px;
 `;
+
+const StyledCiSearch = styled(CiSearch)`
+  cursor: pointer;
+  position: absolute;
+  bottom: 12px;
+  right: 11px;
+  width: 1.5em;
+  height: 1.5em;
+`;
+
 const ContentsList = styled.div`
-  position: relative;
-  top: 16rem;
-  left: 4rem;
-  overflow: hidden;
+  margin: 180px auto;
 `;
 
+const PopularList = styled.div`
+  margin-bottom: 180px;
+`;
 
-
-const PopularList= styled.div `
-position: relative;
-top: 30rem;
-left: 4rem;
-overflow: hidden;
-`
-
-const NewList= styled.div `
-position: relative;
-top: 44rem;
-left: 4rem;
-overflow: hidden;
-`
+const NewList = styled.div`
+  margin-bottom: 180px;
+`;
 
 const ProgressList = styled.ul`
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 45px;
   font-size: 20px;
+  align-items: center;
 
   li {
     margin: 0 8px;
@@ -245,18 +237,10 @@ const ProgressList = styled.ul`
 
   li:nth-child(2),
   li:nth-child(3) {
-    border-radius: 100%;
-    border: 1px solid rgb(199, 199, 199);
-    color: rgb(199, 199, 199);
-    width: 24px;
-    height: 24px;
     text-align: center;
     cursor: pointer;
 
     &:hover {
-      border: 1px solid #339af0;
-      background-color: #339af0;
-      color: #fff;
     }
   }
 
@@ -265,27 +249,64 @@ const ProgressList = styled.ul`
   }
 
   li:nth-child(4) {
-    float: right;
-    right: 4rem;
-    position: absolute;
+    margin-left: auto;
     cursor: pointer;
 
+    h3 {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
     &:hover {
-      border-bottom: 4px solid #339af0;
+      text-decoration: underline;
     }
   }
 `;
-const PopularListSpan = styled.span`
-  color: #00daa6;
-`;
-const NewListSpan = styled.span`
-  color: #24ff00;
+const StyledSlideCircleRight = styled(CiCircleChevRight)`
+  width: 1.7em;
+  height: 1.7em;
+
+  &:hover {
+    color: #339af0;
+  }
 `;
 
-const BottomBannerr = styled.div`
-  position: relative;
-  top: 54rem;
+const KeywordWrap = styled.div`
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+
+  h5 {
+    font-size: 15px;
+    color: #fff;
+    background-color: #339af0;
+    border-radius: 20px;
+    margin-right: 15px;
+    padding: 8px 12px;
+    font-weight: 500;
+  }
+  p {
+    font-size: 20px;
+    padding: 0 10px;
+    color: #515151;
+  }
 `;
+const StyledSlideCircleLeft = styled(CiCircleChevLeft)`
+  width: 1.7em;
+  height: 1.7em;
+  &:hover {
+    color: #339af0;
+  }
+`;
+
+const PopularListSpan = styled.span`
+  color: #ff003d;
+`;
+const NewListSpan = styled.span`
+  color: #ffe500;
+`;
+
+const BottomBannerr = styled.div``;
 
 const BottomInner = styled.div`
   img {
@@ -296,27 +317,11 @@ const BottomInner = styled.div`
     max-width: 100%;
   }
 `;
-const BannerTxt = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 30%;
-  align-items: center;
 
-  h3 {
-    font-size: 40px;
-    letter-spacing: 4px;
-    margin-bottom: 20px;
-  }
-
-  p {
-    font-size: 20px;
-    text-align: center;
-    letter-spacing: 4px;
-    &:hover {
-      font-weight: 600;
-      font-size: 22px;
-    }
-  }
+const StyledStyledSlideCircleRight = styled(StyledSlideCircleRight)`
+  width: 1.5em;
+  height: 1.5em;
+  padding-left: 4px;
 `;
 
 const BannerLine = styled.div`

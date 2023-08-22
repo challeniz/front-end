@@ -1,48 +1,67 @@
 import React from 'react';
 import styled from 'styled-components';
+import LogoImage from '../../assets/image/logo.png';
+import TopButton from './top_button';
 
 const Footer = () => {
   return (
-    <div>
+    <FooterWrap>
+      <TopButton />
       <FooterBox>
-        <h1>Logo</h1>
-        <FooterTxt>
-          <span>(주)챌리니즈</span>
-          <span>대표자 : 김갓생</span>
-        </FooterTxt>
-        <FooterAddress>
-          <address>
-            주소: 서울 성동구 아차산로17길 48 성수낙낙 2층 엘리스랩{' '}
-          </address>
-          <span>
-            대표번호: <a href="tel:021234567">02-123-4567</a>
-          </span>
-        </FooterAddress>
+        <Logo>
+          <LogoImg src={LogoImage} alt="Logo" />
+        </Logo>
+        <TextWrap>
+          <FooterTxt>
+            <span>(주)챌리니즈</span>
+            <span>대표자 : 김갓생</span>
+          </FooterTxt>
+          <FooterAddress>
+            <address>
+              주소: 서울 성동구 아차산로17길 48 성수낙낙 2층 엘리스랩{' '}
+            </address>
+            <span>
+              대표번호: <a href="tel:021234567">02-123-4567</a>
+            </span>
+          </FooterAddress>
+        </TextWrap>
 
         <Copyright>ⓒ Challines Corporation. All Rights reserved.</Copyright>
       </FooterBox>
-    </div>
+    </FooterWrap>
   );
 };
 
-const FooterBox = styled.div`
+const FooterWrap = styled.div`
   position: relative;
-  top: 54rem;
-  bottom: 0;
-  width: 100vw;
-  height: 180px;
-  background-color: #339af0;
+`;
+
+const FooterBox = styled.div`
+  background-color: #666;
   text-align: center;
+  padding: 40px 150px;
 
   h1 {
     color: #eaeaea;
-    position: absolute;
-    top: 4rem;
     text-align: center;
-    left: 4rem;
     font-size: 40px;
     margin: 0;
   }
+`;
+
+const Logo = styled.div`
+  width: 180px;
+  margin-right: 50px;
+`;
+
+const LogoImg = styled.img`
+  width: 100%;
+`;
+
+const TextWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
 `;
 
 const FooterTxt = styled.div`
@@ -51,14 +70,11 @@ const FooterTxt = styled.div`
   span {
     display: inline-block;
     vertical-align: top;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.5em;
     color: #eaeaea;
     margin-right: 15px;
     margin-bottom: 4px;
-    position: relative;
-    top: 2rem;
-    left: 12rem;
     display: block;
   }
 `;
@@ -69,6 +85,7 @@ const FooterAddress = styled.div`
     display: inline-block;
     vertical-align: top;
     font-style: normal;
+<<<<<<< HEAD
     font-size: 14px;
     line-height: 1.5em;
     color: #eaeaea;
@@ -76,6 +93,11 @@ const FooterAddress = styled.div`
     margin-right: 8px;
     top: 2rem;
     left: 12rem;
+=======
+    font-size: 15px;
+    line-height: 1.5em;
+    color: #eaeaea;
+>>>>>>> ac05cd79fdc9cce8606987d5955c52409c3b11b7
     letter-spacing: 1px;
   }
   span {
@@ -85,20 +107,32 @@ const FooterAddress = styled.div`
     font-size: 14px;
     line-height: 1.5em;
     color: #eaeaea;
+<<<<<<< HEAD
     position: relative;
     margin-right: 8px;
     top: 2.2rem;
     left: 12rem;
+=======
+    margin-right: 8px;
+>>>>>>> ac05cd79fdc9cce8606987d5955c52409c3b11b7
     letter-spacing: 1px;
   }
 `;
 
 const Copyright = styled.p`
+<<<<<<< HEAD
   position: absolute;
   font-size: 12px;
   font-weight: 500;
   color: #d8d8d8;
   left: 12rem;
   top: 8.5girem;
+=======
+  font-size: 12px;
+  font-weight: 500;
+  color: #d8d8d8;
+  text-align: left;
+  padding-top: 15px;
+>>>>>>> ac05cd79fdc9cce8606987d5955c52409c3b11b7
 `;
 export default Footer;
