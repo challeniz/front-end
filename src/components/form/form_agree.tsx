@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const AgreeBox = styled.div`
@@ -37,11 +37,7 @@ const StyledUl = styled.ul`
   list-style: disc;
 `;
 
-interface AgreeBoxProps {
-  children: ReactNode;
-}
-
-const FormAgreeBox: React.FC<AgreeBoxProps> = ({ children }) => {
+const FormAgreeBox = () => {
   return (
     <>
       <p>
@@ -60,7 +56,9 @@ const FormAgreeBox: React.FC<AgreeBoxProps> = ({ children }) => {
       </p>
       <AgreeBox>
         <p className="agree-title">약관동의</p>
-        <input type="checkbox"></input>
+        <input  type="checkbox"
+          checked={isAgreed}
+          onChange={handleAgreeChange}></input>
         <p className="agree-text">
           위의 내용을 모두 읽어보았으며, 이에 모두 동의합니다.
         </p>
