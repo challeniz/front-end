@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import CommentBox from '../comment/comment';
+import CommentBox from '../../comment/comment';
 const TabMenu = styled.ul`
   border-bottom: 1px solid #000;
   display: flex;
@@ -100,22 +100,18 @@ const CalendarWrap = styled.div`
     width: 30px;
     height: 30px;
   }
-  
-
 
   .event1-class {
     background: rgba(255, 246, 40, 0.43);
-    border:none;
-   
-    .fc-event-title{
+    border: none;
+
+    .fc-event-title {
       color: #000;
     }
   }
 `;
 
-
 const H2Styled = styled.div``;
-
 
 export const Tab: React.FC = () => {
   const [currentTab, clickTab] = useState<number>(0);
@@ -136,8 +132,6 @@ export const Tab: React.FC = () => {
       end: '2023-08-15',
       classNames: 'event1-class',
     },
-
-
   ];
 
   const event2 = [
@@ -168,8 +162,14 @@ export const Tab: React.FC = () => {
             <DetailWrap>
               <h2>챌린지를 소개합니다.</h2>
               <ul>
-                <li>"오늘날짜"와 1만보이상걸음수가 기록된 스마트워치화면 또는 웹화면을 올려주세요.</li>
-                <li>다른 걷기챌린지(주 3일이내)외에 추가로 운동하실분들 환영합니다~</li>
+                <li>
+                  "오늘날짜"와 1만보이상걸음수가 기록된 스마트워치화면 또는
+                  웹화면을 올려주세요.
+                </li>
+                <li>
+                  다른 걷기챌린지(주 3일이내)외에 추가로 운동하실분들
+                  환영합니다~
+                </li>
                 <li>매일 걷고 인생체력 만드실분들 어서오세요~</li>
               </ul>
             </DetailWrap>
@@ -183,10 +183,9 @@ export const Tab: React.FC = () => {
                   locale="ko"
                   titleFormat={{ year: 'numeric', month: 'long' }}
                   events={event1.concat(event2)}
-                  
                 />
               </CalendarWrap>
-            <CommentBox></CommentBox>
+              <CommentBox></CommentBox>
             </DetailWrap>
           </>
         ) : (

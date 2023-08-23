@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Tab } from './detail_tab';
+import { Tab } from '../detail_tab/detail_tab';
 
 const DetailContents = styled.div`
   width: 67%;

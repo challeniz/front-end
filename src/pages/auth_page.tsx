@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
 import Wrapper from '../components/common/wrapper';
-import WhiteBox from '../components/form/white_box';
-import WhiteBoxTitle from '../components/form/white_box_title';
-import WhiteBoxContents from '../components/form/white_box_contents';
+import WhiteBox from '../components/form/white_box/white_box/white_box';
+import WhiteBoxTitle from '../components/form/white_box/white_box_title/white_box_title';
+import WhiteBoxContents from '../components/form/white_box/white_box_contents/white_box_contents';
 
 import { useNavigate } from 'react-router-dom';
 

@@ -1,34 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import WhiteBox from './white_box';
-
-const NoticeWrap = styled.div`
-  padding: 40px;
-  background-color: #def2ff;
-  width: 100%;
-  margin-bottom: 60px;
-  h2 {
-    font-size: 23px;
-    padding-bottom: 30px;
-  }
-  li {
-    line-height: 36px;
-    font-size: 18px;
-    letter-space: 1px;
-    span.bold {
-      font-weight: 600;
-    }
-    span.light {
-      font-weight: 400;
-      font-size: 15px;
-      color: #6f6f6f;
-    }
-  }
-`;
+import * as S from './form_notice.style';
+import WhiteBox from '../white_box/white_box/white_box';
 
 const NoticeForm = () => {
   return (
-    <NoticeWrap>
+    <S.NoticeWrap>
       <h2>챌린지 개설 안내</h2>
       <ul>
         <li>✅ 챌린지 모집기간은 지난 날짜를 선택할 수 없습니다.</li>
@@ -47,7 +23,7 @@ const NoticeForm = () => {
           개설해주세요!
         </li>
       </ul>
-    </NoticeWrap>
+    </S.NoticeWrap>
   );
 };
 

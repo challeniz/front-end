@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
 import Wrapper from '../components/common/wrapper';
-import DetailContent from '../components/challenge/detail_content';
-import DetailNav from '../components/challenge/detail_nav';
+import DetailContent from '../components/challenge/detail_content/detail_content';
+import DetailNav from '../components/challenge/detail_nav/detail_nav';
 
 const Detail = styled.div`
   width: 100%;

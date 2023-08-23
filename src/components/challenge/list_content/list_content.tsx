@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import HeartButton from './heart';
+import HeartButton from '../heart/heart';
 import { BsCalendarRange } from 'react-icons/bs';
 
 const ContentWrap = styled.div`

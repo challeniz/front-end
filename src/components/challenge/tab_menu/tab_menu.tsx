@@ -1,61 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import ListContent from './list_content';
-import challengeData from '../../data/data.json';
-
-const TabMenu = styled.ul`
-  border-bottom: 1px solid #000;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  list-style: none;
-  margin-bottom: 60px;
-  margin-top: 10px;
-  justify-contents: center;
-
-  .submenu {
-    display: flex;
-    padding: 0 25px 15px;
-    font-size: 20px;
-    border-radius: 10px 10px 0px 0px;
-    text-align: center;
-    color: #787878;
-    cursor: pointer;
-    font-weight: 600;
-  }
-
-  .focused {
-    color: #339af0;
-    position: relative;
-    font-weight: 600;
-
-    &::before {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 100%;
-      background-color: #339af0;
-      height: 5px;
-      border-radius: 10px;
-    }
-  }
-
-  & div.desc {
-    text-align: center;
-  }
-`;
-
-const Desc = styled.div`
-  text-align: center;
-`;
-
-const ContentsWrap = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 40px;
-  grid-row-gap: 50px;
-`;
+import * as S from './tab_menu.style';
+import ListContent from '../list_content/list_content';
+import challengeData from '../../../data/data.json';
 
 export const Tab: React.FC<{ currentTab: number }> = ({
   currentTab: parentCurrentTab,
@@ -83,7 +29,7 @@ export const Tab: React.FC<{ currentTab: number }> = ({
 
   return (
     <div>
-      <TabMenu>
+      <S.TabMenu>
         {menuArr.map((el, index) => (
           <li
             className={index === currentTab ? 'submenu focused' : 'submenu'}
@@ -93,9 +39,9 @@ export const Tab: React.FC<{ currentTab: number }> = ({
             {el.name}
           </li>
         ))}
-      </TabMenu>
-      <Desc>
-        <ContentsWrap>
+      </S.TabMenu>
+      <S.Desc>
+        <S.ContentsWrap>
           {challengeData
             .filter(
               (challenge) =>
@@ -104,8 +50,8 @@ export const Tab: React.FC<{ currentTab: number }> = ({
             .map((challenge) => (
               <ListContent key={challenge.title} challenge={challenge} />
             ))}
-        </ContentsWrap>
-      </Desc>
+        </S.ContentsWrap>
+      </S.Desc>
     </div>
   );
 };

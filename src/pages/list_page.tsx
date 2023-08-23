@@ -4,7 +4,7 @@ import Footer from '../components/common/footer';
 import styled from 'styled-components';
 
 import Wrapper from '../components/common/wrapper';
-import { Tab } from '../components/challenge/tab_menu';
+import { Tab } from '../components/challenge/tab_menu/tab_menu';
 
 const H2 = styled.h2`
   font-size: 35px;

@@ -1,76 +1,24 @@
 import React, { useState, useCallback, useEffect, ChangeEvent } from 'react';
-import styled from 'styled-components';
+import * as S from './tag_box.style';
 
 interface TagBoxProps {
   tags: string[];
   onChangeTags: (tags: string[]) => void;
 }
 
-const TagBoxBlock = styled.div`
-`;
+const TagItem: React.FC<{ tag: string; onRemove: (tag: string) => void }> =
+  React.memo(({ tag, onRemove }) => (
+    <S.Tag onClick={() => onRemove(tag)}>#{tag}</S.Tag>
+  ));
 
-const TagForm = styled.form`
-  display: flex;
-  
-  input,
-  button {
-    outline: none;
-    border: none;
-    font-size: 1rem;
-  }
-
-  input {
-    width:406px;
-    height:45px;
-    background-color:#f6f6f6;
-    border-radius:5px;
-    border:1px solid #cfcfcf;
-    font-size:16px;
-    padding: 0 15px;
-  }
-  button {
-    cursor: pointer;
-    padding-right: 2rem;
-    padding-left: 2rem;
-    border: none;
-    margin-left:15px;
-    background-color:#339af0;
-    border-radius:8px;
-    color: white;
-    font-weight: bold;
-    &:hover {
-      
-    }
-  }
-`;
-
-const Tag = styled.div`
-  background: #000000;
-  padding: 0px 16px;
-  border-radius: 20px;
-  color: #fff;
-  margin-right:5px;
-  &:hover {
-    opacity: 0.5;
-  }
-`;
-
-const TagListBlock = styled.div`
-  display: flex;
-  margin-top: 10px;
-`;
-
-const TagItem: React.FC<{ tag: string; onRemove: (tag: string) => void }> = React.memo(({ tag, onRemove }) => (
-  <Tag onClick={() => onRemove(tag)}>#{tag}</Tag>
-));
-
-const TagList: React.FC<{ tags: string[]; onRemove: (tag: string) => void }> = React.memo(({ tags, onRemove }) => (
-  <TagListBlock>
-    {tags.map(tag => (
-      <TagItem key={tag} tag={tag} onRemove={onRemove} />
-    ))}
-  </TagListBlock>
-));
+const TagList: React.FC<{ tags: string[]; onRemove: (tag: string) => void }> =
+  React.memo(({ tags, onRemove }) => (
+    <S.TagListBlock>
+      {tags.map((tag) => (
+        <TagItem key={tag} tag={tag} onRemove={onRemove} />
+      ))}
+    </S.TagListBlock>
+  ));
 
 const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
   const [input, setInput] = useState<string>('');
@@ -90,16 +38,16 @@ const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
       setLocalTags(nextTags);
       onChangeTags(nextTags);
     },
-    [localTags, onChangeTags],
+    [localTags, onChangeTags]
   );
 
   const onRemove = useCallback(
     (tag: string) => {
-      const nextTags = localTags.filter(t => t !== tag);
+      const nextTags = localTags.filter((t) => t !== tag);
       setLocalTags(nextTags);
       onChangeTags(nextTags);
     },
-    [localTags, onChangeTags],
+    [localTags, onChangeTags]
   );
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -112,7 +60,7 @@ const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
       insertTag(input.trim()); // 앞뒤 공백 없앤 후 등록
       setInput(''); // input 초기화
     },
-    [input, insertTag],
+    [input, insertTag]
   );
 
   // tags 값이 바뀔 때
@@ -121,17 +69,17 @@ const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
   }, [tags]);
 
   return (
-    <TagBoxBlock>
-      <TagForm onSubmit={onSubmit}>
+    <>
+      <S.TagForm onSubmit={onSubmit}>
         <input
           placeholder="추가된 태그를 클릭하면 삭제할 수 있습니다."
           value={input}
           onChange={onChange}
         />
         <button type="submit">추가</button>
-      </TagForm>
+      </S.TagForm>
       <TagList tags={localTags} onRemove={onRemove} />
-    </TagBoxBlock>
+    </>
   );
 };
 

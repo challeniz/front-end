@@ -1,17 +1,17 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../components/common/wrapper';
-import FormAgreeBox from '../components/form/form_agree';
-import WhiteBox from '../components/form/white_box';
+import FormAgreeBox from '../components/form/form_agree/form_agree';
+import WhiteBox from '../components/form/white_box/white_box/white_box';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
-import WhiteBoxTitle from '../components/form/white_box_title';
-import WhiteBoxContents from '../components/form/white_box_contents';
+import WhiteBoxTitle from '../components/form/white_box/white_box_title/white_box_title';
+import WhiteBoxContents from '../components/form/white_box/white_box_contents/white_box_contents';
 import {
   FormButton,
   FormCancelButton,
   FormSubmitButton,
-} from '../components/form/form_button';
+} from '../components/form/form_button/form_button';
 import { CiCalendarDate, CiUser } from 'react-icons/ci';
 import axios from 'axios';
 
