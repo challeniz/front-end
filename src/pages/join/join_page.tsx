@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  Body ,JoinText, JoinText1, EmailPW, InputTitle, InputWrap, Input, Input2,
-  Input3, ConfrimBtn, UserIcon, ErrorMessageWrap, BtnWrap, LoginBtn, Cancel} from './join_page.styles';
+// import { 
+//   Body ,JoinText, JoinText1, EmailPW, InputTitle, InputWrap, Input, Input2,
+//   Input3, ConfrimBtn, UserIcon, ErrorMessageWrap, BtnWrap, LoginBtn, Cancel} from './join_page.styles';
+import * as S from  './join_page.styles';
 import Wrapper from '../../components/common/wrapper';
 import { emailRegex, passwordRegex, nickNameRegex, numberRegex} from '../../components/common/validation'
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTE } from "../../routes";
 import axios from 'axios';
+import { emailApiInstance, joinApiInstance } from '../../utils/api';
 
 
 
@@ -152,7 +154,7 @@ const JoinPage = () => {
   //이메일 입력 후 중복확인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = async () => {
     try {
-      const response = await axios.post('http://34.64.62.80:3000/users/check', {
+      const response = await emailApiInstance.post('/users/check', {
         email: email,
       });
       console.log(response.data)
@@ -175,7 +177,7 @@ const JoinPage = () => {
       !passwordValid ||
       !ConfirmPwValid ||
       !ConfirmNickNameValid ||
-      !numberValid
+      !numberValid 
     ) {
       alert('모든 항목 및 정보를 올바르게 입력해주세요.');
     } else {
@@ -188,7 +190,7 @@ const JoinPage = () => {
       };
 
       try {
-        const response = await axios.post('http://34.64.62.80:3000/users/signup', user);
+        const response = await joinApiInstance.post('/users/signup', user);
 
         if (response.status === 201) {
           // 회원가입 성공 시 처리
@@ -208,17 +210,17 @@ const JoinPage = () => {
 
   return (
     <Wrapper>
-      <Body>
+      <S.Body>
         {/* 회원가입 문구 */}
-        <JoinText>회원가입</JoinText>
-        <JoinText1>회원이 되어 다양한 혜택을 경험해 보세요!</JoinText1>
+        <S.JoinText>회원가입</S.JoinText>
+        <S.JoinText1>회원이 되어 다양한 혜택을 경험해 보세요!</S.JoinText1>
 
         {/* 이메일 ui 및 기능 로직 */}
-        <EmailPW>
+        <S.EmailPW>
           {/* 이메일 입력칸 */}
-          <InputTitle>이메일</InputTitle>
-          <InputWrap>
-            <UserIcon>
+          <S.InputTitle>이메일</S.InputTitle>
+          <S.InputWrap>
+            <S.UserIcon>
               <a
                 href="https://www.flaticon.com/kr/free-icons/"
                 title="사람 아이콘"
@@ -227,28 +229,28 @@ const JoinPage = () => {
                 src={require('../../assets/icon/free-icon-user-5264565.png')}
                 alt="아이콘"
               />
-            </UserIcon>
-            <Input
+            </S.UserIcon>
+            <S.Input
               type="text"
               value={email}
               onChange={handleEmail}
               placeholder="test@gmail.com"
             />
-            <ConfrimBtn onClick={onClickConfirmBtn} disabled={notAllow}>
+            <S.ConfrimBtn onClick={onClickConfirmBtn} disabled={notAllow}>
               중복확인
-            </ConfrimBtn>
-          </InputWrap>
+            </S.ConfrimBtn>
+          </S.InputWrap>
           {/* 이메일 에러메세지 입력칸 */}
-          <ErrorMessageWrap>
+          <S.ErrorMessageWrap>
             {!emailValid && email.length > 0 && (
               <div>올바른 이메일을 입력해주세요.</div>
             )}
-          </ErrorMessageWrap>
+          </S.ErrorMessageWrap>
 
           {/* 비밀번호 입력칸 */}
-          <InputTitle>비밀번호</InputTitle>
-          <InputWrap>
-            <UserIcon>
+          <S.InputTitle>비밀번호</S.InputTitle>
+          <S.InputWrap>
+            <S.UserIcon>
               <a
                 href="https://www.flaticon.com/kr/free-icons/"
                 title="키 아이콘"
@@ -257,25 +259,25 @@ const JoinPage = () => {
                 src={require('../../assets/icon/free-icon-key-566076.png')}
                 alt="아이콘"
               />
-            </UserIcon>
-            <Input
+            </S.UserIcon>
+            <S.Input
               type="password"
               value={password}
               onChange={handlePassword}
               placeholder="영문, 숫자, 특수문자 포함 10자 이상"
             />
-          </InputWrap>
+          </S.InputWrap>
           {/* 비밀번호 에러메세지 입력칸 */}
-          <ErrorMessageWrap>
+          <S.ErrorMessageWrap>
             {!passwordValid && password.length > 0 && (
               <div>영문, 숫자, 특수문자 포함 10자 이상 입력해주세요.</div>
             )}
-          </ErrorMessageWrap>
+          </S.ErrorMessageWrap>
 
           {/* 비밀번호 확인 */}
-          <InputTitle>비밀번호 확인</InputTitle>
-          <InputWrap>
-            <UserIcon>
+          <S.InputTitle>비밀번호 확인</S.InputTitle>
+          <S.InputWrap>
+            <S.UserIcon>
               <a
                 href="https://www.flaticon.com/kr/free-icons/"
                 title="키 아이콘"
@@ -284,37 +286,37 @@ const JoinPage = () => {
                 src={require('../../assets/icon/free-icon-key-566076.png')}
                 alt="아이콘"
               />
-            </UserIcon>
-            <Input2
+            </S.UserIcon>
+            <S.Input2
               type="password"
               value={confirmPw}
               onChange={handleConfirmPassword}
               placeholder="비밀번호 재입력"
             />
-          </InputWrap>
+          </S.InputWrap>
           {/* 비밀번호 에러메세지 입력칸 */}
-          <ErrorMessageWrap>
+          <S.ErrorMessageWrap>
             {!ConfirmPwValid && confirmPw.length > 0 && (
               <div>비밀번호가 일치하지 않습니다.</div>
             )}
-          </ErrorMessageWrap>
+          </S.ErrorMessageWrap>
 
           {/* 닉네임 입력칸 */}
-          <InputTitle>닉네임</InputTitle>
-          <InputWrap>
-            <Input3
+          <S.InputTitle>닉네임</S.InputTitle>
+          <S.InputWrap>
+            <S.Input3
               type="text"
               value={nickName}
               onChange={handleNickName}
               placeholder="닉네임을 입력해주세요."
             />
-          </InputWrap>
+          </S.InputWrap>
           {/* 닉네임 에러메세지 입력칸 */}
-          <ErrorMessageWrap>
+          <S.ErrorMessageWrap>
             {!ConfirmNickNameValid && nickName.length > 0 && (
               <div>2자 이상 8자 이하, 영어 or 숫자 or 한글로 입력해주세요.</div>
             )}
-          </ErrorMessageWrap>
+          </S.ErrorMessageWrap>
 
           {/* 이름 입력칸 */}
           {/* <InputTitle style={{ marginTop: '26px' }}>이름</InputTitle>
@@ -336,30 +338,30 @@ const JoinPage = () => {
 
 
           {/* 전화번호 입력칸 */}
-          <InputTitle>전화번호</InputTitle>
-          <InputWrap>
-            <Input3
+          <S.InputTitle>전화번호</S.InputTitle>
+          <S.InputWrap>
+            <S.Input3
               type="text"
               value={number}
               onChange={handleNumber}
               placeholder="전화번호를 입력해주세요."
             />
-          </InputWrap>
-          <ErrorMessageWrap>
+          </S.InputWrap>
+          <S.ErrorMessageWrap>
             {!numberValid && number.length > 0 && (
               <div>전화번호가 올바르지 않습니다.</div>
             )}
-          </ErrorMessageWrap>
-        </EmailPW>
+          </S.ErrorMessageWrap>
+        </S.EmailPW>
 
         {/* 가입하기, 가입취소 버튼 */}
-        <BtnWrap>
-          <LoginBtn onClick={() => handleJoin()}>가입하기</LoginBtn>
+        <S.BtnWrap>
+          <S.LoginBtn onClick={() => handleJoin()}>가입하기</S.LoginBtn>
           <Link to={ROUTE.LOGIN.link}>
-            <Cancel>가입취소</Cancel>
+            <S.Cancel>가입취소</S.Cancel>
           </Link>
-        </BtnWrap>
-      </Body>
+        </S.BtnWrap>
+      </S.Body>
     </Wrapper>
   );
 };

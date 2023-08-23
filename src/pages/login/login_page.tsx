@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  Memvership, EmailPW, InputTitle, InputWrap, Input, UserIcon,
-  ErrorMessageWrap, BtnCenter, SubmitBtn, NoMemberShipWrap, NoMemberShip, JoinMemberBtn } from './login_page.styles';
+// import { 
+//   Memvership, EmailPW, InputTitle, InputWrap, Input, UserIcon,
+//   ErrorMessageWrap, BtnCenter, SubmitBtn, NoMemberShipWrap, NoMemberShip, JoinMemberBtn } from './login_page.styles';
+import * as S from './login_page.styles';
 import Wrapper from '../../components/common/wrapper';
 import { Link, useNavigate } from 'react-router-dom';
 import { emailRegex, passwordRegex } from '../../components/common/validation'
 import { ROUTE } from "../../routes";
 import axios from 'axios';
+import { loginApiInstance } from '../../utils/api';
 
 
 //로그인 페이지 컴포넌트
@@ -58,7 +60,7 @@ const LoginPage = () => {
   //이메일, 비밀번호 입력 후 로그인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickLoginBtn = async () => {
     try {
-      const response = await axios.post('http://34.64.62.80:3000/users/login', {
+      const response = await loginApiInstance.post('/users/login', {
         email,
         password
       });
@@ -79,13 +81,13 @@ const LoginPage = () => {
 
   return (
     <Wrapper>
-      <Memvership>회원 로그인</Memvership>
+      <S.Memvership>회원 로그인</S.Memvership>
 
-      <EmailPW>
+      <S.EmailPW>
         {/* 이메일 입력칸 */}
-        <InputTitle>이메일 주소</InputTitle>
-        <InputWrap>
-          <UserIcon>
+        <S.InputTitle>이메일 주소</S.InputTitle>
+        <S.InputWrap>
+          <S.UserIcon>
             <a
               href="https://www.flaticon.com/kr/free-icons/"
               title="사람 아이콘"
@@ -94,25 +96,25 @@ const LoginPage = () => {
               src={require('../../assets/icon/free-icon-user-5264565.png')}
               alt="아이콘"
             />
-          </UserIcon>
-          <Input
+          </S.UserIcon>
+          <S.Input
             type="text"
             value={email}
             onChange={handleEmail}
             placeholder="test@gmail.com"
           />
-        </InputWrap>
+        </S.InputWrap>
         {/* 이메일 에러메세지 입력칸 */}
-        <ErrorMessageWrap>
+        <S.ErrorMessageWrap>
           {!emailValid && email.length > 0 && (
             <div>올바른 이메일을 입력해주세요.</div>
           )}
-        </ErrorMessageWrap>
+        </S.ErrorMessageWrap>
 
         {/* 비밀번호 입력칸 */}
-        <InputTitle>비밀번호</InputTitle>
-        <InputWrap>
-          <UserIcon>
+        <S.InputTitle>비밀번호</S.InputTitle>
+        <S.InputWrap>
+          <S.UserIcon>
             <a
               href="https://www.flaticon.com/kr/free-icons/"
               title="키 아이콘"
@@ -121,36 +123,36 @@ const LoginPage = () => {
               src={require('../../assets/icon/free-icon-key-566076.png')}
               alt="아이콘"
             />
-          </UserIcon>
-          <Input
+          </S.UserIcon>
+          <S.Input
             type="password"
             value={password}
             onChange={handlePassword}
             placeholder="영문, 숫자, 특수문자 포함 10자 이상"
           />
-        </InputWrap>
+        </S.InputWrap>
         {/* 비밀번호 에러메세지 입력칸 */}
-        <ErrorMessageWrap>
+        <S.ErrorMessageWrap>
           {!passwordValid && password.length > 0 && (
             <div>영문, 숫자, 특수문자 포함 10자 이상 입력해주세요.</div>
           )}
-        </ErrorMessageWrap>
-      </EmailPW>
+        </S.ErrorMessageWrap>
+      </S.EmailPW>
 
       {/* 이메일, 비밀번호 입력 후 버튼 활성화 */}
-      <BtnCenter>
-        <SubmitBtn onClick={onClickLoginBtn} disabled={notAllow}>
+      <S.BtnCenter>
+        <S.SubmitBtn onClick={onClickLoginBtn} disabled={notAllow}>
           로그인
-        </SubmitBtn>
-      </BtnCenter>
+        </S.SubmitBtn>
+      </S.BtnCenter>
 
       {/* 계정이 없을경우 회원가입 페이지 리로드 */}
-      <NoMemberShipWrap>
-        <NoMemberShip>계정이 없으신가요?</NoMemberShip>
+      <S.NoMemberShipWrap>
+        <S.NoMemberShip>계정이 없으신가요?</S.NoMemberShip>
         <Link to={ROUTE.JOINPAGE.link}>
-          <JoinMemberBtn>회원가입</JoinMemberBtn>
+          <S.JoinMemberBtn>회원가입</S.JoinMemberBtn>
         </Link>
-      </NoMemberShipWrap>
+      </S.NoMemberShipWrap>
 
       {/* 소셜로그인 */}
       {/* <SocialLogin>SNS계정으로 로그인</SocialLogin> */}
