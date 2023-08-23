@@ -8,6 +8,7 @@ import AuthPage from './pages/auth_page/auth_page';
 import DetailPage from './pages/detail_page/detail_page';
 import ApplicationPage from './pages/app_page/app_page';
 import MyPrivacy from './pages/my_privacy/ my_privacy';
+import EditPage from './pages/edit_page/edit_page';
 
 export const ROUTE = {
   MAIN: {
@@ -49,6 +50,11 @@ export const ROUTE = {
     path: '/newpage',
     link: '/newpage',
     element: NewPage,
+  },
+  EDITPAGE: {
+    path: '/editpage',
+    link: '/editpage',
+    element: EditPage,
   },
   AUTHPAGE: {
     path: '/authpage',

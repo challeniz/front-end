@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import * as S from './list_content.style';
-import HeartButton from '../heart/heart';
 import { BsCalendarRange } from 'react-icons/bs';
 
 interface ListContentProps {
