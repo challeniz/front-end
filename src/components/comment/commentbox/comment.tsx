@@ -36,23 +36,25 @@ const CommentBox = () => {
 
   return (
     <div>
-      <Wrapper>
-        <S.H2Styled>후기,댓글</S.H2Styled>
-        <S.CommentInput
-          type="text"
-          className="CommentInput"
-          placeholder="댓글을 달아보세요!"
-          onKeyDown={handleKeyDown} // 엔터 키 감지 이벤트 핸들러 추가
-          onChange={(e) => {
-            setComment(e.target.value);
-            setIsValid(e.target.value.length > 0);
-          }}
-          value={comment}
-          key="comment-input"
-        />
-        <S.SubmitBtn isValid={isValid} onClick={post} disabled={!isValid}>
-          입력
-        </S.SubmitBtn>
+      <>
+        <S.H2Styled>댓글</S.H2Styled>
+        <S.CommentWrap>
+          <S.CommentInput
+            type="text"
+            className="CommentInput"
+            placeholder="댓글을 달아보세요!"
+            onKeyDown={handleKeyDown} // 엔터 키 감지 이벤트 핸들러 추가
+            onChange={(e) => {
+              setComment(e.target.value);
+              setIsValid(e.target.value.length > 0);
+            }}
+            value={comment}
+            key="comment-input"
+          />
+          <S.SubmitBtn isValid={isValid} onClick={post} disabled={!isValid}>
+            입력
+          </S.SubmitBtn>
+        </S.CommentWrap>
 
         {feedComment.map((commentArr, i) => (
           <S.CommentContainer key={i}>
@@ -62,7 +64,7 @@ const CommentBox = () => {
             </S.RemoveBtn>
           </S.CommentContainer>
         ))}
-      </Wrapper>
+      </>
     </div>
   );
 };
