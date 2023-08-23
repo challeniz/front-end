@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Wrapper from '../../common/wrapper/wrapper';
 import CommentList from '../commentlist/commentlist';
 import { BsTrash3 } from 'react-icons/bs';
@@ -20,11 +21,7 @@ const CommentBox = () => {
     setFeedComment(copyFeedComment);
     setComment('');
   };
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && isValid) {
-      post();
-    }
-  };
+
 
   // 댓글삭제
   const removeComment = (indexToRemove: number) => {
