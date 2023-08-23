@@ -33,7 +33,7 @@ const JoinPage = () => {
 
   const navigate = useNavigate(); // 회원가입 페이지에서 회원가입 버튼 누르고 성공할 시 로그인 페이지로 넘어가는 기능
 
-  //submit 버튼 활성화 기능 구현 코드
+  //중복확인 버튼 활성화 기능 구현 코드
   useEffect(() => {
     if (emailValid) {
       setNotAllow(false);
@@ -171,7 +171,8 @@ const JoinPage = () => {
       !passwordValid ||
       !ConfirmPwValid ||
       !ConfirmNickNameValid ||
-      !numberValid
+      !numberValid ||
+      !onClickConfirmBtn
     ) {
       alert('모든 항목 및 정보를 올바르게 입력해주세요.');
     } else {

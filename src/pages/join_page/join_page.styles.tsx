@@ -153,6 +153,8 @@ export const LoginBtn = styled.button`
   font-weight: 400;
   cursor: pointer;
   margin-top: 30px;
+
+  
 `;
 
 export const Cancel = styled.button`
