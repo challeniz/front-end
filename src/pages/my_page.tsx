@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Header from '../components/common/header';
-import Footer from '../components/common/footer';
-import Wrapper from '../components/common/wrapper';
+import Header from '../components/common/header/header';
+import Footer from '../components/common/footer/footer';
+import Wrapper from '../components/common/wrapper/wrapper';
 import { MyPageTab } from '../components/mypage/mypage_tab';
 import 'react-calendar/dist/Calendar.css';
 import MyInfo from '../components/mypage/mypage_info';

@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import * as S from './commentlist.styles';
+
+
 interface CommentListProps {
   userName: string;
   userComment: string;

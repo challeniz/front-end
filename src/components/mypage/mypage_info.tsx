@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ROUTE } from '../../routes';
 import { Link } from 'react-router-dom';
-import Wrapper from '../common/wrapper';
+import Wrapper from '../common/wrapper/wrapper';
 import useImageUploader from '../../hook/imgfiler';
 
 const PageBox = styled.div`

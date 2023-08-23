@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import Wrapper from '../../common/wrapper';
+import Wrapper from '../../common/wrapper/wrapper';
 import CommentList from '../commentlist/commentlist';
 import { BsTrash3 } from 'react-icons/bs';
 import * as S from './comment.styles';

@@ -1,22 +1,18 @@
 import React, { useState, ChangeEvent, useReducer, useEffect } from 'react';
 import styled from 'styled-components';
-import Header from '../components/common/header';
-import Footer from '../components/common/footer';
-import Wrapper from '../components/common/wrapper';
-import WhiteBox from '../components/form/white_box';
-import WhiteBoxTitle from '../components/form/white_box_title';
-import WhiteBoxContents from '../components/form/white_box_contents';
-import {
-  FormButton,
+import Header from '../components/common/header/header';
+import Footer from '../components/common/footer/footer';
+import Wrapper from '../components/common/wrapper/wrapper';
+import WhiteBox from '../components/form/white_box/white_box/white_box';
+import WhiteBoxTitle from '../components/form/white_box/white_box_title/white_box_title';
+import WhiteBoxContents from '../components/form/white_box/white_box_contents/white_box_contents';
+import { FormButton,
   FormCancelButton,
-  FormSubmitButton,
-} from '../components/form/form_button';
+  FormSubmitButton, } from '../components/form/form_button/form_button';
 import FormAgreeBox from '../components/form/form_agree';
-
 import ReactDatePicker from '../components/calendar/calendar';
 import ReactDatePicker2 from '../components/calendar/calendar2';
-import TagBox from '../components/form/tag_box';
-import addDays from 'date-fns/addDays';
+import TagBox from '../components/form/tag_box/tag_box';
 import useImageUploader from '../hook/imgfiler';
 
 const PageBack = styled.div`
