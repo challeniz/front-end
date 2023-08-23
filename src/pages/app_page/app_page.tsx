@@ -1,7 +1,7 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './app_page.style';
 import Wrapper from '../../components/common/wrapper/wrapper';
-import FormAgreeBox from '../../components/form/form_agree/form_agree';
+// import FormAgreeBox from '../components/form/form_agree';
 import WhiteBox from '../../components/form/white_box/white_box/white_box';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
@@ -12,7 +12,6 @@ import {
   FormCancelButton,
   FormSubmitButton,
 } from '../../components/form/form_button/form_button';
-import { CiCalendarDate, CiUser } from 'react-icons/ci';
 import axios from 'axios';
 
 interface Challenge {
@@ -21,18 +20,11 @@ interface Challenge {
   description: string;
   date: string;
 }
-interface FormButtonProps {
-  children: ReactNode;
-}
 
-interface CancelButtonProps extends FormButtonProps {}
-
-interface SubmitButtonProps extends FormButtonProps {}
-
-const ApplicationPage = () => {
+const ApplicationPage: React.FC = () => {
   const [challengeInfo, setChallengeInfo] = useState<Challenge | null>(null);
 
-  const [isAgreed, setIsAgreed] = useState(false); // 약관 동의 여부
+  // const [isAgreed, setIsAgreed] = useState(false); // 약관 동의 여부
 
   const [form, setForm] = useState({
     name: '',
@@ -40,13 +32,26 @@ const ApplicationPage = () => {
     email: '',
   });
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
+
+  // const handleAgreeChange = (isChecked: boolean) => {
+  //   setIsAgreed(isChecked);
+  // };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isAgreed) {
-      console.log('약관에 동의해야 합니다.');
-      return;
-    }
+    // if (!isAgreed) {
+    //   console.log('약관에 동의해야 합니다.');
+    //   return;
+    // }
+
     const userData = {
       name: form.name,
       tel: form.tel,
@@ -117,6 +122,7 @@ const ApplicationPage = () => {
                         type="text"
                         name="name"
                         value={form.name}
+                        onChange={handleInputChange}
                         id="formName"
                       />
                     </S.InputContent>
@@ -128,6 +134,7 @@ const ApplicationPage = () => {
                         type="text"
                         name="tel"
                         value={form.tel}
+                        onChange={handleInputChange}
                         id="formTel"
                       />
                     </S.InputContent>
@@ -137,6 +144,7 @@ const ApplicationPage = () => {
                         type="text"
                         name="email"
                         value={form.email}
+                        onChange={handleInputChange}
                         id="formMail"
                       />
                     </S.InputContent>
@@ -147,13 +155,11 @@ const ApplicationPage = () => {
           </div>
           <WhiteBox>
             <WhiteBoxTitle>약관 정보</WhiteBoxTitle>
-            <WhiteBoxContents>
-              <FormAgreeBox />
-            </WhiteBoxContents>
+            <WhiteBoxContents>약관폼</WhiteBoxContents>
           </WhiteBox>
           <FormButton>
             <FormCancelButton>취소하기</FormCancelButton>
-            <FormSubmitButton>챌린지 신청하기</FormSubmitButton>
+            <FormSubmitButton>참가하기</FormSubmitButton>
           </FormButton>
         </Wrapper>
       </S.PageBack>
