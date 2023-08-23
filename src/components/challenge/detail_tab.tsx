@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import CommentBox from '../comment/comment';
+import CommentBox from '../comment/commentbox/comment';
 const TabMenu = styled.ul`
   border-bottom: 1px solid #000;
   display: flex;
@@ -100,7 +100,10 @@ const CalendarWrap = styled.div`
     width: 30px;
     height: 30px;
   }
+.fc .fc-daygrid-day.fc-day-today{
+  background: rgba(132, 151, 172, 0.40);
 
+}
   .event1-class {
     background: rgba(255, 246, 40, 0.43);
     border: none;
@@ -109,6 +112,10 @@ const CalendarWrap = styled.div`
       color: #000;
     }
   }
+
+  .event2-class {
+    background: #339AF0;
+    border: none;
 `;
 
 const H2Styled = styled.div``;

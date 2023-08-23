@@ -14,18 +14,25 @@ const StyledDatePicker = styled(DatePicker)`
   padding: 0 15px;
 `;
 
-const ReactDatePicker = () => {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
-
+const ReactDatePicker = ({ joinningDate, setDate }) => {
   return (
     <StyledDatePicker
       selectsRange={true}
-      startDate={startDate}
-      endDate={endDate ? addDays(startDate, 4) : null}
+      startDate={joinningDate[0]}
+      endDate={joinningDate[1]}
       dateFormat="yyyy년MM월dd일"
       onChange={(update) => {
-        setDateRange(update);
+        const startDate = new Date(update);
+        let endDate = new Date(update);
+        endDate = new Date(endDate.setDate(endDate.getDate() + 4));
+
+        console.log('update', update);
+        console.log('endDate', endDate);
+
+        setDate((prev) => ({
+          ...prev,
+          joinningDate: [startDate, endDate],
+        }));
       }}
       isClearable={true}
       placeholderText="날짜를 선택하세요"
@@ -33,25 +40,5 @@ const ReactDatePicker = () => {
     />
   );
 };
-
-// const ReactDatePicker2 = ({ endDate }) => { 
-//   const [dateRange, setDateRange] = useState([null, null]);
-//   const [startDate, endDate2] = dateRange;
-
-//   return (
-//     <StyledDatePicker
-//       selectsRange={true}
-//       startDate={startDate}
-//       endDate={endDate2}
-//       dateFormat="yyyy년MM월dd일"
-//       onChange={(update) => {
-//         setDateRange(update);
-//       }}
-//       isClearable={true}
-//       placeholderText="날짜를 선택하세요"
-//       minDate={endDate} // Set the minDate using the received endDate prop
-//     />
-//   );
-// };
 
 export default ReactDatePicker;

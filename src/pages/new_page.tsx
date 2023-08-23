@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useReducer, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
@@ -22,8 +22,6 @@ import useImageUploader from '../hook/imgfiler';
 const PageBack = styled.div`
   background-color: #f4f4f4;
 `;
-
-
 
 const InputContent = styled.div`
   display: flex;
@@ -94,6 +92,28 @@ const InputImg = styled.input`
 const NewPage: React.FC = () => {
   // 태그 관련 상태와 함수들을 정의
   const [tags, setTags] = useState<string[]>([]);
+  const [date, setDate] = useState({
+    joinningDate: [null, null],
+    startDate: [null, null],
+  });
+
+  useEffect(() => {
+    // joinningDate가 바뀌면 startDate를 자동 변환
+    if (date.joinningDate[1]) {
+      setDate((prev) => {
+        const date = new Date(
+          (new Date(prev.joinningDate[1] || '') as any).setDate(
+            (prev.joinningDate[1] as any).getDate() + 1
+          )
+        );
+        console.log('date', date);
+        return {
+          ...(prev as any),
+          startDate: [date, null],
+        };
+      });
+    }
+  }, [date.joinningDate]);
 
   const handleChangeTags = (newTags: string[]) => {
     setTags(newTags);
@@ -104,15 +124,14 @@ const NewPage: React.FC = () => {
     setTextValue(e.target.value);
   };
 
+  // 동의하기 
   const [isAgreed, setIsAgreed] = useState(false);
 
   const handleAgreeChange = (isChecked: boolean) => {
     setIsAgreed(isChecked);
   };
 
-  // 챌린지모집기간+4일후 챌린지 시작됨
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(new Date());
+
 
   const { imgSrc, fileInput, onChange } = useImageUploader(
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
@@ -146,11 +165,17 @@ const NewPage: React.FC = () => {
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formDage">챌린지 모집 기간</LabelStyled>
-                  <ReactDatePicker></ReactDatePicker>
+                  <ReactDatePicker
+                    joinningDate={date.joinningDate}
+                    setDate={setDate}
+                  ></ReactDatePicker>
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formDage">챌린지 기간</LabelStyled>
-                  <ReactDatePicker2></ReactDatePicker2>
+                  <ReactDatePicker2
+                    startDate={date.startDate}
+                    setDate={setDate}
+                  ></ReactDatePicker2>
                 </InputContent>
                 <InputContent>
                   <LabelStyled htmlFor="formImg">대표 이미지</LabelStyled>
