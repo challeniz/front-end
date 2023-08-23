@@ -1,79 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import * as S from './list_content.style';
 import HeartButton from '../heart/heart';
 import { BsCalendarRange } from 'react-icons/bs';
-
-const ContentWrap = styled.div`
-  text-align: left;
-`;
-
-const ImgStyled = styled.div`
-  position: relative;
-  width: 100%;
-  height: 300px;
-  border-radius: 20px;
-  background-color: #d9d9d9;
-  overflow: hidden;
-  margin: 0 auto;
-  border: 1px solid #eeeeee;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const StyledHeartButton = styled(HeartButton)`
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 10;
-`;
-
-const TabWrap = styled.div`
-  margin: 20px 0;
-`;
-
-const TabStyled = styled.a`
-  background-color: #d9d9d9;
-  border-radius: 10px;
-  padding: 4px 15px;
-  font-size: 13px;
-  margin-right: 5px;
-`;
-
-const H3Styled = styled.h3`
-  font-size: 25px;
-  padding-bottom: 20px;
-  max-width: 300px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: 500;
-  letter-spacing: -0.8px;
-
-  &:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-`;
-
-const H4Styled = styled.h4`
-  font-size: 15px;
-  font-weight: 400;
-  color: #686868;
-  display: flex;
-  align-items: center;
-
-  svg {
-    width: 1.2em;
-    height: 1.2em;
-    padding-right: 5px;
-  }
-`;
 
 interface ListContentProps {
   challenge: {
@@ -99,22 +27,22 @@ const ListContent: React.FC<ListContentProps> = ({ challenge }) => {
   };
 
   return (
-    <ContentWrap>
-      <ImgStyled>
+    <S.ContentWrap>
+      <S.ImgStyled>
         <img src={challenge.img} alt={`Challenge`} />
-        <StyledHeartButton like={like} onClick={toggleLike} />
-      </ImgStyled>
-      <TabWrap>
+        <S.StyledHeartButton like={like} onClick={toggleLike} />
+      </S.ImgStyled>
+      <S.TabWrap>
         {challenge.tag.split(',').map((tag, index) => (
-          <TabStyled key={index}>{tag}</TabStyled>
+          <S.TabStyled key={index}>{tag}</S.TabStyled>
         ))}
-      </TabWrap>
-      <H3Styled>{challenge.title}</H3Styled>
-      <H4Styled>
+      </S.TabWrap>
+      <S.H3Styled>{challenge.title}</S.H3Styled>
+      <S.H4Styled>
         <BsCalendarRange />
         {challenge.startdate} ~ {challenge.enddate}
-      </H4Styled>
-    </ContentWrap>
+      </S.H4Styled>
+    </S.ContentWrap>
   );
 };
 

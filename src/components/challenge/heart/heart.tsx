@@ -1,16 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import HeartImg from '../../assets/image/heart_red.png';
-import EmptyHeartImg from '../../assets/image/heart.png';
-
-const Heart = styled.img`
-  width: 30px !important;
-  height: 30px !important;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 10;
-`;
+import * as S from './heart.style';
+import HeartImg from '../../../assets/image/heart_red.png';
+import EmptyHeartImg from '../../../assets/image/heart.png';
 
 interface HeartButtonProps {
   like: boolean;
@@ -19,7 +10,7 @@ interface HeartButtonProps {
 
 const HeartButton: React.FC<HeartButtonProps> = ({ like, onClick }) => {
   return (
-    <Heart
+    <S.Heart
       src={like ? HeartImg : EmptyHeartImg}
       alt={like ? 'Liked' : 'Not Liked'}
       onClick={onClick}

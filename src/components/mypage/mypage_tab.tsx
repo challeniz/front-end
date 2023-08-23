@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import StatusInfo from './status_info';
 import HeartInfo from './heart_info';
 import CompleteInfo from './complete_info';
-import AuthList from '../common/auth_list';
+import AuthList from '../common/auth_list/auth_list';
 
 const TabMenu = styled.ul`
   border-bottom: 1px solid #000;
