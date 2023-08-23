@@ -26,7 +26,7 @@ const ReactDatePicker2 = ({ startDate, setDate }) => {
           startDate: update,
         }));
       }}
-      isClearable={true}
+      isClearable={false}
       placeholderText="날짜를 선택하세요"
       minDate={new Date()}
     />

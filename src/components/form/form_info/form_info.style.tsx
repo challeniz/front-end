@@ -52,8 +52,9 @@ export const SpanStyled = styled.span`
 export const AvatarWrapper = styled.div`
   width: 406px;
   height: 226px;
-  border: 1px solid #000;
+  border: 1px solid #cfcfcf;
   border-radius: 10px;
+  overflow: hidden;
 `;
 
 export const AvatarImage = styled.img`
