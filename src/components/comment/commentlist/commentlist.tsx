@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-import Wrapper from '../../common/wrapper/wrapper';
+import * as S from './commentlist.styles';
+
 
 interface CommentListProps {
   userName: string;
@@ -10,12 +10,12 @@ interface CommentListProps {
 const CommentList: React.FC<CommentListProps> = (props) => {
   return (
     <div>
-      <Wrapper>
-        <div className="userCommentBox">
-          <p className="userName">{props.userName}</p>
-          <div className="userComment">{props.userComment}</div>
-        </div>
-      </Wrapper>
+      <S.CommentListBox>
+        <S.UserCommentBox>
+          <S.UserName>{props.userName}</S.UserName>
+          <S.UserComment>{props.userComment}</S.UserComment>
+        </S.UserCommentBox>
+      </S.CommentListBox>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import CommentBox from '../../comment/comment/comment';
+import CommentBox from '../../comment/commentbox/comment';
 
 export const Tab: React.FC = () => {
   const [currentTab, clickTab] = useState<number>(0);
