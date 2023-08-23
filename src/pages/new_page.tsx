@@ -6,9 +6,11 @@ import Wrapper from '../components/common/wrapper/wrapper';
 import WhiteBox from '../components/form/white_box/white_box/white_box';
 import WhiteBoxTitle from '../components/form/white_box/white_box_title/white_box_title';
 import WhiteBoxContents from '../components/form/white_box/white_box_contents/white_box_contents';
-import { FormButton,
+import {
+  FormButton,
   FormCancelButton,
-  FormSubmitButton, } from '../components/form/form_button/form_button';
+  FormSubmitButton,
+} from '../components/form/form_button/form_button';
 import FormAgreeBox from '../components/form/form_agree';
 import ReactDatePicker from '../components/calendar/calendar';
 import ReactDatePicker2 from '../components/calendar/calendar2';
@@ -120,14 +122,12 @@ const NewPage: React.FC = () => {
     setTextValue(e.target.value);
   };
 
-  // 동의하기 
+  // 동의하기
   const [isAgreed, setIsAgreed] = useState(false);
 
   const handleAgreeChange = (isChecked: boolean) => {
     setIsAgreed(isChecked);
   };
-
-
 
   const { imgSrc, fileInput, onChange } = useImageUploader(
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'

@@ -22,7 +22,6 @@ const CommentBox = () => {
     setComment('');
   };
 
-
   // 댓글삭제
   const removeComment = (indexToRemove: number) => {
     const updatedFeedComment = feedComment.filter(
@@ -39,7 +38,6 @@ const CommentBox = () => {
           type="text"
           className="CommentInput"
           placeholder="댓글을 달아보세요!"
-          onKeyDown={handleKeyDown} // 엔터 키 감지 이벤트 핸들러 추가
           onChange={(e) => {
             setComment(e.target.value);
             setIsValid(e.target.value.length > 0);
