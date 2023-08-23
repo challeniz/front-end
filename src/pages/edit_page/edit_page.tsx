@@ -1,29 +1,26 @@
 import React from 'react';
-import * as S from './new_page.style';
+import * as S from './edit_page.style';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import Wrapper from '../../components/common/wrapper/wrapper';
-import NoticeForm from '../../components/form/form_notice/from_notice';
+import FormEdit from '../../components/form/form_edit/form_edit';
 import {
   FormButton,
   FormCancelButton,
   FormSubmitButton,
 } from '../../components/form/form_button/form_button';
-import FormAgreeBox from '../../components/form/form_agree/form_agree';
 import FormInfo from '../../components/form/form_info/form_info';
 
-const NewPage = () => {
+const EditPage = () => {
   return (
     <>
       <Header />
       <S.PageBack>
         <Wrapper>
-          <NoticeForm />
-          <FormInfo />
-          <FormAgreeBox />
+          <FormEdit />
           <FormButton>
             <FormCancelButton>취소하기</FormCancelButton>
-            <FormSubmitButton>챌린지 개설하기</FormSubmitButton>
+            <FormSubmitButton>챌린지 수정하기</FormSubmitButton>
           </FormButton>
         </Wrapper>
       </S.PageBack>
@@ -32,4 +29,4 @@ const NewPage = () => {
   );
 };
 
-export default NewPage;
+export default EditPage;

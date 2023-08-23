@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './app_page.style';
 import Wrapper from '../../components/common/wrapper/wrapper';
-// import FormAgreeBox from '../components/form/form_agree';
+import FormAgreeBox from '../../components/form/form_agree/form_agree';
 import WhiteBox from '../../components/form/white_box/white_box/white_box';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
