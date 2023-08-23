@@ -1,14 +1,13 @@
-import ListPage from './pages/list_page';
-import NewPage from './pages/new_page';
-import MainPage from './pages/main_page';
-import LoginPage from './pages/login/login_page';
-import JoinPage from './pages/join/join_page';
-import MyPage from './pages/my_page';
-import AuthPage from './pages/auth_page';
-import DetailPage from './pages/detail_page';
-import ApplicationPage from './pages/app_page';
-import MyPrivacy from './pages/ my_privacy';
-
+import ListPage from './pages/list_page/list_page';
+import NewPage from './pages/new_page/new_page';
+import MainPage from './pages/main_page/main_page';
+import LoginPage from './pages/login_page/login_page';
+import JoinPage from './pages/join_page/join_page';
+import MyPage from './pages/my_page/my_page';
+import AuthPage from './pages/auth_page/auth_page';
+import DetailPage from './pages/detail_page/detail_page';
+import ApplicationPage from './pages/app_page/app_page';
+import MyPrivacy from './pages/my_privacy/ my_privacy';
 
 export const ROUTE = {
   MAIN: {
