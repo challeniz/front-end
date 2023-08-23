@@ -21,6 +21,7 @@ export const BannerSlide = styled.div`
   .slick-prev:before,
   .slick-next:before {
     font-size: 45px;
+    color: #363636;
   }
 
   .slick-prev,
