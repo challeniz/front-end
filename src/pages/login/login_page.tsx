@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { emailRegex, passwordRegex } from '../../components/common/validation'
 import { ROUTE } from "../../routes";
 import axios from 'axios';
-import { loginApiInstance } from '../../utils/api';
+import { apiInstance } from '../../utils/api';
 
 
 //로그인 페이지 컴포넌트
@@ -60,7 +60,7 @@ const LoginPage = () => {
   //이메일, 비밀번호 입력 후 로그인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickLoginBtn = async () => {
     try {
-      const response = await loginApiInstance.post('/users/login', {
+      const response = await apiInstance.post('/users/login', {
         email,
         password
       });
