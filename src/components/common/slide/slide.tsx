@@ -6,9 +6,9 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { AiOutlineLeft } from 'react-icons/ai';
 
-import banner1 from '../../../assets/image/banner.png';
-import banner2 from '../../../assets/image/banner_2.png';
-import banner3 from '../../../assets/image/banner_3.png';
+import banner1 from '../../../assets/image/banner.jpg';
+import banner2 from '../../../assets/image/banner_2.jpg';
+import banner3 from '../../../assets/image/banner_3.jpg';
 
 const SlideBnner = () => {
   const settings = {

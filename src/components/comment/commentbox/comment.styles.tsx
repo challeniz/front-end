@@ -1,7 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-
-
+export const CommentWrap = styled.div`
+  display: flex;
+  position: relative;
+`;
 
 //코멘트 입력창
 export const CommentInput = styled.input`
@@ -10,12 +12,11 @@ export const CommentInput = styled.input`
   text-align: left;
   font-size: 14px;
   outline: none;
-  width: 60vw;
+  width: 100%;
   float: left;
   background-color: transparent;
   border-bottom: 1px solid #000;
-  margin-left: 30px;
-  margin-top: 10px;
+
   ::placeholder {
     color: #999;
   }
@@ -25,14 +26,12 @@ export const H2Styled = styled.h2`
   padding-bottom: 25px;
   font-weight: 700;
   text-align: left;
-  padding: 30px;
 `;
 
 //입력창
 export const SubmitBtn = styled.button<{ isValid: boolean }>`
-  float: left;
-  position: relative;
-  left: -58px;
+  position: absolute;
+
   font-size: 14px;
   width: 66px;
   height: 34px;
@@ -41,10 +40,14 @@ export const SubmitBtn = styled.button<{ isValid: boolean }>`
   color: #111;
   border: none;
   cursor: pointer;
+  right: 6px;
+  bottom: 11px;
 `;
 export const CommentContainer = styled.div`
   padding: 0px;
-  float: left;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
 `;
 
 //식제버튼
@@ -54,4 +57,8 @@ export const RemoveBtn = styled.button`
   border: none;
   padding: 5px 10px;
   cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 `;

@@ -13,6 +13,7 @@ export const ScrollButton = styled.button<{ show: boolean }>`
   cursor: pointer;
   border-radius: 50%;
   font-size: 25px;
+  box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.3);
 
   svg {
     transition: 0.3s;

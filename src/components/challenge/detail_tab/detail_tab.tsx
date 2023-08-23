@@ -79,6 +79,8 @@ export const Tab: React.FC = () => {
                   events={event1.concat(event2)}
                 />
               </S.CalendarWrap>
+            </S.DetailWrap>
+            <S.DetailWrap>
               <CommentBox></CommentBox>
             </S.DetailWrap>
           </>
