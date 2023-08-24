@@ -4,6 +4,12 @@ import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import SlideBnner from '../../components/common/slide/slide';
 import Wrapper from '../../components/common/wrapper/wrapper';
+import {
+  Default,
+  Desktop,
+  Mobile,
+  Tablet,
+} from '../../components/responsive/responsive';
 
 const MainPage = () => {
   const SlideRef1 = useRef<HTMLDivElement | null>(null);

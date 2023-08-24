@@ -21,6 +21,10 @@ export const HeaderWrapper = styled.div`
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
     transition: 0.3s;
   }
+
+  @media (max-width: 930px) {
+    padding: 0 40px;
+  }
 `;
 
 export const HeaderContainer = styled.header`
