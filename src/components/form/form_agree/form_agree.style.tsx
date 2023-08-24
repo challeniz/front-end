@@ -28,6 +28,11 @@ export const AgreeBox = styled.div`
 
   .agree-text {
     font-weight: 600;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 `;
 export const StyledUl = styled.ul`
