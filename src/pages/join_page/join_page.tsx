@@ -13,7 +13,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTE } from '../../routes';
 import axios from 'axios';
-import { emailApiInstance, joinApiInstance } from '../../utils/api';
+import { apiInstance } from '../../utils/api';
 
 const JoinPage = () => {
   const [email, setEmail] = useState(''); // 이메일 상태, 상태변경
@@ -149,7 +149,7 @@ const JoinPage = () => {
   //이메일 입력 후 중복확인 버튼 눌렀을때 맞게 되었는지 확인창 기능
   const onClickConfirmBtn = async () => {
     try {
-      const response = await emailApiInstance.post('/users/check', {
+      const response = await apiInstance.post('/users/check', {
         email: email,
       });
       console.log(response.data);
@@ -185,7 +185,7 @@ const JoinPage = () => {
       };
 
       try {
-        const response = await joinApiInstance.post('/users/signup', user);
+        const response = await apiInstance.post('/users/signup', user);
 
         if (response.status === 201) {
           // 회원가입 성공 시 처리
