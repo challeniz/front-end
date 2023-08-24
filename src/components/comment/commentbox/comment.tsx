@@ -32,8 +32,8 @@ const CommentBox = () => {
 
   return (
     <div>
-      <Wrapper>
-        <S.H2Styled>후기,댓글</S.H2Styled>
+      <S.H2Styled>댓글</S.H2Styled>
+      <S.CommentWrap>
         <S.CommentInput
           type="text"
           className="CommentInput"
@@ -48,16 +48,15 @@ const CommentBox = () => {
         <S.SubmitBtn isValid={isValid} onClick={post} disabled={!isValid}>
           입력
         </S.SubmitBtn>
-
-        {feedComment.map((commentArr, i) => (
-          <S.CommentContainer key={i}>
-            <CommentList userName={username} userComment={commentArr} />
-            <S.RemoveBtn onClick={() => removeComment(i)}>
-              <BsTrash3 />
-            </S.RemoveBtn>
-          </S.CommentContainer>
-        ))}
-      </Wrapper>
+      </S.CommentWrap>
+      {feedComment.map((commentArr, i) => (
+        <S.CommentContainer key={i}>
+          <CommentList userName={username} userComment={commentArr} />
+          <S.RemoveBtn onClick={() => removeComment(i)}>
+            <BsTrash3 />
+          </S.RemoveBtn>
+        </S.CommentContainer>
+      ))}
     </div>
   );
 };
