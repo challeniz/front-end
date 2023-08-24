@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
-import MyInfo from '../../components/mypage/mypage_info';
+import MyInfo from '../../components/mypage/mypage_info/mypage_info';
 
 const MyPrivacy = () => {
   return (
