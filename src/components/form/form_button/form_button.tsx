@@ -1,8 +1,9 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, MouseEvent } from 'react';
 import * as S from './form_button.style';
 
 interface FormButtonProps {
   children: ReactNode;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface CancelButtonProps extends FormButtonProps {}
@@ -26,8 +27,11 @@ export const FormCancelButton: React.FC<CancelButtonProps> = ({ children }) => {
   return <S.CancelButton onClick={handleCancel}>{children}</S.CancelButton>;
 };
 
-export const FormSubmitButton: React.FC<SubmitButtonProps> = ({ children }) => {
-  return <S.SubmitButton>{children}</S.SubmitButton>;
+export const FormSubmitButton: React.FC<SubmitButtonProps> = ({
+  children,
+  onClick,
+}) => {
+  return <S.SubmitButton onClick={onClick}>{children}</S.SubmitButton>;
 };
 
 export const FormSubmitButton2: React.FC<SubmitButtonProps2> = ({ children, onClick }) => {

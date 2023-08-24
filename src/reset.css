@@ -93,6 +93,7 @@ textarea {
   font-family: 'Pretendard' !important;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -107,17 +108,21 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -125,6 +130,7 @@ q:after {
   content: '';
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -137,11 +143,3 @@ select:focus-visible {
 textarea:focus-visible {
   outline-color: #339af0;
 }
-
-/* input 기본 스타일 초기화 */
-/* input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-} */
-

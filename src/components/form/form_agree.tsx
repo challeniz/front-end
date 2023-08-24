@@ -38,15 +38,18 @@ const StyledUl = styled.ul`
   list-style: disc;
 `;
 
-interface FormAgreeBoxProps {
-  onCheckboxChange: (newValue: boolean) => void;
-}
+const FormAgreeBox = ({
+  onAgreeChange,
+}: {
+  onAgreeChange: (isChecked: boolean) => void;
+}) => {
+  const [isChecked, setIsChecked] = useState(false);
 
-const FormAgreeBox: React.FC<FormAgreeBoxProps> = ({ onCheckboxChange }) => {
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.checked;
-    onCheckboxChange(newValue);
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+    onAgreeChange(!isChecked); // 체크 여부가 변경될 때마다 상위 컴포넌트의 상태 업데이트
   };
+
 
   return (
     <>
