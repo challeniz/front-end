@@ -1,22 +1,34 @@
 import axios from 'axios';
 
-//로그인 API 호출
-export const loginApiInstance = axios.create({
+export const apiInstance = axios.create({
   baseURL: 'http://34.64.62.80:3000/',
   timeout: 1000,
-  headers: { 'Content-Type': 'application/json' }
+  headers: { 'Content-Type': 'application/json' },
 });
 
-//회원가입시 이메일 중복확인 API 호출
-export const emailApiInstance = axios.create({
-  baseURL: 'http://34.64.62.80:3000',
-  timeout: 1000,
-  headers: { 'Content-Type': 'application/json' }
-});
+// 요청 인터셉터 추가하기
+apiInstance.interceptors.request.use(
+  function (config) {
+    // 요청이 전달되기 전에 작업 수행
+    config.headers.authorization = localStorage.getItem('token');
+    return config;
+  },
+  function (error) {
+    // 요청 오류가 있는 작업 수행
+    return Promise.reject(error);
+  }
+);
 
-//회원가입시 모든 유호성 검사 통과 후 유저정보 등록하는 API 호출
-export const joinApiInstance = axios.create({
-  baseURL: 'http://34.64.62.80:3000',
-  timeout: 1000,
-  headers: { 'Content-Type': 'application/json' }
-});
+// 응답 인터셉터 추가하기
+apiInstance.interceptors.response.use(
+  function (response) {
+    // 2xx 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
+    // 응답 데이터가 있는 작업 수행
+    return response;
+  },
+  function (error) {
+    // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
+    // 응답 오류가 있는 작업 수행
+    return Promise.reject(error);
+  }
+);
