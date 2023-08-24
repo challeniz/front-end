@@ -68,7 +68,7 @@ const LoginPage = () => {
       });
 
       if (response.status === 201) {
-        const token = response.data.token;
+        const token = response.data.access_token;
         alert('로그인에 성공하였습니다.');
         localStorage.setItem('token', token);
         console.log('token', token)
