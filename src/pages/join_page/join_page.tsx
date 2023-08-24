@@ -15,6 +15,8 @@ import { ROUTE } from '../../routes';
 import axios from 'axios';
 import { apiInstance } from '../../utils/api';
 
+
+
 const JoinPage = () => {
   const [email, setEmail] = useState(''); // 이메일 상태, 상태변경
   const [password, setPassword] = useState(''); // 비밀번호 상태, 상태변경
