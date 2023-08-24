@@ -9,7 +9,7 @@ import WhiteBoxContents from '../components/form/white_box/white_box_contents/wh
 import {
   FormButton,
   FormCancelButton,
-  FormSubmitButton,
+  FormSubmitButton2,
 } from '../components/form/form_button/form_button';
 import FormAgreeBox from '../components/form/form_agree';
 import ReactDatePicker from '../components/calendar/calendar';
@@ -125,8 +125,19 @@ const NewPage: React.FC = () => {
   // 동의하기
   const [isAgreed, setIsAgreed] = useState(false);
 
-  const handleAgreeChange = (isChecked: boolean) => {
-    setIsAgreed(isChecked);
+  const handleCheckboxChange = (newValue: boolean) => {
+    console.log('Checkbox changed:', newValue);
+    setIsAgreed(newValue);
+  };
+
+  const handleFormSubmit: React.MouseEventHandler<HTMLButtonElement> = (
+    event
+  ) => {
+    if (!isAgreed) {
+      alert('약관에 동의해주세요.');
+      event.preventDefault();
+      return;
+    }
   };
 
   const { imgSrc, fileInput, onChange } = useImageUploader(
@@ -210,12 +221,12 @@ const NewPage: React.FC = () => {
           <WhiteBox>
             <WhiteBoxTitle>약관 동의</WhiteBoxTitle>
             <WhiteBoxContents>
-              <FormAgreeBox />
+              <FormAgreeBox onCheckboxChange={handleCheckboxChange} />
             </WhiteBoxContents>
           </WhiteBox>
           <FormButton>
             <FormCancelButton>취소하기</FormCancelButton>
-            <FormSubmitButton>챌린지 개설하기</FormSubmitButton>
+            <FormSubmitButton2 onClick={handleFormSubmit}>챌린지 개설하기</FormSubmitButton2>
           </FormButton>
         </Wrapper>
       </PageBack>

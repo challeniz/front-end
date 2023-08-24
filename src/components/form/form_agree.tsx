@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const AgreeBox = styled.div`
@@ -38,7 +38,16 @@ const StyledUl = styled.ul`
   list-style: disc;
 `;
 
-const FormAgreeBox = () => {
+interface FormAgreeBoxProps {
+  onCheckboxChange: (newValue: boolean) => void;
+}
+
+const FormAgreeBox: React.FC<FormAgreeBoxProps> = ({ onCheckboxChange }) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.checked;
+    onCheckboxChange(newValue);
+  };
+
   return (
     <>
       <p>
@@ -57,9 +66,15 @@ const FormAgreeBox = () => {
       </p>
       <AgreeBox>
         <p className="agree-title">약관동의</p>
-        <input type="checkbox"></input>
+        <input
+          type="checkbox"
+          checked={isAgreed}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            handleCheckboxChange(e.target.checked)
+          }
+        />
         <p className="agree-text">
-          위의 내용을 모두 읽어보았으며, 이에ㅊㅊㅊㅊㅊ 모두 동의합니다.
+          위의 내용을 모두 읽어보았으며, 이에 모두 동의합니다.
         </p>
       </AgreeBox>
     </>

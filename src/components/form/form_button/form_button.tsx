@@ -9,6 +9,10 @@ interface CancelButtonProps extends FormButtonProps {}
 
 interface SubmitButtonProps extends FormButtonProps {}
 
+interface SubmitButtonProps2 extends FormButtonProps {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 export const FormButton: React.FC<FormButtonProps> = ({ children }) => {
   return <S.FormButtonWrap>{children}</S.FormButtonWrap>;
 };
@@ -24,4 +28,8 @@ export const FormCancelButton: React.FC<CancelButtonProps> = ({ children }) => {
 
 export const FormSubmitButton: React.FC<SubmitButtonProps> = ({ children }) => {
   return <S.SubmitButton>{children}</S.SubmitButton>;
+};
+
+export const FormSubmitButton2: React.FC<SubmitButtonProps2> = ({ children, onClick }) => {
+  return <S.SubmitButton onClick={onClick}>{children}</S.SubmitButton>;
 };
