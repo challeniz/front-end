@@ -42,3 +42,5 @@ const ReactDatePicker = ({ joinningDate, setDate }) => {
 };
 
 export default ReactDatePicker;
+
+export default ReactDatePicker;
