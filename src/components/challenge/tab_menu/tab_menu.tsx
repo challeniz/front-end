@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import * as S from './tab_menu.style';
 import ListContent from '../list_content/list_content';
-import challengeData from '../../../data/data.json';
 
 export const Tab: React.FC<{ currentTab: number }> = ({
   currentTab: parentCurrentTab,
@@ -49,15 +48,7 @@ export const Tab: React.FC<{ currentTab: number }> = ({
       </S.TabMenu>
       <S.Desc>
         <S.ContentsWrap>
-          {challengeData
-            .filter(
-              (challenge) =>
-                currentCategory === 0 ||
-                challenge.category === menuArr[currentTab].category
-            )
-            .map((challenge) => (
-              <ListContent key={challenge.title} challenge={challenge} />
-            ))}
+          <ListContent />
         </S.ContentsWrap>
       </S.Desc>
     </div>
