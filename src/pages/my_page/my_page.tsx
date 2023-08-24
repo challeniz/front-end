@@ -3,9 +3,9 @@ import * as S from './my_page.style';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import Wrapper from '../../components/common/wrapper/wrapper';
-import { MyPageTab } from '../../components/mypage/mypage_tab';
+import { MyPageTab } from '../../components/mypage/mypage_tab/mypage_tab';
 import 'react-calendar/dist/Calendar.css';
-import MyInfo from '../../components/mypage/mypage_info';
+import MyInfo from '../../components/mypage/mypage_info/mypage_info';
 
 const MyPage = () => {
   const [value, setValue] = useState(new Date());
