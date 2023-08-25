@@ -1,15 +1,22 @@
-import React, { useState, ChangeEvent, useReducer, useEffect } from 'react';
-import * as S from './form_info.style';
-import WhiteBox from '../white_box/white_box/white_box';
-import WhiteBoxTitle from '../white_box/white_box_title/white_box_title';
-import WhiteBoxContents from '../white_box/white_box_contents/white_box_contents';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import useImageUploader from '../../../hook/imgfiler';
 import ReactDatePicker from '../../calendar/calendar';
 import ReactDatePicker2 from '../../calendar/calendar2';
 import TagBox from '../tag_box/tag_box';
-import addDays from 'date-fns/addDays';
-import useImageUploader from '../../../hook/imgfiler';
+import WhiteBox from '../white_box/white_box/white_box';
+import WhiteBoxContents from '../white_box/white_box_contents/white_box_contents';
+import WhiteBoxTitle from '../white_box/white_box_title/white_box_title';
+import * as S from './form_info.style';
 
-const FormInfo = () => {
+interface FormInfoProps {
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setTopic: (arg: string) => void;
+  topic: string;
+  isImageSelected: boolean;
+  handleIsImageSelected: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   // 태그 관련 상태와 함수들을 정의
   const [tags, setTags] = useState<string[]>([]);
   const [date, setDate] = useState({
@@ -44,19 +51,43 @@ const FormInfo = () => {
     setTextValue(e.target.value);
   };
 
+  // 동의하기 체크
   const [isAgreed, setIsAgreed] = useState(false);
-
   const handleAgreeChange = (isChecked: boolean) => {
     setIsAgreed(isChecked);
   };
-
-  // 챌린지모집기간+4일후 챌린지 시작됨
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(new Date());
-
   const { imgSrc, fileInput, onChange } = useImageUploader(
     'https://i.ibb.co/NNhgTLL/2.jpg'
   );
+
+  //챌린지유효성 검사-주제
+
+  const [checkTxt, setCheckTxt] = useState(false);
+  const handleTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    const temp = e.target.value;
+    if (temp === '') {
+      console.log('Input value:', temp);
+      setCheckTxt(false);
+    } else {
+      setCheckTxt(true);
+    }
+    props.setTopic(temp);
+  };
+
+  // 챌린지유효성 검사-이미지
+  const [isImageSelected, setIsImageSelected] = useState(false);
+  const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => { 
+    const selectedFile = e.target.files && e.target.files[0];
+    if (selectedFile) {
+      setIsImageSelected(true); // 이미지 선택됨
+     
+    } else {
+      setIsImageSelected(false); // 이미지 선택되지 않음
+      alert('이미지를 선택해주세요.');
+    } console.log('이미지',selectedFile) 
+  };
+
 
   return (
     <WhiteBox>
@@ -69,8 +100,12 @@ const FormInfo = () => {
               type="text"
               id="formName"
               placeholder="주제를 입력하세요."
+              value={props.topic}
+              onChange={handleTopicChange}
+              required
             />
           </S.InputContent>
+
           <S.InputContent>
             <S.LabelStyled htmlFor="formCate">카테고리</S.LabelStyled>
             <S.SelectStyled id="formCate">
@@ -106,7 +141,11 @@ const FormInfo = () => {
             >
               <S.AvatarImage src={imgSrc} />
             </S.AvatarWrapper>
-            <S.InputImg type="file" ref={fileInput} onChange={onChange} />
+            <S.InputImg
+            type="file"
+            ref={fileInput}
+            onChange={handleIsImageSelected} 
+            />
           </S.InputContent>
           <S.InputContent className="flex-start">
             <S.LabelStyled htmlFor="forDescription">챌린지 설명</S.LabelStyled>
