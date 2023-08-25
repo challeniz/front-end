@@ -10,6 +10,8 @@ import {
   Mobile,
   Tablet,
 } from '../../components/responsive/responsive';
+import ChallengeBox from '../../components/challenge/challenge_box/challenge_box';
+import ListContent from '../../components/challenge/list_content/list_content';
 
 const MainPage = () => {
   const SlideRef1 = useRef<HTMLDivElement | null>(null);
