@@ -77,7 +77,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error('로그인 에러:', error);
-      alert('로그인에 실패하였습니다.');
+      alert('로그인에 실패하였습니다..');
     }
   };
 
