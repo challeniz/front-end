@@ -4,6 +4,7 @@ import * as S from './form_button.style';
 interface FormButtonProps {
   children: ReactNode;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 }
 
 interface CancelButtonProps extends FormButtonProps {}
@@ -27,5 +28,9 @@ export const FormSubmitButton: React.FC<SubmitButtonProps> = ({
   children,
   onClick,
 }) => {
-  return <S.SubmitButton onClick={onClick}>{children}</S.SubmitButton>;
+  return (
+    <S.SubmitButton type="submit" onClick={onClick}>
+      {children}
+    </S.SubmitButton>
+  );
 };
