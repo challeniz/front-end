@@ -10,7 +10,8 @@ import { apiInstance } from '../../utils/api';
 
 const MyPrivacy = () => {
 
-  
+  // 유저정보 받아온 후 값을 수정할 수 있게 구현해야 하는데 잘안됩니다....ㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+  //useState 사용하는건 알겠는데 초기값을 어떻게 하고 value에는 무엇을 적용해야할 지 모르겠습니다.
 
   const navigate = useNavigate();
   
@@ -78,6 +79,7 @@ const MyPrivacy = () => {
             <ul>
               <InfoTxt>
                 <label htmlFor="labelName">닉네임</label>
+                {/* value 값을 어떻게 해야되는지 모르겠습니다; */}
                 <input type="text" id="labelName" value={userInfo.name}/>
               </InfoTxt>
               <br />
