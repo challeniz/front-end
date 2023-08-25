@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEventHandler } from 'react';
 import * as S from './app_page.style';
 import * as D from '../../components/form/form_agree/form_agree.style';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import WhiteBox from '../../components/form/white_box/white_box/white_box';
 import Header from '../../components/common/header/header';
+import { ROUTE } from '../../routes';
 import Footer from '../../components/common/footer/footer';
 import WhiteBoxTitle from '../../components/form/white_box/white_box_title/white_box_title';
 import WhiteBoxContents from '../../components/form/white_box/white_box_contents/white_box_contents';
@@ -13,6 +14,7 @@ import {
   FormSubmitButton,
 } from '../../components/form/form_button/form_button';
 import axios from 'axios';
+import { apiInstance } from '../../utils/api';
 
 interface Challenge {
   title: string;
@@ -83,8 +85,8 @@ const ApplicationPage: React.FC = () => {
   const handleAgreeChange = (isChecked: boolean) => {
     setIsAgreed(isChecked);
   };
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
 
     if (!isAgreed) {
       console.log('약관에 동의해야 합니다.');
@@ -96,7 +98,10 @@ const ApplicationPage: React.FC = () => {
       email: form.email,
     };
     try {
-      const response = await axios.post('submit API주소', userData);
+      const response = await apiInstance.patch(
+        '/challenges/subscription/64e4d93bb812a8e5dc1882f5',
+        userData
+      );
       console.log('참가 신청이 완료되었습니다.');
     } catch (error) {
       console.error('참가 신청이 실패하였습니다', error);
@@ -106,7 +111,7 @@ const ApplicationPage: React.FC = () => {
   useEffect(() => {
     async function fetchChallengeInfo() {
       try {
-        const response = await axios.get<Challenge>('API주소');
+        const response = await apiInstance.get<Challenge>('/challenges/');
         setChallengeInfo(response.data);
       } catch (error) {
         console.error('챌린지 정보가 없습니다', error);

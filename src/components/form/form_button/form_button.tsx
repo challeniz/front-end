@@ -27,9 +27,10 @@ export const FormCancelButton: React.FC<CancelButtonProps> = ({ children }) => {
 export const FormSubmitButton: React.FC<SubmitButtonProps> = ({
   children,
   onClick,
+  ...props
 }) => {
   return (
-    <S.SubmitButton type="submit" onClick={onClick}>
+    <S.SubmitButton {...props} onClick={onClick}>
       {children}
     </S.SubmitButton>
   );
