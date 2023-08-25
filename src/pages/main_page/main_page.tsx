@@ -14,6 +14,7 @@ import ChallengeBox from '../../components/challenge/challenge_box/challenge_box
 import ListContent from '../../components/challenge/list_content/list_content';
 
 const MainPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const SlideRef1 = useRef<HTMLDivElement | null>(null);
   const SlideRef2 = useRef<HTMLDivElement | null>(null);
   const SlideRef3 = useRef<HTMLDivElement | null>(null);
@@ -67,6 +68,10 @@ const MainPage = () => {
     }
   };
 
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <S.BackWhite>
       <Header />
@@ -107,7 +112,12 @@ const MainPage = () => {
               <h3>전체보기</h3>
             </li>
           </S.ProgressList>
-          <S.ContentsWrap ref={SlideRef1}></S.ContentsWrap>
+          <S.ContentsWrap ref={SlideRef1}>
+            <ChallengeBox
+              selectedCategory={selectedCategory}
+              handleCategoryClick={handleCategoryClick}
+            />
+          </S.ContentsWrap>
         </S.ContentsList>
 
         <S.PopularList>

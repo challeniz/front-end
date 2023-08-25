@@ -37,7 +37,7 @@ export const ROUTE = {
     element: ListPage,
   },
   DETAILPAGE: {
-    path: '/detail',
+    path: '/detail/:id',
     link: '/detail',
     element: DetailPage,
   },
