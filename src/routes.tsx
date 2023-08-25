@@ -32,13 +32,13 @@ export const ROUTE = {
     element: MyPage,
   },
   LISTPAGE: {
-    path: '/listpage',
-    link: '/listpage',
+    path: '/challenges',
+    link: '/challenges',
     element: ListPage,
   },
   DETAILPAGE: {
-    path: '/detailpage',
-    link: '/detailpage',
+    path: '/detail/:id',
+    link: '/detail/:id',
     element: DetailPage,
   },
   APPPAGE: {

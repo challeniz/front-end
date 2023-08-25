@@ -70,7 +70,7 @@ const LoginPage = () => {
         const token = response.data.access_token;
         alert('로그인에 성공하였습니다.');
         localStorage.setItem('token', token);
-        console.log('token', token)
+        console.log('token', token);
         navigate('/'); // 로그인 성공 시 홈 메인페이지로 이동
       } else {
         alert('등록되지 않은 회원입니다.');
