@@ -23,8 +23,7 @@ const NewPage = () => {
     setTopic(e.target.value);
   };
 
-
-// 이미지 선택
+  // 이미지 선택
   const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0]; // 수정: 선택된 파일 가져오기
     setSelectedFile(file); // 수정: 선택된 파일 상태 업데이트
@@ -35,7 +34,7 @@ const NewPage = () => {
       setIsImageSelected(false); // 이미지 선택되지 않음
     }
   };
-  
+
   const handleChallengeSubmit = () => {
     if (topic.trim() === '') {
       alert('주제를 입력하세요.');
