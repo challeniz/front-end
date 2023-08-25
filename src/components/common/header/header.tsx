@@ -20,7 +20,7 @@ const Header = () => {
 
   const token = 'token';
   const user = localStorage.getItem(token);
-  console.log('user', user);
+  // console.log('user', user);
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
@@ -108,3 +108,9 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
+
+

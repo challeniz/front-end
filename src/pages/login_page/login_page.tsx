@@ -10,7 +10,6 @@ import {
   passwordRegex,
 } from '../../components/common/validation/validation';
 import { ROUTE } from '../../routes';
-import axios from 'axios';
 import { apiInstance } from '../../utils/api';
 
 //로그인 페이지 컴포넌트
@@ -78,7 +77,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error('로그인 에러:', error);
-      alert('로그인에 실패하였습니다.');
+      alert('로그인에 실패하였습니다..');
     }
   };
 
