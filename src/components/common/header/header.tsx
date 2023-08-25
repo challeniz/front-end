@@ -85,7 +85,7 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Link to={'mypage'}>
+                    <Link to={'/mypage'}>
                       <S.InnerLi>마이페이지</S.InnerLi>
                     </Link>
                     <button
