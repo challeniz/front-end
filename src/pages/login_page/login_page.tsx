@@ -10,7 +10,6 @@ import {
   passwordRegex,
 } from '../../components/common/validation/validation';
 import { ROUTE } from '../../routes';
-import axios from 'axios';
 import { apiInstance } from '../../utils/api';
 
 //로그인 페이지 컴포넌트
