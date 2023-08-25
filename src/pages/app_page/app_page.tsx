@@ -4,7 +4,7 @@ import * as D from '../../components/form/form_agree/form_agree.style';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import WhiteBox from '../../components/form/white_box/white_box/white_box';
 import Header from '../../components/common/header/header';
-import { ROUTE } from '../../routes';
+// import { ROUTE } from '../../routes';
 import Footer from '../../components/common/footer/footer';
 import WhiteBoxTitle from '../../components/form/white_box/white_box_title/white_box_title';
 import WhiteBoxContents from '../../components/form/white_box/white_box_contents/white_box_contents';
@@ -13,7 +13,7 @@ import {
   FormCancelButton,
   FormSubmitButton,
 } from '../../components/form/form_button/form_button';
-import axios from 'axios';
+// import axios from 'axios';
 import { apiInstance } from '../../utils/api';
 
 interface Challenge {
