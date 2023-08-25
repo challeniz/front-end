@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import * as S from './detail_tab.style';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import CommentBox from '../../comment/commentbox/comment';
+import { apiInstance } from '../../../utils/api';
+import moment from 'moment';
 
 export const Tab: React.FC = () => {
+  const { id } = useParams();
   const [currentTab, clickTab] = useState<number>(0);
 
   const menuArr = [
@@ -19,11 +20,49 @@ export const Tab: React.FC = () => {
     clickTab(index);
   };
 
+  // 챌린지 데이터 호출
+  const [challengeInfo, setChallengeInfo] = useState({
+    description: '',
+    start_date: '',
+    end_date: '',
+    recru_open_date: '',
+    recru_end_date: '',
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiInstance.get(`/challenges/${id}`);
+        const data = response.data;
+
+        if (data) {
+          setChallengeInfo({
+            description: data.description,
+            start_date: data.start_date,
+            end_date: data.end_date,
+            recru_open_date: data.recru_open_date, // 수정된 부분
+            recru_end_date: data.recru_end_date,
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  // Moment.js를 사용하여 날짜 데이터 변환
+  const recruOpenDate = moment(challengeInfo.recru_open_date).toDate();
+  const recruEndDate = moment(challengeInfo.recru_end_date).toDate();
+  const startDate = moment(challengeInfo.start_date).toDate();
+  const endDate = moment(challengeInfo.end_date).toDate();
+
   const event1 = [
     {
       title: '모집기간',
-      start: '2023-08-10',
-      end: '2023-08-15',
+      start: recruOpenDate,
+      end: recruEndDate,
       classNames: 'event1-class',
     },
   ];
@@ -31,8 +70,8 @@ export const Tab: React.FC = () => {
   const event2 = [
     {
       title: '진행기간',
-      start: '2023-08-15',
-      end: '2023-08-29',
+      start: startDate,
+      end: endDate,
       classNames: 'event2-class',
     },
   ];
@@ -56,15 +95,7 @@ export const Tab: React.FC = () => {
             <S.DetailWrap>
               <h2>챌린지를 소개합니다.</h2>
               <ul>
-                <li>
-                  "오늘날짜"와 1만보이상걸음수가 기록된 스마트워치화면 또는
-                  웹화면을 올려주세요.
-                </li>
-                <li>
-                  다른 걷기챌린지(주 3일이내)외에 추가로 운동하실분들
-                  환영합니다~
-                </li>
-                <li>매일 걷고 인생체력 만드실분들 어서오세요~</li>
+                <li>{challengeInfo.description}</li>
               </ul>
             </S.DetailWrap>
             <S.DetailWrap>
