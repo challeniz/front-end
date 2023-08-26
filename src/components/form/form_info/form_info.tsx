@@ -76,17 +76,17 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   };
 
   // 챌린지유효성 검사-이미지
-  const [isImageSelected, setIsImageSelected] = useState(false);
-  const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => { 
-    const selectedFile = e.target.files && e.target.files[0];
-    if (selectedFile) {
-      setIsImageSelected(true); // 이미지 선택됨
+  // const [isImageSelected, setIsImageSelected] = useState(false);
+  // const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => { 
+  //   const selectedFile = e.target.files && e.target.files[0];
+  //   if (selectedFile) {
+  //     setIsImageSelected(true); // 이미지 선택됨
      
-    } else {
-      setIsImageSelected(false); // 이미지 선택되지 않음
-      alert('이미지를 선택해주세요.');
-    } console.log('이미지',selectedFile) 
-  };
+  //   } else {
+  //     setIsImageSelected(false); // 이미지 선택되지 않음
+  //     alert('이미지를 선택해주세요.');
+  //   } console.log('이미지',selectedFile) 
+  // };
 
 
   return (
