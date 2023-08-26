@@ -20,7 +20,7 @@ const Header = () => {
 
   const token = 'token';
   const user = localStorage.getItem(token);
-  console.log('user', user);
+  // console.log('user', user);
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
@@ -85,7 +85,7 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Link to={'mypage'}>
+                    <Link to={'/mypage'}>
                       <S.InnerLi>마이페이지</S.InnerLi>
                     </Link>
                     <button
@@ -108,3 +108,9 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
+
+

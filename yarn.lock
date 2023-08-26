@@ -2944,10 +2944,17 @@
   "resolved" "https://registry.npmjs.org/at-least-node/-/at-least-node-1.0.0.tgz"
   "version" "1.0.0"
 
+<<<<<<< HEAD
+axios@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npmjs.org/axios/-/axios-1.4.0.tgz"
+  integrity sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==
+=======
 "autoprefixer@^10.4.13":
   "integrity" "sha512-KCuPB8ZCIqFdA4HwKXsvz7j6gvSDNhDP7WnUjBleRkKjPdvCmHFuQ77ocavI8FT6NdvlBnE2UFr2H4Mycn8Vew=="
   "resolved" "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.4.15.tgz"
   "version" "10.4.15"
+>>>>>>> 874a2ed4d88def4fd5d1b883d96482cee98b5e93
   dependencies:
     "browserslist" "^4.21.10"
     "caniuse-lite" "^1.0.30001520"
@@ -4908,11 +4915,16 @@
 "fs.realpath@^1.0.0":
   "version" "1.0.0"
 
+<<<<<<< HEAD
+fullcalendar@*:
+  version "6.1.8"
+=======
 "fsevents@^2.3.2", "fsevents@~2.3.2":
   "version" "2.3.2"
 
 "fullcalendar@*":
   "version" "6.1.8"
+>>>>>>> 874a2ed4d88def4fd5d1b883d96482cee98b5e93
   dependencies:
     "@fullcalendar/core" "~6.1.8"
     "@fullcalendar/daygrid" "~6.1.8"

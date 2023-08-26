@@ -12,7 +12,6 @@ import {
 } from '../../components/common/validation/validation';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTE } from '../../routes';
-import axios from 'axios';
 import { apiInstance } from '../../utils/api';
 
 

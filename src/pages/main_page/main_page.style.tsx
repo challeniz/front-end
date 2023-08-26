@@ -36,9 +36,9 @@ export const SearchBoxInput = styled.input`
   }
 `;
 export const ContentsWrap = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 40px;
+  // display: grid;
+  // grid-template-columns: repeat(4, 1fr);
+  // grid-column-gap: 40px;
 `;
 
 export const StyledCiSearch = styled(CiSearch)`
