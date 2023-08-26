@@ -25,16 +25,16 @@ const NewPage = () => {
 
 
 // 이미지 선택
-  // const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files && e.target.files[0]; // 수정: 선택된 파일 가져오기
-  //   setSelectedFile(file); // 수정: 선택된 파일 상태 업데이트
-  //   console.log('뉴이미지', file); // 수정: selectedFile 대신 file 사용
-  //   if (file) {
-  //     setIsImageSelected(true); // 이미지 선택됨
-  //   } else {
-  //     setIsImageSelected(false); // 이미지 선택되지 않음
-  //   }
-  // };
+  const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0]; // 수정: 선택된 파일 가져오기
+    setSelectedFile(file); // 수정: 선택된 파일 상태 업데이트
+    console.log('뉴이미지', file); // 수정: selectedFile 대신 file 사용
+    if (file) {
+      setIsImageSelected(true); // 이미지 선택됨
+    } else {
+      setIsImageSelected(false); // 이미지 선택되지 않음
+    }
+  };
   
   const handleChallengeSubmit = () => {
     if (topic.trim() === '') {
