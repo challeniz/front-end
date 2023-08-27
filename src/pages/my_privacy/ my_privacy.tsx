@@ -105,9 +105,9 @@ const MyPrivacy = () => {
             </ul>
           </S.InfoBox>
           <S.ButtonWrap>
-            <S.Link to={ROUTE.MYPAGE.link}>
+            <Link to={ROUTE.MYPAGE.link}>
               <S.BackButton>뒤로가기</S.BackButton>
-            </S.Link>
+            </Link>
             <S.CorrectionButton onClick={fixHandler}>수정하기</S.CorrectionButton>
           </S.ButtonWrap>
         </div>
