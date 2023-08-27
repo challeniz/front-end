@@ -75,7 +75,7 @@ export const Tab: React.FC = () => {
       classNames: 'event2-class',
     },
   ];
-
+  console.log(startDate);
   return (
     <div>
       <S.TabMenu>

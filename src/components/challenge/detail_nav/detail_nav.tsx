@@ -6,6 +6,7 @@ import { ROUTE } from '../../../routes';
 
 const DetailNav = () => {
   const { id } = useParams();
+  const [isLiked, setIsLiked] = useState(false);
 
   // 스크롤시 nav 위치 수정
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -49,6 +50,11 @@ const DetailNav = () => {
     fetchData();
   }, [id]);
 
+  //찜하기
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <S.DetailNavs
       className={scrollPosition < 100 ? 'DetailNavs' : 'ScrollNavs'}
@@ -68,8 +74,11 @@ const DetailNav = () => {
           </S.ButtonFlex>
         </S.SubButton>
         <S.SubButton>
-          <S.ButtonFlex>
-            <S.StyledCiHeart />
+          <S.ButtonFlex
+            className={isLiked ? 'liked' : ''}
+            onClick={handleLikeClick}
+          >
+            <S.StyledCiHeart className={isLiked ? 'red' : ''} />
             찜하기
           </S.ButtonFlex>
         </S.SubButton>

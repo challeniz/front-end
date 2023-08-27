@@ -59,7 +59,10 @@ const ListContent = () => {
         selectedCategory={selectedCategory}
         handleCategoryClick={handleCategoryClick}
       />
-      <ChallengeBox selectedCategory={''} handleCategoryClick={() => {}} />
+      <ChallengeBox
+        selectedCategory={selectedCategory}
+        handleCategoryClick={handleCategoryClick}
+      />
     </>
   );
 };
