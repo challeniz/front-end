@@ -25,6 +25,7 @@ const SearchPage = () => {
   const [inputValue, setInputValue] = useState('');
   const [challengeList, setChallengeList] = useState();
   const [noResults, setNoResults] = useState(false);
+  const [searched, setSearched] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -49,6 +50,7 @@ const SearchPage = () => {
 
       setChallengeList(filteredChallenges);
       setNoResults(filteredChallenges.length === 0);
+      setSearched(true);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -87,11 +89,15 @@ const SearchPage = () => {
           </S.SearchBox>
         </S.Search>
 
-        {noResults ? (
-          <S.noResult>일치하는 챌린지가 없습니다</S.noResult>
-        ) : (
-          <ChallengeBox selectedCategory={''} handleCategoryClick={() => {}} />
-        )}
+        {searched &&
+          (noResults ? (
+            <S.noResult>일치하는 챌린지가 없습니다</S.noResult>
+          ) : (
+            <ChallengeBox
+              selectedCategory={''}
+              handleCategoryClick={() => {}}
+            />
+          ))}
       </Wrapper>
       <Footer />
     </>
