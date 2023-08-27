@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import Wrapper from '../../components/common/wrapper/wrapper';
@@ -13,12 +12,23 @@ import FormInfo from '../../components/form/form_info/form_info';
 import NoticeForm from '../../components/form/form_notice/from_notice';
 import * as S from './new_page.style';
 
+import { apiInstance } from '../../utils/api';
+
+export interface ChallengeFormDataType {
+  title: string;
+  cate: string;
+  start_date: string;
+  end_date: string;
+  recru_open_date: string;
+  recru_end_date: string;
+}
+
 const NewPage = () => {
   const [isAgreed, setIsAgreed] = useState(false);
   const [topic, setTopic] = useState<string>('');
   const [isImageSelected, setIsImageSelected] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [data, setData] = useState({
+  const [data, setData] = useState<ChallengeFormDataType>({
     title: '', // 주제의 초기값
     cate: '',
     start_date: '',
@@ -26,26 +36,21 @@ const NewPage = () => {
     recru_open_date: '',
     recru_end_date: '',
   });
+
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://34.64.62.80:3000/challenges/create');
-   
-      console.log(response.data);
- 
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  fetchData(); 
-}, []); 
+    const fetchData = async () => {
+      try {
+        const response = await apiInstance.get(
+          'http://34.64.62.80:3000/challenges/create'
+        );
 
-
-  // 주제미입력
-  const handleTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('new_page:', e.target.value);
-    setTopic(e.target.value);
-  };
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   // 이미지 선택
   const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +66,15 @@ const NewPage = () => {
 
   // 챌린지 개설 버튼 클릭 시 실행
   const handleChallengeSubmit = () => {
-    if (topic.trim() === '') {
+    const {
+      title,
+      start_date,
+      end_date,
+      cate: category,
+      recru_open_date,
+      recru_end_date,
+    } = data;
+    if (title.trim() === '') {
       alert('주제를 입력하세요.');
     } else if (!selectedFile) {
       alert('이미지를 선택해주세요.');
@@ -69,17 +82,17 @@ const NewPage = () => {
       alert('챌린지를 개설하려면 약관에 동의해야 합니다.');
     } else {
       // 챌린지 생성 API 호출
-      axios
-        .post('http://34.64.62.80:3000/challenges/create', {
-          title: data.title,
-          start_date: data.start_date,
-          end_date: data.end_date,
-          category: data.cate,
-          recru_open_date: data.recru_open_date,
-          recru_end_date: data.recru_end_date,
+      apiInstance
+        .post('/challenges/create', {
+          title,
+          start_date,
+          end_date,
+          category,
+          recru_open_date,
+          recru_end_date,
         })
         .then((response) => {
-          if (response.status === 200) {
+          if (response.status === 201) {
             alert('챌린지가 성공적으로 개설되었습니다!');
           }
         })
@@ -97,14 +110,11 @@ const NewPage = () => {
         <Wrapper>
           <NoticeForm />
           <FormInfo
-            onInputChange={handleTopicChange}
-            setTopic={setTopic}
-            topic={topic}
-            isImageSelected={isImageSelected}
             handleIsImageSelected={handleIsImageSelected}
+            data={data}
+            setData={setData}
           />
 
-          <FormAgreeBox onAgreeChange={setIsAgreed} />
           <FormButton>
             <FormCancelButton>취소하기</FormCancelButton>
             <FormSubmitButton onClick={handleChallengeSubmit}>
