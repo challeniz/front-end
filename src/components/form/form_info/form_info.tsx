@@ -9,7 +9,6 @@ import {
 } from '../form_button/form_button';
 import FormAgreeBox from '../form_agree/form_agree';
 import TagBox from '../tag_box/tag_box';
-import addDays from 'date-fns/addDays';
 // import useImageUploader from '../../../hook/imgfiler';
 import axios from 'axios';
 import WhiteBox from '../white_box/white_box/white_box';
@@ -23,6 +22,7 @@ interface FormInfoProps {
   topic: string;
   isImageSelected: boolean;
   handleIsImageSelected: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChallengeSubmit: () => void;
 }
 
 const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
@@ -32,7 +32,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     joinningDate: [null, null],
     startDate: [null, null],
   });
-
+  const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
     // joinningDate가 바뀌면 startDate를 자동 변환
     if (date.joinningDate[1]) {
@@ -51,6 +51,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }
   }, [date.joinningDate]);
 
+  //태그
   const handleChangeTags = (newTags: string[]) => {
     setTags(newTags);
   };
@@ -77,14 +78,22 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
 
   const handleChallengeSubmit = () => {
     axios
-      .post('http://34.64.62.80:3000/challenges/create', {
-        title: data.title,
-        start_date: data.start_date,
-        end_date: data.end_date,
-        category: data.cate,
-        recru_open_date: data.recru_open_date,
-        recru_end_date: data.recru_end_date,
-      })
+      .post(
+        'http://34.64.62.80:3000/challenges/create',
+        {
+          title: data.title,
+          start_date: data.start_date,
+          end_date: data.end_date,
+          category: data.cate,
+          recru_open_date: data.recru_open_date,
+          recru_end_date: data.recru_end_date,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // 생성한 토큰을 Authorization 헤더에 추가
+          },
+        }
+      )
       .then((response) => {
         console.log('200', response.data);
 
@@ -106,10 +115,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }));
   };
 
-  // 챌린지모집기간+4일후 챌린지 시작됨
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(new Date());
-
+  // 이지지업로드
   const { imgSrc, fileInput, onChange } = useImageUploader(
     'https://i.ibb.co/NNhgTLL/2.jpg'
   );
@@ -153,7 +159,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
               <S.InputStyled
                 type="text"
                 id="formName"
-                name="cate"
+                name="title"
                 placeholder="주제를 입력하세요."
                 value={data.title}
                 onChange={handleChange}
@@ -198,7 +204,11 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
               >
                 <S.AvatarImage src={imgSrc} />
               </S.AvatarWrapper>
-              <S.InputImg type="file" ref={fileInput} onChange={onChange} />
+              <S.InputImg
+                type="file"
+                ref={fileInput}
+                onChange={handleIsImageSelected}
+              />
             </S.InputContent>
             <S.InputContent className="flex-start">
               <S.LabelStyled htmlFor="forDescription">

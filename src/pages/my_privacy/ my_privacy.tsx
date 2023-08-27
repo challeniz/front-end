@@ -1,5 +1,4 @@
 import React, { useState, useEffect }from 'react';
-import styled from 'styled-components';
 import { ROUTE } from '../../routes';
 import { Link, useNavigate } from 'react-router-dom';
 import Wrapper from '../../components/common/wrapper/wrapper';
@@ -7,7 +6,7 @@ import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import MyInfo from '../../components/mypage/mypage_info/mypage_info';
 import { apiInstance } from '../../utils/api';
-
+import * as S from './my_privacy.style';
 const MyPrivacy = () => {
 
   // 유저정보 받아온 후 값을 수정할 수 있게 구현해야 하는데 잘안됩니다....ㅠㅠㅠㅠㅠㅠㅠㅠㅠ
@@ -68,49 +67,49 @@ const MyPrivacy = () => {
     <>
       <Header />
       <Wrapper>
-        <StyleH1>마이 페이지</StyleH1>
+        <S.StyleH1>마이 페이지</S.StyleH1>
         <MyInfo />
         <div>
-          <InfoTitle>
+          <S.InfoTitle>
             <h3>내정보 수정</h3>
             <h4>회원탈퇴</h4>
-          </InfoTitle>
-          <InfoBox>
+          </S.InfoTitle>
+          <S.InfoBox>
             <ul>
-              <InfoTxt>
+              <S.InfoTxt>
                 <label htmlFor="labelName">닉네임</label>
                 {/* value 값을 어떻게 해야되는지 모르겠습니다; */}
                 <input type="text" id="labelName" value={userInfo.name}/>
-              </InfoTxt>
+              </S.InfoTxt>
               <br />
-              <InfoTxt>
+              <S.InfoTxt>
                 <label htmlFor="labelTel">전화번호</label>
                 <input type="text" id="labelTel" value={userInfo.phone}/>
-              </InfoTxt>
+              </S.InfoTxt>
               <br />
-              <InfoTxt>
+              <S.InfoTxt>
                 <label htmlFor="labeMail">이메일</label>
                 <input type="text" id="labelMail" readOnly value={userInfo.email}/>
-              </InfoTxt>
+              </S.InfoTxt>
               <br />
-              <InfoTxt>
+              <S.InfoTxt>
                 <label htmlFor="labelPassword">비밀번호</label>
                 <input type="password" id="labelPassword" />
-              </InfoTxt>
+              </S.InfoTxt>
               <br />
-              <InfoTxt>
+              <S.InfoTxt>
                 <label htmlFor="labelPasswordConfirm">비밀번호 확인</label>
                 <input type="password" id="labelPasswordConfirm"  />
-              </InfoTxt>
+              </S.InfoTxt>
               <br />
             </ul>
-          </InfoBox>
-          <ButtonWrap>
-            <Link to={ROUTE.MYPAGE.link}>
-              <BackButton>뒤로가기</BackButton>
-            </Link>
-            <CorrectionButton onClick={fixHandler}>수정하기</CorrectionButton>
-          </ButtonWrap>
+          </S.InfoBox>
+          <S.ButtonWrap>
+            <S.Link to={ROUTE.MYPAGE.link}>
+              <S.BackButton>뒤로가기</S.BackButton>
+            </S.Link>
+            <S.CorrectionButton onClick={fixHandler}>수정하기</S.CorrectionButton>
+          </S.ButtonWrap>
         </div>
       </Wrapper>
       <Footer />
@@ -118,80 +117,6 @@ const MyPrivacy = () => {
   );
 };
 
-const StyleH1 = styled.h1`
-  font-size: 38px;
-  padding-bottom: 30px;
-`;
 
-const InfoTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 60px;
-  h3 {
-    font-size: 30px;
-    font-weight: 500;
-  }
-  h4 {
-    font-size: 20px;
-    font-weight: normal;
-    border-bottom: 1px solid #000;
-    cursor: pointer;
-  }
-`;
-
-const InfoBox = styled.div``;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-`;
-
-const CorrectionButton = styled.button`
-  padding: 18px 52px;
-  background-color: #339af0;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 10px;
-  text-align: center;
-`;
-
-const BackButton = styled.button`
-  padding: 18px 52px;
-  background-color: #fff;
-  color: #339af0;
-  border: 1px solid #339af0;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 10px;
-  text-align: center;
-  margin-right: 15px;
-`;
-
-const InfoTxt = styled.li`
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 20px;
-  input {
-    display: block;
-    font-weight: normal;
-    margin-top: 25px;
-    border-bottom: 1px solid #dbdbdb;
-    padding-bottom: 8px;
-    border-right: none;
-    border-top: none;
-    border-left: none;
-    font-size: 18px;
-    width: 100%;
-
-    &:focus {
-      outline: none;
-    }
-  }
-`;
 
 export default MyPrivacy;
