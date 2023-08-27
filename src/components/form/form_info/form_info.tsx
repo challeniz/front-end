@@ -15,6 +15,7 @@ import TagBox from '../tag_box/tag_box';
 import addDays from 'date-fns/addDays';
 import useImageUploader from '../../../hook/imgfiler';
 import axios from 'axios';
+import { apiInstance } from '../../../utils/api';
 
 const FormInfo = () => {
   // 태그 관련 상태와 함수들을 정의
@@ -58,7 +59,7 @@ const FormInfo = () => {
   };
 
   const [data, setData] = useState({
-    title: '', // 주제의 초기값
+    title: '',
     cate: '',
     start_date: '',
     end_date: '',
@@ -66,31 +67,34 @@ const FormInfo = () => {
     recru_end_date: '',
   });
 
-  const handleChallengeSubmit = () => {
-    axios
-      .post('http://34.64.62.80:3000/challenges/create', {
+  const handleChallengeSubmit = async () => {
+    try {
+      const response = await apiInstance.post('challenges/create', {
         title: data.title,
         start_date: data.start_date,
         end_date: data.end_date,
         category: data.cate,
         recru_open_date: data.recru_open_date,
         recru_end_date: data.recru_end_date,
-      })
-      .then((response) => {
-        console.log('200', response.data);
+      });
 
-        if (response.status === 200) {
-          console.log('챌린지 개설에 성공했습니다!');
-          // 챌린지 개설에 성공했을 때 추가적인 로직을 수행하고 싶다면 이곳에 작성
-        }
-      })
-      .catch((error) => console.log(error.response));
+      if (response.status === 200) {
+        // 챌린지 개설에 성공했을 때 추가적인 로직을 수행하고 싶다면 이곳에 작성
+        alert('챌린지 개설에 성공했습니다!');
+      }
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        console.log('error', error.response);
+      } else {
+        console.log('error', error);
+      }
+    }
   };
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
+    const { name, value } = e.currentTarget;
     setData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -118,17 +122,12 @@ const FormInfo = () => {
                 id="formName"
                 name="cate"
                 placeholder="주제를 입력하세요."
-                value={data.title}
                 onChange={handleChange}
               />
             </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formCate">카테고리</S.LabelStyled>
-              <S.SelectStyled
-                id="formCate"
-                value={data.cate}
-                onChange={handleChange}
-              >
+              <S.SelectStyled id="formCate" onChange={handleChange}>
                 <option value="건강">건강</option>
                 <option value="취미">취미</option>
                 <option value="식습관">식습관</option>

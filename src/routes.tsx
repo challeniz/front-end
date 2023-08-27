@@ -9,6 +9,7 @@ import DetailPage from './pages/detail_page/detail_page';
 import ApplicationPage from './pages/app_page/app_page';
 import MyPrivacy from './pages/my_privacy/ my_privacy';
 import EditPage from './pages/edit_page/edit_page';
+import SearchPage from './pages/search_page/search_page';
 
 export const ROUTE = {
   MAIN: {
@@ -30,14 +31,21 @@ export const ROUTE = {
     path: '/mypage',
     link: '/mypage',
     element: MyPage,
+    isAuth: true,
+    isMain: false,
   },
   LISTPAGE: {
     path: '/challenges',
     link: '/challenges',
     element: ListPage,
   },
+  SEARCHPAGE: {
+    path: '/challengesresult',
+    link: '/challengesresult',
+    element: SearchPage,
+  },
   DETAILPAGE: {
-    path: '/detail',
+    path: '/detail/:id',
     link: '/detail',
     element: DetailPage,
   },
