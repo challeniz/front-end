@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import useImageUploader from '../../../hook/imgfiler';
 import ReactDatePicker from '../../calendar/calendar';
 import ReactDatePicker2 from '../../calendar/calendar2';
@@ -15,6 +21,16 @@ import WhiteBox from '../white_box/white_box/white_box';
 import WhiteBoxContents from '../white_box/white_box_contents/white_box_contents';
 import WhiteBoxTitle from '../white_box/white_box_title/white_box_title';
 import * as S from './form_info.style';
+import { apiInstance } from '../../../utils/api';
+
+interface ChallengeFormDataType {
+  title: string;
+  cate: string;
+  start_date: string;
+  end_date: string;
+  recru_open_date: string;
+  recru_end_date: string;
+}
 
 interface FormInfoProps {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -23,6 +39,8 @@ interface FormInfoProps {
   isImageSelected: boolean;
   handleIsImageSelected: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChallengeSubmit: () => void;
+  data: ChallengeFormDataType;
+  setData: Dispatch<SetStateAction<ChallengeFormDataType>>;
 }
 
 const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
@@ -77,32 +95,50 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   });
 
   const handleChallengeSubmit = () => {
-    axios
-      .post(
-        'http://34.64.62.80:3000/challenges/create',
-        {
-          title: data.title,
-          start_date: data.start_date,
-          end_date: data.end_date,
-          category: data.cate,
-          recru_open_date: data.recru_open_date,
-          recru_end_date: data.recru_end_date,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // 생성한 토큰을 Authorization 헤더에 추가
-          },
-        }
-      )
-      .then((response) => {
-        console.log('200', response.data);
+    const {
+      title,
+      start_date,
+      end_date,
+      cate: category,
+      recru_open_date,
+      recru_end_date,
+    } = data;
 
-        if (response.status === 200) {
-          console.log('챌린지 개설에 성공했습니다!');
-          // 챌린지 개설에 성공했을 때 추가적인 로직을 수행하고 싶다면 이곳에 작성
-        }
-      })
-      .catch((error) => console.log(error.response));
+    if (title.trim() === '') {
+      alert('주제를 입력하세요.');
+    } else if (!isImageSelected) {
+      alert('이미지를 선택해주세요.');
+    } else if (!isAgreed) {
+      alert('챌린지를 개설하려면 약관에 동의해야 합니다.');
+    } else {
+      // 챌린지 생성 API 호출
+      apiInstance
+        .post(
+          '/challenges/create',
+          {
+            title,
+            start_date,
+            end_date,
+            category,
+            recru_open_date,
+            recru_end_date,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => { 
+          console.log('200', response.data);
+
+          if (response.status === 201) {
+            alert('챌린지가 성공적으로 개설되었습니다!');
+            // 챌린지 개설에 성공했을 때 추가적인 로직을 수행하고 싶다면 이곳에 작성
+          }
+        })
+        .catch((error) => console.log(error.response));
+    }
   };
 
   const handleChange = (
@@ -115,7 +151,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }));
   };
 
-  // 이지지업로드
+  // 이미지지업로드
   const { imgSrc, fileInput, onChange } = useImageUploader(
     'https://i.ibb.co/NNhgTLL/2.jpg'
   );
@@ -123,7 +159,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   //챌린지유효성 검사-주제
 
   const [checkTxt, setCheckTxt] = useState(false);
-  const handleTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => { 
     console.log(e.target.value);
     const temp = e.target.value;
     if (temp === '') {
@@ -202,13 +238,13 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                   }
                 }}
               >
-                <S.AvatarImage src={imgSrc} />
+               <S.AvatarImage src={imgSrc} />
               </S.AvatarWrapper>
               <S.InputImg
                 type="file"
                 ref={fileInput}
                 onChange={handleIsImageSelected}
-              />
+              /> 
             </S.InputContent>
             <S.InputContent className="flex-start">
               <S.LabelStyled htmlFor="forDescription">

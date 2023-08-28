@@ -9,6 +9,7 @@ import {
   FormSubmitButton,
 } from '../../components/form/form_button/form_button';
 import FormInfo from '../../components/form/form_info/form_info';
+import FormInfoProps from '../../components/form/form_info/form_info';
 import NoticeForm from '../../components/form/form_notice/from_notice';
 import * as S from './new_page.style';
 
@@ -29,7 +30,7 @@ const NewPage = () => {
   const [isImageSelected, setIsImageSelected] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [data, setData] = useState<ChallengeFormDataType>({
-    title: '', // 주제의 초기값
+    title: '',
     cate: '',
     start_date: '',
     end_date: '',
@@ -37,20 +38,6 @@ const NewPage = () => {
     recru_end_date: '',
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiInstance.get(
-          'http://34.64.62.80:3000/challenges/create'
-        );
-
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
 
   // 이미지 선택
   const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +49,14 @@ const NewPage = () => {
       setIsImageSelected(false);
     }
     console.log('이미지', file);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   // 챌린지 개설 버튼 클릭 시 실행
@@ -110,17 +105,16 @@ const NewPage = () => {
         <Wrapper>
           <NoticeForm />
           <FormInfo
+            onInputChange={handleInputChange}
+            setTopic={setTopic}
+            topic={topic}
+            isImageSelected={isImageSelected}
             handleIsImageSelected={handleIsImageSelected}
+            handleChallengeSubmit={handleChallengeSubmit}
             data={data}
             setData={setData}
           />
-
-          <FormButton>
-            <FormCancelButton>취소하기</FormCancelButton>
-            <FormSubmitButton onClick={handleChallengeSubmit}>
-              챌린지 개설하기
-            </FormSubmitButton>
-          </FormButton>
+          
         </Wrapper>
       </S.PageBack>
       <Footer />
