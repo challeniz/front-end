@@ -60,7 +60,6 @@ export const SubButton = styled.button`
   background-color: #fff;
   border: 1px solid #339af0;
   border-radius: 10px;
-  padding: 10px 13px;
   font-size: 16px;
   font-weight: 600;
   width: calc(100% / 2.1);
@@ -76,6 +75,13 @@ export const ButtonFlex = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px 13px;
+
+  &.liked {
+    background-color: #339af0;
+    color: #fff;
+    border-radius: 10px;
+  }
 `;
 export const StyledCiShare2 = styled(CiShare2)`
   padding-right: 5px;
@@ -87,6 +93,10 @@ export const StyledCiHeart = styled(CiHeart)`
   padding-right: 5px;
   width: 2em;
   height: 2em;
+
+  &.red {
+    color: #fff;
+  }
 `;
 
 export const MainButton = styled.button`

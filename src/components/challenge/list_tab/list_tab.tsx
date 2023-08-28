@@ -6,19 +6,19 @@ interface ListTabProps {
   handleCategoryClick: (category: string) => void; // ListContent 컴포넌트로부터 전달된 함수
 }
 
+const menuArr = [
+  { name: '전체', content: '전체', category: '' },
+  { name: '건강', content: '건강', category: '건강' },
+  { name: '취미', content: '취미', category: '취미' },
+  { name: '식습관', content: '식습관', category: '식습관' },
+  { name: '공부', content: '공부', category: '공부' },
+  { name: '환경', content: '환경', category: '환경' },
+];
+
 const ListTab: React.FC<ListTabProps> = ({
   selectedCategory,
   handleCategoryClick,
 }) => {
-  const menuArr = [
-    { name: '전체', content: '전체', category: '' },
-    { name: '건강', content: '건강', category: '건강' },
-    { name: '취미', content: '취미', category: '취미' },
-    { name: '식습관', content: '식습관', category: '식습관' },
-    { name: '공부', content: '공부', category: '공부' },
-    { name: '환경', content: '환경', category: '환경' },
-  ];
-
   return (
     <S.TabMenu>
       {menuArr.map((menu, index) => (

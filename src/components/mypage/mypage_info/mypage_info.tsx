@@ -13,8 +13,10 @@ const MyInfo: React.FC<MyInfoProps> = () => {
     'https://i.ibb.co/rbPbb9z/3.png'
   );
 
-  const [name, setName] = useState<string>('');
-  const [grade, setGrade] = useState<string>('');
+  const [mypageInfo, setMypageInfo] = useState({
+    name: '',
+    grade: '',
+  });
 
   useEffect(() => {
     // API를 통해 유저 정보 가져오기
@@ -22,8 +24,10 @@ const MyInfo: React.FC<MyInfoProps> = () => {
       .get('/users/mypageInfo')
       .then((response) => {
         const userData = response.data;
-        setName(userData.name);
-        setGrade(userData.grade);
+        setMypageInfo({
+          name: userData.name,
+          grade: userData.grade,
+        });
       })
       .catch((error) => {
         console.error('Error fetching user data:', error);
@@ -46,10 +50,10 @@ const MyInfo: React.FC<MyInfoProps> = () => {
         <S.PageTxt>
           <ul>
             <li>
-              <span>{name}</span> 님
+              <span>{mypageInfo.name}</span> 님
             </li>
             <li>
-              현재등급은 <span>{grade}</span>입니다.
+              현재등급은 <span>{mypageInfo.grade}</span>입니다.
             </li>
           </ul>
         </S.PageTxt>

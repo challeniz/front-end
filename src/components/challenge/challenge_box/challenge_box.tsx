@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
 
 // 예시로 Challenge 타입을 정의
-interface Challenge {
+export interface Challenge {
   like: boolean;
   title: string;
   start_date: string;
@@ -20,7 +20,7 @@ interface Challenge {
 
 interface ChallengeBoxProps {
   selectedCategory: string;
-  handleCategoryClick: (category: string) => void; // 이 부분이 추가되어야 합니다.
+  handleCategoryClick: (category: string) => void;
 }
 
 const ChallengeBox: React.FC<ChallengeBoxProps> = ({

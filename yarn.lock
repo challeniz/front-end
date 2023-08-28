@@ -7803,8 +7803,15 @@ fullcalendar@*:
     "prop-types" "^15.6.1"
     "shallow-equal" "^1.2.1"
 
+<<<<<<< HEAD
 "react-router-dom@^6.15.0":
   "version" "6.15.0"
+=======
+react-router-dom@^6.15.0:
+  version "6.15.0"
+  resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.15.0.tgz"
+  integrity sha512-aR42t0fs7brintwBGAv2+mGlCtgtFQeOzK0BM1/OiqEzRejOZtpMZepvgkscpMUnKb8YO84G7s3LsHnnDNonbQ==
+>>>>>>> 0b0a1e1b08a1b29efbdf1d310a05157f0c0bf004
   dependencies:
     "@remix-run/router" "1.8.0"
     "react-router" "6.15.0"

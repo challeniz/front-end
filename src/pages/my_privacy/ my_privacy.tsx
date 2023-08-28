@@ -44,7 +44,8 @@ const MyPrivacy = () => {
   const fixHandler = async () => {
     try {
       const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기 (실제 토큰 키로 대체)
-  
+  console.log('수정',token)
+
       const updatedUserData = {
         name: userInfo.name, // 수정된 이름 정보
         phone: userInfo.phone, // 수정된 전화번호 정보
@@ -52,9 +53,9 @@ const MyPrivacy = () => {
       };
       // 수정할 데이터를 담은 객체를 서버로 전송합니다.
       await apiInstance.patch('http://34.64.62.80:3000/users/mypageInfo');
-  
+
       // 수정 완료 후 필요한 처리를 해주세요.
-      alert('사용자 정보가 수정되었습니다.')
+      alert('사용자 정보가 수정되었습니다.');
       navigate('/'); // 개인정보 수정 성공 시 홈 메인페이지로 이동
       console.log('사용자 정보가 수정되었습니다.');
     } catch (error) {

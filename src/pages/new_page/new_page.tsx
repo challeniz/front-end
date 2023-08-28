@@ -2,12 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import Wrapper from '../../components/common/wrapper/wrapper';
-import FormAgreeBox from '../../components/form/form_agree/form_agree';
-import {
-  FormButton,
-  FormCancelButton,
-  FormSubmitButton,
-} from '../../components/form/form_button/form_button';
 import FormInfo from '../../components/form/form_info/form_info';
 import FormInfoProps from '../../components/form/form_info/form_info';
 import NoticeForm from '../../components/form/form_notice/from_notice';
@@ -37,7 +31,6 @@ const NewPage = () => {
     recru_open_date: '',
     recru_end_date: '',
   });
-
 
   // 이미지 선택
   const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,7 +107,6 @@ const NewPage = () => {
             data={data}
             setData={setData}
           />
-          
         </Wrapper>
       </S.PageBack>
       <Footer />
