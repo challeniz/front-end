@@ -41,14 +41,14 @@ export const ImgStyled = styled.div`
   margin: 0 auto;
   border: 1px solid #eeeeee;
 
-  img {
+  &.thumbnail {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 `;
 
-export const StyledHeartButton = styled(HeartButton)`
+export const StyledHeartButton = styled.img`
   width: 30px;
   height: 30px;
   position: absolute;
