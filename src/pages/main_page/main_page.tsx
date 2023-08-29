@@ -4,17 +4,25 @@ import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import SlideBnner from '../../components/common/slide/slide';
 import Wrapper from '../../components/common/wrapper/wrapper';
-import {
-  Default,
-  Desktop,
-  Mobile,
-  Tablet,
-} from '../../components/responsive/responsive';
-import ChallengeBox from '../../components/challenge/challenge_box/challenge_box';
-import ListContent from '../../components/challenge/list_content/list_content';
+import ChallengeBox, {
+  Challenge,
+} from '../../components/challenge/challenge_box_main/challenge_box_main';
+import { apiInstance } from '../../utils/api';
+import SearchPage from '../search_page/search_page';
+import { ROUTE } from '../../routes';
+import { Link } from 'react-router-dom';
+
+export interface ChallengeBoxProps {
+  selectedCategory: string;
+  handleCategoryClick: (category: string) => void;
+  challenges: [];
+}
 
 const MainPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [ongoingChallenge, setOngoingChallenge] = useState();
+  const [usersChallenge, setUsersChallenge] = useState();
+  const [dateChallenge, setDateChallenge] = useState();
   const SlideRef1 = useRef<HTMLDivElement | null>(null);
   const SlideRef2 = useRef<HTMLDivElement | null>(null);
   const SlideRef3 = useRef<HTMLDivElement | null>(null);
@@ -72,31 +80,33 @@ const MainPage = () => {
     setSelectedCategory(category);
   };
 
+  // 필터링
+  const fetchChallenges = async () => {
+    try {
+      const response = await apiInstance.get('/challenges');
+      const ongoingChallenge = response.data.ongoingChallenge;
+      setOngoingChallenge(ongoingChallenge);
+      console.log(ongoingChallenge);
+      const orderByUsersChallenge = response.data.orderByUsersChallenge;
+      setUsersChallenge(orderByUsersChallenge);
+      console.log(orderByUsersChallenge);
+      const orderByDateChallenge = response.data.orderByDateChallenge;
+      setDateChallenge(orderByDateChallenge);
+      console.log(orderByDateChallenge);
+    } catch (error) {
+      console.error('Error fetching challenges:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchChallenges();
+  }, []);
+
   return (
     <S.BackWhite>
       <Header />
       <SlideBnner />
       <Wrapper>
-        <S.Search>
-          <S.SearchTitle>
-            찾고 있는 <S.SearchTitleColor>챌린지</S.SearchTitleColor>를
-            검색해보세요!
-          </S.SearchTitle>
-          <S.SearchBox>
-            <S.SearchBoxInput type="text" placeholder="#만보걷기" />
-            <S.StyledCiSearch />
-          </S.SearchBox>
-          <S.SearchBox>
-            <S.KeywordWrap>
-              <h5>추천 키워드</h5>
-              <p>#걷기</p>
-              <p>#물마시기</p>
-              <p>#영어공부</p>
-              <p>#운동</p>
-            </S.KeywordWrap>
-          </S.SearchBox>
-        </S.Search>
-
         <S.ContentsList>
           <S.ProgressList>
             <li>
@@ -116,10 +126,10 @@ const MainPage = () => {
             <ChallengeBox
               selectedCategory={selectedCategory}
               handleCategoryClick={handleCategoryClick}
+              challenges={ongoingChallenge}
             />
           </S.ContentsWrap>
         </S.ContentsList>
-
         <S.PopularList>
           <S.ProgressList>
             <li>
@@ -134,10 +144,18 @@ const MainPage = () => {
               <S.StyledSlideCircleRight />
             </li>
             <li>
-              <h3>전체보기</h3>
+              <Link to={ROUTE.LISTPAGE.link}>
+                <h3>전체보기</h3>
+              </Link>
             </li>
           </S.ProgressList>
-          <S.ContentsWrap ref={SlideRef2}></S.ContentsWrap>
+          <S.ContentsWrap ref={SlideRef2}>
+            <ChallengeBox
+              selectedCategory={selectedCategory}
+              handleCategoryClick={handleCategoryClick}
+              challenges={usersChallenge}
+            />
+          </S.ContentsWrap>
         </S.PopularList>
 
         <S.NewList>
@@ -157,7 +175,13 @@ const MainPage = () => {
               <h3>전체보기</h3>
             </li>
           </S.ProgressList>
-          <S.ContentsWrap ref={SlideRef3}></S.ContentsWrap>
+          <S.ContentsWrap ref={SlideRef3}>
+            <ChallengeBox
+              selectedCategory={selectedCategory}
+              handleCategoryClick={handleCategoryClick}
+              challenges={dateChallenge}
+            />
+          </S.ContentsWrap>
         </S.NewList>
       </Wrapper>
       <Footer />

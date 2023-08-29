@@ -1,6 +1,6 @@
 // list_content.tsx
 import React, { useState, useEffect } from 'react';
-import * as S from './challenge_box.style';
+import * as S from './challenge_box_main.style';
 import { BsCalendarRange } from 'react-icons/bs';
 import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
@@ -33,7 +33,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiInstance.get('/challenges/list');
+        const response = await apiInstance.get('/challenges');
         const data = response.data;
 
         if (data.length > 0) {

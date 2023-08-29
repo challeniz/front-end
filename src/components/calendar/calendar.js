@@ -36,7 +36,7 @@ const ReactDatePicker = ({ joinningDate, setDate }) => {
       }}
       isClearable={false}
       placeholderText="날짜를 선택하세요"
-      minDate={new Date()} // Set the minimum date
+      minDate={new Date()}
     />
   );
 };

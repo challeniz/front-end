@@ -1,4 +1,5 @@
 import React, { useState, useEffect, FormEventHandler } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import * as S from './app_page.style';
 import * as D from '../../components/form/form_agree/form_agree.style';
 import Wrapper from '../../components/common/wrapper/wrapper';
@@ -16,29 +17,30 @@ import {
 // import axios from 'axios';
 import { apiInstance } from '../../utils/api';
 
-interface Challenge {
-  title: string;
-  participants: number;
-  description: string;
-  date: string;
+interface FormData {
+  name: string;
+  phone: string; // phone 프로퍼티 추가
+  email: string;
 }
 
-const ApplicationPage: React.FC = () => {
-  const [challengeInfo, setChallengeInfo] = useState<Challenge | null>(null);
-  const [isAgreed, setIsAgreed] = useState(false); // 약관 동의 여부
-  const [form, setForm] = useState({
-    name: '',
-    tel: '',
-    email: '',
-  });
+const initialFormState: FormData = {
+  name: '',
+  phone: '',
+  email: '',
+};
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
-  };
+const ApplicationPage: React.FC = () => {
+  const { id } = useParams();
+  const [challengeInfo, setChallengeInfo] = useState({
+    description: '',
+    start_date: '',
+    end_date: '',
+    title: '',
+    users: '',
+  });
+  const [isAgreed, setIsAgreed] = useState(false);
+  const [form, setForm] = useState<FormData>(initialFormState);
+
   interface FormAgreeBoxProps {
     onAgreeChange: (isChecked: boolean) => void;
   }
@@ -85,41 +87,72 @@ const ApplicationPage: React.FC = () => {
   const handleAgreeChange = (isChecked: boolean) => {
     setIsAgreed(isChecked);
   };
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-    event.preventDefault();
 
+  // const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  //   event.preventDefault();
+
+  //   const userData = {
+  //     name: form.name,
+  //     phone: form.phone,
+  //     email: form.email,
+  //   };
+  //   try {
+  //     await apiInstance.patch(`/challenges/subscription/${id}`, userData);
+  //     console.log('참가 신청이 완료되었습니다.');
+  //   } catch (error) {
+  //     console.error('참가 신청이 실패하였습니다', error);
+  //   }
+  // };
+
+  const handleChallengeSubmit = async () => {
+    // 챌린지 생성 API 호출
     if (!isAgreed) {
-      console.log('약관에 동의해야 합니다.');
+      alert('약관에 동의해야 합니다.');
       return;
-    }
-    const userData = {
-      name: form.name,
-      tel: form.tel,
-      email: form.email,
-    };
-    try {
-      const response = await apiInstance.patch(
-        '/challenges/subscription/64e4d93bb812a8e5dc1882f5',
-        userData
-      );
-      console.log('참가 신청이 완료되었습니다.');
-    } catch (error) {
-      console.error('참가 신청이 실패하였습니다', error);
+    } else {
+      await apiInstance
+        .patch(`/challenges/subscription/${id}`, {})
+        .then((response) => {
+          console.log('201', response.data);
+          alert('챌린지가 성공적으로 개설되었습니다!');
+
+          navigate(`/detail/${id}`);
+        })
+        .catch((error) => console.log(error.response));
     }
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchChallengeInfo() {
       try {
-        const response = await apiInstance.get<Challenge>('/challenges/');
-        setChallengeInfo(response.data);
+        const response = await apiInstance.get(
+          `/challenges/subscription/${id}`
+        );
+        const data = response.data;
+        if (data) {
+          setChallengeInfo({
+            description: data.challenge.description,
+            start_date: data.challenge.start_date,
+            end_date: data.challenge.end_date,
+            title: data.challenge.title,
+            users: data.challenge.users,
+          });
+          setForm({
+            name: data.name,
+            phone: data.phone,
+            email: data.email,
+          });
+        }
+        console.log(response.data);
       } catch (error) {
         console.error('챌린지 정보가 없습니다', error);
       }
     }
 
     fetchChallengeInfo();
-  }, []);
+  }, [id]);
   return (
     <>
       <Header />
@@ -131,22 +164,18 @@ const ApplicationPage: React.FC = () => {
                 <S.ContentWrap>
                   <S.ImgWrap></S.ImgWrap>
                   <S.TextWrap>
-                    {challengeInfo ? (
-                      <>
-                        <h5>
-                          <S.StyledCiUser />
-                          현재 {challengeInfo.participants}명 참여 중
-                        </h5>
-                        <h2>{challengeInfo.title}</h2>
-                        <h4>{challengeInfo.description}</h4>
-                        <h6>
-                          <S.StyledCiCalendar />
-                          {challengeInfo.date}
-                        </h6>
-                      </>
-                    ) : (
-                      <p>Loading...</p>
-                    )}
+                    <>
+                      <h5>
+                        <S.StyledCiUser />
+                        현재 {challengeInfo.users.length}명 참여 중
+                      </h5>
+                      <h2>{challengeInfo.title}</h2>
+                      <h4>{challengeInfo.description}</h4>
+                      <h6>
+                        <S.StyledCiCalendar />
+                        {challengeInfo.start_date} ~ {challengeInfo.end_date}
+                      </h6>
+                    </>
                   </S.TextWrap>
                 </S.ContentWrap>
               </WhiteBoxContents>
@@ -157,14 +186,13 @@ const ApplicationPage: React.FC = () => {
               <WhiteBoxTitle>참가자 정보</WhiteBoxTitle>
               <WhiteBoxContents>
                 <div>
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleChallengeSubmit}>
                     <S.InputContent>
                       <S.LabelStyled htmlFor="formName">이름</S.LabelStyled>
                       <S.InputStyled
                         type="text"
                         name="name"
                         value={form.name}
-                        onChange={handleInputChange}
                         id="formName"
                       />
                     </S.InputContent>
@@ -175,8 +203,7 @@ const ApplicationPage: React.FC = () => {
                       <S.InputStyled
                         type="text"
                         name="tel"
-                        value={form.tel}
-                        onChange={handleInputChange}
+                        value={form.phone}
                         id="formTel"
                       />
                     </S.InputContent>
@@ -186,7 +213,6 @@ const ApplicationPage: React.FC = () => {
                         type="text"
                         name="email"
                         value={form.email}
-                        onChange={handleInputChange}
                         id="formMail"
                       />
                     </S.InputContent>
@@ -203,7 +229,9 @@ const ApplicationPage: React.FC = () => {
           </WhiteBox>
           <FormButton>
             <FormCancelButton>취소하기</FormCancelButton>
-            <FormSubmitButton disabled={!isAgreed}>참가하기</FormSubmitButton>
+            <FormSubmitButton onClick={handleChallengeSubmit}>
+              참가하기
+            </FormSubmitButton>
           </FormButton>
         </Wrapper>
       </S.PageBack>
