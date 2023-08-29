@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect }from 'react';
 import { ROUTE } from '../../routes';
 import { Link, useNavigate } from 'react-router-dom';
 import Wrapper from '../../components/common/wrapper/wrapper';
@@ -12,7 +12,6 @@ const MyPrivacy = () => {
   //useState 사용하는건 알겠는데 초기값을 어떻게 하고 value에는 무엇을 적용해야할 지 모르겠습니다.
 
   const navigate = useNavigate();
-
   const [userInfo, setUserInfo] = useState({
     name: '', // 빈값이 초기값이 아니라 회원가입할때 사용되었던 정보가 초기값으로 되어있어야 출력이된다?
     phone: '',
@@ -43,6 +42,7 @@ const MyPrivacy = () => {
   const fixHandler = async () => {
     try {
       const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기 (실제 토큰 키로 대체)
+  console.log('수정',token)
 
       const updatedUserData = {
         name: userInfo.name, // 수정된 이름 정보

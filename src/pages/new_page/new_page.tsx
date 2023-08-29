@@ -2,12 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import Wrapper from '../../components/common/wrapper/wrapper';
-import FormAgreeBox from '../../components/form/form_agree/form_agree';
-import {
-  FormButton,
-  FormCancelButton,
-  FormSubmitButton,
-} from '../../components/form/form_button/form_button';
 import FormInfo from '../../components/form/form_info/form_info';
 import FormInfoProps from '../../components/form/form_info/form_info';
 import NoticeForm from '../../components/form/form_notice/from_notice';
@@ -18,10 +12,12 @@ import { apiInstance } from '../../utils/api';
 export interface ChallengeFormDataType {
   title: string;
   cate: string;
+  description: string;
   start_date: string;
   end_date: string;
   recru_open_date: string;
   recru_end_date: string;
+  tag: string[];
 }
 
 const NewPage = () => {
@@ -32,10 +28,12 @@ const NewPage = () => {
   const [data, setData] = useState<ChallengeFormDataType>({
     title: '',
     cate: '',
+    description: '',
     start_date: '',
     end_date: '',
     recru_open_date: '',
     recru_end_date: '',
+    tag: [],
   });
 
   // 이미지 선택
@@ -56,19 +54,25 @@ const NewPage = () => {
       ...prevData,
       [name]: value,
     }));
+    
   };
 
   // 챌린지 개설 버튼 클릭 시 실행
   const handleChallengeSubmit = () => {
+    console.log("데이터2",data);
     const {
       title,
+      description,
       start_date,
       end_date,
       cate: category,
       recru_open_date,
       recru_end_date,
-    } = data;
-    if (title.trim() === '') {
+      tag,
+    } = data; 
+    console.log("뉴패이지",title)
+  
+    if (title.trim() === '' || title == null) { 
       alert('주제를 입력하세요.');
     } else if (!selectedFile) {
       alert('이미지를 선택해주세요.');
@@ -79,11 +83,13 @@ const NewPage = () => {
       apiInstance
         .post('/challenges/create', {
           title,
+          description,
           start_date,
           end_date,
           category,
           recru_open_date,
           recru_end_date,
+          tag,
         })
         .then((response) => {
           if (response.status === 201) {

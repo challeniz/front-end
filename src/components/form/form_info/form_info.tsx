@@ -26,10 +26,12 @@ import { apiInstance } from '../../../utils/api';
 interface ChallengeFormDataType {
   title: string;
   cate: string;
+  description: string;
   start_date: string;
   end_date: string;
   recru_open_date: string;
   recru_end_date: string;
+  tag: string[];
 }
 
 interface FormInfoProps {
@@ -50,7 +52,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     joinningDate: [null, null],
     startDate: [null, null],
   });
-  const [token, setToken] = useState<string | null>(null);
+
   useEffect(() => {
     // joinningDate가 바뀌면 startDate를 자동 변환
     if (date.joinningDate[1]) {
@@ -73,12 +75,13 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   const handleChangeTags = (newTags: string[]) => {
     setTags(newTags);
   };
-
+console.log("태그",tags)
   const [textValue, setTextValue] = useState<string>('');
   const handleSetValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextValue(e.target.value);
   };
 
+  
   // 동의하기 체크
   const [isAgreed, setIsAgreed] = useState(false);
   const handleAgreeChange = (isChecked: boolean) => {
@@ -88,50 +91,52 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   const [data, setData] = useState({
     title: '',
     cate: '',
+    description: '',
     start_date: '',
     end_date: '',
     recru_open_date: '',
     recru_end_date: '',
+    tag: [],
   });
 
-  const handleChallengeSubmit = () => {
-    const {
-      title,
-      start_date,
-      end_date,
-      cate: category,
-      recru_open_date,
-      recru_end_date,
-    } = data;
+  const handleChallengeSubmit = async () => {
+    try {
+      const { title } = data; 
+      if (title.trim() === '' || title == null) {
+        alert('주제를 입력하세요.');
+      } else if (!isImageSelected) {
+        alert('이미지를 선택하세요.');
+      } else if (textValue.trim() === '' || textValue == null) {
+        alert('챌린지설명을 입력하세요.');
+      } else if (tags.length === 0) {  
+        alert('태그를 입력하세요.');console.log("설명",tags)
+      }  else if (!isAgreed) {
+        alert('챌린지를 개설하려면 약관에 동의해야 합니다.');
+      }
+  
+      const response = await apiInstance.post('challenges/create', {
+        title: data.title,
+        start_date: date.startDate[0],
+        end_date: date.startDate[1],
+        category: data.cate,
+        description: textValue,
+        recru_open_date: date.joinningDate[0],
+        recru_end_date: date.joinningDate[1],
+        tag: data.tag,
+      });
 
-    if (title.trim() === '') {
-      alert('주제를 입력하세요.');
-    } else if (!isImageSelected) {
-      alert('이미지를 선택해주세요.');
-    } else if (!isAgreed) {
-      alert('챌린지를 개설하려면 약관에 동의해야 합니다.');
-    } else {
-      // 챌린지 생성 API 호출
-      apiInstance
-        .post('/challenges/create', {
-          title,
-          start_date,
-          end_date,
-          category,
-          recru_open_date,
-          recru_end_date,
-        })
-        .then((response) => {
-          console.log('201', response.data);
-
-          if (response.status === 201) {
-            alert('챌린지가 성공적으로 개설되었습니다!');
-          }
-        })
-        .catch((error) => console.log(error.response));
+      if (response.status === 201) {console.log('response', response);
+        // 챌린지 생성 성공 후 추가 로직 
+        alert('챌린지 개설에 성공했습니다!');
+      }
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        console.log('error', error.response);
+      } else {
+        console.log('error', error);
+      }
     }
   };
-
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -142,25 +147,10 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }));
   };
 
-  // 이지지업로드
+  // 이미지지업로드
   const { imgSrc, fileInput, onChange } = useImageUploader(
     'https://i.ibb.co/NNhgTLL/2.jpg'
   );
-
-  //챌린지유효성 검사-주제
-
-  const [checkTxt, setCheckTxt] = useState(false);
-  const handleTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    const temp = e.target.value;
-    if (temp === '') {
-      console.log('Input value:', temp);
-      setCheckTxt(false);
-    } else {
-      setCheckTxt(true);
-    }
-    props.setTopic(temp);
-  };
 
   // 챌린지유효성 검사-이미지
   const [isImageSelected, setIsImageSelected] = useState(false);
@@ -174,6 +164,8 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }
     console.log('이미지', selectedFile);
   };
+
+
 
   return (
     <>
@@ -244,6 +236,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
               <S.TextareaStyled
                 placeholder="여기에 입력하세요"
                 value={textValue}
+              
                 onChange={handleSetValue}
               ></S.TextareaStyled>
             </S.InputContent>

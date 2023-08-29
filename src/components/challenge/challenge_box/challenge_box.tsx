@@ -1,4 +1,3 @@
-// list_content.tsx
 import React, { useState, useEffect } from 'react';
 import * as S from './challenge_box.style';
 import { BsCalendarRange } from 'react-icons/bs';
@@ -30,7 +29,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
 
-  useEffect(() => {
+  useEffect(() => {  
     const fetchData = async () => {
       try {
         const response = await apiInstance.get('/challenges/list');
@@ -46,16 +45,16 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
             id: challenge._id,
             category: challenge.category,
           }));
-          setChallengeList(challenges);
+          setChallengeList(challenges); 
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+    // console.log(fetchData)
     // 초기 로딩 시 데이터 가져오기
     fetchData();
-  }, []);
+  }, [challengeList]);
 
   const toggleLike = (index: number) => {
     setChallengeList((prevList) => {
