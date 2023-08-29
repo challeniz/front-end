@@ -6,7 +6,7 @@ import SlideBnner from '../../components/common/slide/slide';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import ChallengeBox, {
   Challenge,
-} from '../../components/challenge/challenge_box/challenge_box';
+} from '../../components/challenge/challenge_box_main/challenge_box_main';
 import { apiInstance } from '../../utils/api';
 import SearchPage from '../search_page/search_page';
 import { ROUTE } from '../../routes';
@@ -15,12 +15,14 @@ import { Link } from 'react-router-dom';
 export interface ChallengeBoxProps {
   selectedCategory: string;
   handleCategoryClick: (category: string) => void;
-  challenges: Challenge[];
+  challenges: [];
 }
 
 const MainPage = () => {
-  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [ongoingChallenge, setOngoingChallenge] = useState();
+  const [usersChallenge, setUsersChallenge] = useState();
+  const [dateChallenge, setDateChallenge] = useState();
   const SlideRef1 = useRef<HTMLDivElement | null>(null);
   const SlideRef2 = useRef<HTMLDivElement | null>(null);
   const SlideRef3 = useRef<HTMLDivElement | null>(null);
@@ -82,19 +84,15 @@ const MainPage = () => {
   const fetchChallenges = async () => {
     try {
       const response = await apiInstance.get('/challenges');
-      const challengesData = response.data.challenges;
-
-      if (challengesData) {
-        const sortedChallenges = challengesData
-          .slice()
-          .sort((a: Challenge, b: Challenge) => {
-            const dateA = new Date(a.start_date).getTime();
-            const dateB = new Date(b.start_date).getTime();
-            return dateA - dateB;
-          });
-        const displayedChallenges = sortedChallenges.slice(0, 6);
-        setChallengeList(displayedChallenges);
-      }
+      const ongoingChallenge = response.data.ongoingChallenge;
+      setOngoingChallenge(ongoingChallenge);
+      console.log(ongoingChallenge);
+      const orderByUsersChallenge = response.data.orderByUsersChallenge;
+      setUsersChallenge(orderByUsersChallenge);
+      console.log(orderByUsersChallenge);
+      const orderByDateChallenge = response.data.orderByDateChallenge;
+      setDateChallenge(orderByDateChallenge);
+      console.log(orderByDateChallenge);
     } catch (error) {
       console.error('Error fetching challenges:', error);
     }
@@ -125,13 +123,11 @@ const MainPage = () => {
             </li>
           </S.ProgressList>
           <S.ContentsWrap ref={SlideRef1}>
-            {challengeList.length > 0 && (
-              <ChallengeBox
-                selectedCategory={selectedCategory}
-                handleCategoryClick={handleCategoryClick}
-                challenges={challengeList}
-              />
-            )}
+            <ChallengeBox
+              selectedCategory={selectedCategory}
+              handleCategoryClick={handleCategoryClick}
+              challenges={ongoingChallenge}
+            />
           </S.ContentsWrap>
         </S.ContentsList>
         <S.PopularList>
@@ -154,13 +150,11 @@ const MainPage = () => {
             </li>
           </S.ProgressList>
           <S.ContentsWrap ref={SlideRef2}>
-            {challengeList.length > 0 && (
-              <ChallengeBox
-                selectedCategory={selectedCategory}
-                handleCategoryClick={handleCategoryClick}
-                challenges={challengeList}
-              />
-            )}
+            <ChallengeBox
+              selectedCategory={selectedCategory}
+              handleCategoryClick={handleCategoryClick}
+              challenges={usersChallenge}
+            />
           </S.ContentsWrap>
         </S.PopularList>
 
@@ -182,13 +176,11 @@ const MainPage = () => {
             </li>
           </S.ProgressList>
           <S.ContentsWrap ref={SlideRef3}>
-            {challengeList.length > 0 && (
-              <ChallengeBox
-                selectedCategory={selectedCategory}
-                handleCategoryClick={handleCategoryClick}
-                challenges={challengeList}
-              />
-            )}
+            <ChallengeBox
+              selectedCategory={selectedCategory}
+              handleCategoryClick={handleCategoryClick}
+              challenges={dateChallenge}
+            />
           </S.ContentsWrap>
         </S.NewList>
       </Wrapper>

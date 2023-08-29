@@ -7,6 +7,7 @@ import { ROUTE } from '../../../routes';
 const DetailNav = () => {
   const { id } = useParams();
   const [isLiked, setIsLiked] = useState(false);
+  const [isParticipated, setIsParticipated] = useState(false);
 
   // 스크롤시 nav 위치 수정
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -31,6 +32,16 @@ const DetailNav = () => {
     id: '',
   });
 
+  const [userInfo, setUserInfo] = useState({
+    id: '',
+  });
+
+  //찜하기
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+  };
+
+  //
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,7 +50,6 @@ const DetailNav = () => {
         console.log('Fetched data:', data);
 
         if (data) {
-          // 데이터가 존재하는지 확인
           setChallengeInfo((prevChallengeInfo) => ({
             ...prevChallengeInfo,
             like: false,
@@ -49,6 +59,17 @@ const DetailNav = () => {
             count: data.count,
             id: data.challenge._id,
           }));
+
+          const response = await apiInstance.get('/users/mypageInfo');
+          const currentUserID = response.data._id;
+
+          setUserInfo({
+            id: currentUserID.id,
+          });
+          console.log('유저아이디', currentUserID);
+
+          const hasParticipated = data.challenge.users.includes(currentUserID);
+          setIsParticipated(hasParticipated);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -57,12 +78,6 @@ const DetailNav = () => {
 
     fetchData();
   }, [id]);
-
-  //찜하기
-  const handleLikeClick = () => {
-    setIsLiked(!isLiked);
-  };
-
   return (
     <S.DetailNavs
       className={scrollPosition < 100 ? 'DetailNavs' : 'ScrollNavs'}
@@ -92,9 +107,15 @@ const DetailNav = () => {
           </S.ButtonFlex>
         </S.SubButton>
       </S.ButtonWrap>
-      <Link to={`${ROUTE.APPPAGE.link}/${challengeInfo.id}`}>
-        <S.MainButton>챌린지 참여하기</S.MainButton>
-      </Link>
+      {isParticipated ? (
+        <Link to={`${ROUTE.AUTHPAGE.link}/${challengeInfo.id}`}>
+          <S.MainButton>챌린지 인증하기</S.MainButton>
+        </Link>
+      ) : (
+        <Link to={`${ROUTE.APPPAGE.link}/${challengeInfo.id}`}>
+          <S.MainButton>챌린지 참여하기</S.MainButton>
+        </Link>
+      )}
       <S.DetailInfo>
         <S.PStyled>
           <S.StyledCiUser />

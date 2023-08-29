@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FormEventHandler } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import * as S from './app_page.style';
 import * as D from '../../components/form/form_agree/form_agree.style';
 import Wrapper from '../../components/common/wrapper/wrapper';
@@ -88,38 +88,41 @@ const ApplicationPage: React.FC = () => {
     setIsAgreed(isChecked);
   };
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-    event.preventDefault();
+  // const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  //   event.preventDefault();
 
-    if (!isAgreed) {
-      console.log('약관에 동의해야 합니다.');
-      return;
-    }
-    const userData = {
-      name: form.name,
-      phone: form.phone,
-      email: form.email,
-    };
-    try {
-      await apiInstance.patch(`/challenges/subscription/${id}`, userData);
-      console.log('참가 신청이 완료되었습니다.');
-    } catch (error) {
-      console.error('참가 신청이 실패하였습니다', error);
-    }
-  };
+  //   const userData = {
+  //     name: form.name,
+  //     phone: form.phone,
+  //     email: form.email,
+  //   };
+  //   try {
+  //     await apiInstance.patch(`/challenges/subscription/${id}`, userData);
+  //     console.log('참가 신청이 완료되었습니다.');
+  //   } catch (error) {
+  //     console.error('참가 신청이 실패하였습니다', error);
+  //   }
+  // };
 
   const handleChallengeSubmit = async () => {
     // 챌린지 생성 API 호출
-    await apiInstance
-      .patch(`/challenges/subscription/${id}`, {})
-      .then((response) => {
-        console.log('201', response.data);
-        if (response.status === 201) {
+    if (!isAgreed) {
+      alert('약관에 동의해야 합니다.');
+      return;
+    } else {
+      await apiInstance
+        .patch(`/challenges/subscription/${id}`, {})
+        .then((response) => {
+          console.log('201', response.data);
           alert('챌린지가 성공적으로 개설되었습니다!');
-        }
-      })
-      .catch((error) => console.log(error.response));
+
+          navigate(`/detail/${id}`);
+        })
+        .catch((error) => console.log(error.response));
+    }
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchChallengeInfo() {
@@ -183,7 +186,7 @@ const ApplicationPage: React.FC = () => {
               <WhiteBoxTitle>참가자 정보</WhiteBoxTitle>
               <WhiteBoxContents>
                 <div>
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleChallengeSubmit}>
                     <S.InputContent>
                       <S.LabelStyled htmlFor="formName">이름</S.LabelStyled>
                       <S.InputStyled
