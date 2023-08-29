@@ -29,7 +29,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
 
-  useEffect(() => {  
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await apiInstance.get('/challenges/list');
@@ -45,7 +45,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
             id: challenge._id,
             category: challenge.category,
           }));
-          setChallengeList(challenges); 
+          setChallengeList(challenges);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -56,10 +56,17 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
     fetchData();
   }, [challengeList]);
 
-  const toggleLike = (index: number) => {
+  const toggleLike = (id: string) => {
     setChallengeList((prevList) => {
-      const updatedList = [...prevList];
-      updatedList[index].like = !updatedList[index].like;
+      const updatedList = prevList.map((challenge) => {
+        if (challenge.id === id) {
+          return {
+            ...challenge,
+            like: !challenge.like,
+          };
+        }
+        return challenge;
+      });
       return updatedList;
     });
   };
@@ -73,13 +80,13 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   return (
     <S.ListWrap>
       <S.ContentsWrap>
-        {filteredChallengeList.map((challenge, index) => (
-          <S.ContentWrap key={index}>
+        {filteredChallengeList.map((challenge) => (
+          <S.ContentWrap key={challenge.id}>
             <S.ImgStyled>
               <img src="" alt={`Challenge`} />
               <S.StyledHeartButton
                 like={challenge.like}
-                onClick={() => toggleLike(index)}
+                onClick={() => toggleLike(challenge.id)}
               />
             </S.ImgStyled>
             <S.TabWrap>
