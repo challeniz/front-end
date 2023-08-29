@@ -71,24 +71,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }
   }, [date.joinningDate]);
 
-  //태그
-  const handleChangeTags = (newTags: string[]) => {
-    setTags(newTags);
-  };
-console.log("태그",tags)
-  const [textValue, setTextValue] = useState<string>('');
-  const handleSetValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setTextValue(e.target.value);
-  };
-
-  
-  // 동의하기 체크
-  const [isAgreed, setIsAgreed] = useState(false);
-  const handleAgreeChange = (isChecked: boolean) => {
-    setIsAgreed(isChecked);
-  };
-
-  const [data, setData] = useState({
+  const [data, setData] = useState<ChallengeFormDataType>({
     title: '',
     cate: '',
     description: '',
@@ -99,21 +82,42 @@ console.log("태그",tags)
     tag: [],
   });
 
+  //태그
+  const handleChangeTags = (newTags: string[]) => {
+    console.log('newTags', newTags);
+    setData((prevData) => ({
+      ...prevData,
+      tag: newTags as string[],
+    }));
+  };
+  console.log('태그', tags);
+  const [textValue, setTextValue] = useState<string>('');
+  const handleSetValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setTextValue(e.target.value);
+  };
+
+  // 동의하기 체크
+  const [isAgreed, setIsAgreed] = useState(false);
+  const handleAgreeChange = (isChecked: boolean) => {
+    setIsAgreed(isChecked);
+  };
+
   const handleChallengeSubmit = async () => {
     try {
-      const { title } = data; 
+      const { title } = data;
       if (title.trim() === '' || title == null) {
         alert('주제를 입력하세요.');
       } else if (!isImageSelected) {
         alert('이미지를 선택하세요.');
       } else if (textValue.trim() === '' || textValue == null) {
         alert('챌린지설명을 입력하세요.');
-      } else if (tags.length === 0) {  
-        alert('태그를 입력하세요.');console.log("설명",tags)
-      }  else if (!isAgreed) {
+      } else if (tags.length === 0) {
+        alert('태그를 입력하세요.');
+        console.log('설명', tags);
+      } else if (!isAgreed) {
         alert('챌린지를 개설하려면 약관에 동의해야 합니다.');
       }
-  
+
       const response = await apiInstance.post('challenges/create', {
         title: data.title,
         start_date: date.startDate[0],
@@ -125,8 +129,9 @@ console.log("태그",tags)
         tag: data.tag,
       });
 
-      if (response.status === 201) {console.log('response', response);
-        // 챌린지 생성 성공 후 추가 로직 
+      if (response.status === 201) {
+        console.log('response', response);
+        // 챌린지 생성 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
       }
     } catch (error: any) {
@@ -164,8 +169,6 @@ console.log("태그",tags)
     }
     console.log('이미지', selectedFile);
   };
-
-
 
   return (
     <>
@@ -236,7 +239,6 @@ console.log("태그",tags)
               <S.TextareaStyled
                 placeholder="여기에 입력하세요"
                 value={textValue}
-              
                 onChange={handleSetValue}
               ></S.TextareaStyled>
             </S.InputContent>

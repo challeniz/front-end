@@ -105,7 +105,7 @@ export const Tab: React.FC = () => {
                   plugins={[dayGridPlugin]}
                   initialView="dayGridMonth"
                   weekends={true}
-                  locale="ko"
+                  locale="es"
                   titleFormat={{ year: 'numeric', month: 'long' }}
                   events={event1.concat(event2)}
                 />
