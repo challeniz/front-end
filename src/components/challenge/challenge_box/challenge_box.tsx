@@ -18,9 +18,10 @@ export interface Challenge {
   category: string;
 }
 
-interface ChallengeBoxProps {
+export interface ChallengeBoxProps {
   selectedCategory: string;
   handleCategoryClick: (category: string) => void;
+  challenges?: Challenge[];
 }
 
 const ChallengeBox: React.FC<ChallengeBoxProps> = ({
@@ -32,7 +33,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiInstance.get('/challenges/');
+        const response = await apiInstance.get('/challenges/list');
         const data = response.data;
 
         if (data.length > 0) {

@@ -37,11 +37,11 @@ export const Tab: React.FC = () => {
 
         if (data) {
           setChallengeInfo({
-            description: data.description,
-            start_date: data.start_date,
-            end_date: data.end_date,
-            recru_open_date: data.recru_open_date,
-            recru_end_date: data.recru_end_date,
+            description: data.challenge.description,
+            start_date: data.challenge.start_date,
+            end_date: data.challenge.end_date,
+            recru_open_date: data.challenge.recru_open_date,
+            recru_end_date: data.challenge.recru_end_date,
           });
         }
       } catch (error) {
@@ -75,7 +75,7 @@ export const Tab: React.FC = () => {
       classNames: 'event2-class',
     },
   ];
-  console.log(startDate);
+
   return (
     <div>
       <S.TabMenu>

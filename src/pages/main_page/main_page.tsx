@@ -12,6 +12,12 @@ import SearchPage from '../search_page/search_page';
 import { ROUTE } from '../../routes';
 import { Link } from 'react-router-dom';
 
+export interface ChallengeBoxProps {
+  selectedCategory: string;
+  handleCategoryClick: (category: string) => void;
+  challenges: Challenge[];
+}
+
 const MainPage = () => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -72,27 +78,31 @@ const MainPage = () => {
     setSelectedCategory(category);
   };
 
-  // const sortByStartDate = (challenges: Challenge[]) => {
-  //   const today = new Date();
-  //   return challenges.filter((challenge) => {
-  //     const startDate = new Date(challenge.start_date);
-  //     return startDate <= today;
-  //   });
-  // };
+  // 필터링
+  const fetchChallenges = async () => {
+    try {
+      const response = await apiInstance.get('/challenges');
+      const challengesData = response.data.challenges;
 
-  // const sortByUserCount = (challenges: Challenge[]) => {
-  //   return challenges.slice().sort((a, b) => {
-  //     // return a.userCount - b.userCount; // userCount의 타입과 속성을 반영해주세요
-  //   });
-  // };
+      if (challengesData) {
+        const sortedChallenges = challengesData
+          .slice()
+          .sort((a: Challenge, b: Challenge) => {
+            const dateA = new Date(a.start_date).getTime();
+            const dateB = new Date(b.start_date).getTime();
+            return dateA - dateB;
+          });
+        const displayedChallenges = sortedChallenges.slice(0, 6);
+        setChallengeList(displayedChallenges);
+      }
+    } catch (error) {
+      console.error('Error fetching challenges:', error);
+    }
+  };
 
-  // const sortByNewest = (challenges: Challenge[]) => {
-  //   return challenges.slice().sort((a, b) => {
-  //     const dateA = new Date(a.start_date).getTime();
-  //     const dateB = new Date(b.start_date).getTime();
-  //     return dateA - dateB;
-  //   });
-  // };
+  useEffect(() => {
+    fetchChallenges();
+  }, []);
 
   return (
     <S.BackWhite>
@@ -115,10 +125,13 @@ const MainPage = () => {
             </li>
           </S.ProgressList>
           <S.ContentsWrap ref={SlideRef1}>
-            <ChallengeBox
-              selectedCategory={selectedCategory}
-              handleCategoryClick={handleCategoryClick}
-            />
+            {challengeList.length > 0 && (
+              <ChallengeBox
+                selectedCategory={selectedCategory}
+                handleCategoryClick={handleCategoryClick}
+                challenges={challengeList}
+              />
+            )}
           </S.ContentsWrap>
         </S.ContentsList>
         <S.PopularList>
@@ -141,10 +154,13 @@ const MainPage = () => {
             </li>
           </S.ProgressList>
           <S.ContentsWrap ref={SlideRef2}>
-            <ChallengeBox
-              selectedCategory={selectedCategory}
-              handleCategoryClick={handleCategoryClick}
-            />
+            {challengeList.length > 0 && (
+              <ChallengeBox
+                selectedCategory={selectedCategory}
+                handleCategoryClick={handleCategoryClick}
+                challenges={challengeList}
+              />
+            )}
           </S.ContentsWrap>
         </S.PopularList>
 
@@ -166,11 +182,13 @@ const MainPage = () => {
             </li>
           </S.ProgressList>
           <S.ContentsWrap ref={SlideRef3}>
-            <ChallengeBox
-              selectedCategory={selectedCategory}
-              handleCategoryClick={handleCategoryClick}
-              // challengeList={sortByNewest(challengeList)}
-            />
+            {challengeList.length > 0 && (
+              <ChallengeBox
+                selectedCategory={selectedCategory}
+                handleCategoryClick={handleCategoryClick}
+                challenges={challengeList}
+              />
+            )}
           </S.ContentsWrap>
         </S.NewList>
       </Wrapper>

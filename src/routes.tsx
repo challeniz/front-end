@@ -50,7 +50,7 @@ export const ROUTE = {
     element: DetailPage,
   },
   APPPAGE: {
-    path: '/applicationpage',
+    path: '/applicationpage/:id',
     link: '/applicationpage',
     element: ApplicationPage,
   },
