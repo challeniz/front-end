@@ -22,6 +22,7 @@ import WhiteBoxContents from '../white_box/white_box_contents/white_box_contents
 import WhiteBoxTitle from '../white_box/white_box_title/white_box_title';
 import * as S from './form_info.style';
 import { apiInstance } from '../../../utils/api';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 interface ChallengeFormDataType {
   title: string;
@@ -52,7 +53,8 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     joinningDate: [null, null],
     startDate: [null, null],
   });
-
+  const navigate = useNavigate();
+  const { id } = useParams();
   useEffect(() => {
     // joinningDate가 바뀌면 startDate를 자동 변환
     if (date.joinningDate[1]) {
@@ -133,6 +135,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         console.log('response', response);
         // 챌린지 생성 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
+        navigate(`/detail/${id}`);
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
