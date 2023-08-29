@@ -17,9 +17,10 @@ export interface Challenge {
   category: string;
 }
 
-interface ChallengeBoxProps {
+export interface ChallengeBoxProps {
   selectedCategory: string;
   handleCategoryClick: (category: string) => void;
+  challenges?: Challenge[];
 }
 
 const ChallengeBox: React.FC<ChallengeBoxProps> = ({
@@ -28,7 +29,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
 
-  useEffect(() => {
+  useEffect(() => {  
     const fetchData = async () => {
       try {
         const response = await apiInstance.get('/challenges/list');
@@ -44,16 +45,16 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
             id: challenge._id,
             category: challenge.category,
           }));
-          setChallengeList(challenges);
+          setChallengeList(challenges); 
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-    console.log(fetchData)
+    // console.log(fetchData)
     // 초기 로딩 시 데이터 가져오기
     fetchData();
-  }, []);
+  }, [challengeList]);
 
   const toggleLike = (index: number) => {
     setChallengeList((prevList) => {

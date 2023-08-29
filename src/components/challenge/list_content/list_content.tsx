@@ -25,7 +25,7 @@ const ListContent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiInstance.get('/challenges/');
+        const response = await apiInstance.get('/challenges/list');
         const data = response.data;
 
         if (data.length > 0) {

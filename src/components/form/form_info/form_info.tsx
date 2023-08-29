@@ -81,6 +81,7 @@ console.log("태그",tags)
     setTextValue(e.target.value);
   };
 
+  
   // 동의하기 체크
   const [isAgreed, setIsAgreed] = useState(false);
   const handleAgreeChange = (isChecked: boolean) => {
@@ -95,7 +96,7 @@ console.log("태그",tags)
     end_date: '',
     recru_open_date: '',
     recru_end_date: '',
-    tag: '',
+    tag: [],
   });
 
   const handleChallengeSubmit = async () => {
@@ -124,8 +125,8 @@ console.log("태그",tags)
         tag: data.tag,
       });
 
-      if (response.status === 200) {
-        // 챌린지 생성 성공 후 추가 로직
+      if (response.status === 201) {console.log('response', response);
+        // 챌린지 생성 성공 후 추가 로직 
         alert('챌린지 개설에 성공했습니다!');
       }
     } catch (error: any) {
@@ -139,7 +140,7 @@ console.log("태그",tags)
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.currentTarget;
+    const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -179,12 +180,17 @@ console.log("태그",tags)
                 id="formName"
                 name="title"
                 placeholder="주제를 입력하세요."
+                value={data.title}
                 onChange={handleChange}
               />
             </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formCate">카테고리</S.LabelStyled>
-              <S.SelectStyled id="formCate" onChange={handleChange}>
+              <S.SelectStyled
+                id="formCate"
+                value={data.cate}
+                onChange={handleChange}
+              >
                 <option value="건강">건강</option>
                 <option value="취미">취미</option>
                 <option value="식습관">식습관</option>

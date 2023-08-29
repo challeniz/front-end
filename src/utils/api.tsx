@@ -3,7 +3,7 @@ import axios from 'axios';
 export const apiInstance = axios.create({
   baseURL: 'http://34.64.62.80:3000/',
   timeout: 1000,
-  headers: { 'Content-Type': 'application/json' },
+  headers: { 'Content-Type': 'application/json' }
 });
 
 // 요청 인터셉터 추가하기

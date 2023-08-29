@@ -15,7 +15,11 @@ const DetailNav = () => {
   };
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
-  });
+    return () => {
+      // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
+      window.removeEventListener('scroll', updateScroll);
+    };
+  }, []); // 두 번째 파라미터로 빈 배열을 넣어 최초 렌더링 시에만 실행되도록 설정
 
   // 챌린지 데이터 호출
   const [challengeInfo, setChallengeInfo] = useState({
@@ -23,24 +27,28 @@ const DetailNav = () => {
     title: '',
     user: '',
     tag: [],
+    count: '',
+    id: '',
   });
 
-  console.log(challengeInfo.tag);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await apiInstance.get(`/challenges/${id}`);
         const data = response.data;
-        console.log(data);
+        console.log('Fetched data:', data);
 
         if (data) {
           // 데이터가 존재하는지 확인
-          setChallengeInfo({
+          setChallengeInfo((prevChallengeInfo) => ({
+            ...prevChallengeInfo,
             like: false,
-            title: data.title,
-            user: data.user,
-            tag: data.tag,
-          });
+            title: data.challenge.title,
+            user: data.name,
+            tag: data.challenge.tag,
+            count: data.count,
+            id: data.challenge._id,
+          }));
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -84,13 +92,13 @@ const DetailNav = () => {
           </S.ButtonFlex>
         </S.SubButton>
       </S.ButtonWrap>
-      <Link to={ROUTE.APPPAGE.link}>
+      <Link to={`${ROUTE.APPPAGE.link}/${challengeInfo.id}`}>
         <S.MainButton>챌린지 참여하기</S.MainButton>
       </Link>
       <S.DetailInfo>
         <S.PStyled>
           <S.StyledCiUser />
-          현재 18명 참여 중
+          현재 {challengeInfo.count}명 참여 중
         </S.PStyled>
       </S.DetailInfo>
     </S.DetailNavs>

@@ -8,12 +8,10 @@ import MyInfo from '../../components/mypage/mypage_info/mypage_info';
 import { apiInstance } from '../../utils/api';
 import * as S from './my_privacy.style';
 const MyPrivacy = () => {
-
   // 유저정보 받아온 후 값을 수정할 수 있게 구현해야 하는데 잘안됩니다....ㅠㅠㅠㅠㅠㅠㅠㅠㅠ
   //useState 사용하는건 알겠는데 초기값을 어떻게 하고 value에는 무엇을 적용해야할 지 모르겠습니다.
 
   const navigate = useNavigate();
-  
   const [userInfo, setUserInfo] = useState({
     name: '', // 빈값이 초기값이 아니라 회원가입할때 사용되었던 정보가 초기값으로 되어있어야 출력이된다?
     phone: '',
@@ -24,7 +22,7 @@ const MyPrivacy = () => {
     const fetchUserInfo = async () => {
       try {
         const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기 (실제 토큰 키로 대체)
-        console.log('token', token)
+        console.log('token', token);
         const response = await apiInstance.get('/users/mypageInfo');
         const userData = response.data; // 서버 응답에서 사용자 데이터 추출
 
@@ -80,17 +78,22 @@ const MyPrivacy = () => {
               <S.InfoTxt>
                 <label htmlFor="labelName">닉네임</label>
                 {/* value 값을 어떻게 해야되는지 모르겠습니다; */}
-                <input type="text" id="labelName" value={userInfo.name}/>
+                <input type="text" id="labelName" value={userInfo.name} />
               </S.InfoTxt>
               <br />
               <S.InfoTxt>
                 <label htmlFor="labelTel">전화번호</label>
-                <input type="text" id="labelTel" value={userInfo.phone}/>
+                <input type="text" id="labelTel" value={userInfo.phone} />
               </S.InfoTxt>
               <br />
               <S.InfoTxt>
                 <label htmlFor="labeMail">이메일</label>
-                <input type="text" id="labelMail" readOnly value={userInfo.email}/>
+                <input
+                  type="text"
+                  id="labelMail"
+                  readOnly
+                  value={userInfo.email}
+                />
               </S.InfoTxt>
               <br />
               <S.InfoTxt>
@@ -100,7 +103,7 @@ const MyPrivacy = () => {
               <br />
               <S.InfoTxt>
                 <label htmlFor="labelPasswordConfirm">비밀번호 확인</label>
-                <input type="password" id="labelPasswordConfirm"  />
+                <input type="password" id="labelPasswordConfirm" />
               </S.InfoTxt>
               <br />
             </ul>
@@ -109,7 +112,9 @@ const MyPrivacy = () => {
             <Link to={ROUTE.MYPAGE.link}>
               <S.BackButton>뒤로가기</S.BackButton>
             </Link>
-            <S.CorrectionButton onClick={fixHandler}>수정하기</S.CorrectionButton>
+            <S.CorrectionButton onClick={fixHandler}>
+              수정하기
+            </S.CorrectionButton>
           </S.ButtonWrap>
         </div>
       </Wrapper>
@@ -117,7 +122,5 @@ const MyPrivacy = () => {
     </>
   );
 };
-
-
 
 export default MyPrivacy;
