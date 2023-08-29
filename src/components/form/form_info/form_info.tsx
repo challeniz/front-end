@@ -132,10 +132,18 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       });
 
       if (response.status === 201) {
-        console.log('response', response);
-        // 챌린지 생성 성공 후 추가 로직
+        // 생성된 챌린지의 id 값 가져오기
+        const createdChallengeId = response.data.id;
+
+        // 챌린지 구독 정보 업데이트
+        await apiInstance.patch(
+          `/challenges/subscription/${createdChallengeId}`,
+          {}
+        );
+
+        // 챌린지 개설 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
-        navigate(`/detail/${id}`);
+        navigate(`/detail/${createdChallengeId}`);
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
@@ -145,6 +153,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       }
     }
   };
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {

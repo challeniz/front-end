@@ -55,6 +55,7 @@ export const StyledHeartButton = styled(HeartButton)`
   top: 20px;
   right: 20px;
   z-index: 10;
+  cursor: pointer;
 `;
 
 export const TabWrap = styled.div`
