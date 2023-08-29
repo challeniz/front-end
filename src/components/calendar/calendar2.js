@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
-import addDays from 'date-fns/addDays';
-import ReactDatePicker from './calendar';
+
 const StyledDatePicker = styled(DatePicker)`
   width: 406px;
   height: 45px;
@@ -14,20 +13,20 @@ const StyledDatePicker = styled(DatePicker)`
   padding: 0 15px;
 `;
 
-const ReactDatePicker2 = () => {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
-  
+const ReactDatePicker2 = ({ startDate, setDate }) => {
   return (
     <StyledDatePicker
       selectsRange={true}
-      startDate={startDate}
-      endDate={endDate}
+      startDate={startDate[0]}
+      endDate={startDate[1]}
       dateFormat="yyyy년MM월dd일"
       onChange={(update) => {
-        setDateRange(update);
+        setDate((prev) => ({
+          ...prev,
+          startDate: update,
+        }));
       }}
-      isClearable={true}
+      isClearable={false}
       placeholderText="날짜를 선택하세요"
       minDate={new Date()}
     />

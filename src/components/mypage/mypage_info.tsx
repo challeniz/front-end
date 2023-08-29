@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ROUTE } from '../../routes';
 import { Link } from 'react-router-dom';
-import Wrapper from '../common/wrapper';
+import Wrapper from '../common/wrapper/wrapper';
 import useImageUploader from '../../hook/imgfiler';
 
 const PageBox = styled.div`
@@ -79,9 +79,8 @@ interface MyInfoProps {}
 
 const MyInfo: React.FC<MyInfoProps> = () => {
   const { imgSrc, fileInput, onChange } = useImageUploader(
-    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+    'https://i.ibb.co/rbPbb9z/3.png'
   );
-
   return (
     <Wrapper>
       <PageBox>
