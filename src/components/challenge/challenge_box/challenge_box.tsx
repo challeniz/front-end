@@ -1,4 +1,3 @@
-// list_content.tsx
 import React, { useState, useEffect } from 'react';
 import * as S from './challenge_box.style';
 import { BsCalendarRange } from 'react-icons/bs';
@@ -32,7 +31,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiInstance.get('/challenges/');
+        const response = await apiInstance.get('/challenges/list');
         const data = response.data;
 
         if (data.length > 0) {
@@ -51,7 +50,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
         console.error('Error fetching data:', error);
       }
     };
-
+    console.log(fetchData)
     // 초기 로딩 시 데이터 가져오기
     fetchData();
   }, []);

@@ -85,6 +85,7 @@ const ApplicationPage: React.FC = () => {
   const handleAgreeChange = (isChecked: boolean) => {
     setIsAgreed(isChecked);
   };
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
 
@@ -98,7 +99,10 @@ const ApplicationPage: React.FC = () => {
       email: form.email,
     };
     try {
-      await apiInstance.patch('/challenges/subscription', userData);
+      await apiInstance.patch(
+        '/challenges/subscription/64e4d93bb812a8e5dc1882f5',
+        userData
+      );
       console.log('참가 신청이 완료되었습니다.');
     } catch (error) {
       console.error('참가 신청이 실패하였습니다', error);
@@ -108,7 +112,7 @@ const ApplicationPage: React.FC = () => {
   useEffect(() => {
     async function fetchChallengeInfo() {
       try {
-        const response = await apiInstance.get('/challenges/');
+        const response = await apiInstance.get<Challenge>('/challenges/');
         setChallengeInfo(response.data);
       } catch (error) {
         console.error('챌린지 정보가 없습니다', error);

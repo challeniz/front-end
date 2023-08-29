@@ -12,10 +12,12 @@ import { apiInstance } from '../../utils/api';
 export interface ChallengeFormDataType {
   title: string;
   cate: string;
+  description: string;
   start_date: string;
   end_date: string;
   recru_open_date: string;
   recru_end_date: string;
+  tag: string[];
 }
 
 const NewPage = () => {
@@ -26,10 +28,12 @@ const NewPage = () => {
   const [data, setData] = useState<ChallengeFormDataType>({
     title: '',
     cate: '',
+    description: '',
     start_date: '',
     end_date: '',
     recru_open_date: '',
     recru_end_date: '',
+    tag: [],
   });
 
   // 이미지 선택
@@ -54,15 +58,20 @@ const NewPage = () => {
 
   // 챌린지 개설 버튼 클릭 시 실행
   const handleChallengeSubmit = () => {
+    console.log("데이터2",data);
     const {
       title,
+      description,
       start_date,
       end_date,
       cate: category,
       recru_open_date,
       recru_end_date,
-    } = data;
-    if (title.trim() === '') {
+      tag,
+    } = data; 
+    console.log("데이터",title)
+  
+    if (title.trim() === '' || title == null) { 
       alert('주제를 입력하세요.');
     } else if (!selectedFile) {
       alert('이미지를 선택해주세요.');
@@ -73,11 +82,13 @@ const NewPage = () => {
       apiInstance
         .post('/challenges/create', {
           title,
+          description,
           start_date,
           end_date,
           category,
           recru_open_date,
           recru_end_date,
+          tag,
         })
         .then((response) => {
           if (response.status === 201) {
