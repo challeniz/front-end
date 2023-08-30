@@ -58,3 +58,37 @@ export const FormButton = styled.div`
   justify-content: space-between;
   margin-top: 38px;
 `;
+
+export const StyledImageWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const StyledImageContainer = styled.div`
+  position: relative;
+  width: 620px;
+  height: 377px;
+  background-color: #d9d9d9;
+`;
+
+export const StyledImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const StyledLabel = styled.label`
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+`;
