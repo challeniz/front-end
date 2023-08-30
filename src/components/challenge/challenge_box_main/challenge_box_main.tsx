@@ -27,76 +27,32 @@ export interface ChallengeBoxProps {
 const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   selectedCategory,
   handleCategoryClick,
+  challenges,
 }) => {
-  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiInstance.get('/challenges');
-        const data = response.data;
-
-        if (data.length > 0) {
-          const challenges = data.map((challenge: any) => ({
-            like: false,
-            title: challenge.title,
-            start_date: new Date(challenge.start_date).toLocaleDateString(),
-            end_date: new Date(challenge.end_date).toLocaleDateString(),
-            tag: challenge.tag,
-            id: challenge._id,
-            category: challenge.category,
-          }));
-          setChallengeList(challenges);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    // 초기 로딩 시 데이터 가져오기
-    fetchData();
-  }, []);
-
-  const toggleLike = (index: number) => {
-    setChallengeList((prevList) => {
-      const updatedList = [...prevList];
-      updatedList[index].like = !updatedList[index].like;
-      return updatedList;
-    });
-  };
-
-  const filteredChallengeList = selectedCategory
-    ? challengeList.filter(
-        (challenge) => challenge.category === selectedCategory
-      )
-    : challengeList;
-
   return (
     <S.ListWrap>
       <S.ContentsWrap>
-        {filteredChallengeList.map((challenge, index) => (
-          <S.ContentWrap key={index}>
-            <S.ImgStyled>
-              <img src="" alt={`Challenge`} />
-              <S.StyledHeartButton
-                like={challenge.like}
-                onClick={() => toggleLike(index)}
-              />
-            </S.ImgStyled>
-            <S.TabWrap>
-              {challenge.tag.map((tag, index) => (
-                <S.TabStyled key={index}>{tag}</S.TabStyled>
-              ))}
-            </S.TabWrap>
-            <Link to={`${ROUTE.DETAILPAGE.link}/${challenge.id}`}>
-              <S.H3Styled>{challenge.title}</S.H3Styled>
-            </Link>
-            <S.H4Styled>
-              <BsCalendarRange />
-              {challenge.start_date} ~ {challenge.end_date}
-            </S.H4Styled>
-          </S.ContentWrap>
-        ))}
+        {challenges &&
+          challenges.map((challenge, index) => (
+            <S.ContentWrap key={index}>
+              <S.ImgStyled>
+                <img src="" alt={`Challenge`} />
+                <S.StyledHeartButton like={challenge.like} onClick={() => {}} />
+              </S.ImgStyled>
+              <S.TabWrap>
+                {challenge.tag.map((tag, index) => (
+                  <S.TabStyled key={index}>{tag}</S.TabStyled>
+                ))}
+              </S.TabWrap>
+              <Link to={`${ROUTE.DETAILPAGE.link}/${challenge.id}`}>
+                <S.H3Styled>{challenge.title}</S.H3Styled>
+              </Link>
+              <S.H4Styled>
+                <BsCalendarRange />
+                {challenge.start_date} ~ {challenge.end_date}
+              </S.H4Styled>
+            </S.ContentWrap>
+          ))}
       </S.ContentsWrap>
     </S.ListWrap>
   );

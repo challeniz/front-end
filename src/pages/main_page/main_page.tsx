@@ -10,7 +10,7 @@ import ChallengeBox, {
 import { apiInstance } from '../../utils/api';
 import SearchPage from '../search_page/search_page';
 import { ROUTE } from '../../routes';
-import { Link } from 'react-router-dom';
+import { Link, Routes, Route, BrowserRouter } from 'react-router-dom';
 
 export interface ChallengeBoxProps {
   selectedCategory: string;
@@ -29,12 +29,13 @@ const MainPage = () => {
   const [CurrentImg1, setCurrentImg1] = useState(0);
   const [CurrentImg2, setCurrentImg2] = useState(0);
   const [CurrentImg3, setCurrentImg3] = useState(0);
-  const IMG_WIDTH = 50;
+  const IMG_WIDTH = 30;
   const slideRange1 = CurrentImg1 * IMG_WIDTH;
   const slideRange2 = CurrentImg2 * IMG_WIDTH;
   const slideRange3 = CurrentImg3 * IMG_WIDTH;
   const TotalImg = 4;
-
+  const challengeBoxRef = useRef<HTMLDivElement | null>(null);
+  const [isWrapperOverflowHidden, setIsWrapperOverflowHidden] = useState(false);
   useEffect(() => {
     if (SlideRef1.current) {
       SlideRef1.current.style.transition = 'transform 0.5s ease-in-out';
@@ -79,7 +80,15 @@ const MainPage = () => {
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
   };
+  const handleOverflowToggle = () => {
+    setIsWrapperOverflowHidden(!isWrapperOverflowHidden);
+  };
 
+  useEffect(() => {
+    if (challengeBoxRef.current) {
+      challengeBoxRef.current.style.overflow = isWrapperOverflowHidden ? 'hidden' : 'visible';
+    }
+  }, [isWrapperOverflowHidden]);
   // 필터링
   const fetchChallenges = async () => {
     try {

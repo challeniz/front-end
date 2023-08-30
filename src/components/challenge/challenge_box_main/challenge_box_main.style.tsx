@@ -29,6 +29,7 @@ export const ContentsWrap = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 40px;
   grid-row-gap: 50px;
+  
 `;
 
 export const ImgStyled = styled.div`
