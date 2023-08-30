@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import * as S from './auth_page.style';
 import { ROUTE } from '../../routes';
-import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import WhiteBox from '../../components/form/white_box/white_box/white_box';

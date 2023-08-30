@@ -5,9 +5,10 @@ export const PopularList = styled.div`
   margin-bottom: 180px;
 `;
 export const ContentsWrap = styled.div`
-  // display: grid;
-  // grid-template-columns: repeat(4, 1fr);
-  // grid-column-gap: 40px;
+ display: grid;
+ grid-column-gap: 40px;
+ grid-row-gap: 50px;  
+ 
 `;
 export const NewList = styled.div`
   margin-bottom: 180px;
@@ -60,7 +61,7 @@ export const ProgressList = styled.ul`
 export const StyledSlideCircleRight = styled(CiCircleChevRight)`
   width: 1.7em;
   height: 1.7em;
-
+  display: none;
   &:hover {
     color: #339af0;
   }
@@ -69,6 +70,7 @@ export const StyledSlideCircleRight = styled(CiCircleChevRight)`
 export const StyledSlideCircleLeft = styled(CiCircleChevLeft)`
   width: 1.7em;
   height: 1.7em;
+  display: none;
   &:hover {
     color: #339af0;
   }

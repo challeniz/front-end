@@ -25,16 +25,6 @@ const NewPage = () => {
   const [topic, setTopic] = useState<string>('');
   const [isImageSelected, setIsImageSelected] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [data, setData] = useState<ChallengeFormDataType>({
-    title: '',
-    cate: '',
-    description: '',
-    start_date: '',
-    end_date: '',
-    recru_open_date: '',
-    recru_end_date: '',
-    tag: [],
-  });
 
   // 이미지 선택
   const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,18 +38,28 @@ const NewPage = () => {
     console.log('이미지', file);
   };
 
+  const [data, setData] = useState<ChallengeFormDataType>({
+    title: '',
+    cate: '',
+    description: '',
+    start_date: '',
+    end_date: '',
+    recru_open_date: '',
+    recru_end_date: '',
+    tag: [],
+  });
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-    
   };
 
   // 챌린지 개설 버튼 클릭 시 실행
   const handleChallengeSubmit = () => {
-    console.log("데이터2",data);
+    console.log('데이터2', data);
     const {
       title,
       description,
@@ -69,10 +69,10 @@ const NewPage = () => {
       recru_open_date,
       recru_end_date,
       tag,
-    } = data; 
-    console.log("뉴패이지",title)
-  
-    if (title.trim() === '' || title == null) { 
+    } = data;
+    console.log('뉴패이지', title);
+
+    if (title.trim() === '' || title == null) {
       alert('주제를 입력하세요.');
     } else if (!selectedFile) {
       alert('이미지를 선택해주세요.');
