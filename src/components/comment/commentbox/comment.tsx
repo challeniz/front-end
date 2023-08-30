@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Wrapper from '../../common/wrapper/wrapper';
 import CommentList from '../commentlist/commentlist';
 import { BsTrash3 } from 'react-icons/bs';
@@ -20,11 +21,6 @@ const CommentBox = () => {
     setFeedComment(copyFeedComment);
     setComment('');
   };
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && isValid) {
-      post();
-    }
-  };
 
   // 댓글삭제
   const removeComment = (indexToRemove: number) => {
@@ -42,7 +38,6 @@ const CommentBox = () => {
           type="text"
           className="CommentInput"
           placeholder="댓글을 달아보세요!"
-          onKeyDown={handleKeyDown} // 엔터 키 감지 이벤트 핸들러 추가
           onChange={(e) => {
             setComment(e.target.value);
             setIsValid(e.target.value.length > 0);

@@ -42,14 +42,3 @@ export const TabMenu = styled.ul`
     text-align: center;
   }
 `;
-
-export const Desc = styled.div`
-  text-align: center;
-`;
-
-export const ContentsWrap = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 40px;
-  grid-row-gap: 50px;
-`;

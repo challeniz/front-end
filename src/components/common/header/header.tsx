@@ -20,7 +20,7 @@ const Header = () => {
 
   const token = 'token';
   const user = localStorage.getItem(token);
-  console.log('user', user);
+  // console.log('user', user);
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
@@ -37,32 +37,36 @@ const Header = () => {
         </S.Logo>
         <S.HeaderNav>
           <S.NavList>
-            <S.NavItem>
-              진행중인챌린지
-              <S.SubMenu>
-                <S.InnerLi>
-                  <FaHeartPulse />
-                  건강
-                </S.InnerLi>
-                <S.InnerLi>
-                  <FaCat />
-                  취미
-                </S.InnerLi>
-                <S.InnerLi>
-                  <FaBowlFood />
-                  식습관
-                </S.InnerLi>
-                <S.InnerLi>
-                  <FaBook />
-                  공부
-                </S.InnerLi>
-                <S.InnerLi>
-                  <FaLeaf />
-                  환경
-                </S.InnerLi>
-              </S.SubMenu>
-            </S.NavItem>
-            <S.NavItem>챌린지개설하기</S.NavItem>
+            <Link to={ROUTE.LISTPAGE.link}>
+              <S.NavItem>
+                진행중인챌린지
+                <S.SubMenu>
+                  <S.InnerLi>
+                    <FaHeartPulse />
+                    건강
+                  </S.InnerLi>
+                  <S.InnerLi>
+                    <FaCat />
+                    취미
+                  </S.InnerLi>
+                  <S.InnerLi>
+                    <FaBowlFood />
+                    식습관
+                  </S.InnerLi>
+                  <S.InnerLi>
+                    <FaBook />
+                    공부
+                  </S.InnerLi>
+                  <S.InnerLi>
+                    <FaLeaf />
+                    환경
+                  </S.InnerLi>
+                </S.SubMenu>
+              </S.NavItem>
+            </Link>
+            <Link to={ROUTE.NEWPAGE.link}>
+              <S.NavItem>챌린지개설하기</S.NavItem>
+            </Link>
           </S.NavList>
         </S.HeaderNav>
         <S.LoginBox>
@@ -70,7 +74,7 @@ const Header = () => {
             <S.LoginItem>
               <S.StyledCiUser />
               <S.SubMenu>
-              {!user ? (
+                {!user ? (
                   <>
                     <Link to={'/login'}>
                       <S.InnerLi>로그인</S.InnerLi>
@@ -81,7 +85,7 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Link to={'mypage'}>
+                    <Link to={'/mypage'}>
                       <S.InnerLi>마이페이지</S.InnerLi>
                     </Link>
                     <button
@@ -104,3 +108,9 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
+
+

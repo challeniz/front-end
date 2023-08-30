@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import HeartButton from '../heart/heart';
 
-export const ListWrap = styled.div`
-  height: 100vh;
-`;
+export const ListWrap = styled.div``;
 
 export const CategoryTab = styled.div`
   display: flex;
@@ -16,6 +14,10 @@ export const CategoryTab = styled.div`
       font-weight: bold;
     }
   }
+`;
+
+export const SearchResult = styled.div`
+  margin-top: 100px;
 `;
 
 export const ContentWrap = styled.div`

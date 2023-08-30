@@ -10,7 +10,6 @@ import {
   passwordRegex,
 } from '../../components/common/validation/validation';
 import { ROUTE } from '../../routes';
-import axios from 'axios';
 import { apiInstance } from '../../utils/api';
 
 //로그인 페이지 컴포넌트
@@ -68,17 +67,17 @@ const LoginPage = () => {
       });
 
       if (response.status === 201) {
-        const token = response.data.token;
+        const token = response.data.access_token;
         alert('로그인에 성공하였습니다.');
         localStorage.setItem('token', token);
-        console.log('token', token)
+        console.log('token', token);
         navigate('/'); // 로그인 성공 시 홈 메인페이지로 이동
       } else {
         alert('등록되지 않은 회원입니다.');
       }
     } catch (error) {
       console.error('로그인 에러:', error);
-      alert('로그인에 실패하였습니다.');
+      alert('로그인에 실패하였습니다..');
     }
   };
 
