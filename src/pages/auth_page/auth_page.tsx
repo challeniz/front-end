@@ -24,6 +24,7 @@ const AuthPage: React.FC = () => {
     if (inputValue.length <= 70) {
       setText(inputValue);
     }
+    
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,26 +34,27 @@ const AuthPage: React.FC = () => {
       setSelectedImage(file);
       setImageButtonText(""); // 이미지 업로드 후 버튼 내용 변경
     }
+    console.log(selectedImage)
   };
 
 // api 나오면 연결하기!!!
-  // const joinHandler = async () => {
-  //   try {
-  //     const response = await axios.post('URL', {
-  //       id,
-  //       image,
-  //       text,
-  //     });
-  //     if(response.status.201) {
-  //       실행코드 alert('등록에 성공했스비다.')
-  //     실행과 동시에 내인증현황 html 뿌려주는 기능도 코드 적어야함
-  //          navigator('/detailpage')
-  //     } 
-  //   } catch (error) {
-  //     console.error('로그인 에러:', error);
-  //     alert('로그인에 실패하였습니다.');
-  //   }
-  // }
+//   const joinHandler = async () => {
+//     try {
+//       const response = await axios.post('URL', {
+//         id,
+//         image,
+//         text,
+//       });
+//       if(response.status.201) {
+//         실행코드 alert('등록에 성공했스비다.')
+//       실행과 동시에 내인증현황 html 뿌려주는 기능도 코드 적어야함
+//            navigator('/detailpage')
+//       } 
+//     } catch (error) {
+//       console.error('로그인 에러:', error);
+//       alert('로그인에 실패하였습니다.');
+//     }
+//   }
 
 
   // const handleLabelClick = () => {
