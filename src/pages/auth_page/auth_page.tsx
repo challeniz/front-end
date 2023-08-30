@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import * as S from './auth_page.style';
 import { ROUTE } from '../../routes';
-import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import WhiteBox from '../../components/form/white_box/white_box/white_box';
@@ -36,7 +35,7 @@ const AuthPage: React.FC = () => {
 
   return (
     <>
-      <Header />
+ 
       <Wrapper>
         <WhiteBox>
           <WhiteBoxTitle>챌린지 인증</WhiteBoxTitle>
@@ -61,7 +60,7 @@ const AuthPage: React.FC = () => {
           </WhiteBoxContents>
         </WhiteBox>
       </Wrapper>
-      <Footer />
+  
     </>
   );
 };

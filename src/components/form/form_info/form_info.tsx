@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, {
   ChangeEvent,
   useEffect,
@@ -5,6 +6,7 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import useImageUploader from '../../../hook/imgfiler';
 import ReactDatePicker from '../../calendar/calendar';
 import ReactDatePicker2 from '../../calendar/calendar2';
@@ -22,7 +24,6 @@ import WhiteBoxContents from '../white_box/white_box_contents/white_box_contents
 import WhiteBoxTitle from '../white_box/white_box_title/white_box_title';
 import * as S from './form_info.style';
 import { apiInstance } from '../../../utils/api';
-import { Link, useNavigate, useParams } from 'react-router-dom';
 
 interface ChallengeFormDataType {
   title: string;
@@ -33,6 +34,7 @@ interface ChallengeFormDataType {
   recru_open_date: string;
   recru_end_date: string;
   tag: string[];
+
 }
 
 interface FormInfoProps {
@@ -53,8 +55,8 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     joinningDate: [null, null],
     startDate: [null, null],
   });
+  const { _id } = useParams();
   const navigate = useNavigate();
-  const { id } = useParams();
   useEffect(() => {
     // joinningDate가 바뀌면 startDate를 자동 변환
     if (date.joinningDate[1]) {
@@ -82,6 +84,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     recru_open_date: '',
     recru_end_date: '',
     tag: [],
+
   });
 
   //태그
@@ -106,14 +109,14 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
 
   const handleChallengeSubmit = async () => {
     try {
-      const { title } = data;
+      const { title , tag } = data;
       if (title.trim() === '' || title == null) {
         alert('주제를 입력하세요.');
       } else if (!isImageSelected) {
         alert('이미지를 선택하세요.');
       } else if (textValue.trim() === '' || textValue == null) {
         alert('챌린지설명을 입력하세요.');
-      } else if (tags.length === 0) {
+      } else if (tag.length === 0) {
         alert('태그를 입력하세요.');
         console.log('설명', tags);
       } else if (!isAgreed) {
@@ -129,21 +132,14 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         recru_open_date: date.joinningDate[0],
         recru_end_date: date.joinningDate[1],
         tag: data.tag,
+
       });
 
       if (response.status === 201) {
-        // 생성된 챌린지의 id 값 가져오기
-        const createdChallengeId = response.data.id;
-
-        // 챌린지 구독 정보 업데이트
-        await apiInstance.patch(
-          `/challenges/subscription/${createdChallengeId}`,
-          {}
-        );
-
-        // 챌린지 개설 성공 후 추가 로직
+        console.log('response', response);
+        // 챌린지 생성 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
-        navigate(`/detail/${createdChallengeId}`);
+        navigate(`/detail/${response.data._id}`);
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
@@ -153,7 +149,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       }
     }
   };
-
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {

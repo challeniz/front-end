@@ -5,6 +5,8 @@ import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
+import HeartImg from '../../../assets/image/heart_red.png';
+import EmptyHeartImg from '../../../assets/image/heart.png';
 
 // 예시로 Challenge 타입을 정의
 export interface Challenge {
@@ -28,6 +30,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   handleCategoryClick,
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
+  const [wishCount, setWishCount] = useState(808);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,24 +54,34 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
         console.error('Error fetching data:', error);
       }
     };
-    // console.log(fetchData)
-    // 초기 로딩 시 데이터 가져오기
     fetchData();
-  }, [challengeList]);
+  }, []);
 
-  const toggleLike = (id: string) => {
-    setChallengeList((prevList) => {
-      const updatedList = prevList.map((challenge) => {
-        if (challenge.id === id) {
-          return {
-            ...challenge,
-            like: !challenge.like,
-          };
+  const wishCountHandler = async (challengeId: string) => {
+    const updatedChallengeList = challengeList.map((challenge) => {
+      if (challenge.id === challengeId) {
+        const newLikeValue = !challenge.like;
+        console.log(`Challenge ${challenge.id} like: ${newLikeValue}`);
+
+        if (newLikeValue) {
+          try {
+            apiInstance.patch(`/challenges/zzim/${challenge.id}`);
+            console.log(`Challenge ${challenge.id} liked and saved to /zzim`);
+          } catch (error) {
+            console.error(`Error saving challenge to /zzim:`, error);
+          }
         }
-        return challenge;
-      });
-      return updatedList;
+
+        return {
+          ...challenge,
+          like: newLikeValue,
+        };
+      }
+      return challenge;
     });
+
+    setChallengeList(updatedChallengeList);
+    setWishCount((prevCount) => prevCount + 1);
   };
 
   const filteredChallengeList = selectedCategory
@@ -83,10 +96,11 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
         {filteredChallengeList.map((challenge) => (
           <S.ContentWrap key={challenge.id}>
             <S.ImgStyled>
-              <img src="" alt={`Challenge`} />
+              <img src="" alt={`Challenge`} className="thumbnail" />
               <S.StyledHeartButton
-                like={challenge.like}
-                onClick={() => toggleLike(challenge.id)}
+                src={challenge.like ? HeartImg : EmptyHeartImg}
+                alt={challenge.like ? 'Liked' : 'Not Liked'}
+                onClick={() => wishCountHandler(challenge.id)}
               />
             </S.ImgStyled>
             <S.TabWrap>
