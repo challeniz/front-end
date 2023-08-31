@@ -39,6 +39,11 @@ export const ROUTE = {
     link: '/challenges',
     element: ListPage,
   },
+  CATEPAGE: {
+    path: '/challenges/:name',
+    link: '/challenges',
+    element: ListPage,
+  },
   SEARCHPAGE: {
     path: '/challengesresult',
     link: '/challengesresult',

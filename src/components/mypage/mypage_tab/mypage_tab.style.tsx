@@ -67,11 +67,7 @@ export const StatusWrap = styled.div`
   }
 `;
 
-export const StatusGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 40px;
-`;
+export const StatusGrid = styled.div``;
 
 export const AuthInfo = styled.div`
   display: flex;
