@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, {
   ChangeEvent,
   useEffect,
@@ -5,6 +6,7 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import useImageUploader from '../../../hook/imgfiler';
 import ReactDatePicker from '../../calendar/calendar';
 import ReactDatePicker2 from '../../calendar/calendar2';
@@ -52,7 +54,9 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     joinningDate: [null, null],
     startDate: [null, null],
   });
-
+  const { _id } = useParams();
+  const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   useEffect(() => {
     // joinningDate가 바뀌면 startDate를 자동 변환
     if (date.joinningDate[1]) {
@@ -90,7 +94,9 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       tag: newTags as string[],
     }));
   };
-  console.log('태그', data);
+  console.log('태그', tags);
+
+  //내용
   const [textValue, setTextValue] = useState<string>('');
   const handleSetValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextValue(e.target.value);
@@ -104,14 +110,15 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
 
   const handleChallengeSubmit = async () => {
     try {
-      const { title } = data;
+      const { title, tag } = data;
       if (title.trim() === '' || title == null) {
         alert('주제를 입력하세요.');
       } else if (!isImageSelected) {
         alert('이미지를 선택하세요.');
       } else if (textValue.trim() === '' || textValue == null) {
         alert('챌린지설명을 입력하세요.');
-      } else if (tags.length === 0) {
+      } else if (tag.length === 0) {
+        alert('태그를 입력하세요.');
         console.log('설명', tags);
       } else if (!isAgreed) {
         alert('챌린지를 개설하려면 약관에 동의해야 합니다.');
@@ -162,6 +169,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       if (response.status === 201) {
         // 챌린지 생성 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
+        navigate(`/detail/${response.data._id}`);
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
@@ -202,9 +210,11 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files && e.target.files[0];
     if (selectedFile) {
-      setIsImageSelected(true); // 이미지 선택됨
+      setIsImageSelected(true);
+      setSelectedImage(selectedFile); // 이미지 선택됨
     } else {
-      setIsImageSelected(false); // 이미지 선택되지 않음
+      setIsImageSelected(false);
+      setSelectedImage(null); // 이미지 선택되지 않음
       alert('이미지를 선택해주세요.');
     }
     console.log('이미지', selectedFile);
@@ -264,7 +274,9 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                   }
                 }}
               >
-                <S.AvatarImage src={imgSrc} alt="Uploaded" />
+                {selectedImage && (
+                  <S.AvatarImage src={URL.createObjectURL(selectedImage)} />
+                )}
               </S.AvatarWrapper>
               <S.InputImg
                 type="file"
