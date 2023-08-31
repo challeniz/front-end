@@ -14,6 +14,7 @@ import useImageUploader from '../../hook/imgfiler';
 
 interface AuthDataType {
   description: string;
+  file: string;
 }
 
 const AuthPage: React.FC = () => {
@@ -23,6 +24,7 @@ const AuthPage: React.FC = () => {
   const { id } = useParams();
   const [data, setData] = useState<AuthDataType>({
     description: '',
+    file: '',
   });
 
   // 내용
@@ -82,13 +84,14 @@ const AuthPage: React.FC = () => {
       console.log('check', isImageSelected);
       const response = await apiInstance.post(`/posts/upload/${id}`, {
         description: text,
+        file: isImageSelected,
       });
       console.log('API 응답:', response);
       if (response.status === 201) {
         console.log('response', response);
         // 챌린지 생성 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
-        navigate(`/detail/${response.data._id}`);
+        navigate(`/detail/${response.data.id}`);
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
