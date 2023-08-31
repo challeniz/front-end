@@ -1,9 +1,11 @@
 import React from 'react';
 import * as S from './list_tab.style';
+import { Link } from 'react-router-dom';
+import { ROUTE } from '../../../routes';
 
 interface ListTabProps {
-  selectedCategory: string; // ListContent 컴포넌트에서 전달된 선택된 카테고리
-  handleCategoryClick: (category: string) => void; // ListContent 컴포넌트로부터 전달된 함수
+  selectedCategory: string;
+  handleCategoryClick: (category: string) => void;
 }
 
 const menuArr = [

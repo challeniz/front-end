@@ -61,17 +61,15 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
     const updatedChallengeList = challengeList.map((challenge) => {
       if (challenge.id === challengeId) {
         const newLikeValue = !challenge.like;
-        console.log(`Challenge ${challenge.id} like: ${newLikeValue}`);
-
-        if (newLikeValue) {
-          try {
+        try {
+          if (newLikeValue) {
             apiInstance.patch(`/challenges/zzim/${challenge.id}`);
-            console.log(`Challenge ${challenge.id} liked and saved to /zzim`);
-          } catch (error) {
-            console.error(`Error saving challenge to /zzim:`, error);
+          } else {
+            apiInstance.patch(`/challenges/zzim/${challenge.id}`);
           }
+        } catch (error) {
+          console.error(`Error updating challenge like status:`, error);
         }
-
         return {
           ...challenge,
           like: newLikeValue,

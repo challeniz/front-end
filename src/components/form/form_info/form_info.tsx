@@ -90,7 +90,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       tag: newTags as string[],
     }));
   };
-  console.log('태그', tags);
+  console.log('태그', data);
   const [textValue, setTextValue] = useState<string>('');
   const handleSetValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextValue(e.target.value);
@@ -112,25 +112,54 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       } else if (textValue.trim() === '' || textValue == null) {
         alert('챌린지설명을 입력하세요.');
       } else if (tags.length === 0) {
-        alert('태그를 입력하세요.');
         console.log('설명', tags);
       } else if (!isAgreed) {
         alert('챌린지를 개설하려면 약관에 동의해야 합니다.');
       }
 
-      const response = await apiInstance.post('challenges/create', {
-        title: data.title,
-        start_date: date.startDate[0],
-        end_date: date.startDate[1],
-        category: data.cate,
-        description: textValue,
-        recru_open_date: date.joinningDate[0],
-        recru_end_date: date.joinningDate[1],
-        tag: data.tag,
+      const formData = new FormData();
+      formData.append('title', data.title);
+      formData.append('category', data.cate);
+      formData.append('description', textValue);
+      for (let i = 0; i < Math.min(3, data.tag.length); i++) {
+        formData.append('tag', data.tag[i]);
+      }
+
+      if (date.joinningDate[0]) {
+        formData.append('recru_open_date', date.joinningDate[0]);
+      }
+      if (date.joinningDate[1]) {
+        formData.append('recru_end_date', date.joinningDate[1]);
+      }
+      if (date.startDate[0]) {
+        formData.append('start_date', date.startDate[0]);
+      }
+      if (date.startDate[1]) {
+        formData.append('end_date', date.startDate[1]);
+      }
+
+      if (fileInput.current) {
+        const selectedFile =
+          fileInput.current.files && fileInput.current.files[0];
+        if (selectedFile) {
+          formData.append('file', selectedFile);
+        } else {
+          alert('이미지를 선택해주세요.');
+          return;
+        }
+      } else {
+        alert('이미지 파일이 존재하지 않습니다.');
+        return;
+      }
+
+      const response = await apiInstance.post('challenges/create', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        data: formData,
       });
 
       if (response.status === 201) {
-        console.log('response', response);
         // 챌린지 생성 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
       }
@@ -142,6 +171,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       }
     }
   };
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -150,6 +180,16 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       ...prevData,
       [name]: value,
     }));
+    console.log(data.cate);
+  };
+
+  const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      cate: value,
+    }));
+    console.log(value);
   };
 
   // 이미지지업로드
@@ -191,8 +231,8 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
               <S.LabelStyled htmlFor="formCate">카테고리</S.LabelStyled>
               <S.SelectStyled
                 id="formCate"
-                value={data.cate}
-                onChange={handleChange}
+                value={data.cate} // 선택된 값이 상태로부터 표시됨
+                onChange={handleChangeSelect} // 선택값 변경 시 상태 업데이트
               >
                 <option value="건강">건강</option>
                 <option value="취미">취미</option>
@@ -224,7 +264,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                   }
                 }}
               >
-                <S.AvatarImage src={imgSrc} />
+                <S.AvatarImage src={imgSrc} alt="Uploaded" />
               </S.AvatarWrapper>
               <S.InputImg
                 type="file"

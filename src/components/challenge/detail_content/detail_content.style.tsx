@@ -15,10 +15,17 @@ export const H4Styled = styled.h4`
   padding-bottom: 25px;
 `;
 
-export const ImgStyled = styled.div`
+export const ImgStyledWrapper = styled.div`
   width: 100%;
   height: 450px;
   background-color: #d9d9d9;
   border-radius: 25px;
   margin-bottom: 55px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;

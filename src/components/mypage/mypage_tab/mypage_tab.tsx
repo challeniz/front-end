@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './mypage_tab.style';
 import StatusInfo from '../status_info/status_info';
 import HeartInfo from '../heart_info/heart_info';
 import CompleteInfo from '../complete_info/complete_info';
-import AuthList from '../../common/auth_list/auth_list';
+import { apiInstance } from '../../../utils/api';
 
 const menuArr = [
   { name: '내 챌린지 현황', content: 'Tab menu ONE' },
@@ -11,13 +11,10 @@ const menuArr = [
 ];
 
 export const MyPageTab: React.FC = () => {
-  // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
-  const [currentTab, clickTab] = useState<number>(0);
+  const [currentTab, setCurrentTab] = useState<number>(0);
 
   const selectMenuHandler = (index: number) => {
-    // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
-    // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
-    clickTab(index);
+    setCurrentTab(index);
   };
 
   return (
@@ -40,9 +37,6 @@ export const MyPageTab: React.FC = () => {
             <S.StatusWrap>
               <h2>참여중인 챌린지</h2>
               <S.StatusGrid>
-                <StatusInfo />
-                <StatusInfo />
-                <StatusInfo />
                 <StatusInfo />
               </S.StatusGrid>
             </S.StatusWrap>
@@ -76,7 +70,7 @@ export const MyPageTab: React.FC = () => {
                 <h3>22개</h3>
               </div>
             </S.AuthInfo>
-            <AuthList />
+            {/* <AuthList /> */}
           </S.StatusWrap>
         )}
       </S.Desc>

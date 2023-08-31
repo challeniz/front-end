@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const StatusWrap = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+`;
+
 export const InfoFlex = styled.div`
   display: flex;
   align-items: center;
@@ -16,9 +23,9 @@ export const StyledImg = styled.div`
 `;
 
 export const InfoWrap = styled.div`
-  display: flex;
-  width: 300px;
-  flex-direction: column;
+  // display: flex;
+  // width: 300px;
+  // flex-direction: column;
 `;
 
 export const ButtonAuth = styled.div`
