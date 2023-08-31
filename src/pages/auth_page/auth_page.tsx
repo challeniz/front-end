@@ -64,7 +64,7 @@ const AuthPage: React.FC = () => {
       setSelectedImage(null); // 이미지 선택되지 않음
       alert('이미지를 선택해주세요.');
     }
-    console.log('이미지', selectedFile);
+    console.log('이미지1', selectedFile);
     console.log('이미지', imgSrc);
   };
 
@@ -75,16 +75,34 @@ const AuthPage: React.FC = () => {
     console.log('데이터2', data);
 
     try {
-      const { description } = data;
       if (text.trim() === '' || text == null) {
         alert('내용을 입력하세요.');
       } else if (!isImageSelected) {
         alert('이미지를 선택하세요.');
       }
+
+      const formData = new FormData();
+      formData.append('dedescription', text);
+
+      if (fileInput.current) {
+        const selectedFile =
+          fileInput.current.files && fileInput.current.files[0];
+        if (selectedFile) {
+          formData.append('file', selectedFile);
+        } else {
+          alert('이미지를 선택해주세요.');
+          return;
+        }
+      } else {
+        alert('이미지 파일이 존재하지 않습니다.');
+        return;
+      }
       console.log('check', isImageSelected);
-      const response = await apiInstance.post(`/posts/upload/${id}`, {
-        description: text,
-        file: isImageSelected,
+      const response = await apiInstance.post(`/posts/upload/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        data: formData,
       });
       console.log('API 응답:', response);
       if (response.status === 201) {
