@@ -34,7 +34,6 @@ interface ChallengeFormDataType {
   recru_open_date: string;
   recru_end_date: string;
   tag: string[];
-
 }
 
 interface FormInfoProps {
@@ -57,6 +56,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   });
   const { _id } = useParams();
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   useEffect(() => {
     // joinningDate가 바뀌면 startDate를 자동 변환
     if (date.joinningDate[1]) {
@@ -84,7 +84,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     recru_open_date: '',
     recru_end_date: '',
     tag: [],
-
   });
 
   //태그
@@ -96,6 +95,8 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }));
   };
   console.log('태그', tags);
+
+  //내용
   const [textValue, setTextValue] = useState<string>('');
   const handleSetValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextValue(e.target.value);
@@ -109,7 +110,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
 
   const handleChallengeSubmit = async () => {
     try {
-      const { title , tag } = data;
+      const { title, tag } = data;
       if (title.trim() === '' || title == null) {
         alert('주제를 입력하세요.');
       } else if (!isImageSelected) {
@@ -132,7 +133,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         recru_open_date: date.joinningDate[0],
         recru_end_date: date.joinningDate[1],
         tag: data.tag,
-
       });
 
       if (response.status === 201) {
@@ -169,9 +169,11 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files && e.target.files[0];
     if (selectedFile) {
-      setIsImageSelected(true); // 이미지 선택됨
+      setIsImageSelected(true);
+      setSelectedImage(selectedFile); // 이미지 선택됨
     } else {
-      setIsImageSelected(false); // 이미지 선택되지 않음
+      setIsImageSelected(false);
+      setSelectedImage(null); // 이미지 선택되지 않음
       alert('이미지를 선택해주세요.');
     }
     console.log('이미지', selectedFile);
@@ -230,8 +232,9 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                     fileInput.current.click();
                   }
                 }}
-              >
-                <S.AvatarImage src={imgSrc} />
+              >{selectedImage && (
+                <S.AvatarImage src={URL.createObjectURL(selectedImage)} />
+                )}
               </S.AvatarWrapper>
               <S.InputImg
                 type="file"
