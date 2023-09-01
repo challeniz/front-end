@@ -46,11 +46,17 @@ export const ImgStyled = styled.div`
     height: 100%;
     object-fit: cover;
   }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
+export const ImgWrap = styled.div``;
+
 export const StyledHeartButton = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 30px !important;
+  height: 30px !important;
   position: absolute;
   top: 20px;
   right: 20px;

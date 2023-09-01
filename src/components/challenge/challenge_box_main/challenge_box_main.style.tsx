@@ -29,7 +29,6 @@ export const ContentsWrap = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 40px;
   grid-row-gap: 50px;
-  
 `;
 
 export const ImgStyled = styled.div`
@@ -48,10 +47,11 @@ export const ImgStyled = styled.div`
     object-fit: cover;
   }
 `;
+export const ImgWrap = styled.div``;
 
-export const StyledHeartButton = styled(HeartButton)`
-  width: 30px;
-  height: 30px;
+export const StyledHeartButton = styled.img`
+  width: 30px !important;
+  height: 30px !important;
   position: absolute;
   top: 20px;
   right: 20px;

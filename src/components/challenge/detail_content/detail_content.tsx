@@ -5,19 +5,17 @@ import { Tab } from '../detail_tab/detail_tab';
 import { apiInstance } from '../../../utils/api';
 
 const DetailContent = () => {
-  const [imageName, setImageName] = useState('');
+  const [image, setImage] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
     async function fetchChallengeData() {
       try {
-        const challengeResponse = await apiInstance.get(`challenges/${id}`);
-        const data = challengeResponse.data;
-        const exten = data.challenge.mainImg.contentType;
-        const bin = data.img;
-        const imageName = 'data:' + exten + ';base64,' + bin;
+        const challengeResponse = await apiInstance.get(`/challenges/${id}`);
+        // 수정한곳
+        const data = challengeResponse.data.challenge.mainImg;
 
-        setImageName(imageName);
+        setImage(data);
       } catch (error) {
         console.error('Error fetching challenge data:', error);
       }
@@ -29,7 +27,7 @@ const DetailContent = () => {
   return (
     <S.DetailContents>
       <S.ImgStyledWrapper>
-        <img src={imageName} alt="Challenge" />
+        <img src={image} alt="Challenge" />
       </S.ImgStyledWrapper>
       <Tab />
     </S.DetailContents>

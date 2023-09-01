@@ -37,7 +37,9 @@ const ApplicationPage: React.FC = () => {
     end_date: '',
     title: '',
     users: '',
+    mainImg: '',
   });
+
   const [isAgreed, setIsAgreed] = useState(false);
   const [form, setForm] = useState<FormData>(initialFormState);
 
@@ -144,6 +146,7 @@ const ApplicationPage: React.FC = () => {
             }월 ${endDate.getDate()}일`,
             title: data.challenge.title,
             users: data.challenge.users,
+            mainImg: data.challenge.mainImg,
           });
           setForm({
             name: data.name,
@@ -168,7 +171,9 @@ const ApplicationPage: React.FC = () => {
             <WhiteBox>
               <WhiteBoxContents>
                 <S.ContentWrap>
-                  <S.ImgWrap></S.ImgWrap>
+                  <S.ImgWrap>
+                    <img src={challengeInfo.mainImg} alt="Challenge" />
+                  </S.ImgWrap>
                   <S.TextWrap>
                     <>
                       <h5>
@@ -236,7 +241,7 @@ const ApplicationPage: React.FC = () => {
           <FormButton>
             <FormCancelButton>취소하기</FormCancelButton>
             <FormSubmitButton onClick={handleChallengeSubmit}>
-              참가하기
+              참여하기
             </FormSubmitButton>
           </FormButton>
         </Wrapper>

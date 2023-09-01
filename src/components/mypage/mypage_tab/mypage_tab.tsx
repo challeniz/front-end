@@ -21,12 +21,6 @@ export const MyPageTab: React.FC = () => {
   return (
     <div>
       <S.StatusWrap>
-        <h2>개설한 챌린지</h2>
-        <S.StatusGrid>
-          <CompleteInfo />
-        </S.StatusGrid>
-      </S.StatusWrap>
-      <S.StatusWrap>
         <h2>참여중인 챌린지</h2>
         <S.StatusGrid>
           <StatusInfo />

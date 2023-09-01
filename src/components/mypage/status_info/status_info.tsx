@@ -6,7 +6,7 @@ import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 
 interface Challenge {
-  image: string;
+  mainImg: string;
   title: string;
   start_date: string;
   end_date: string;
@@ -31,7 +31,7 @@ const StatusInfo = () => {
               const endDate = new Date(challenge.end_date);
 
               return {
-                image: challenge.image,
+                image: challenge.mainImg,
                 title: challenge.title,
                 start_date: `${startDate.getFullYear()}년 ${
                   startDate.getMonth() + 1
@@ -58,7 +58,9 @@ const StatusInfo = () => {
     <S.StatusWrap>
       {challengeData.map((challenge, index) => (
         <S.InfoWrap key={index}>
-          <S.StyledImg />
+          <S.ImgWrap>
+            <img src={challenge.mainImg} alt="Challenge" />
+          </S.ImgWrap>
           <S.InfoFlex>
             <div>
               <h3>{challenge.title}</h3>

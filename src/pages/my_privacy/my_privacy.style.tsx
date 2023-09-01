@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const PrivacyWrap = styled.div`
+  padding-top: 100px;
+`;
+
 export const StyleH1 = styled.h1`
   font-size: 38px;
   padding-bottom: 30px;

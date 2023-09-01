@@ -58,7 +58,7 @@ export const StatusWrap = styled.div`
   }
   h3 {
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
     padding-bottom: 10px;
   }
   h4 {

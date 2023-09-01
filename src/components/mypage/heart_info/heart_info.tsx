@@ -5,7 +5,7 @@ import { ROUTE } from '../../../routes';
 import { Link, useParams } from 'react-router-dom';
 
 interface Challenge {
-  image: string;
+  mainImg: string;
   title: string;
   start_date: string;
   end_date: string;
@@ -15,49 +15,37 @@ interface Challenge {
 const HeartInfo = () => {
   const { id } = useParams();
   const [likeUserData, setLikeUserData] = useState<Challenge[]>([]);
+
   useEffect(() => {
-    async function fetchUserData() {
+    async function fetchChallengeData() {
       try {
         const challengeResponse = await apiInstance.get('/users/mypageChall');
-        const data = challengeResponse.data;
+        if (challengeResponse.status === 200) {
+          const challenges: Challenge[] =
+            challengeResponse.data.zzimChallenge.map((challenge: any) => ({
+              ...challenge,
+              start_date: new Date(challenge.start_date).toLocaleDateString(),
+              end_date: new Date(challenge.end_date).toLocaleDateString(),
+              mainImg: challenge.mainImg,
+            }));
 
-        if (data && data.challenge && data.challenge.length > 0) {
-          const challengeArray = data.challenge;
-
-          const processedChallenges = challengeArray.map(
-            (challenge: Challenge) => {
-              const startDate = new Date(challenge.start_date);
-              const endDate = new Date(challenge.end_date);
-
-              return {
-                image: challenge.image,
-                title: challenge.title,
-                start_date: `${startDate.getFullYear()}년 ${
-                  startDate.getMonth() + 1
-                }월 ${startDate.getDate()}일`,
-                end_date: `${endDate.getFullYear()}년 ${
-                  endDate.getMonth() + 1
-                }월 ${endDate.getDate()}일`,
-                id: challenge.id,
-              };
-            }
-          );
-
-          setLikeUserData(processedChallenges);
+          setLikeUserData(challenges);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching challenge data:', error);
       }
     }
 
-    fetchUserData();
+    fetchChallengeData();
   }, []);
 
   return (
     <S.StatusWrap>
       {likeUserData.map((challenge, index) => (
         <div key={index}>
-          <S.StyledImg />
+          <S.ImgWrap>
+            <img src={challenge.mainImg} alt="Challenge" />
+          </S.ImgWrap>
           <S.InfoFlex>
             <div>
               <h3>{challenge.title}</h3>
