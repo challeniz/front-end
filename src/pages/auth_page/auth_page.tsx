@@ -158,9 +158,9 @@ const AuthPage: React.FC = () => {
                 <S.FormCancelButton onClick={handleCancelClick}>
                   <Link to={ROUTE.DETAILPAGE.link}>취소하기</Link>
                 </S.FormCancelButton>
-                <S.FormCancelButton onClick={handleChallengeSubmit}>
+                <S.FormSubmitButton onClick={handleChallengeSubmit}>
                   <Link to={ROUTE.DETAILPAGE.link}>등록하기</Link>
-                </S.FormCancelButton>
+                </S.FormSubmitButton>
                 {/* <S.FormCancelButton onClick={joinHandler} ></S.FormCancelButton>  */}
               </S.FormButton>
             </WhiteBoxContents>
