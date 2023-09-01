@@ -67,7 +67,7 @@ export const NavItem = styled.li`
   font-size: 18px;
 
   &:hover {
-    // color: #339af0;
+    color: #339af0;
     ul {
       visibility: visible;
     }
@@ -123,6 +123,10 @@ export const SubMenu = styled.ul`
   left: 50%;
   transform: translateX(-50%);
   z-index: 99;
+
+  button {
+    background-color: transparent;
+  }
 `;
 
 export const InnerLi = styled.li`

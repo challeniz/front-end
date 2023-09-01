@@ -50,4 +50,5 @@ export const Tag = styled.div`
 export const TagListBlock = styled.div`
   display: flex;
   margin-top: 10px;
+  margin-left: 25px;
 `;

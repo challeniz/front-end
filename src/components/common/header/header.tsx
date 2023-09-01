@@ -57,7 +57,7 @@ const Header = () => {
             <Link to={ROUTE.LISTPAGE.link}>
               <S.NavItem>
                 진행중인챌린지
-                <S.SubMenu>
+                {/* <S.SubMenu>
                   <S.InnerLi>
                     <FaHeartPulse />
                     건강
@@ -78,13 +78,13 @@ const Header = () => {
                     <FaLeaf />
                     환경
                   </S.InnerLi>
-                </S.SubMenu>
+                </S.SubMenu> */}
               </S.NavItem>
             </Link>
             {/* <Link to={ROUTE.NEWPAGE.link}> */}
-              <S.NavItem onClick={handleChallengeCreationClick}>
-                챌린지개설하기
-              </S.NavItem>
+            <S.NavItem onClick={handleChallengeCreationClick}>
+              챌린지개설하기
+            </S.NavItem>
             {/* </Link> */}
           </S.NavList>
         </S.HeaderNav>
@@ -113,7 +113,7 @@ const Header = () => {
                         window.location.reload();
                       }}
                     >
-                      <S.InnerLi>로그 아웃</S.InnerLi>
+                      <S.InnerLi>로그아웃</S.InnerLi>
                     </button>
                   </>
                 )}
