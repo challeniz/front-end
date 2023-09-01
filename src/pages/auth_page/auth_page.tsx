@@ -102,7 +102,6 @@ const AuthPage: React.FC = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-        data: formData,
       });
       console.log('API 응답:', response);
       if (response.status === 201) {

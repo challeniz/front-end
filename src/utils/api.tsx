@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const apiInstance = axios.create({
   baseURL: 'http://34.64.62.80:3000/',
-  timeout: 10000,
+  timeout: 15000,
   headers: { 'Content-Type': 'application/json' }
 });
 
