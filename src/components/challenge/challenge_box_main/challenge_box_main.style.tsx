@@ -41,12 +41,17 @@ export const ImgStyled = styled.div`
   margin: 0 auto;
   border: 1px solid #eeeeee;
 
-  img {
+  &.thumbnail {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
+
 export const ImgWrap = styled.div``;
 
 export const StyledHeartButton = styled.img`
@@ -56,6 +61,7 @@ export const StyledHeartButton = styled.img`
   top: 20px;
   right: 20px;
   z-index: 10;
+  cursor: pointer;
 `;
 
 export const TabWrap = styled.div`

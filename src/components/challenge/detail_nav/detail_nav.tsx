@@ -37,9 +37,26 @@ const DetailNav = () => {
   });
 
   //찜하기
-  const handleLikeClick = () => {
-    setIsLiked(!isLiked);
+  const handleLikeClick = async () => {
+    try {
+      await apiInstance.patch(`/challenges/zzim/${id}`);
+
+      setIsLiked(!isLiked);
+      localStorage.setItem('isLiked', JSON.stringify(!isLiked));
+    } catch (error) {
+      console.error('Error updating like status:', error);
+    }
   };
+
+  useEffect(() => {
+    // 로컬 스토리지에서 찜하기 상태 가져오기
+    const storedIsLiked = localStorage.getItem('isLiked');
+
+    // 로컬 스토리지에 'isLiked' 키가 존재하고, 값이 null이 아닌 경우에만 파싱하여 설정
+    if (storedIsLiked !== null) {
+      setIsLiked(JSON.parse(storedIsLiked));
+    }
+  }, []);
 
   //
   useEffect(() => {

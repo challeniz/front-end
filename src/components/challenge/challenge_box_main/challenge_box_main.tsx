@@ -73,6 +73,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
           } else {
             apiInstance.patch(`/challenges/zzim/${challenge.id}`);
           }
+          console.log(newLikeValue);
         } catch (error) {
           console.error(`Error updating challenge like status:`, error);
         }
@@ -95,11 +96,11 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
             <S.ContentWrap key={index}>
               <S.ImgStyled>
                 <img src={challenge.mainImg} alt="Challenge" />
-                <S.StyledHeartButton
+                {/* <S.StyledHeartButton
                   src={challenge.like ? HeartImg : EmptyHeartImg}
                   alt={challenge.like ? 'Liked' : 'Not Liked'}
                   onClick={() => wishCountHandler(challenge.id)}
-                />
+                /> */}
               </S.ImgStyled>
               <S.TabWrap>
                 {challenge.tag.map((tag, index) => (
