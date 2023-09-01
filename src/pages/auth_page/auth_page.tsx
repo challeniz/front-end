@@ -14,6 +14,7 @@ import useImageUploader from '../../hook/imgfiler';
 
 interface AuthDataType {
   description: string;
+  file: string;
 }
 
 const AuthPage: React.FC = () => {
@@ -23,6 +24,7 @@ const AuthPage: React.FC = () => {
   const { id } = useParams();
   const [data, setData] = useState<AuthDataType>({
     description: '',
+    file: '',
   });
 
   // 내용
@@ -62,7 +64,7 @@ const AuthPage: React.FC = () => {
       setSelectedImage(null); // 이미지 선택되지 않음
       alert('이미지를 선택해주세요.');
     }
-    console.log('이미지', selectedFile);
+    console.log('이미지1', selectedFile);
     console.log('이미지', imgSrc);
   };
 
@@ -73,22 +75,40 @@ const AuthPage: React.FC = () => {
     console.log('데이터2', data);
 
     try {
-      const { description } = data;
       if (text.trim() === '' || text == null) {
         alert('내용을 입력하세요.');
       } else if (!isImageSelected) {
         alert('이미지를 선택하세요.');
       }
+
+      const formData = new FormData();
+      formData.append('description', text);
+
+      if (fileInput.current) {
+        const selectedFile =
+          fileInput.current.files && fileInput.current.files[0];
+        if (selectedFile) {
+          formData.append('file', selectedFile);
+        } else {
+          alert('이미지를 선택해주세요.');
+          return;
+        }
+      } else {
+        alert('이미지 파일이 존재하지 않습니다.');
+        return;
+      }
       console.log('check', isImageSelected);
-      const response = await apiInstance.post(`/posts/upload/${id}`, {
-        description: text,
+      const response = await apiInstance.post(`/posts/upload/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
       console.log('API 응답:', response);
       if (response.status === 201) {
         console.log('response', response);
         // 챌린지 생성 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
-        navigate(`/detail/${response.data._id}`);
+        navigate(`/detail/${id}`);
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
