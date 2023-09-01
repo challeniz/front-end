@@ -29,7 +29,6 @@ export const ContentsWrap = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 40px;
   grid-row-gap: 50px;
-  
 `;
 
 export const ImgStyled = styled.div`
@@ -42,20 +41,27 @@ export const ImgStyled = styled.div`
   margin: 0 auto;
   border: 1px solid #eeeeee;
 
-  img {
+  &.thumbnail {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
-export const StyledHeartButton = styled(HeartButton)`
-  width: 30px;
-  height: 30px;
+export const ImgWrap = styled.div``;
+
+export const StyledHeartButton = styled.img`
+  width: 30px !important;
+  height: 30px !important;
   position: absolute;
   top: 20px;
   right: 20px;
   z-index: 10;
+  cursor: pointer;
 `;
 
 export const TabWrap = styled.div`

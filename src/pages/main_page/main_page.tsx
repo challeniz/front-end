@@ -86,7 +86,9 @@ const MainPage = () => {
 
   useEffect(() => {
     if (challengeBoxRef.current) {
-      challengeBoxRef.current.style.overflow = isWrapperOverflowHidden ? 'hidden' : 'visible';
+      challengeBoxRef.current.style.overflow = isWrapperOverflowHidden
+        ? 'hidden'
+        : 'visible';
     }
   }, [isWrapperOverflowHidden]);
   // 필터링
@@ -119,7 +121,7 @@ const MainPage = () => {
         <S.ContentsList>
           <S.ProgressList>
             <li>
-              <h2>🗓️ 진행중인 챌린지</h2>
+              <h2>🗓️ 모집/진행중인 챌린지</h2>
             </li>
             <li onClick={() => prevSlide(1)}>
               <S.StyledSlideCircleLeft />
@@ -128,7 +130,9 @@ const MainPage = () => {
               <S.StyledSlideCircleRight />
             </li>
             <li>
-              <h3>전체보기</h3>
+              <Link to={ROUTE.LISTPAGE.link}>
+                <h3>전체보기</h3>
+              </Link>
             </li>
           </S.ProgressList>
           <S.ContentsWrap ref={SlideRef1}>
@@ -181,7 +185,9 @@ const MainPage = () => {
               <S.StyledSlideCircleRight />
             </li>
             <li>
-              <h3>전체보기</h3>
+              <Link to={ROUTE.LISTPAGE.link}>
+                <h3>전체보기</h3>
+              </Link>
             </li>
           </S.ProgressList>
           <S.ContentsWrap ref={SlideRef3}>

@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const MyWrap = styled.div`
+  padding-top: 100px;
+`;
+
+export const PrivacyWrap = styled.div`
+  padding-top: 100px;
+`;
+
 export const StyleH1 = styled.h1`
   font-size: 38px;
   padding-bottom: 30px;
@@ -12,7 +20,7 @@ export const InfoTitle = styled.div`
   padding-bottom: 60px;
   h3 {
     font-size: 30px;
-    font-weight: 500;
+    font-weight: 600;
   }
   h4 {
     font-size: 20px;
@@ -74,4 +82,11 @@ export const InfoTxt = styled.li`
       outline: none;
     }
   }
+`;
+
+//이메일, 비밀번호 에러 메세지
+export const ErrorMessageWrap = styled.div`
+  margin-top: 10px;
+  color: #ef0000;
+  font-size: 14px;
 `;

@@ -11,12 +11,10 @@ const DetailContent = () => {
   useEffect(() => {
     async function fetchChallengeData() {
       try {
-        const challengeResponse = await apiInstance.get(
-         `/challenges/${id}`
-        );
+        const challengeResponse = await apiInstance.get(`/challenges/${id}`);
         // 수정한곳
         const data = challengeResponse.data.challenge.mainImg;
-        
+
         setImage(data);
       } catch (error) {
         console.error('Error fetching challenge data:', error);

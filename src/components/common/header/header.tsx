@@ -56,7 +56,7 @@ const Header = () => {
           <S.NavList>
             <Link to={ROUTE.LISTPAGE.link}>
               <S.NavItem>
-                진행중인챌린지
+                챌린지 둘러보기
                 {/* <S.SubMenu>
                   <S.InnerLi>
                     <FaHeartPulse />
@@ -83,7 +83,7 @@ const Header = () => {
             </Link>
             {/* <Link to={ROUTE.NEWPAGE.link}> */}
             <S.NavItem onClick={handleChallengeCreationClick}>
-              챌린지개설하기
+              챌린지 개설하기
             </S.NavItem>
             {/* </Link> */}
           </S.NavList>
