@@ -65,5 +65,6 @@ export const AvatarImage = styled.img`
 `;
 
 export const InputImg = styled.input`
-  display: none;
+margin-left: -400px;
+margin-top: -200px;
 `;

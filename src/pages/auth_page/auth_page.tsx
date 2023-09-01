@@ -107,7 +107,7 @@ const AuthPage: React.FC = () => {
       if (response.status === 201) {
         console.log('response', response);
         // 챌린지 생성 성공 후 추가 로직
-        alert('챌린지 개설에 성공했습니다!');
+        alert('인증이 완료 되었습니다.');
         navigate(`/detail/${id}`);
       }
     } catch (error: any) {

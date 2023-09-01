@@ -4,6 +4,7 @@ import StatusInfo from '../status_info/status_info';
 import HeartInfo from '../heart_info/heart_info';
 import CompleteInfo from '../complete_info/complete_info';
 import { apiInstance } from '../../../utils/api';
+import AuthList from '../../common/auth_list/auth_list';
 
 const menuArr = [
   { name: '내 챌린지 현황', content: 'Tab menu ONE' },
@@ -56,21 +57,7 @@ export const MyPageTab: React.FC = () => {
         ) : (
           // 인증 목록 내용
           <S.StatusWrap>
-            <S.AuthInfo>
-              <div>
-                <h4>모은 스탬프</h4>
-                <h3>8개</h3>
-              </div>
-              <div>
-                <h4>내 등급</h4>
-                <h3>신입 챌리니</h3>
-              </div>
-              <div>
-                <h4>다음 등급까지 남은 스탬프</h4>
-                <h3>22개</h3>
-              </div>
-            </S.AuthInfo>
-            {/* <AuthList /> */}
+            <AuthList />
           </S.StatusWrap>
         )}
       </S.Desc>

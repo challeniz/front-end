@@ -35,33 +35,31 @@ const MyInfo: React.FC<MyInfoProps> = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <S.PageBox>
-        <S.AvatarWrapper
-          onClick={() => {
-            if (fileInput.current) {
-              fileInput.current.click();
-            }
-          }}
-        >
-          <S.AvatarImage src={imgSrc} />
-        </S.AvatarWrapper>
-        <S.InputStyled type="file" ref={fileInput} onChange={onChange} />
-        <S.PageTxt>
-          <ul>
-            <li>
-              <span>{mypageInfo.name}</span> 님
-            </li>
-            <li>
-              현재등급은 <span>{mypageInfo.grade}</span>입니다.
-            </li>
-          </ul>
-        </S.PageTxt>
-        <Link to={ROUTE.MYPRIVACY.link}>
-          <S.PageBtn>내 정보 수정하기</S.PageBtn>
-        </Link>
-      </S.PageBox>
-    </Wrapper>
+    <S.PageBox>
+      <S.AvatarWrapper
+        onClick={() => {
+          if (fileInput.current) {
+            fileInput.current.click();
+          }
+        }}
+      >
+        <S.AvatarImage src={imgSrc} />
+      </S.AvatarWrapper>
+      <S.InputStyled type="file" ref={fileInput} onChange={onChange} />
+      <S.PageTxt>
+        <ul>
+          <li>
+            <span>{mypageInfo.name}</span> 님
+          </li>
+          <li>
+            현재등급은 <span>{mypageInfo.grade}</span>입니다.
+          </li>
+        </ul>
+      </S.PageTxt>
+      <Link to={ROUTE.MYPRIVACY.link}>
+        <S.PageBtn>내 정보 수정하기</S.PageBtn>
+      </Link>
+    </S.PageBox>
   );
 };
 

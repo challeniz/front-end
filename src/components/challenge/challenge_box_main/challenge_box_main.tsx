@@ -6,6 +6,7 @@ import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
+import moment from 'moment';
 
 // 예시로 Challenge 타입을 정의
 export interface Challenge {
@@ -49,7 +50,8 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
               </Link>
               <S.H4Styled>
                 <BsCalendarRange />
-                {challenge.start_date} ~ {challenge.end_date}
+                {moment(challenge.start_date).format('YYYY년 MM월 DD일')} ~{' '}
+                {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
               </S.H4Styled>
             </S.ContentWrap>
           ))}
