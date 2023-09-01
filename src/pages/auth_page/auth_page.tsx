@@ -82,7 +82,7 @@ const AuthPage: React.FC = () => {
       }
 
       const formData = new FormData();
-      formData.append('dedescription', text);
+      formData.append('description', text);
 
       if (fileInput.current) {
         const selectedFile =
@@ -102,14 +102,13 @@ const AuthPage: React.FC = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-        data: formData,
       });
       console.log('API 응답:', response);
       if (response.status === 201) {
         console.log('response', response);
         // 챌린지 생성 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
-        navigate(`/detail/${response.data.id}`);
+        navigate(`/detail/${id}`);
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
