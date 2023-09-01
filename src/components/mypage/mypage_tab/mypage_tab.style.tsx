@@ -7,7 +7,7 @@ export const TabMenu = styled.ul`
   align-items: center;
   list-style: none;
   margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 80px;
   justify-content: left;
   width: 100%;
 
