@@ -4,6 +4,10 @@ export const PageBack = styled.div`
   background-color: #f4f4f4;
 `;
 
+export const DetailContents = styled.div`
+  width: 67%;
+`;
+
 export const TextInput = styled.textarea`
   width: 620px;
   height: 377px;
