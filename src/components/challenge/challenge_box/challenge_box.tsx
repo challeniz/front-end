@@ -17,6 +17,7 @@ export interface Challenge {
   tag: string[];
   id: string;
   category: string;
+  mainImg: string;
 }
 
 export interface ChallengeBoxProps {
@@ -94,7 +95,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
         {filteredChallengeList.map((challenge) => (
           <S.ContentWrap key={challenge.id}>
             <S.ImgStyled>
-              <img src="" alt={`Challenge`} className="thumbnail" />
+              <img src={challenge.mainImg} alt="Challenge" />
               <S.StyledHeartButton
                 src={challenge.like ? HeartImg : EmptyHeartImg}
                 alt={challenge.like ? 'Liked' : 'Not Liked'}

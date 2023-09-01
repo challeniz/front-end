@@ -62,7 +62,7 @@ const MyPrivacy = () => {
       <Wrapper>
         <S.StyleH1>마이 페이지</S.StyleH1>
         <MyInfo />
-        <div>
+        <S.PrivacyWrap>
           <S.InfoTitle>
             <h3>내정보 수정</h3>
             <h4>회원탈퇴</h4>
@@ -110,7 +110,7 @@ const MyPrivacy = () => {
               수정하기
             </S.CorrectionButton>
           </S.ButtonWrap>
-        </div>
+        </S.PrivacyWrap>
       </Wrapper>
       <Footer />
     </>

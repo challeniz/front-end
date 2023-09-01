@@ -11,7 +11,7 @@ export const InfoFlex = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin: 10px 0 15px;
 `;
 
 export const StyledImg = styled.div`
@@ -20,6 +20,13 @@ export const StyledImg = styled.div`
   background-color: #d9d9d9;
   border-radius: 10px;
   margin-bottom: 14px;
+`;
+
+export const ImgWrap = styled.div`
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const InfoWrap = styled.div`

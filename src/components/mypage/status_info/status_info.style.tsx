@@ -22,6 +22,13 @@ export const StyledImg = styled.div`
   margin-bottom: 14px;
 `;
 
+export const ImgWrap = styled.div`
+  img {
+    width: 100%;
+    height: auto;
+  }
+`;
+
 export const TagEdit = styled.div`
   display: flex;
   align-items: center;

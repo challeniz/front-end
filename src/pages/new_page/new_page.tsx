@@ -78,6 +78,7 @@ const NewPage = () => {
       alert('이미지를 선택해주세요.');
     } else if (!isAgreed) {
       alert('챌린지를 개설하려면 약관에 동의해야 합니다.');
+      return;
     } else {
       // 챌린지 생성 API 호출
       apiInstance
