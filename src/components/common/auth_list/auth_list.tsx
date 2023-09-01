@@ -33,7 +33,7 @@ const AuthList: React.FC<AuthListProps> = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiInstance.get(`post/challenges/${id}`);
+        const response = await apiInstance.get(`/challenges/${id}`);
         const data = response.data;
 
         if (data) {
