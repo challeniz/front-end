@@ -6,7 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import CommentBox from '../../comment/commentbox/comment';
 import { apiInstance } from '../../../utils/api';
 import moment from 'moment';
-import DetailCheck from '../detail_check/detail_check';
+import AuthList from '../../common/auth_list/auth_list';
+
 export const Tab: React.FC = () => {
   const { id } = useParams();
   const [currentTab, clickTab] = useState<number>(0);
@@ -116,7 +117,7 @@ export const Tab: React.FC = () => {
             </S.DetailWrap> */}
           </>
         ) : (
-         <DetailCheck />
+          <AuthList />
         )}
       </S.Desc>
     </div>

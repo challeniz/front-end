@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+import { apiInstance } from '../../../utils/api';
 import * as S from './auth_list.style';
 import ModalBasic from '../modal/modal';
 import FullCalendar from '@fullcalendar/react';
@@ -15,58 +17,47 @@ const AuthList: React.FC<AuthListProps> = () => {
     setModalOpen(true);
   };
 
-  // 시작 날짜와 끝 날짜
-  const event1 = [
-    {
-      start: '2023-08-01',
-      end: '2023-08-14',
-      classNames: ['event1-class'], // 클래스 이름 할당
-    },
-  ];
+  const [challengeData, setChallengeData] = useState({
+    description: '',
+    file: '', 
+  });
 
-  const event2 = [
-    {
-      start: '2023-08-07',
-      end: '2023-08-10',
-      classNames: ['event2-class'], // 클래스 이름 할당
-    },
-  ];
+  const { id } = useParams();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const text = queryParams.get('text');
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiInstance.get(`post/challenges/${id}`);
+        const data = response.data;
+
+        if (data) {
+          setChallengeData({
+            description: data.challenge.description,
+            file: data.challenge.img,
+          });
+        }
+      } catch (error) {
+        console.error('데이터 가져오기 오류:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   return (
     <>
       <S.AuthWrap>
-        <h2>만보 걷기 챌린지</h2>
+        {/* 여기에 text를 표시 */}
+        <p>{text}</p>
         <S.AuthGrid>
-          <S.CalendarWrap>
-            <FullCalendar
-              plugins={[dayGridPlugin]}
-              initialView="dayGridMonth"
-              weekends={true}
-              locale="ko"
-              titleFormat={{ year: 'numeric', month: 'long' }}
-              events={event1.concat(event2)}
-            />
-          </S.CalendarWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
-        </S.AuthGrid>
-      </S.AuthWrap>
-      <S.AuthWrap>
-        <h2>영어 단어 하루에 100개 외우기</h2>
-        <S.AuthGrid>
-          <S.CalendarWrap>
-            <FullCalendar
-              plugins={[dayGridPlugin]}
-              initialView="dayGridMonth"
-              weekends={true}
-              locale="ko"
-              titleFormat={{ year: 'numeric', month: 'long' }}
-              events={event1.concat(event2)}
-            />
-          </S.CalendarWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
+          {/* 여기에 img를 표시 */}
+          {challengeData.file && <img src={challengeData.file} alt="인증 이미지" />}
           <S.ImgWrap onClick={showModal}></S.ImgWrap>
           <S.ImgWrap onClick={showModal}></S.ImgWrap>
           {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}

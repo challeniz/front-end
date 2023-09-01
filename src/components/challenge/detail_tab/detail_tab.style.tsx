@@ -66,8 +66,7 @@ export const DetailWrap = styled.div`
   li {
     font-size: 18px;
     line-height: 35px;
-    list-style-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' height='20' width='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'><polyline points='20 6 9 17 4 12'></polyline></svg>");
-    margin-left: 20px;
+    white-space: pre-line;
   }
 `;
 

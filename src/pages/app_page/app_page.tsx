@@ -132,10 +132,16 @@ const ApplicationPage: React.FC = () => {
         );
         const data = response.data;
         if (data) {
+          const startDate = new Date(data.challenge.start_date);
+          const endDate = new Date(data.challenge.end_date);
           setChallengeInfo({
             description: data.challenge.description,
-            start_date: data.challenge.start_date,
-            end_date: data.challenge.end_date,
+            start_date: `${startDate.getFullYear()}년 ${
+              startDate.getMonth() + 1
+            }월 ${startDate.getDate()}일`,
+            end_date: `${endDate.getFullYear()}년 ${
+              endDate.getMonth() + 1
+            }월 ${endDate.getDate()}일`,
             title: data.challenge.title,
             users: data.challenge.users,
           });

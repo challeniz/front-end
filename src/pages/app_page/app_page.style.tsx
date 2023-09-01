@@ -65,6 +65,7 @@ export const TextWrap = styled.div`
     font-size: 16px;
     font-weight: 400;
     line-height: 23px;
+    white-space: pre-line;
   }
   h6 {
     margin-top: auto;

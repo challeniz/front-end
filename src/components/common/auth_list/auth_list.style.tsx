@@ -2,20 +2,20 @@ import styled from 'styled-components';
 import HeartImg from '../../../assets/image/heart_red.png';
 
 export const AuthWrap = styled.div`
-  padding: 30px 0 100px;
+  padding: 0px 0 100px;
 `;
 
 export const AuthGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
 `;
 
 export const ImgWrap = styled.div`
   background-color: #d9d9d9;
   width: 100%;
-  height: 310px;
+  height: 210px;
   cursor: pointer;
 `;
 
