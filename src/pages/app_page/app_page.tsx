@@ -114,7 +114,7 @@ const ApplicationPage: React.FC = () => {
         .patch(`/challenges/subscription/${id}`, {})
         .then((response) => {
           console.log('201', response.data);
-          alert('인증이 완료되었습니다');
+          alert('참가 신청이 완료되었습니다!');
 
           navigate(`/detail/${id}`);
         })
