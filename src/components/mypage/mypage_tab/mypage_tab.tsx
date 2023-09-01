@@ -20,47 +20,24 @@ export const MyPageTab: React.FC = () => {
 
   return (
     <div>
-      <S.TabMenu>
-        {menuArr.map((el, index) => (
-          <li
-            className={index === currentTab ? 'submenu focused' : 'submenu'}
-            onClick={() => selectMenuHandler(index)}
-            key={el.name}
-          >
-            {el.name}
-          </li>
-        ))}
-      </S.TabMenu>
-      <S.Desc>
-        {currentTab === 0 ? (
-          // 상세 설명 내용
-          <>
-            <S.StatusWrap>
-              <h2>참여중인 챌린지</h2>
-              <S.StatusGrid>
-                <StatusInfo />
-              </S.StatusGrid>
-            </S.StatusWrap>
-            <S.StatusWrap>
-              <h2>찜 한 챌린지</h2>
-              <S.StatusGrid>
-                <HeartInfo />
-              </S.StatusGrid>
-            </S.StatusWrap>
-            <S.StatusWrap>
-              <h2>완료한 챌린지</h2>
-              <S.StatusGrid>
-                <CompleteInfo />
-              </S.StatusGrid>
-            </S.StatusWrap>
-          </>
-        ) : (
-          // 인증 목록 내용
-          <S.StatusWrap>
-            <AuthList />
-          </S.StatusWrap>
-        )}
-      </S.Desc>
+      <S.StatusWrap>
+        <h2>개설한 챌린지</h2>
+        <S.StatusGrid>
+          <CompleteInfo />
+        </S.StatusGrid>
+      </S.StatusWrap>
+      <S.StatusWrap>
+        <h2>참여중인 챌린지</h2>
+        <S.StatusGrid>
+          <StatusInfo />
+        </S.StatusGrid>
+      </S.StatusWrap>
+      <S.StatusWrap>
+        <h2>찜 한 챌린지</h2>
+        <S.StatusGrid>
+          <HeartInfo />
+        </S.StatusGrid>
+      </S.StatusWrap>
     </div>
   );
 };

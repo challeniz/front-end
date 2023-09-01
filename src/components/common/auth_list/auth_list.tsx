@@ -35,9 +35,9 @@ const AuthList: React.FC<AuthListProps> = () => {
   return (
     <>
       <S.AuthWrap>
-        <h2>만보 걷기 챌린지</h2>
+        {/* <h2>만보 걷기 챌린지</h2> */}
         <S.AuthGrid>
-          <S.CalendarWrap>
+          {/* <S.CalendarWrap>
             <FullCalendar
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
@@ -46,26 +46,7 @@ const AuthList: React.FC<AuthListProps> = () => {
               titleFormat={{ year: 'numeric', month: 'long' }}
               events={event1.concat(event2)}
             />
-          </S.CalendarWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
-        </S.AuthGrid>
-      </S.AuthWrap>
-      <S.AuthWrap>
-        <h2>영어 단어 하루에 100개 외우기</h2>
-        <S.AuthGrid>
-          <S.CalendarWrap>
-            <FullCalendar
-              plugins={[dayGridPlugin]}
-              initialView="dayGridMonth"
-              weekends={true}
-              locale="ko"
-              titleFormat={{ year: 'numeric', month: 'long' }}
-              events={event1.concat(event2)}
-            />
-          </S.CalendarWrap>
+          </S.CalendarWrap> */}
           <S.ImgWrap onClick={showModal}></S.ImgWrap>
           <S.ImgWrap onClick={showModal}></S.ImgWrap>
           <S.ImgWrap onClick={showModal}></S.ImgWrap>

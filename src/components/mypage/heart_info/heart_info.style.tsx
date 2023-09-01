@@ -15,7 +15,7 @@ export const InfoFlex = styled.div`
 `;
 
 export const StyledImg = styled.div`
-  width: 300px;
+  width: 100%;
   height: 117px;
   background-color: #d9d9d9;
   border-radius: 10px;

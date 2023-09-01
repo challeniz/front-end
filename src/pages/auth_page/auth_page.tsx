@@ -119,52 +119,57 @@ const AuthPage: React.FC = () => {
     }
   };
   return (
-    <Wrapper>
+    <>
       <Header />
-      <WhiteBox>
-        <WhiteBoxTitle>챌린지 인증</WhiteBoxTitle>
-        <WhiteBoxContents>
-          <S.H2Styled>{formattedDate}</S.H2Styled>
-          <S.AuthWrapper>
-            <S.StyledImageContainer>
-              <S.StyledImageWrapper
-                onClick={() => {
-                  if (fileInput.current) {
-                    fileInput.current.click();
-                  }
-                }}
-              >
-                {/* 선택된 이미지 미리보기 */}
-                {selectedImage && (
-                  <S.StyledImage src={URL.createObjectURL(selectedImage)} />
-                )}
-              </S.StyledImageWrapper>
+      <S.PageBack>
+        <Wrapper>
+          <WhiteBox>
+            <WhiteBoxTitle>챌린지 인증</WhiteBoxTitle>
+            <WhiteBoxContents>
+              <S.H2Styled>{formattedDate}</S.H2Styled>
+              <S.AuthWrapper>
+                <S.StyledImageContainer>
+                  <S.StyledImageWrapper
+                    onClick={() => {
+                      if (fileInput.current) {
+                        fileInput.current.click();
+                      }
+                    }}
+                  >
+                    {/* 선택된 이미지 미리보기 */}
+                    {selectedImage && (
+                      <S.StyledImage src={URL.createObjectURL(selectedImage)} />
+                    )}
+                  </S.StyledImageWrapper>
 
-              <input
-                type="file"
-                ref={fileInput}
-                onChange={handleIsImageSelected}
-              />
-            </S.StyledImageContainer>
-            <S.TextInput
-              placeholder="70자 이내로 입력해주세요."
-              value={text}
-              onChange={handleTextChange}
-            ></S.TextInput>
-          </S.AuthWrapper>
-          <S.FormButton>
-            <S.FormCancelButton onClick={handleCancelClick}>
-              <Link to={ROUTE.DETAILPAGE.link}>취소하기</Link>
-            </S.FormCancelButton>
-            <S.FormCancelButton onClick={handleChallengeSubmit}>
-              <Link to={ROUTE.DETAILPAGE.link}>등록하기</Link>
-            </S.FormCancelButton>
-            {/* <S.FormCancelButton onClick={joinHandler} ></S.FormCancelButton>  */}
-          </S.FormButton>
-        </WhiteBoxContents>
-      </WhiteBox>
+                  <input
+                    type="file"
+                    ref={fileInput}
+                    onChange={handleIsImageSelected}
+                  />
+                </S.StyledImageContainer>
+                <S.TextInput
+                  placeholder="70자 이내로 입력해주세요."
+                  value={text}
+                  onChange={handleTextChange}
+                ></S.TextInput>
+              </S.AuthWrapper>
+              <S.FormButton>
+                <S.FormCancelButton onClick={handleCancelClick}>
+                  <Link to={ROUTE.DETAILPAGE.link}>취소하기</Link>
+                </S.FormCancelButton>
+                <S.FormCancelButton onClick={handleChallengeSubmit}>
+                  <Link to={ROUTE.DETAILPAGE.link}>등록하기</Link>
+                </S.FormCancelButton>
+                {/* <S.FormCancelButton onClick={joinHandler} ></S.FormCancelButton>  */}
+              </S.FormButton>
+            </WhiteBoxContents>
+          </WhiteBox>
+        </Wrapper>
+      </S.PageBack>
+
       <Footer />
-    </Wrapper>
+    </>
   );
 };
 
