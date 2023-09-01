@@ -61,10 +61,6 @@ const StatusInfo = () => {
           <S.StyledImg />
           <S.InfoFlex>
             <div>
-              <S.TagEdit>
-                <a>수정</a>
-                <a>삭제</a>
-              </S.TagEdit>
               <h3>{challenge.title}</h3>
               <h4>
                 {challenge.start_date} ~ {challenge.end_date}

@@ -6,6 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import CommentBox from '../../comment/commentbox/comment';
 import { apiInstance } from '../../../utils/api';
 import moment from 'moment';
+import AuthList from '../../common/auth_list/auth_list';
 
 export const Tab: React.FC = () => {
   const { id } = useParams();
@@ -111,12 +112,12 @@ export const Tab: React.FC = () => {
                 />
               </S.CalendarWrap>
             </S.DetailWrap>
-            <S.DetailWrap>
+            {/* <S.DetailWrap>
               <CommentBox></CommentBox>
-            </S.DetailWrap>
+            </S.DetailWrap> */}
           </>
         ) : (
-          <div>인증 목록 내용</div>
+          <AuthList />
         )}
       </S.Desc>
     </div>
