@@ -12,6 +12,7 @@ import EmptyHeartImg from '../../../assets/image/heart.png';
 
 // 예시로 Challenge 타입을 정의
 export interface Challenge {
+  _id: string;
   like: boolean;
   title: string;
   start_date: string;
@@ -44,6 +45,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
 
         if (data.length > 0) {
           const challenges = data.map((challenge: any) => ({
+            _id: challenge._id,
             like: false,
             title: challenge.title,
             start_date: new Date(challenge.start_date).toLocaleDateString(),
@@ -104,7 +106,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
                   <S.TabStyled key={index}>{tag}</S.TabStyled>
                 ))}
               </S.TabWrap>
-              <Link to={`${ROUTE.DETAILPAGE.link}/${challenge.id}`}>
+              <Link to={`${ROUTE.DETAILPAGE.link}/${challenge._id}`}>
                 <S.H3Styled>{challenge.title}</S.H3Styled>
               </Link>
               <S.H4Styled>
