@@ -1,20 +1,23 @@
-// ModalBasic 컴포넌트
-import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
 import * as S from './modal.style';
 import { AiOutlineClose } from 'react-icons/ai';
-import { apiInstance } from '../../../utils/api';
 
 interface ModalBasicProps {
   setModalOpen: (open: boolean) => void;
+  challengeData: {
+    description: string;
+    img: string;
+  };
+  postDate: string; // 오늘의 날짜를 받아올 prop 추가
+  userName: string; // 유저 이름을 받아올 prop 추가
 }
 
-interface Challenge {
-  description: string;
-  img: string;
-}
-
-function ModalBasic({ setModalOpen }: ModalBasicProps) {
+function ModalBasic({
+  setModalOpen,
+  challengeData,
+  postDate,
+  userName,
+}: ModalBasicProps) {
   // 모달 끄기 (X버튼 onClick 이벤트 핸들러)
   const closeModal = () => {
     setModalOpen(false);
@@ -23,39 +26,6 @@ function ModalBasic({ setModalOpen }: ModalBasicProps) {
   // 모달 외부 클릭시 끄기 처리
   // Modal 창을 useRef로 취득
   const modalRef = useRef<HTMLDivElement>(null);
-
-  // challengeData 상태를 이곳으로 이동
-  const [challengeData, setChallengeData] = useState({
-    description: '',
-    img: '',
-  });
-
-  const { id } = useParams();
-
-  // challengeList 상태를 이곳으로 이동
-  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiInstance.get(`/posts/challenges/${id}`);
-        const data = response.data;
-        console.log('인증하기', data[0]);
-        if (data.length > 0) {
-          const challenges = data.map((challenge: any) => ({
-            img: challenge.img, // 이미지 URL을 사용
-            description: challenge.description,
-            title: challenge.title,
-          }));
-          setChallengeList(challenges);
-        }
-      } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
-      }
-    };
-
-    fetchData();
-  }, [id]);
 
   // 이벤트 핸들러 함수
   const handler = (event: MouseEvent | TouchEvent) => {
@@ -84,18 +54,24 @@ function ModalBasic({ setModalOpen }: ModalBasicProps) {
           <AiOutlineClose />
         </button>
         <S.ModalBox>
-          {challengeList.map((challenge, index) => (
-            <S.AuthWrap key={index}>
-              <S.ImgBox>
-                {challenge.img && (
-                  <img src={challenge.img} alt="Challenge Image" />
-                )}
-              </S.ImgBox>
-              <S.TextBox>
-                <p>{challenge.description}</p>
-              </S.TextBox>
-            </S.AuthWrap>
-          ))}
+          {/* 오늘의 날짜 표시 */}
+          <S.PostDay>
+            <span>인증 날짜:</span> {postDate}
+          </S.PostDay>
+          {/* 사용자 이름 표시 */}
+          <S.PostName>
+            <span>인증한 챌리니:</span> {userName}
+          </S.PostName>
+          <S.AuthWrap>
+            <S.ImgBox>
+              {challengeData.img && (
+                <img src={challengeData.img} alt="Challenge Image" />
+              )}
+            </S.ImgBox>
+            <S.TextBox>
+              <p>{challengeData.description}</p>
+            </S.TextBox>
+          </S.AuthWrap>
         </S.ModalBox>
       </S.ModalContainer>
     </S.ModalWrap>

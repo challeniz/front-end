@@ -78,3 +78,26 @@ export const TextBox = styled.div`
     font-size: 20px;
   }
 `;
+
+export const PostDay = styled.p`
+  font-size: 20px;
+  text-align: left;
+  padding-bottom: 10px;
+  font-weight: 600;
+
+  span {
+    font-size: 18px;
+    font-weight: 400;
+  }
+`;
+
+export const PostName = styled.p`
+  font-size: 20px;
+  text-align: left;
+  font-weight: 600;
+
+  span {
+    font-size: 18px;
+    font-weight: 400;
+  }
+`;
