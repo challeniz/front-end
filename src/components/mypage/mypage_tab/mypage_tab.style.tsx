@@ -7,7 +7,7 @@ export const TabMenu = styled.ul`
   align-items: center;
   list-style: none;
   margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 80px;
   justify-content: left;
   width: 100%;
 
@@ -58,7 +58,7 @@ export const StatusWrap = styled.div`
   }
   h3 {
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
     padding-bottom: 10px;
   }
   h4 {
@@ -67,11 +67,7 @@ export const StatusWrap = styled.div`
   }
 `;
 
-export const StatusGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 40px;
-`;
+export const StatusGrid = styled.div``;
 
 export const AuthInfo = styled.div`
   display: flex;

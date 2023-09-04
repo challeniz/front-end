@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import HeartButton from '../heart/heart';
-import { AiOutlineHeart } from 'react-icons/ai';
 
 export const ListWrap = styled.div``;
 
@@ -63,10 +62,6 @@ export const StyledHeartButton = styled.img`
   right: 20px;
   z-index: 10;
   cursor: pointer;
-
-  &.liked {
-    color: red;
-  }
 `;
 
 export const TabWrap = styled.div`

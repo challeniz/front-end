@@ -6,6 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import CommentBox from '../../comment/commentbox/comment';
 import { apiInstance } from '../../../utils/api';
 import moment from 'moment';
+import AuthList from '../../common/auth_list/auth_list';
 
 export const Tab: React.FC = () => {
   const { id } = useParams();
@@ -37,11 +38,11 @@ export const Tab: React.FC = () => {
 
         if (data) {
           setChallengeInfo({
-            description: data.description,
-            start_date: data.start_date,
-            end_date: data.end_date,
-            recru_open_date: data.recru_open_date, // 수정된 부분
-            recru_end_date: data.recru_end_date,
+            description: data.challenge.description,
+            start_date: data.challenge.start_date,
+            end_date: data.challenge.end_date,
+            recru_open_date: data.challenge.recru_open_date,
+            recru_end_date: data.challenge.recru_end_date,
           });
         }
       } catch (error) {
@@ -111,12 +112,12 @@ export const Tab: React.FC = () => {
                 />
               </S.CalendarWrap>
             </S.DetailWrap>
-            <S.DetailWrap>
+            {/* <S.DetailWrap>
               <CommentBox></CommentBox>
-            </S.DetailWrap>
+            </S.DetailWrap> */}
           </>
         ) : (
-          <div>인증 목록 내용</div>
+          <AuthList />
         )}
       </S.Desc>
     </div>

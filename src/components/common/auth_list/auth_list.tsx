@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import * as S from './auth_list.style';
 import ModalBasic from '../modal/modal';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
+import { apiInstance } from '../../../utils/api';
 
 interface AuthListProps {}
+
+interface Challenge {
+  description: string;
+  img: string;
+  userName: string;
+  postDate: string;
+}
 
 const AuthList: React.FC<AuthListProps> = () => {
   // 모달창 노출 여부 state
@@ -15,61 +22,73 @@ const AuthList: React.FC<AuthListProps> = () => {
     setModalOpen(true);
   };
 
-  // 시작 날짜와 끝 날짜
-  const event1 = [
-    {
-      start: '2023-08-01',
-      end: '2023-08-14',
-      classNames: ['event1-class'], // 클래스 이름 할당
-    },
-  ];
+  const { id } = useParams();
 
-  const event2 = [
-    {
-      start: '2023-08-07',
-      end: '2023-08-10',
-      classNames: ['event2-class'], // 클래스 이름 할당
-    },
-  ];
+  // challengeList 상태를 이곳으로 이동
+  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
+
+  const [challengeData, setChallengeData] = useState<Challenge | null>(null); // challengeData 타입 변경
+
+  // 사용자 이름 상태
+  const [userName, setUserName] = useState<string>('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 인증 데이터를 가져오는 요청
+        const response = await apiInstance.get(`/posts/challenges/${id}`);
+        const data = response.data;
+        console.log('인증하기', data[0]);
+        if (data.length > 0) {
+          const challenges = data.map((challenge: any) => ({
+            userName: challenge.user.name,
+            img: challenge.img,
+            description: challenge.description,
+            title: challenge.title,
+            postDate: challenge.post_date,
+          }));
+          setChallengeList(challenges);
+        }
+      } catch (error) {
+        console.error('데이터 가져오기 오류:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  const handleChallengeClick = (challenge: Challenge) => {
+    const postDate = new Date(challenge.postDate);
+    // 년, 월, 일을 추출하여 포맷팅
+    const formattedDate = `${postDate.getFullYear()}년 ${
+      postDate.getMonth() + 1
+    }월 ${postDate.getDate()}일`;
+    // challengeData에 포맷팅된 게시 날짜 설정
+    challenge.postDate = formattedDate;
+    setChallengeData(challenge);
+    showModal();
+  };
 
   return (
     <>
       <S.AuthWrap>
-        <h2>만보 걷기 챌린지</h2>
         <S.AuthGrid>
-          <S.CalendarWrap>
-            <FullCalendar
-              plugins={[dayGridPlugin]}
-              initialView="dayGridMonth"
-              weekends={true}
-              locale="ko"
-              titleFormat={{ year: 'numeric', month: 'long' }}
-              events={event1.concat(event2)}
+          {challengeList.map((challenge, index) => (
+            <S.ImgWrap
+              key={index}
+              onClick={() => handleChallengeClick(challenge)}
+            >
+              <img src={challenge.img} alt="Challenge Image" />
+            </S.ImgWrap>
+          ))}
+          {modalOpen && challengeData && (
+            <ModalBasic
+              setModalOpen={setModalOpen}
+              challengeData={challengeData}
+              postDate={challengeData.postDate}
+              userName={challengeData.userName}
             />
-          </S.CalendarWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
-        </S.AuthGrid>
-      </S.AuthWrap>
-      <S.AuthWrap>
-        <h2>영어 단어 하루에 100개 외우기</h2>
-        <S.AuthGrid>
-          <S.CalendarWrap>
-            <FullCalendar
-              plugins={[dayGridPlugin]}
-              initialView="dayGridMonth"
-              weekends={true}
-              locale="ko"
-              titleFormat={{ year: 'numeric', month: 'long' }}
-              events={event1.concat(event2)}
-            />
-          </S.CalendarWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          <S.ImgWrap onClick={showModal}></S.ImgWrap>
-          {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+          )}
         </S.AuthGrid>
       </S.AuthWrap>
     </>

@@ -38,6 +38,12 @@ export const ImgWrap = styled.div`
   background-color: #d9d9d9;
   margin-right: 60px;
   border-right: 1px solid #d9d9d9;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const ContentWrap = styled.div`
@@ -65,6 +71,7 @@ export const TextWrap = styled.div`
     font-size: 16px;
     font-weight: 400;
     line-height: 23px;
+    white-space: pre-line;
   }
   h6 {
     margin-top: auto;

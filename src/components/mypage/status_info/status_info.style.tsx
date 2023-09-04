@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const StatusWrap = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+`;
+
 export const InfoFlex = styled.div`
   display: flex;
   align-items: center;
@@ -13,6 +20,13 @@ export const StyledImg = styled.div`
   background-color: #d9d9d9;
   border-radius: 10px;
   margin-bottom: 14px;
+`;
+
+export const ImgWrap = styled.div`
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const TagEdit = styled.div`
