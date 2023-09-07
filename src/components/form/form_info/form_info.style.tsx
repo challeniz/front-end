@@ -7,6 +7,9 @@ export const InputContent = styled.div`
   &.flex-start {
     align-items: flex-start;
   }
+  &.formDate {
+    margin-bottom: 80px;
+  }
 `;
 
 export const LabelStyled = styled.label`
@@ -65,6 +68,6 @@ export const AvatarImage = styled.img`
 `;
 
 export const InputImg = styled.input`
-margin-left: -400px;
-margin-top: -200px;
+  margin-left: -400px;
+  margin-top: -200px;
 `;

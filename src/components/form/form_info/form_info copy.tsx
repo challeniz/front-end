@@ -10,8 +10,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import useImageUploader from '../../../hook/imgfiler';
 import ReactDatePicker from '../../calendar/calendar';
 import ReactDatePicker2 from '../../calendar/calendar2';
-import DateSelector from '../form_date/form_date';
-import WeekSelector from '../form_week/form_week';
 import {
   FormButton,
   FormCancelButton,
@@ -52,8 +50,30 @@ interface FormInfoProps {
 const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   // 태그 관련 상태와 함수들을 정의
   const [tags, setTags] = useState<string[]>([]);
+  const [date, setDate] = useState({
+    joinningDate: [null, null],
+    startDate: [null, null],
+  });
+  const { _id } = useParams();
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  useEffect(() => {
+    // joinningDate가 바뀌면 startDate를 자동 변환
+    if (date.joinningDate[1]) {
+      setDate((prev) => {
+        const date = new Date(
+          (new Date(prev.joinningDate[1] || '') as any).setDate(
+            (prev.joinningDate[1] as any).getDate() + 1
+          )
+        );
+        console.log('date', date);
+        return {
+          ...(prev as any),
+          startDate: [date, null],
+        };
+      });
+    }
+  }, [date.joinningDate]);
 
   const [data, setData] = useState<ChallengeFormDataType>({
     title: '',
@@ -109,6 +129,19 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       formData.append('description', textValue);
       for (let i = 0; i < Math.min(3, data.tag.length); i++) {
         formData.append('tag', data.tag[i]);
+      }
+
+      if (date.joinningDate[0]) {
+        formData.append('recru_open_date', date.joinningDate[0]);
+      }
+      if (date.joinningDate[1]) {
+        formData.append('recru_end_date', date.joinningDate[1]);
+      }
+      if (date.startDate[0]) {
+        formData.append('start_date', date.startDate[0]);
+      }
+      if (date.startDate[1]) {
+        formData.append('end_date', date.startDate[1]);
       }
 
       if (fileInput.current) {
@@ -217,13 +250,19 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                 <option value="환경">환경</option>
               </S.SelectStyled>
             </S.InputContent>
-            <S.InputContent className="formDate">
-              <S.LabelStyled htmlFor="formDage">모집 시작일</S.LabelStyled>
-              <DateSelector />
+            <S.InputContent>
+              <S.LabelStyled htmlFor="formDage">챌린지 모집 기간</S.LabelStyled>
+              <ReactDatePicker
+                joinningDate={date.joinningDate}
+                setDate={setDate}
+              ></ReactDatePicker>
             </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formDage">챌린지 기간</S.LabelStyled>
-              <WeekSelector />
+              <ReactDatePicker2
+                startDate={date.startDate}
+                setDate={setDate}
+              ></ReactDatePicker2>
             </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formImg">대표 이미지</S.LabelStyled>

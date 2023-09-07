@@ -7,9 +7,7 @@ const AboutPage = () => {
   return (
     <div>
       <Header />
-      <Wrapper>
-        <div className="title"></div>
-      </Wrapper>
+      <Wrapper>{/* <div className="title"></div> */}</Wrapper>
       <Footer />
     </div>
   );
