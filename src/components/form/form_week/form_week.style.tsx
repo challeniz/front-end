@@ -16,10 +16,10 @@ export const Button = styled.button`
     border: 1px solid #339af0;
   }
   & + & {
-    margin: 0 10px;
+    margin: 0 5px;
   }
   &:nth-child(1) {
-    margin-right: 10px;
+    margin-right: 5px;
   }
 `;
 

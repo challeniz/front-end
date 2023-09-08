@@ -8,7 +8,7 @@ export const InputContent = styled.div`
     align-items: flex-start;
   }
   &.formDate {
-    margin-bottom: 80px;
+    margin-bottom: 90px;
   }
 `;
 

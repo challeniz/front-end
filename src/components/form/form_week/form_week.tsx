@@ -1,54 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './form_week.style';
+import { BsCalendarWeek } from 'react-icons/bs';
 
 interface WeekSelectorProps {
-  onSelectWeek?: (start: Date | null, end: Date | null) => void;
-  selectedDate?: Date | null; // DateSelector에서 선택한 날짜
+  onSelectWeek?: (startDate: Date | null, endDate: Date | null) => void;
+  selectedDate?: Date | null;
+  recruEndDate?: Date | null;
 }
 
 const WeekSelector: React.FC<WeekSelectorProps> = ({
   onSelectWeek,
   selectedDate,
+  recruEndDate,
 }) => {
   const [selectedWeek, setSelectedWeek] = useState<number | null>(null);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleWeekClick = (week: number) => {
     if (selectedWeek === week) {
       setSelectedWeek(null);
+      setStartDate(null);
+      setEndDate(null);
       onSelectWeek && onSelectWeek(null, null);
     } else {
       setSelectedWeek(week);
-      const startDate = selectedDate
-        ? calculateStartDate(selectedDate, week)
-        : null;
-      const endDate = startDate ? calculateEndDate(startDate, week) : null;
-      onSelectWeek && onSelectWeek(startDate, endDate);
+
+      if (recruEndDate) {
+        const calculatedStartDate = new Date(recruEndDate);
+        calculatedStartDate.setDate(calculatedStartDate.getDate() + 1); // 시작날짜 설정
+
+        const calculatedEndDate = new Date(calculatedStartDate);
+        calculatedEndDate.setDate(calculatedEndDate.getDate() + 7 * week); // 선택한 주차에 따라 계산
+        setStartDate(calculatedStartDate);
+        setEndDate(calculatedEndDate);
+        onSelectWeek && onSelectWeek(calculatedStartDate, calculatedEndDate);
+      }
     }
   };
 
-  const calculateStartDate = (selectedDate: Date, week: number) => {
-    const startDate = new Date(selectedDate);
-    startDate.setDate(selectedDate.getDate() + 1); // 선택한 날짜 다음날부터 시작
-    startDate.setDate(startDate.getDate() + 7 * (week - 1)); // 선택한 주차에 따라 계산
-    return startDate;
-  };
-
-  const calculateEndDate = (startDate: Date, week: number) => {
-    const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + 7 * week); // 선택한 주차에 따라 계산
-    return endDate;
-  };
-
   useEffect(() => {
-    // selectedDate가 변경될 때 라벨을 업데이트
-    const startDate = selectedDate
-      ? calculateStartDate(selectedDate, selectedWeek || 1)
-      : null;
-    const endDate = startDate
-      ? calculateEndDate(startDate, selectedWeek || 1)
-      : null;
-    onSelectWeek && onSelectWeek(startDate, endDate);
-  }, [selectedDate, selectedWeek, onSelectWeek]);
+    if (selectedDate && recruEndDate && selectedWeek !== null) {
+      const calculatedStartDate = new Date(recruEndDate);
+      calculatedStartDate.setDate(calculatedStartDate.getDate() + 1); // 시작날짜 설정
+
+      const calculatedEndDate = new Date(calculatedStartDate);
+      calculatedEndDate.setDate(calculatedEndDate.getDate() + 7 * selectedWeek); // 선택한 주차에 따라 계산
+      setStartDate(calculatedStartDate);
+      setEndDate(calculatedEndDate);
+
+      // startDate와 endDate를 출력
+      console.log('startDate:', startDate);
+      console.log('endDate:', endDate);
+    }
+  }, [selectedDate, recruEndDate, selectedWeek]);
 
   const formatDate = (date: Date) => {
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -70,10 +75,9 @@ const WeekSelector: React.FC<WeekSelectorProps> = ({
           {week}주
         </S.Button>
       ))}
-      {selectedDate && (
+      {startDate && endDate && (
         <S.Label>
-          {formatDate(selectedDate)} ~{' '}
-          {formatDate(calculateEndDate(selectedDate, selectedWeek || 1))}
+          <BsCalendarWeek /> {formatDate(startDate)} ~ {formatDate(endDate)}
         </S.Label>
       )}
     </S.WeekWrap>

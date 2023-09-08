@@ -3,27 +3,31 @@ import * as S from './form_date.style';
 import { BsCalendarWeek } from 'react-icons/bs';
 
 interface DateSelectorProps {
-  onSelectDate?: (date: Date) => void;
+  onSelectDateRange?: (startDate: Date, endDate: Date) => void;
 }
 
-const DateSelector: React.FC<DateSelectorProps> = ({ onSelectDate }) => {
+const DateSelector: React.FC<DateSelectorProps> = ({ onSelectDateRange }) => {
   const today = new Date();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(today);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [recruStartDate, setRecruStartDate] = useState<Date | null>(null);
+  const [recruEndDate, setRecruEndDate] = useState<Date | null>(null);
 
   const handleDateClick = (date: Date) => {
-    if (selectedDate === date) {
-      setSelectedDate(null);
-    } else {
-      setSelectedDate(date);
-      onSelectDate && onSelectDate(date);
-      console.log('Selected date:', date); // 라벨에 들어간 날짜를 출력
-    }
-  };
+    setSelectedDate(date);
 
-  const RecruEndDate = (startDate: Date) => {
-    const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + (7 - startDate.getDay()));
-    return endDate;
+    // 시작 날짜 설정
+    const start = new Date(date);
+    start.setHours(0, 0, 0, 0);
+    setRecruStartDate(start);
+
+    // 종료 날짜 설정 (선택한 날짜의 다음 주 일요일)
+    const end = new Date(date);
+    end.setDate(end.getDate() + (7 - end.getDay()));
+    end.setHours(23, 59, 59, 999); // 일요일의 마지막 시각으로 설정
+    setRecruEndDate(end);
+
+    // 콜백 함수로 선택된 날짜 범위 전달
+    onSelectDateRange && onSelectDateRange(start, end);
   };
 
   const formatDate = (date: Date) => {
@@ -55,7 +59,6 @@ const DateSelector: React.FC<DateSelectorProps> = ({ onSelectDate }) => {
     date.setDate(today.getDate() + i);
     const isSelected =
       selectedDate && selectedDate.toDateString() === date.toDateString();
-    const recruitmentEndDate = isSelected ? RecruEndDate(date) : null;
 
     dateButtons.push(
       <S.Button
@@ -66,19 +69,15 @@ const DateSelector: React.FC<DateSelectorProps> = ({ onSelectDate }) => {
         {formatDate(date)}
       </S.Button>
     );
-
-    if (recruitmentEndDate) {
-      onSelectDate && onSelectDate(recruitmentEndDate);
-    }
   }
 
   return (
     <S.DateWrap>
       <div>{dateButtons}</div>
-      {selectedDate && (
+      {recruStartDate && recruEndDate && (
         <S.Label>
-          <BsCalendarWeek /> {formatDate(selectedDate)} ~{' '}
-          {formatDate(RecruEndDate(selectedDate))}
+          <BsCalendarWeek /> {formatDate(recruStartDate)} ~{' '}
+          {formatDate(recruEndDate)}
         </S.Label>
       )}
     </S.DateWrap>
