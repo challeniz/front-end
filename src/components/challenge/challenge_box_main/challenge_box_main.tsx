@@ -9,7 +9,12 @@ import ListTab from '../list_tab/list_tab';
 import moment from 'moment';
 import HeartImg from '../../../assets/image/heart_red.png';
 import EmptyHeartImg from '../../../assets/image/heart.png';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 // 예시로 Challenge 타입을 정의
 export interface Challenge {
   _id: string;
@@ -22,7 +27,9 @@ export interface Challenge {
   category: string;
   mainImg: string;
 }
-
+interface modules {
+  onClick: () => void;
+}
 export interface ChallengeBoxProps {
   selectedCategory: string;
   handleCategoryClick: (category: string) => void;
@@ -31,11 +38,12 @@ export interface ChallengeBoxProps {
 
 const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   selectedCategory,
-  handleCategoryClick,
+
   challenges,
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [wishCount, setWishCount] = useState(808);
+  const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,34 +98,42 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   };
   return (
     <S.ListWrap>
-      <S.ContentsWrap>
-        {challenges &&
-          challenges.map((challenge, index) => (
-            <S.ContentWrap key={index}>
-              <S.ImgStyled>
-                <img src={challenge.mainImg} alt="Challenge" />
-                {/* <S.StyledHeartButton
-                  src={challenge.like ? HeartImg : EmptyHeartImg}
-                  alt={challenge.like ? 'Liked' : 'Not Liked'}
-                  onClick={() => wishCountHandler(challenge.id)}
-                /> */}
-              </S.ImgStyled>
-              <S.TabWrap>
-                {challenge.tag.map((tag, index) => (
-                  <S.TabStyled key={index}>{tag}</S.TabStyled>
-                ))}
-              </S.TabWrap>
-              <Link to={`${ROUTE.DETAILPAGE.link}/${challenge._id}`}>
-                <S.H3Styled>{challenge.title}</S.H3Styled>
-              </Link>
-              <S.H4Styled>
-                <BsCalendarRange />
-                {moment(challenge.start_date).format('YYYY년 MM월 DD일')} ~{' '}
-                {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
-              </S.H4Styled>
-            </S.ContentWrap>
-          ))}
-      </S.ContentsWrap>
+      <Swiper
+        modules={[Navigation, Pagination]}
+        navigation={true}
+        pagination={true}
+        className="mySwiper"
+      >
+        <S.ContentsWrap>
+          {challenges &&
+            challenges.map((challenge, index) => (
+              <S.ContentWrap>
+                <S.ImgStyled>
+                  <img src={challenge.mainImg} alt="Challenge" />
+                  {/* <S.StyledHeartButton
+                      src={challenge.like ? HeartImg : EmptyHeartImg}
+                      alt={challenge.like ? 'Liked' : 'Not Liked'}
+                      onClick={() => wishCountHandler(challenge.id)}
+                    /> */}
+                </S.ImgStyled>
+                <S.TabWrap>
+                  {challenge.tag.map((tag, index) => (
+                    <S.TabStyled key={index}>{tag}</S.TabStyled>
+                  ))}
+                </S.TabWrap>
+                <Link to={`${ROUTE.DETAILPAGE.link}/${challenge._id}`}>
+                  <S.H3Styled>{challenge.title}</S.H3Styled>
+                </Link>
+                <S.H4Styled>
+                  <BsCalendarRange />
+                  {moment(challenge.start_date).format(
+                    'YYYY년 MM월 DD일'
+                  )} ~ {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
+                </S.H4Styled>
+              </S.ContentWrap>
+            ))}
+        </S.ContentsWrap>
+      </Swiper>
     </S.ListWrap>
   );
 };

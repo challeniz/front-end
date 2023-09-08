@@ -23,74 +23,11 @@ const MainPage = () => {
   const [ongoingChallenge, setOngoingChallenge] = useState();
   const [usersChallenge, setUsersChallenge] = useState();
   const [dateChallenge, setDateChallenge] = useState();
-  const SlideRef1 = useRef<HTMLDivElement | null>(null);
-  const SlideRef2 = useRef<HTMLDivElement | null>(null);
-  const SlideRef3 = useRef<HTMLDivElement | null>(null);
-  const [CurrentImg1, setCurrentImg1] = useState(0);
-  const [CurrentImg2, setCurrentImg2] = useState(0);
-  const [CurrentImg3, setCurrentImg3] = useState(0);
-  const IMG_WIDTH = 30;
-  const slideRange1 = CurrentImg1 * IMG_WIDTH;
-  const slideRange2 = CurrentImg2 * IMG_WIDTH;
-  const slideRange3 = CurrentImg3 * IMG_WIDTH;
-  const TotalImg = 4;
-  const challengeBoxRef = useRef<HTMLDivElement | null>(null);
-  const [isWrapperOverflowHidden, setIsWrapperOverflowHidden] = useState(false);
-  useEffect(() => {
-    if (SlideRef1.current) {
-      SlideRef1.current.style.transition = 'transform 0.5s ease-in-out';
-      SlideRef1.current.style.transform = `translateX(-${slideRange1}px)`;
-    }
-  }, [slideRange1]);
-
-  useEffect(() => {
-    if (SlideRef2.current) {
-      SlideRef2.current.style.transition = 'transform 0.5s ease-in-out';
-      SlideRef2.current.style.transform = `translateX(-${slideRange2}px)`;
-    }
-  }, [slideRange2]);
-
-  useEffect(() => {
-    if (SlideRef3.current) {
-      SlideRef3.current.style.transition = 'transform 0.5s ease-in-out';
-      SlideRef3.current.style.transform = `translateX(-${slideRange3}px)`;
-    }
-  }, [slideRange3]);
-
-  const prevSlide = (idx: number) => {
-    if (idx === 1) {
-      setCurrentImg1((prevIndex) => (prevIndex - 1 + TotalImg) % TotalImg);
-    } else if (idx === 2) {
-      setCurrentImg2((prevIndex) => (prevIndex - 1 + TotalImg) % TotalImg);
-    } else if (idx === 3) {
-      setCurrentImg3((prevIndex) => (prevIndex - 1 + TotalImg) % TotalImg);
-    }
-  };
-
-  const nextSlide = (idx: number) => {
-    if (idx === 1) {
-      setCurrentImg1((prevIndex) => (prevIndex + 1) % TotalImg);
-    } else if (idx === 2) {
-      setCurrentImg2((prevIndex) => (prevIndex + 1) % TotalImg);
-    } else if (idx === 3) {
-      setCurrentImg3((prevIndex) => (prevIndex + 1) % TotalImg);
-    }
-  };
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
   };
-  const handleOverflowToggle = () => {
-    setIsWrapperOverflowHidden(!isWrapperOverflowHidden);
-  };
 
-  useEffect(() => {
-    if (challengeBoxRef.current) {
-      challengeBoxRef.current.style.overflow = isWrapperOverflowHidden
-        ? 'hidden'
-        : 'visible';
-    }
-  }, [isWrapperOverflowHidden]);
   // 필터링
   const fetchChallenges = async () => {
     try {
@@ -123,19 +60,14 @@ const MainPage = () => {
             <li>
               <h2>🗓️ 모집/진행중인 챌린지</h2>
             </li>
-            <li onClick={() => prevSlide(1)}>
-              <S.StyledSlideCircleLeft />
-            </li>
-            <li onClick={() => nextSlide(1)}>
-              <S.StyledSlideCircleRight />
-            </li>
+
             <li>
               <Link to={ROUTE.LISTPAGE.link}>
                 <h3>전체보기</h3>
               </Link>
             </li>
           </S.ProgressList>
-          <S.ContentsWrap ref={SlideRef1}>
+          <S.ContentsWrap>
             <ChallengeBox
               selectedCategory={selectedCategory}
               handleCategoryClick={handleCategoryClick}
@@ -150,19 +82,14 @@ const MainPage = () => {
                 <S.PopularListSpan>🔥HOT!</S.PopularListSpan> 인기 챌린지
               </h2>
             </li>
-            <li onClick={() => prevSlide(2)}>
-              <S.StyledSlideCircleLeft />
-            </li>
-            <li onClick={() => nextSlide(2)}>
-              <S.StyledSlideCircleRight />
-            </li>
+
             <li>
               <Link to={ROUTE.LISTPAGE.link}>
                 <h3>전체보기</h3>
               </Link>
             </li>
           </S.ProgressList>
-          <S.ContentsWrap ref={SlideRef2}>
+          <S.ContentsWrap>
             <ChallengeBox
               selectedCategory={selectedCategory}
               handleCategoryClick={handleCategoryClick}
@@ -178,19 +105,14 @@ const MainPage = () => {
                 <S.NewListSpan>⭐️NEW!</S.NewListSpan> 신규 챌린지
               </h2>
             </li>
-            <li onClick={() => prevSlide(3)}>
-              <S.StyledSlideCircleLeft />
-            </li>
-            <li onClick={() => nextSlide(3)}>
-              <S.StyledSlideCircleRight />
-            </li>
+           
             <li>
               <Link to={ROUTE.LISTPAGE.link}>
                 <h3>전체보기</h3>
               </Link>
             </li>
           </S.ProgressList>
-          <S.ContentsWrap ref={SlideRef3}>
+          <S.ContentsWrap>
             <ChallengeBox
               selectedCategory={selectedCategory}
               handleCategoryClick={handleCategoryClick}

@@ -102,3 +102,130 @@ code {
     url('./assets/fonts/Pretendard-Black.woff') format('woff'),
     url('./assets/fonts/Pretendard-Black.otf') format('otf');
 }
+
+.Title{
+  background: linear-gradient(90deg, rgba(116,192,252,1) 0%, rgba(34,139,230,1) 94%);
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.TxtBox{
+  width: 50%;
+
+}
+.H1Styled{
+  font-size: 42px;
+  color: #fff;
+  font-weight: 700;
+  margin-left: 5vw;
+
+}
+
+.Title span{
+  display: block;
+  margin-top: 10px;
+}
+
+.Title p{
+  margin-left: 5vw;
+ 
+}
+.about{
+  width: 510px;
+  height: 280px;
+  margin-left: 50px;
+
+  filter: drop-shadow( 0px 4px 4px 0px #cdcdcd);
+
+
+}
+
+.Btn{
+padding: 20px;
+border-radius: 10px;
+background: #009BF3;
+border: 1px solid #009BF3;
+color:  #fff;
+font-size: 12px;
+margin-right: 73vw;
+cursor: pointer;
+
+}
+
+.TitleList{
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+.ListTxt{
+  
+  width: 50%;
+
+}
+
+.H1Styled2{
+  font-size: 42px;
+  color: #111;
+  font-weight: 700;
+  margin-left: 5vw;
+}
+
+.H1Styled2 span{display: block; 
+   margin-top: 10px;}
+
+.ListTxt p{
+  margin-left: 5vw;
+}
+
+.list{
+  width: 510px;
+  height: 280px;
+  margin-left: 120px;
+}
+
+.TitleCheck{
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #F3F9FE;
+
+}
+.CheckTxt{
+  
+  width: 50%;
+
+}
+.CheckTxt p{
+  margin-left: 5vw;
+  
+}
+
+.check{
+  width: 580px;
+  height: 340px;
+}
+
+.TitleCheck1{
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color:#fff;
+}
