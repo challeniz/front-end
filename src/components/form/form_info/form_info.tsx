@@ -59,7 +59,7 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
 
   const [data, setData] = useState<ChallengeFormDataType>({
     title: '',
-    cate: '',
+    cate: '건강',
     description: '',
     start_date: '',
     end_date: '',
@@ -147,6 +147,10 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         data: formData,
       });
 
+      // 챌린지 설명을 줄바꿈 문자로 처리
+      const formattedDescription = textValue.replace(/\n/g, '<br>'); // 엔터키를 <br> 태그로 변경
+      formData.append('description', formattedDescription);
+
       if (response.status === 201) {
         // 챌린지 생성 성공 후 추가 로직
         alert('챌린지 개설에 성공했습니다!');
@@ -227,6 +231,21 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }));
   };
 
+  // 주제 유효성 검사를 위한 상태 변수
+  const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
+
+  // 주제 input 변경 핸들러
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setData((prevData) => ({
+      ...prevData,
+      title: newValue,
+    }));
+
+    // 주제 유효성 검사
+    setIsTitleValid(newValue.length >= 3 && newValue.length <= 15);
+  };
+
   return (
     <>
       <WhiteBox>
@@ -241,8 +260,14 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                 name="title"
                 placeholder="주제를 입력하세요."
                 value={data.title}
-                onChange={handleChange}
+                onChange={handleTitleChange} // 주제 input 변경 핸들러로 변경
               />
+              {/* 주제 유효성 검사 메시지 */}
+              {!isTitleValid && (
+                <S.ErrorMessage>
+                  주제는 3자 이상 15자 이하로 입력해주세요.
+                </S.ErrorMessage>
+              )}
             </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formCate">카테고리</S.LabelStyled>
@@ -261,6 +286,9 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
             <S.InputContent className="formDate">
               <S.LabelStyled htmlFor="formDage">모집 시작일</S.LabelStyled>
               <DateSelector onSelectDateRange={handleDateRangeSelect} />
+              {!selectedStartDate && (
+                <S.ErrorMessage>모집 시작일을 선택해주세요.</S.ErrorMessage>
+              )}
             </S.InputContent>
             <S.InputContent className="formDate">
               <S.LabelStyled htmlFor="formDage">챌린지 기간</S.LabelStyled>
@@ -269,6 +297,9 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                 recruEndDate={selectedEndDate}
                 onSelectWeek={handleWeekSelection}
               />
+              {!endDate && (
+                <S.ErrorMessage>챌린지기간을 선택해주세요.</S.ErrorMessage>
+              )}
             </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formImg">대표 이미지</S.LabelStyled>

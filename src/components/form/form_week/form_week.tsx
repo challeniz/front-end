@@ -35,6 +35,10 @@ const WeekSelector: React.FC<WeekSelectorProps> = ({
         setStartDate(calculatedStartDate);
         setEndDate(calculatedEndDate);
         onSelectWeek && onSelectWeek(calculatedStartDate, calculatedEndDate);
+      } else {
+        // 모집일 데이터가 없을 때 알림창 표시
+        alert('모집 시작일을 선택하세요');
+        setSelectedWeek(null);
       }
     }
   };

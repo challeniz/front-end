@@ -65,7 +65,7 @@ export const DetailWrap = styled.div`
   }
   li {
     font-size: 18px;
-    line-height: 35px;
+    line-height: 28px;
     white-space: pre-line;
   }
 `;
