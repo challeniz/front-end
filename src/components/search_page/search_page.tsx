@@ -58,8 +58,8 @@ const SearchPage = () => {
 
   return (
     <>
-      <Header />
-      <Wrapper>
+      {/* <Header />
+      <Wrapper> */}
         <S.Search>
           <S.SearchTitle>
             찾고 있는 <S.SearchTitleColor>챌린지</S.SearchTitleColor>를
@@ -98,8 +98,8 @@ const SearchPage = () => {
               handleCategoryClick={() => {}}
             />
           ))}
-      </Wrapper>
-      <Footer />
+      {/* </Wrapper>
+      <Footer /> */}
     </>
   );
 };

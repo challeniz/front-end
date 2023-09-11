@@ -2177,6 +2177,13 @@
     "jest-matcher-utils" "^27.0.0"
     "pretty-format" "^27.0.0"
 
+"@types/jquery@*":
+  "integrity" "sha512-sNm7O6LECFhHmF+3KYo6QIl2fIbjlPYa0PDgDQwfOaEJzwpK20Eub9Ke7VKkGsSJ2K0HUR50S266qYzRX4GlSw=="
+  "resolved" "https://registry.npmjs.org/@types/jquery/-/jquery-3.5.18.tgz"
+  "version" "3.5.18"
+  dependencies:
+    "@types/sizzle" "*"
+
 "@types/json-schema@*", "@types/json-schema@^7.0.4", "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.8", "@types/json-schema@^7.0.9":
   "integrity" "sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA=="
   "resolved" "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.12.tgz"
@@ -2348,6 +2355,18 @@
     "@types/http-errors" "*"
     "@types/mime" "*"
     "@types/node" "*"
+
+"@types/sizzle@*":
+  "integrity" "sha512-JYM8x9EGF163bEyhdJBpR2QX1R5naCJHC8ucJylJ3w9/CVBaskdQ8WqBf8MmQrd1kRvp/a4TS8HJ+bxzR7ZJYQ=="
+  "resolved" "https://registry.npmjs.org/@types/sizzle/-/sizzle-2.3.3.tgz"
+  "version" "2.3.3"
+
+"@types/slick-carousel@^1.6.37":
+  "integrity" "sha512-RCvwJyOSxgTV3c+YxXYdQFV93cnFc+BN+tJKWyNZdIU9gijbz8PGZa8GpFh9cE39g3sZQZ1oigw//pJcCSXIPg=="
+  "resolved" "https://registry.npmjs.org/@types/slick-carousel/-/slick-carousel-1.6.37.tgz"
+  "version" "1.6.37"
+  dependencies:
+    "@types/jquery" "*"
 
 "@types/sockjs@^0.3.33":
   "integrity" "sha512-f0KEEe05NvUnat+boPTZ0dgaLZ4SfSouXUgv5noUiefG2ajgKjmETo9ZJyuqsl7dfl2aHlLJUiki6B4ZYldiiw=="
@@ -8816,7 +8835,7 @@
     "picocolors" "^1.0.0"
     "stable" "^0.1.8"
 
-"swiper@*", "swiper@^10.2.0":
+"swiper@*":
   "integrity" "sha512-nktQsOtBInJjr3f5DicxC8eHYGcLXDVIGPSon0QoXRaO6NjKnATCbQ8SZsD3dN1Ph1RH4EhVPwSYCcuDRFWHGQ=="
   "resolved" "https://registry.npmjs.org/swiper/-/swiper-10.2.0.tgz"
   "version" "10.2.0"

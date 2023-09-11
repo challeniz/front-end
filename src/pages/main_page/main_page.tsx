@@ -8,9 +8,10 @@ import ChallengeBox, {
   Challenge,
 } from '../../components/challenge/challenge_box_main/challenge_box_main';
 import { apiInstance } from '../../utils/api';
-import SearchPage from '../search_page/search_page';
+import SearchPage from '../../components/search_page/search_page';
 import { ROUTE } from '../../routes';
 import { Link, Routes, Route, BrowserRouter } from 'react-router-dom';
+import Slider from 'react-slick';
 
 export interface ChallengeBoxProps {
   selectedCategory: string;
@@ -23,7 +24,10 @@ const MainPage = () => {
   const [ongoingChallenge, setOngoingChallenge] = useState();
   const [usersChallenge, setUsersChallenge] = useState();
   const [dateChallenge, setDateChallenge] = useState();
-
+  const [inputValue, setInputValue] = useState('');
+  const [challengeList, setChallengeList] = useState();
+  const [noResults, setNoResults] = useState(false);
+  const [searched, setSearched] = useState(false);
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
   };
@@ -45,34 +49,48 @@ const MainPage = () => {
       console.error('Error fetching challenges:', error);
     }
   };
-
+  console.log('메인', inputValue);
   useEffect(() => {
     fetchChallenges();
   }, []);
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: '0px',
+    centerMode: true,
+    autoplay: true,
+    autoplaySpeed: 1000,
+  };
 
   return (
     <S.BackWhite>
       <Header />
       <SlideBnner />
+      <SearchPage />
       <Wrapper>
         <S.ContentsList>
           <S.ProgressList>
             <li>
               <h2>🗓️ 모집/진행중인 챌린지</h2>
             </li>
-
             <li>
               <Link to={ROUTE.LISTPAGE.link}>
                 <h3>전체보기</h3>
               </Link>
             </li>
           </S.ProgressList>
+
           <S.ContentsWrap>
-            <ChallengeBox
-              selectedCategory={selectedCategory}
-              handleCategoryClick={handleCategoryClick}
-              challenges={ongoingChallenge}
-            />
+            <Slider {...sliderSettings}>
+              <ChallengeBox
+                selectedCategory={selectedCategory}
+                handleCategoryClick={handleCategoryClick}
+                challenges={ongoingChallenge}
+              />
+            </Slider>
           </S.ContentsWrap>
         </S.ContentsList>
         <S.PopularList>
@@ -82,7 +100,6 @@ const MainPage = () => {
                 <S.PopularListSpan>🔥HOT!</S.PopularListSpan> 인기 챌린지
               </h2>
             </li>
-
             <li>
               <Link to={ROUTE.LISTPAGE.link}>
                 <h3>전체보기</h3>
@@ -90,14 +107,15 @@ const MainPage = () => {
             </li>
           </S.ProgressList>
           <S.ContentsWrap>
-            <ChallengeBox
-              selectedCategory={selectedCategory}
-              handleCategoryClick={handleCategoryClick}
-              challenges={usersChallenge}
-            />
+            <Slider {...sliderSettings}>
+              <ChallengeBox
+                selectedCategory={selectedCategory}
+                handleCategoryClick={handleCategoryClick}
+                challenges={usersChallenge}
+              />
+            </Slider>
           </S.ContentsWrap>
         </S.PopularList>
-
         <S.NewList>
           <S.ProgressList>
             <li>
@@ -105,7 +123,6 @@ const MainPage = () => {
                 <S.NewListSpan>⭐️NEW!</S.NewListSpan> 신규 챌린지
               </h2>
             </li>
-           
             <li>
               <Link to={ROUTE.LISTPAGE.link}>
                 <h3>전체보기</h3>
@@ -113,11 +130,13 @@ const MainPage = () => {
             </li>
           </S.ProgressList>
           <S.ContentsWrap>
-            <ChallengeBox
-              selectedCategory={selectedCategory}
-              handleCategoryClick={handleCategoryClick}
-              challenges={dateChallenge}
-            />
+            <Slider {...sliderSettings}>
+              <ChallengeBox
+                selectedCategory={selectedCategory}
+                handleCategoryClick={handleCategoryClick}
+                challenges={dateChallenge}
+              />
+            </Slider>
           </S.ContentsWrap>
         </S.NewList>
       </Wrapper>

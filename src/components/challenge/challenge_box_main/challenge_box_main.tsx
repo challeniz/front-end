@@ -9,12 +9,7 @@ import ListTab from '../list_tab/list_tab';
 import moment from 'moment';
 import HeartImg from '../../../assets/image/heart_red.png';
 import EmptyHeartImg from '../../../assets/image/heart.png';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+
 // 예시로 Challenge 타입을 정의
 export interface Challenge {
   _id: string;
@@ -24,6 +19,7 @@ export interface Challenge {
   end_date: string;
   tag: string[];
   id: string;
+  
   category: string;
   mainImg: string;
 }
@@ -98,12 +94,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   };
   return (
     <S.ListWrap>
-      <Swiper
-        modules={[Navigation, Pagination]}
-        navigation={true}
-        pagination={true}
-        className="mySwiper"
-      >
         <S.ContentsWrap>
           {challenges &&
             challenges.map((challenge, index) => (
@@ -133,7 +123,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
               </S.ContentWrap>
             ))}
         </S.ContentsWrap>
-      </Swiper>
     </S.ListWrap>
   );
 };
