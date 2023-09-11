@@ -5,9 +5,9 @@ export const PopularList = styled.div`
   margin-bottom: 180px;
 `;
 export const ContentsWrap = styled.div`
-  display: grid;
-  grid-column-gap: 40px;
-  grid-row-gap: 50px;
+  // display: grid;
+  // grid-column-gap: 40px;
+  // grid-row-gap: 50px;
 `;
 export const NewList = styled.div`
   margin-bottom: 180px;
