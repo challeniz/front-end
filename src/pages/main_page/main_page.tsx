@@ -6,9 +6,9 @@ import SlideBnner from '../../components/common/slide/slide';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import { ROUTE } from '../../routes';
 import { Link } from 'react-router-dom';
-import MainSlide from '../../hook/Users_slide';
-import OngoinSlide from '../../hook/Ongoing_slide';
-import NewSlide from '../../hook/New_slide';
+import MainSlide from '../../hook/Slide/Users_slide';
+import OngoingSlide from '../../hook/Slide/Ongoing_slide';
+import NewSlide from '../../hook/Slide/New_slide';
 
 export interface ChallengeBoxProps {
   selectedCategory: string;
@@ -25,7 +25,7 @@ const MainPage = () => {
         <S.ContentsList>
           <S.ProgressList>
             <li>
-              <h2>🗓️ 모집/진행중인 챌린지</h2>
+              <h2>🗓️ 진행중인 챌린지</h2>
             </li>
 
             <li>
@@ -35,7 +35,7 @@ const MainPage = () => {
             </li>
           </S.ProgressList>
           <S.ContentsWrap>
-            <OngoinSlide />
+            <OngoingSlide />
           </S.ContentsWrap>
         </S.ContentsList>
         <S.PopularList>

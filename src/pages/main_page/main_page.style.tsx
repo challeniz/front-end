@@ -21,6 +21,7 @@ export const ProgressList = styled.ul`
   margin-bottom: 45px;
   font-size: 20px;
   align-items: center;
+  justify-content: space-between;
 
   li {
     margin: 0 8px;
