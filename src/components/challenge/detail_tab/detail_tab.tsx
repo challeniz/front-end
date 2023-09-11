@@ -94,7 +94,10 @@ export const Tab: React.FC = () => {
         {currentTab === 0 ? (
           <>
             <S.DetailWrap>
-              <h2>챌린지를 소개합니다.</h2>
+              <h2>참여자 후기</h2>
+            </S.DetailWrap>
+            <S.DetailWrap>
+              <h2>챌린지 소개</h2>
               <ul>
                 <li>{challengeInfo.description}</li>
               </ul>
@@ -109,6 +112,7 @@ export const Tab: React.FC = () => {
                   locale="ko"
                   titleFormat={{ year: 'numeric', month: 'long' }}
                   events={event1.concat(event2)}
+                  height="370px"
                 />
               </S.CalendarWrap>
             </S.DetailWrap>
