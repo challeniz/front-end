@@ -12,6 +12,7 @@ import {
 } from 'react-icons/fa6';
 import { FaUserCircle } from 'react-icons/fa';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const updateScroll = () => {
@@ -20,7 +21,6 @@ const Header = () => {
 
   const token = 'token';
   const user = localStorage.getItem(token);
-  // console.log('user', user);
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
@@ -54,38 +54,49 @@ const Header = () => {
         </S.Logo>
         <S.HeaderNav>
           <S.NavList>
+            <S.NavItem>챌리니즈 소개</S.NavItem>
             <Link to={ROUTE.LISTPAGE.link}>
               <S.NavItem>
-                챌린지 둘러보기
-                {/* <S.SubMenu>
+                <Link to={`${ROUTE.LISTPAGE.link}?category=`}>
+                  챌린지 둘러보기
+                </Link>
+                <S.SubMenu>
                   <S.InnerLi>
                     <FaHeartPulse />
-                    건강
+                    <Link to={`${ROUTE.LISTPAGE.link}?category=건강`}>
+                      건강
+                    </Link>
                   </S.InnerLi>
                   <S.InnerLi>
                     <FaCat />
-                    취미
+                    <Link to={`${ROUTE.LISTPAGE.link}?category=취미`}>
+                      취미
+                    </Link>
                   </S.InnerLi>
                   <S.InnerLi>
                     <FaBowlFood />
-                    식습관
+                    <Link to={`${ROUTE.LISTPAGE.link}?category=식습관`}>
+                      식습관
+                    </Link>
                   </S.InnerLi>
                   <S.InnerLi>
                     <FaBook />
-                    공부
+                    <Link to={`${ROUTE.LISTPAGE.link}?category=공부`}>
+                      공부
+                    </Link>
                   </S.InnerLi>
                   <S.InnerLi>
                     <FaLeaf />
-                    환경
+                    <Link to={`${ROUTE.LISTPAGE.link}?category=환경`}>
+                      환경
+                    </Link>
                   </S.InnerLi>
-                </S.SubMenu> */}
+                </S.SubMenu>
               </S.NavItem>
             </Link>
-            {/* <Link to={ROUTE.NEWPAGE.link}> */}
             <S.NavItem onClick={handleChallengeCreationClick}>
               챌린지 개설하기
             </S.NavItem>
-            {/* </Link> */}
           </S.NavList>
         </S.HeaderNav>
         <S.LoginBox>

@@ -43,7 +43,7 @@ const AboutPage = () => {
         </div>
         <div className="TitleCheck">
           {/* 인증사진을 목업스타일이나 인증모음샷으로 수정하는거 어떤지 물어보기 */}
-          <img src={check} alt="check" className="check" />  
+          <img src={check} alt="check" className="check" />
           <div className="CheckTxt">
             <h1 className="H1Styled2">
               다른사람의 인증샷을 보고 <span>응원해보세요!</span>
