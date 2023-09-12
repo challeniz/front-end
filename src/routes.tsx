@@ -65,7 +65,7 @@ export const ROUTE = {
     element: NewPage,
   },
   EDITPAGE: {
-    path: '/editpage',
+    path: '/editpage/:id',
     link: '/editpage',
     element: EditPage,
   },
