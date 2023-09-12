@@ -2390,13 +2390,6 @@
   "resolved" "https://registry.npmjs.org/@types/stylis/-/stylis-4.2.0.tgz"
   "version" "4.2.0"
 
-"@types/swiper@^6.0.0":
-  "integrity" "sha512-QPZRgxZ+ivXXtzV43B3LxpXUIC7FE/EoKM+rtxngmgt2M7eeUYypZhyqZD8UxJtlBcUDw/ATGoVeSNpvBBrz2w=="
-  "resolved" "https://registry.npmjs.org/@types/swiper/-/swiper-6.0.0.tgz"
-  "version" "6.0.0"
-  dependencies:
-    "swiper" "*"
-
 "@types/testing-library__jest-dom@^5.9.1":
   "integrity" "sha512-FSYhIjFlfOpGSRyVoMBMuS3ws5ehFQODymf3vlI7U1K8c7PHwWwFY7VREfmsuzHSOnoKs/9/Y983ayOs7eRzqw=="
   "resolved" "https://registry.npmjs.org/@types/testing-library__jest-dom/-/testing-library__jest-dom-5.14.9.tgz"
@@ -9339,7 +9332,7 @@
     "picocolors" "^1.0.0"
     "stable" "^0.1.8"
 
-"swiper@*", "swiper@^9.3.2":
+"swiper@^9.3.2":
   "integrity" "sha512-Kj9Z4kXRmJR3YT/Wj+XLWj8P6IcRt+WG38uL8M3/Wny7+6sV0TlP9vnE1X+Co9c7VzNooojWGnFa+Wf/9+CUMA=="
   "resolved" "https://registry.npmjs.org/swiper/-/swiper-9.3.2.tgz"
   "version" "9.3.2"

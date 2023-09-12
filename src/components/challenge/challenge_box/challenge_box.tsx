@@ -19,6 +19,7 @@ export interface Challenge {
   id: string;
   category: string;
   mainImg: string;
+  like_users: string;
 }
 
 export interface ChallengeBoxProps {
@@ -26,13 +27,33 @@ export interface ChallengeBoxProps {
   handleCategoryClick: (category: string) => void;
   challenges?: Challenge[];
 }
-
+export const sortedChallenges = (
+  selectedCategory: string,
+  challengeList: Challenge[]
+) => {
+  if (selectedCategory === 'popular') {
+    return challengeList
+      .slice()
+      .sort((a, b) => b.like_users.length - a.like_users.length);
+  } else if (selectedCategory === 'latest') {
+    return challengeList
+      .slice()
+      .sort(
+        (a, b) =>
+          new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+      );
+  } else {
+    return challengeList;
+  }
+};
 const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   selectedCategory,
   handleCategoryClick,
+  challenges = [],
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [wishCount, setWishCount] = useState(808);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +70,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
             tag: challenge.tag,
             id: challenge._id,
             category: challenge.category,
+            like_users: challenge.like_users,
           }));
           setChallengeList(challenges);
         }
@@ -83,13 +105,9 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
     setChallengeList(updatedChallengeList);
     setWishCount((prevCount) => prevCount + 1);
   };
-
   const filteredChallengeList = selectedCategory
-    ? challengeList.filter(
-        (challenge) => challenge.category === selectedCategory
-      )
-    : challengeList;
-
+  ? challenges.filter((challenge) => challenge.category === selectedCategory)
+  : challenges;
   return (
     <S.ListWrap>
       <S.ContentsWrap>

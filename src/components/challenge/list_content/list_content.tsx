@@ -1,4 +1,3 @@
-// list_content.tsx
 import React, { useState, useEffect } from 'react';
 import * as S from './list_content.style';
 import { BsCalendarRange } from 'react-icons/bs';
@@ -6,7 +5,7 @@ import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
-import ChallengeBox from '../challenge_box/challenge_box';
+import ChallengeBox , { sortedChallenges }from '../challenge_box/challenge_box';
 
 interface Challenge {
   like: boolean;
@@ -16,11 +15,20 @@ interface Challenge {
   tag: string[];
   id: string;
   category: string;
+  like_users: string;
+  mainImg: string;
 }
 
 const ListContent = () => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+
+  const handleCategoryClick = (category: string) => {
+    console.log(`Clicked category: ${category}`);
+    setSelectedCategory(category);
+    console.log(`Selected category: ${category}`);
+  };
+  console.log(sortedChallenges(selectedCategory, challengeList));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +45,10 @@ const ListContent = () => {
             tag: challenge.tag,
             id: challenge._id,
             category: challenge.category,
+            like_users: challenge.like_users,
+            mainImg: challenge.mainImg,
           }));
+
           setChallengeList(challenges);
         }
       } catch (error) {
@@ -45,23 +56,24 @@ const ListContent = () => {
       }
     };
 
-    // 초기 로딩 시 데이터 가져오기
     fetchData();
-  }, []);
-
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category);
-  };
-
+  }, []); console.log(sortedChallenges)
+  console.log('latest')
   return (
     <>
       <ListTab selectedCategory={selectedCategory} />
+      <ul>
+        <li onClick={() => handleCategoryClick('latest')}>최신순</li>
+        <li onClick={() => handleCategoryClick('popular')}>인기순</li>
+      </ul>
       <ChallengeBox
         selectedCategory={selectedCategory}
         handleCategoryClick={handleCategoryClick}
+        challenges={sortedChallenges(selectedCategory, challengeList)}
       />
+
     </>
   );
-};
+}
 
 export default ListContent;
