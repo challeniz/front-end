@@ -1,3 +1,4 @@
+// list_content.tsx
 import React, { useState, useEffect } from 'react';
 import * as S from './list_content.style';
 import { BsCalendarRange } from 'react-icons/bs';
@@ -5,7 +6,7 @@ import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
-import ChallengeBox , { sortedChallenges }from '../challenge_box/challenge_box';
+import ChallengeBox from '../challenge_box/challenge_box';
 
 interface Challenge {
   like: boolean;
@@ -24,12 +25,20 @@ const ListContent = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
   const handleCategoryClick = (category: string) => {
-    console.log(`Clicked category: ${category}`);
     setSelectedCategory(category);
-    console.log(`Selected category: ${category}`);
+    let sortedChallenges: Challenge[] = [];
+  
+    if (category === 'popular') {
+      sortedChallenges = challengeList.slice().sort((a, b) => b.like_users.length - a.like_users.length);
+    } else if (category === 'latest') {
+      sortedChallenges = challengeList.slice().sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
+    }
+  
+    setSortedChallenges(sortedChallenges);
   };
-  console.log(sortedChallenges(selectedCategory, challengeList));
 
+  const [sortedChallenges, setSortedChallenges] = useState<Challenge[]>([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,10 +55,10 @@ const ListContent = () => {
             id: challenge._id,
             category: challenge.category,
             like_users: challenge.like_users,
-            mainImg: challenge.mainImg,
           }));
 
           setChallengeList(challenges);
+          setSortedChallenges(challenges); 
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -57,8 +66,8 @@ const ListContent = () => {
     };
 
     fetchData();
-  }, []); console.log(sortedChallenges)
-  console.log('latest')
+  }, []);
+console.log(setSortedChallenges(challengeList))
   return (
     <>
       <ListTab selectedCategory={selectedCategory} />
@@ -66,14 +75,15 @@ const ListContent = () => {
         <li onClick={() => handleCategoryClick('latest')}>최신순</li>
         <li onClick={() => handleCategoryClick('popular')}>인기순</li>
       </ul>
-      <ChallengeBox
-        selectedCategory={selectedCategory}
-        handleCategoryClick={handleCategoryClick}
-        challenges={sortedChallenges(selectedCategory, challengeList)}
-      />
-
+    {sortedChallenges&& (
+  <ChallengeBox
+    selectedCategory={selectedCategory}
+    handleCategoryClick={handleCategoryClick}
+    challenges={challengeList} 
+  />
+)}
     </>
   );
-}
+} 
 
 export default ListContent;

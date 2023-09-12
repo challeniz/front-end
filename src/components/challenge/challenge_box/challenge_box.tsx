@@ -27,25 +27,7 @@ export interface ChallengeBoxProps {
   handleCategoryClick: (category: string) => void;
   challenges?: Challenge[];
 }
-export const sortedChallenges = (
-  selectedCategory: string,
-  challengeList: Challenge[]
-) => {
-  if (selectedCategory === 'popular') {
-    return challengeList
-      .slice()
-      .sort((a, b) => b.like_users.length - a.like_users.length);
-  } else if (selectedCategory === 'latest') {
-    return challengeList
-      .slice()
-      .sort(
-        (a, b) =>
-          new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
-      );
-  } else {
-    return challengeList;
-  }
-};
+
 const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   selectedCategory,
   handleCategoryClick,
