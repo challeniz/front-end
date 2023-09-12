@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const InputContent = styled.div`
   display: flex;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
   align-items: center;
   &.flex-start {
     align-items: flex-start;
+    position: relative;
   }
   &.formDate {
     margin-bottom: 90px;
@@ -58,6 +59,9 @@ export const AvatarWrapper = styled.div`
   border: 1px solid #cfcfcf;
   border-radius: 10px;
   overflow: hidden;
+  cursor: pointer;
+  background-color: #ddd;
+  background-image: url('https://i.ibb.co/B4LTSRF/preview.jpg');
 `;
 
 export const AvatarImage = styled.img`
@@ -70,4 +74,11 @@ export const AvatarImage = styled.img`
 export const InputImg = styled.input`
   margin-left: -400px;
   margin-top: -200px;
+  visibility: hidden;
+`;
+
+export const ErrorMessage = styled.span`
+  font-size: 14px;
+  color: red;
+  padding-left: 15px;
 `;

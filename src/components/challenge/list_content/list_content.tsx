@@ -55,10 +55,7 @@ const ListContent = () => {
 
   return (
     <>
-      <ListTab
-        selectedCategory={selectedCategory}
-        handleCategoryClick={handleCategoryClick}
-      />
+      <ListTab selectedCategory={selectedCategory} />
       <ChallengeBox
         selectedCategory={selectedCategory}
         handleCategoryClick={handleCategoryClick}

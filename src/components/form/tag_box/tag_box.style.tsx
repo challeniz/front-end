@@ -37,18 +37,28 @@ export const TagForm = styled.form`
 `;
 
 export const Tag = styled.div`
-  background: #000000;
+  border: 1px solid #797979;
   padding: 0px 16px;
   border-radius: 20px;
-  color: #fff;
   margin-right: 5px;
-  &:hover {
-    opacity: 0.5;
-  }
+  display: flex;
+  align-items: center;
 `;
 
 export const TagListBlock = styled.div`
   display: flex;
   margin-top: 10px;
   margin-left: 25px;
+  position: absolute;
+  top: 50px;
+  left: 135px;
+`;
+
+export const Closebutton = styled.button`
+  cursor: pointer;
+  background-color: transparent;
+
+  svg {
+    width: 0.8em;
+  }
 `;

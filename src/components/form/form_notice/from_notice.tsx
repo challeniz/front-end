@@ -1,6 +1,5 @@
 import React from 'react';
 import * as S from './form_notice.style';
-import WhiteBox from '../white_box/white_box/white_box';
 
 const NoticeForm = () => {
   return (
@@ -8,15 +7,15 @@ const NoticeForm = () => {
       <h2>챌린지 개설 안내</h2>
       <ul>
         <li>
-          ✅ 모집기간은 시작일 부터{' '}
-          <span className="bold">금주 일요일까지 </span>입니다.
+          ✅ 시작일을 선택하면 자동으로{' '}
+          <span className="bold">금주 일요일까지</span> 모집기간이 설정됩니다.
         </li>
         <li>
-          ✅ 챌린지 기간은 <span className="bold">'주'단위</span>로 선택할 수
-          있습니다.
+          ✅ <span className="bold">매주 월요일</span> 챌린지가 시작됩니다.
         </li>
         <li>
-          ✅ 모집기간이 끝나면 챌린지를 수정/삭제 할 수 없으므로 신중하게
+          ✅ 챌린지가 시작되면{' '}
+          <span className="bold">수정 / 삭제가 불가능</span> 하므로 신중하게
           개설해주세요!
         </li>
       </ul>

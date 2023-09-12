@@ -1,23 +1,35 @@
 import React, { useState, useCallback, useEffect, ChangeEvent } from 'react';
 import * as S from './tag_box.style';
+import { AiOutlineClose } from 'react-icons/ai';
 
 interface TagBoxProps {
   tags: string[];
   onChangeTags: (tags: string[]) => void;
+  children?: React.ReactNode;
 }
+
+interface TagListProps {
+  tags: string[];
+  onRemove: (tag: string) => void;
+  children?: React.ReactNode;
+}
+
+const TagList: React.FC<TagListProps> = ({ tags, onRemove }) => (
+  <S.TagListBlock>
+    {tags.map((tag) => (
+      <TagItem key={tag} tag={tag} onRemove={onRemove} />
+    ))}
+  </S.TagListBlock>
+);
 
 const TagItem: React.FC<{ tag: string; onRemove: (tag: string) => void }> =
   React.memo(({ tag, onRemove }) => (
-    <S.Tag onClick={() => onRemove(tag)}>#{tag}</S.Tag>
-  ));
-
-const TagList: React.FC<{ tags: string[]; onRemove: (tag: string) => void }> =
-  React.memo(({ tags, onRemove }) => (
-    <S.TagListBlock>
-      {tags.map((tag) => (
-        <TagItem key={tag} tag={tag} onRemove={onRemove} />
-      ))}
-    </S.TagListBlock>
+    <S.Tag>
+      {tag}
+      <S.Closebutton onClick={() => onRemove(tag)}>
+        <AiOutlineClose />
+      </S.Closebutton>
+    </S.Tag>
   ));
 
 const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {

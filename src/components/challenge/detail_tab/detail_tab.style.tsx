@@ -65,7 +65,7 @@ export const DetailWrap = styled.div`
   }
   li {
     font-size: 18px;
-    line-height: 35px;
+    line-height: 28px;
     white-space: pre-line;
   }
 `;
@@ -88,6 +88,7 @@ export const CalendarWrap = styled.div`
     font-size: 14px;
     padding: 4px 10px;
   }
+
   .fc .fc-view-harness {
     font-size: 11px;
   }
@@ -95,12 +96,24 @@ export const CalendarWrap = styled.div`
     width: 30px;
     height: 30px;
   }
-
+  .fc-event-time {
+    display: none;
+  }
+  .fc-h-event .fc-event-title {
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .fc-daygrid-block-event .fc-event-time,
+  .fc-daygrid-block-event .fc-event-title {
+    padding: 3px 10px;
+  }
   .event1-class {
-    background: rgba(255, 246, 40, 0.43);
+    background: rgb(255 249 0);
     border: none;
 
     .fc-event-title {
+      font-size: 13px;
+      font-weight: 500;
       color: #000;
     }
   }
