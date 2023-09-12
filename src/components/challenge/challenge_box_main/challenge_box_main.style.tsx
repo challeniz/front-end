@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import HeartButton from '../heart/heart';
-import { Swiper, SwiperSlide } from 'swiper/react';
 export const ListWrap = styled.div``;
 
 export const CategoryTab = styled.div`

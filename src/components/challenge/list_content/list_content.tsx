@@ -16,12 +16,29 @@ interface Challenge {
   tag: string[];
   id: string;
   category: string;
+  like_users: string;
+  mainImg: string;
 }
 
 const ListContent = () => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+    let sortedChallenges: Challenge[] = [];
+  
+    if (category === 'popular') {
+      sortedChallenges = challengeList.slice().sort((a, b) => b.like_users.length - a.like_users.length);
+    } else if (category === 'latest') {
+      sortedChallenges = challengeList.slice().sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
+    }
+  
+    setSortedChallenges(sortedChallenges);
+  };
+
+  const [sortedChallenges, setSortedChallenges] = useState<Challenge[]>([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,31 +54,36 @@ const ListContent = () => {
             tag: challenge.tag,
             id: challenge._id,
             category: challenge.category,
+            like_users: challenge.like_users,
           }));
+
           setChallengeList(challenges);
+          setSortedChallenges(challenges); 
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    // 초기 로딩 시 데이터 가져오기
     fetchData();
   }, []);
-
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category);
-  };
-
+console.log(setSortedChallenges(challengeList))
   return (
     <>
       <ListTab selectedCategory={selectedCategory} />
-      <ChallengeBox
-        selectedCategory={selectedCategory}
-        handleCategoryClick={handleCategoryClick}
-      />
+      <ul>
+        <li onClick={() => handleCategoryClick('latest')}>최신순</li>
+        <li onClick={() => handleCategoryClick('popular')}>인기순</li>
+      </ul>
+    {sortedChallenges&& (
+  <ChallengeBox
+    selectedCategory={selectedCategory}
+    handleCategoryClick={handleCategoryClick}
+    challenges={challengeList} 
+  />
+)}
     </>
   );
-};
+} 
 
 export default ListContent;

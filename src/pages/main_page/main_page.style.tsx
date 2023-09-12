@@ -1,6 +1,6 @@
 import { CiCircleChevLeft, CiCircleChevRight, CiSearch } from 'react-icons/ci';
 import styled from 'styled-components';
-
+import Slider from 'react-slick';
 export const PopularList = styled.div`
   margin-bottom: 180px;
 `;
@@ -61,7 +61,7 @@ export const ProgressList = styled.ul`
 export const StyledSlideCircleRight = styled(CiCircleChevRight)`
   width: 1.7em;
   height: 1.7em;
-  display: none;
+
   &:hover {
     color: #339af0;
   }
@@ -70,7 +70,7 @@ export const StyledSlideCircleRight = styled(CiCircleChevRight)`
 export const StyledSlideCircleLeft = styled(CiCircleChevLeft)`
   width: 1.7em;
   height: 1.7em;
-  display: none;
+
   &:hover {
     color: #339af0;
   }
@@ -82,31 +82,6 @@ export const PopularListSpan = styled.span`
 export const NewListSpan = styled.span`
   color: #ffe500;
 `;
-
-// export const BottomBannerr = styled.div``;
-
-// export const BottomInner = styled.div`
-//   img {
-//     box-sizing: border-box;
-//     vertical-align: bottom;
-
-//     width: 100vw;
-//     max-width: 100%;
-//   }
-// `;
-
-// export const StyledStyledSlideCircleRight = styled(StyledSlideCircleRight)`
-//   width: 1.5em;
-//   height: 1.5em;
-//   padding-left: 4px;
-// `;
-
-// export const BannerLine = styled.div`
-//   font-size: 30px;
-//   position: absolute;
-//   top: 68%;
-//   left: 64%;
-// `;
 
 export const BackWhite = styled.div`
   background-color: #fff !important;
