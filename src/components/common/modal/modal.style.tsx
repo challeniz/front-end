@@ -64,6 +64,11 @@ export const ImgBox = styled.div`
   height: 400px;
   background-color: #d9d9d9;
   border-radius: 15px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const TextBox = styled.div`

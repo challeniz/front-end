@@ -3,7 +3,6 @@ import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import FormInfo from '../../components/form/form_info/form_info';
-import FormInfoProps from '../../components/form/form_info/form_info';
 import NoticeForm from '../../components/form/form_notice/from_notice';
 import * as S from './new_page.style';
 

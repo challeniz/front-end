@@ -40,7 +40,7 @@ export const ROUTE = {
     element: ListPage,
   },
   CATEPAGE: {
-    path: '/challenges/:name',
+    path: '/challenges',
     link: '/challenges',
     element: ListPage,
   },

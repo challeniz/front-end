@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import HeartButton from '../heart/heart';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
 export const ListWrap = styled.div``;
 
 export const CategoryTab = styled.div`
@@ -25,10 +25,10 @@ export const ContentWrap = styled.div`
 `;
 
 export const ContentsWrap = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 40px;
-  grid-row-gap: 50px;
+  // display: grid;
+  // grid-template-columns: repeat(4, 1fr);
+  // grid-column-gap: 40px;
+  // grid-row-gap: 50px;
 `;
 
 export const ImgStyled = styled.div`

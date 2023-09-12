@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, {
   ChangeEvent,
   useEffect,
@@ -7,8 +8,8 @@ import React, {
 } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useImageUploader from '../../../hook/imgfiler';
-import DateSelector from '../form_date/form_date';
-import WeekSelector from '../form_week/form_week';
+import ReactDatePicker from '../../calendar/calendar';
+import ReactDatePicker2 from '../../calendar/calendar2';
 import {
   FormButton,
   FormCancelButton,
@@ -47,19 +48,36 @@ interface FormInfoProps {
 }
 
 const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
-  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
-  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-
   // 태그 관련 상태와 함수들을 정의
   const [tags, setTags] = useState<string[]>([]);
+  const [date, setDate] = useState({
+    joinningDate: [null, null],
+    startDate: [null, null],
+  });
+  const { _id } = useParams();
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  useEffect(() => {
+    // joinningDate가 바뀌면 startDate를 자동 변환
+    if (date.joinningDate[1]) {
+      setDate((prev) => {
+        const date = new Date(
+          (new Date(prev.joinningDate[1] || '') as any).setDate(
+            (prev.joinningDate[1] as any).getDate() + 1
+          )
+        );
+        console.log('date', date);
+        return {
+          ...(prev as any),
+          startDate: [date, null],
+        };
+      });
+    }
+  }, [date.joinningDate]);
 
   const [data, setData] = useState<ChallengeFormDataType>({
     title: '',
-    cate: '건강',
+    cate: '',
     description: '',
     start_date: '',
     end_date: '',
@@ -96,11 +114,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         alert('주제를 입력하세요.');
       } else if (!isImageSelected) {
         alert('이미지를 선택하세요.');
-      } else if (!selectedStartDate) {
-        alert('모집 시작일을 선택해주세요.');
-      } else if (!endDate) {
-        alert('챌린지 기간을 선택해주세요.');
-        return;
       } else if (textValue.trim() === '' || textValue == null) {
         alert('챌린지설명을 입력하세요.');
       } else if (tag.length === 0) {
@@ -117,15 +130,20 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       for (let i = 0; i < Math.min(3, data.tag.length); i++) {
         formData.append('tag', data.tag[i]);
       }
-      if (selectedStartDate && selectedEndDate) {
-        formData.append('recru_open_date', selectedStartDate.toISOString());
-        formData.append('recru_end_date', selectedEndDate.toISOString());
+
+      if (date.joinningDate[0]) {
+        formData.append('recru_open_date', date.joinningDate[0]);
       }
-      if (startDate && endDate) {
-        formData.append('start_date', startDate.toISOString());
-        formData.append('end_date', endDate.toISOString());
+      if (date.joinningDate[1]) {
+        formData.append('recru_end_date', date.joinningDate[1]);
       }
-      console.log(endDate);
+      if (date.startDate[0]) {
+        formData.append('start_date', date.startDate[0]);
+      }
+      if (date.startDate[1]) {
+        formData.append('end_date', date.startDate[1]);
+      }
+
       if (fileInput.current) {
         const selectedFile =
           fileInput.current.files && fileInput.current.files[0];
@@ -146,10 +164,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         },
         data: formData,
       });
-
-      // 챌린지 설명을 줄바꿈 문자로 처리
-      const formattedDescription = textValue.replace(/\n/g, '<br>'); // 엔터키를 <br> 태그로 변경
-      formData.append('description', formattedDescription);
 
       if (response.status === 201) {
         // 챌린지 생성 성공 후 추가 로직
@@ -205,47 +219,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     console.log('이미지', selectedFile);
   };
 
-  const handleDateRangeSelect = (
-    selectedStartDate: Date,
-    selectedEndDate: Date
-  ) => {
-    setSelectedStartDate(selectedStartDate);
-    setSelectedEndDate(selectedEndDate);
-    setData((prevData) => ({
-      ...prevData,
-      recru_open_date: selectedStartDate.toISOString(),
-      recru_end_date: selectedEndDate.toISOString(),
-    }));
-  };
-
-  const handleWeekSelection = (
-    startDate: Date | null,
-    endDate: Date | null
-  ) => {
-    setStartDate(startDate);
-    setEndDate(endDate);
-    setData((prevData) => ({
-      ...prevData,
-      start_date: startDate?.toISOString() || '',
-      end_date: endDate?.toISOString() || '',
-    }));
-  };
-
-  // 주제 유효성 검사를 위한 상태 변수
-  const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
-
-  // 주제 input 변경 핸들러
-  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setData((prevData) => ({
-      ...prevData,
-      title: newValue,
-    }));
-
-    // 주제 유효성 검사
-    setIsTitleValid(newValue.length >= 3 && newValue.length <= 15);
-  };
-
   return (
     <>
       <WhiteBox>
@@ -260,14 +233,8 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                 name="title"
                 placeholder="주제를 입력하세요."
                 value={data.title}
-                onChange={handleTitleChange} // 주제 input 변경 핸들러로 변경
+                onChange={handleChange}
               />
-              {/* 주제 유효성 검사 메시지 */}
-              {!isTitleValid && (
-                <S.ErrorMessage>
-                  주제는 3자 이상 15자 이하로 입력해주세요.
-                </S.ErrorMessage>
-              )}
             </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formCate">카테고리</S.LabelStyled>
@@ -283,23 +250,19 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                 <option value="환경">환경</option>
               </S.SelectStyled>
             </S.InputContent>
-            <S.InputContent className="formDate">
-              <S.LabelStyled htmlFor="formDage">모집 시작일</S.LabelStyled>
-              <DateSelector onSelectDateRange={handleDateRangeSelect} />
-              {!selectedStartDate && (
-                <S.ErrorMessage>모집 시작일을 선택해주세요.</S.ErrorMessage>
-              )}
+            <S.InputContent>
+              <S.LabelStyled htmlFor="formDage">챌린지 모집 기간</S.LabelStyled>
+              <ReactDatePicker
+                joinningDate={date.joinningDate}
+                setDate={setDate}
+              ></ReactDatePicker>
             </S.InputContent>
-            <S.InputContent className="formDate">
+            <S.InputContent>
               <S.LabelStyled htmlFor="formDage">챌린지 기간</S.LabelStyled>
-              <WeekSelector
-                selectedDate={selectedStartDate}
-                recruEndDate={selectedEndDate}
-                onSelectWeek={handleWeekSelection}
-              />
-              {!endDate && (
-                <S.ErrorMessage>챌린지기간을 선택해주세요.</S.ErrorMessage>
-              )}
+              <ReactDatePicker2
+                startDate={date.startDate}
+                setDate={setDate}
+              ></ReactDatePicker2>
             </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formImg">대표 이미지</S.LabelStyled>

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
 import HeartImg from '../../../assets/image/heart_red.png';
 import EmptyHeartImg from '../../../assets/image/heart.png';
+import Countdown from '../../../hook/Countdown/Countdown';
 
 // 예시로 Challenge 타입을 정의
 export interface Challenge {
@@ -101,6 +102,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
                 alt={challenge.like ? 'Liked' : 'Not Liked'}
                 onClick={() => wishCountHandler(challenge.id)}
               />
+              <Countdown targetDate={new Date(challenge.start_date)} />
             </S.ImgStyled>
             <S.TabWrap>
               {challenge.tag.map((tag, index) => (
