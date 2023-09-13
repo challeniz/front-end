@@ -4,9 +4,13 @@ import { BsCalendarWeek } from 'react-icons/bs';
 
 interface DateSelectorProps {
   onSelectDateRange?: (startDate: Date, endDate: Date) => void;
+  value?: string;
 }
 
-const DateSelector: React.FC<DateSelectorProps> = ({ onSelectDateRange }) => {
+const DateSelector: React.FC<DateSelectorProps> = ({
+  onSelectDateRange,
+  value,
+}) => {
   const today = new Date();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [recruStartDate, setRecruStartDate] = useState<Date | null>(null);

@@ -22,6 +22,8 @@ import WhiteBoxContents from '../white_box/white_box_contents/white_box_contents
 import WhiteBoxTitle from '../white_box/white_box_title/white_box_title';
 import * as S from './form_edit.style';
 import { apiInstance } from '../../../utils/api';
+import ChallengeBox from '../../challenge/challenge_box/challenge_box';
+import { channel } from 'diagnostics_channel';
 
 interface ChallengeFormDataType {
   title: string;
@@ -32,6 +34,13 @@ interface ChallengeFormDataType {
   recru_open_date: string;
   recru_end_date: string;
   tag: string[];
+}
+
+interface TagBoxProps {
+  tags: string[];
+  onChangeTags: (tags: string[]) => void;
+  children?: React.ReactNode;
+  value?: string[];
 }
 
 interface FormInfoProps {
@@ -85,12 +94,34 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     setTextValue(e.target.value);
   };
 
+  // 주제 유효성 검사를 위한 상태 변수
+  const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
+
+  // 주제 input 변경 핸들러
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setData((prevData) => ({
+      ...prevData,
+      title: newValue,
+    }));
+
+    // 주제 유효성 검사
+    setIsTitleValid(newValue.length >= 3 && newValue.length <= 15);
+  };
+
   useEffect(() => {
     const GetChallengeData = async () => {
       try {
         const response = await apiInstance.get(`challenges/${id}`);
-        const data = response.data;
-        setData(data);
+        const challengeData = response.data;
+        setData((prevData) => ({
+          ...prevData,
+          title: challengeData.challenge.title,
+          cate: challengeData.challenge.category,
+          description: challengeData.challenge.description,
+          tag: challengeData.challenge.tag,
+        }));
+        console.log(challengeData.challenge.tag);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -106,11 +137,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         alert('주제를 입력하세요.');
       } else if (!isImageSelected) {
         alert('이미지를 선택하세요.');
-      } else if (!selectedStartDate) {
-        alert('모집 시작일을 선택해주세요.');
-      } else if (!endDate) {
-        alert('챌린지 기간을 선택해주세요.');
-        return;
       } else if (textValue.trim() === '' || textValue == null) {
         alert('챌린지설명을 입력하세요.');
       } else if (tag.length === 0) {
@@ -173,17 +199,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }
   };
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    console.log(data.cate);
-  };
-
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
     setData((prevData) => ({
@@ -239,21 +254,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     }));
   };
 
-  // 주제 유효성 검사를 위한 상태 변수
-  const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
-
-  // 주제 input 변경 핸들러
-  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setData((prevData) => ({
-      ...prevData,
-      title: newValue,
-    }));
-
-    // 주제 유효성 검사
-    setIsTitleValid(newValue.length >= 3 && newValue.length <= 15);
-  };
-
   return (
     <>
       <WhiteBox>
@@ -266,11 +266,9 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                 type="text"
                 id="formName"
                 name="title"
-                placeholder="주제를 입력하세요."
                 value={data.title}
-                onChange={handleTitleChange} // 주제 input 변경 핸들러로 변경
+                onChange={handleTitleChange}
               />
-              {/* 주제 유효성 검사 메시지 */}
               {!isTitleValid && (
                 <S.ErrorMessage>
                   주제는 3자 이상 15자 이하로 입력해주세요.
@@ -291,7 +289,7 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                 <option value="환경">환경</option>
               </S.SelectStyled>
             </S.InputContent>
-            <S.InputContent className="formDate">
+            {/* <S.InputContent className="formDate">
               <S.LabelStyled htmlFor="formDage">모집 시작일</S.LabelStyled>
               <DateSelector onSelectDateRange={handleDateRangeSelect} />
               {!selectedStartDate && (
@@ -308,7 +306,7 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
               {!endDate && (
                 <S.ErrorMessage>챌린지기간을 선택해주세요.</S.ErrorMessage>
               )}
-            </S.InputContent>
+            </S.InputContent> */}
             <S.InputContent>
               <S.LabelStyled htmlFor="formImg">대표 이미지</S.LabelStyled>
               <S.AvatarWrapper
@@ -334,7 +332,7 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
               </S.LabelStyled>
               <S.TextareaStyled
                 placeholder="여기에 입력하세요"
-                value={textValue}
+                value={data.description}
                 onChange={handleSetValue}
               ></S.TextareaStyled>
             </S.InputContent>
