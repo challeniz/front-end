@@ -32,6 +32,12 @@ export const MyPageTab: React.FC = () => {
           <HeartInfo />
         </S.StatusGrid>
       </S.StatusWrap>
+      <S.StatusWrap>
+        <h2>완료된 챌린지</h2>
+        <S.StatusGrid>
+          <CompleteInfo />
+        </S.StatusGrid>
+      </S.StatusWrap>
     </div>
   );
 };

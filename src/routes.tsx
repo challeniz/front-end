@@ -9,7 +9,8 @@ import DetailPage from './pages/detail_page/detail_page';
 import ApplicationPage from './pages/app_page/app_page';
 import MyPrivacy from './pages/my_privacy/ my_privacy';
 import EditPage from './pages/edit_page/edit_page';
-import SearchPage from './pages/search_page/search_page';
+import SearchPage from './components/search_page/search_page';
+import AboutPage from './pages/aboutpage/aboutpage';
 
 export const ROUTE = {
   MAIN: {
@@ -65,7 +66,7 @@ export const ROUTE = {
     element: NewPage,
   },
   EDITPAGE: {
-    path: '/editpage',
+    path: '/editpage/:id',
     link: '/editpage',
     element: EditPage,
   },
@@ -78,6 +79,11 @@ export const ROUTE = {
     path: '/myprivacy',
     link: '/myprivacy',
     element: MyPrivacy,
+  },
+  ABOUTPAGE: {
+    path: '/aboutpage',
+    link: '/aboutpage',
+    element: AboutPage,
   },
 };
 

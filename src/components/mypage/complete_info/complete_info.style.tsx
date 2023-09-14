@@ -46,12 +46,9 @@ export const PercentWrap = styled.div`
   display: flex;
   flex-direction: column;
 
-  p {
-    padding-bottom: 15px;
-  }
-
   h5 {
-    font-size: 38px;
+    font-size: 30px;
+    font-weight: 600;
 
     span {
       font-size: 18px;

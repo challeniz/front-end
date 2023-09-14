@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import MainSlide from '../../hook/Slide/Users_slide';
 import OngoingSlide from '../../hook/Slide/Ongoing_slide';
 import NewSlide from '../../hook/Slide/New_slide';
-
+import SearchPage from '../../components/search_page/search_page';
 export interface ChallengeBoxProps {
   selectedCategory: string;
   handleCategoryClick: (category: string) => void;
@@ -21,6 +21,7 @@ const MainPage = () => {
     <S.BackWhite>
       <Header />
       <SlideBnner />
+      <SearchPage />
       <Wrapper>
         <S.ContentsList>
           <S.ProgressList>
@@ -45,7 +46,6 @@ const MainPage = () => {
                 <S.PopularListSpan>🔥HOT!</S.PopularListSpan> 인기 챌린지
               </h2>
             </li>
-
             <li>
               <Link to={ROUTE.LISTPAGE.link}>
                 <h3>전체보기</h3>
@@ -56,7 +56,6 @@ const MainPage = () => {
             <MainSlide />
           </S.ContentsWrap>
         </S.PopularList>
-
         <S.NewList>
           <S.ProgressList>
             <li>
@@ -64,7 +63,6 @@ const MainPage = () => {
                 <S.NewListSpan>⭐️NEW!</S.NewListSpan> 신규 챌린지
               </h2>
             </li>
-
             <li>
               <Link to={ROUTE.LISTPAGE.link}>
                 <h3>전체보기</h3>

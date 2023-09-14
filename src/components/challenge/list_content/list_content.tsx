@@ -1,4 +1,3 @@
-// list_content.tsx
 import React, { useState, useEffect } from 'react';
 import * as S from './list_content.style';
 import { BsCalendarRange } from 'react-icons/bs';
@@ -16,11 +15,34 @@ interface Challenge {
   tag: string[];
   id: string;
   category: string;
+  like_users: string;
+  mainImg: string;
 }
 
 const ListContent = () => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+
+    let sortedChallenges: Challenge[] = [];
+
+    if (category === 'popular') {
+      sortedChallenges = challengeList
+        .slice()
+        .sort((a, b) => b.like_users.length - a.like_users.length);
+    } else if (category === 'latest') {
+      sortedChallenges = challengeList
+        .slice()
+        .sort(
+          (a, b) =>
+            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+        );
+    }
+
+    setChallengeList(sortedChallenges);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +59,9 @@ const ListContent = () => {
             tag: challenge.tag,
             id: challenge._id,
             category: challenge.category,
+            like_users: challenge.like_users,
           }));
+
           setChallengeList(challenges);
         }
       } catch (error) {
@@ -45,20 +69,20 @@ const ListContent = () => {
       }
     };
 
-    // 초기 로딩 시 데이터 가져오기
     fetchData();
   }, []);
-
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category);
-  };
 
   return (
     <>
       <ListTab selectedCategory={selectedCategory} />
+      <ul>
+        <li onClick={() => handleCategoryClick('latest')}>최신순</li>
+        <li onClick={() => handleCategoryClick('popular')}>인기순</li>
+      </ul>
       <ChallengeBox
         selectedCategory={selectedCategory}
         handleCategoryClick={handleCategoryClick}
+        challenges={challengeList}
       />
     </>
   );

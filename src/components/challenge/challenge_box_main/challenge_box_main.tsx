@@ -17,10 +17,13 @@ export interface Challenge {
   end_date: string;
   tag: string[];
   id: string;
+  
   category: string;
   mainImg: string;
 }
-
+interface modules {
+  onClick: () => void;
+}
 export interface ChallengeBoxProps {
   selectedCategory: string;
   handleCategoryClick: (category: string) => void;
@@ -33,6 +36,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   challenge,
 }) => {
   const [wishCount, setWishCount] = useState(808);
+  const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
 
   const wishCountHandler = async (challengeId: string) => {
     const newLikeValue = !challenge.like;
