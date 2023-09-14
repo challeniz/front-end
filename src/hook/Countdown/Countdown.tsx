@@ -7,8 +7,7 @@ interface CountdownProps {
 
 const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
   const countDownDate = new Date(targetDate).getTime();
-  const [countDown, setCountDown] = useState(0); // 초기값을 0으로 설정
-  const [countdownText, setCountdownText] = useState(''); // 남은 시간에 대한 텍스트 상태 추가
+  const [countdownText, setCountdownText] = useState(''); // 카운트다운 텍스트 상태
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -17,19 +16,21 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
 
       if (distance > 0) {
         // 남은 시간이 양수일 때만 업데이트
-        setCountDown(distance);
 
-        // 남은 시간을 계산하여 텍스트 설정
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        // 남은 시간 계산
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
           (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
         );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        setCountdownText(`마감까지 ${hours}시간 ${minutes}분 ${seconds}초`);
+        // 카운트다운 텍스트 설정
+        setCountdownText(
+          `마감까지 ${days}일 ${hours}시간 ${minutes}분 ${seconds}초`
+        );
       } else {
         // 남은 시간이 0보다 작으면 카운트다운 종료
-        setCountDown(0);
         clearInterval(intervalId);
 
         // "모집 완료" 텍스트 설정

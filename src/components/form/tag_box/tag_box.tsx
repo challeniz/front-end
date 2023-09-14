@@ -1,11 +1,25 @@
 import React, { useState, useCallback, useEffect, ChangeEvent } from 'react';
 import * as S from './tag_box.style';
 import { AiOutlineClose } from 'react-icons/ai';
+import { apiInstance } from '../../../utils/api';
+import { useParams } from 'react-router-dom';
+
+interface ChallengeFormDataType {
+  title: string;
+  cate: string;
+  description: string;
+  start_date: string;
+  end_date: string;
+  recru_open_date: string;
+  recru_end_date: string;
+  tag: string[];
+}
 
 interface TagBoxProps {
   tags: string[];
   onChangeTags: (tags: string[]) => void;
   children?: React.ReactNode;
+  value?: string[] | undefined;
 }
 
 interface TagListProps {
@@ -33,33 +47,70 @@ const TagItem: React.FC<{ tag: string; onRemove: (tag: string) => void }> =
   ));
 
 const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
+  const { id } = useParams();
   const [input, setInput] = useState<string>('');
   const [localTags, setLocalTags] = useState<string[]>([]);
+  const [existingTags, setExistingTags] = useState<string[]>([]); // 기존 태그 목록 저장
+
+  const [data, setData] = useState<ChallengeFormDataType>({
+    title: '',
+    cate: '건강',
+    description: '',
+    start_date: '',
+    end_date: '',
+    recru_open_date: '',
+    recru_end_date: '',
+    tag: [],
+  });
+
+  useEffect(() => {
+    const GetChallengeData = async () => {
+      try {
+        const response = await apiInstance.get(`challenges/${id}`);
+        const challengeData = response.data;
+
+        // 기존 태그 목록 저장
+        setExistingTags(challengeData.challenge.tag);
+
+        // 나머지 도전과제 데이터 저장
+        setData((prevData: ChallengeFormDataType) => ({
+          ...prevData,
+          tag: challengeData.challenge.tag,
+        }));
+
+        // Initialize localTags with the API data
+        setLocalTags(challengeData.challenge.tag);
+
+        console.log(challengeData.challenge.tag);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    GetChallengeData();
+  }, [id]);
 
   const insertTag = useCallback(
     (tag: string) => {
-      if (!tag) return; // 공백이라면 추가하지 않음
-      if (localTags.includes(tag)) return; // 이미 존재한다면 추가하지 않음
-      if (localTags.length === 3 || tag.length >= 5) {
-        if (tag.length >= 5) {
-          window.alert('태그는 5글자 이하로 입력해주세요.');
-        }
-        return;
-      }
-      const nextTags = [...localTags, tag];
+      if (!tag) return;
+
+      const nextTags = Array.from(
+        new Set([...existingTags, ...localTags, tag])
+      );
       setLocalTags(nextTags);
       onChangeTags(nextTags);
     },
-    [localTags, onChangeTags]
+    [existingTags, localTags, onChangeTags]
   );
 
   const onRemove = useCallback(
     (tag: string) => {
-      const nextTags = localTags.filter((t) => t !== tag);
-      setLocalTags(nextTags);
+      // 선택한 태그를 제거하고 최종 태그 목록을 상위 컴포넌트로 전달
+      const nextTags = existingTags.filter((t) => t !== tag);
+      setExistingTags(nextTags);
       onChangeTags(nextTags);
     },
-    [localTags, onChangeTags]
+    [existingTags, onChangeTags]
   );
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -69,10 +120,21 @@ const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
   const onSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      insertTag(input.trim()); // 앞뒤 공백 없앤 후 등록
-      setInput(''); // input 초기화
+      const trimmedInput = input.trim();
+
+      if (trimmedInput && !existingTags.includes(trimmedInput)) {
+        // 중복되지 않는 새로운 태그만 추가합니다.
+        insertTag(trimmedInput);
+        setInput('');
+
+        // Update existingTags with the new tag
+        setExistingTags((prevExistingTags) => [
+          ...prevExistingTags,
+          trimmedInput,
+        ]);
+      }
     },
-    [input, insertTag]
+    [input, existingTags, insertTag]
   );
 
   // tags 값이 바뀔 때
@@ -90,7 +152,7 @@ const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
         />
         <button type="submit">추가</button>
       </S.TagForm>
-      <TagList tags={localTags} onRemove={onRemove} />
+      <TagList tags={existingTags} onRemove={onRemove} />
     </>
   );
 };

@@ -71,6 +71,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/fullcalendar": "^3.8.0",
     "@types/react-datepicker": "^4.15.0",
-    "@types/react-router-dom": "^5.3.3"
+    "@types/react-router-dom": "^5.3.3",
+    "@types/swiper": "^6.0.0"
   }
 }

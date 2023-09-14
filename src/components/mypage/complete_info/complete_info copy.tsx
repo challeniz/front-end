@@ -1,24 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import * as S from './status_info.style';
+import * as S from './complete_info.style';
 import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 
 interface Challenge {
-  mainImg: string;
+  image: string;
   title: string;
   start_date: string;
   end_date: string;
   id: string;
 }
 
-const StatusInfo = () => {
+const CompleteInfo = () => {
   const { id } = useParams();
   const [challengeData, setChallengeData] = useState<Challenge[]>([]);
+  const [userId, setUserId] = useState<string>(''); // 유저의 ID를 저장할 상태 추가
+
   useEffect(() => {
     async function fetchUserData() {
       try {
+        // 유저 정보 가져오기
+        const userInfoResponse = await apiInstance.get('/users/mypageInfo');
+        const userData = userInfoResponse.data;
+
+        if (userData && userData.id) {
+          // 유저의 ID를 상태에 저장
+          setUserId(userData.id);
+        }
+
         const challengeResponse = await apiInstance.get('/users/mypageChall');
         const data = challengeResponse.data;
 
@@ -31,7 +42,7 @@ const StatusInfo = () => {
               const endDate = new Date(challenge.end_date);
 
               return {
-                image: challenge.mainImg,
+                image: challenge.image,
                 title: challenge.title,
                 start_date: `${startDate.getFullYear()}년 ${
                   startDate.getMonth() + 1
@@ -58,30 +69,17 @@ const StatusInfo = () => {
     <S.StatusWrap>
       {challengeData.map((challenge, index) => (
         <S.InfoWrap key={index}>
-          <S.ImgWrap>
-            <img src={challenge.mainImg} alt="Challenge" />
-          </S.ImgWrap>
+          <S.StyledImg />
           <S.InfoFlex>
             <div>
-              <h3>{challenge.title}</h3>
-              <h4>
-                {challenge.start_date} ~ {challenge.end_date}
-              </h4>
+              <h3>물 마시기</h3>
+              <h4>2023.08.01 ~ 2023.08.31</h4>
             </div>
-            <S.PercentWrap>
-              <p>달성률</p>
-              <h5>
-                70<span>%</span>
-              </h5>
-            </S.PercentWrap>
           </S.InfoFlex>
-          <Link to={`${ROUTE.AUTHPAGE.link}/${challenge.id}`}>
-            <S.ButtonAuth>챌린지 인증하기</S.ButtonAuth>
-          </Link>
         </S.InfoWrap>
       ))}
     </S.StatusWrap>
   );
 };
 
-export default StatusInfo;
+export default CompleteInfo;
