@@ -26,16 +26,17 @@ export interface ChallengeBoxProps {
   selectedCategory: string;
   handleCategoryClick: (category: string) => void;
   challenges?: Challenge[];
+  filteredChallenges?: Challenge[];
 }
 
 const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   selectedCategory,
   handleCategoryClick,
   challenges = [],
+  filteredChallenges = challenges,
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [wishCount, setWishCount] = useState(808);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,9 +88,15 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
     setChallengeList(updatedChallengeList);
     setWishCount((prevCount) => prevCount + 1);
   };
-  const filteredChallengeList = selectedCategory
-  ? challenges.filter((challenge) => challenge.category === selectedCategory)
-  : challenges;
+
+const filteredChallengeList = selectedCategory
+  ? filteredChallenges.filter(challenge => {return (challenge.category === selectedCategory)})
+  : filteredChallenges;
+
+
+console.log('filteredChallenges:', filteredChallenges);
+
+  console.log('filteredChallengeList:', filteredChallengeList);
   return (
     <S.ListWrap>
       <S.ContentsWrap>

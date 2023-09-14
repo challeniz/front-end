@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import React, { useState, useEffect } from 'react';
 import * as S from './search_page.style';
 import { apiInstance } from '../../utils/api';
@@ -14,6 +15,8 @@ export interface Challenge {
   tag: string[];
   id: string;
   category: string;
+  mainImg: string; 
+  like_users:string
 }
 
 interface ChallengeBoxProps {
@@ -23,7 +26,7 @@ interface ChallengeBoxProps {
 
 const SearchPage = () => {
   const [inputValue, setInputValue] = useState('');
-  const [challengeList, setChallengeList] = useState();
+  const[challengeList, setChallengeList] = useState<Challenge[]>([])
   const [noResults, setNoResults] = useState(false);
   const [searched, setSearched] = useState(false);
 
@@ -39,7 +42,8 @@ const SearchPage = () => {
     }
 
     try {
-      const response = await apiInstance.get('/challenges');
+     
+      const response = await apiInstance.get(`challenges/list/search?title=${inputValue}`);
       const data = response.data;
 
       const filteredChallenges = data.filter(
@@ -58,8 +62,8 @@ const SearchPage = () => {
 
   return (
     <>
-      {/* <Header />
-      <Wrapper> */}
+      {/* <Header />*/}
+    
         <S.Search>
           <S.SearchTitle>
             찾고 있는 <S.SearchTitleColor>챌린지</S.SearchTitleColor>를
@@ -88,18 +92,20 @@ const SearchPage = () => {
             </S.KeywordWrap>
           </S.SearchBox>
         </S.Search>
-
+  <Wrapper> 
         {searched &&
           (noResults ? (
             <S.noResult>일치하는 챌린지가 없습니다</S.noResult>
           ) : (
+            
             <ChallengeBox
               selectedCategory={''}
               handleCategoryClick={() => {}}
+              filteredChallenges={challengeList} 
             />
           ))}
-      {/* </Wrapper>
-      <Footer /> */}
+    </Wrapper>
+       {/*  <Footer /> */}
     </>
   );
 };
