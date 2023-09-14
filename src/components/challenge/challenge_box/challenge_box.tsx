@@ -93,10 +93,6 @@ const filteredChallengeList = selectedCategory
   ? filteredChallenges.filter(challenge => {return (challenge.category === selectedCategory)})
   : filteredChallenges;
 
-
-console.log('filteredChallenges:', filteredChallenges);
-
-  console.log('filteredChallengeList:', filteredChallengeList);
   return (
     <S.ListWrap>
       <S.ContentsWrap>

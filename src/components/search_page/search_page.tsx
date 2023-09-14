@@ -16,7 +16,7 @@ export interface Challenge {
   id: string;
   category: string;
   mainImg: string; 
-  like_users:string
+  like_users:string햐
 }
 
 interface ChallengeBoxProps {

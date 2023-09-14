@@ -22,15 +22,17 @@ interface Challenge {
 const ListContent = () => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [sortCategory, setSortCategory] = useState<string>('');
+
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
-    setSelectedCategory(selectedValue);
-    console.log(selectedValue); // 이 줄을 추가하여 선택한 값을 콘솔에 출력합니다.
+    setSortCategory(selectedValue);
   };
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -74,10 +76,8 @@ const ListContent = () => {
     return challenges;
   };
 
-  const sortedChallenges = sortChallenges(challengeList, selectedCategory);
-  console.log('데이터확인', sortedChallenges);
-  console.log('selectedCategory:', selectedCategory);
-
+  const sortedChallenges = sortChallenges(challengeList, sortCategory);
+console.log("값",sortedChallenges)
   return (
     <>
       <ListTab selectedCategory={selectedCategory} />
@@ -91,7 +91,7 @@ const ListContent = () => {
         selectedCategory={selectedCategory}
         handleCategoryClick={handleCategoryClick}
         challenges={challengeList}
-        filteredChallenges={challengeList}
+        filteredChallenges={sortedChallenges}
       />
     </>
   );
