@@ -7,12 +7,29 @@ import {
   FormCancelButton,
   FormSubmitButton,
 } from '../../form/form_button/form_button';
+import { apiInstance } from '../../../utils/api';
+import { useParams } from 'react-router-dom';
 
 interface ModalBasicProps {
   setModalOpen: (open: boolean) => void;
+  star?: number; // star를 props로 받음
+  description?: string; // description을 props로 받음
+  onSubmit: (star: number, description: string) => void; // onSubmit을 추가
 }
 
-function ModalBasic({ setModalOpen }: ModalBasicProps) {
+interface Challenge {
+  id: string;
+}
+
+function ModalBasic({
+  setModalOpen,
+  star,
+  description,
+  onSubmit,
+}: ModalBasicProps) {
+  const { id } = useParams();
+  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
+  console.log('id:', id); // id 값을 로그로 출력
   // 모달 끄기 (X버튼 onClick 이벤트 핸들러)
   const closeModal = () => {
     setModalOpen(false);
@@ -50,6 +67,9 @@ function ModalBasic({ setModalOpen }: ModalBasicProps) {
     false,
   ]);
 
+  const [localDescription, setLocalDescription] = useState<string>(
+    description || ''
+  );
   const handleStarClick = (index: number) => {
     let clickStates = [...clicked];
     for (let i = 0; i < 5; i++) {
@@ -58,27 +78,49 @@ function ModalBasic({ setModalOpen }: ModalBasicProps) {
     setClicked(clickStates);
   };
 
-  useEffect(() => {
-    sendReview();
-  }, [clicked]);
+  const sendReview = async () => {
+    try {
+      const score = star || 0; // star 값이 없으면 0으로 설정
+      const response = await apiInstance.post(`/review/${id}`, {
+        star,
+        description: localDescription,
+      });
 
-  const sendReview = () => {
-    let score = clicked.filter(Boolean).length;
-    // 실제로 사용할 때 주석 처리를 해제하고 요청을 보내세요.
-    // fetch('http://52.78.63.175:8000/movie', {
-    //   method: 'POST',
-    //   headers: {
-    //     Authorization: 'e7f59ef4b4900fe5aa839fcbe7c5ceb7',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     movie_id: 1,
-    //     star: score,
-    //   }),
-    // });
+      if (response.status === 201) {
+        alert('리뷰가 정상적으로 등록되었습니다.');
+        onSubmit(score, localDescription); // onSubmit 콜백 함수 호출
+      } else {
+        console.error('리뷰 전송 중 오류가 발생했습니다.');
+        // 오류 처리 코드 추가
+      }
+    } catch (error) {
+      console.error('오류 발생:', error);
+      // 오류 처리 코드 추가
+    }
   };
 
-  const handleChallengeSubmit = async () => {};
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiInstance.get(`/challenges/${id}`);
+        const data = response.data;
+
+        if (data.length > 0) {
+          const challenges = data.map((challenge: any) => ({
+            id: challenge._id,
+          }));
+
+          setChallengeList(challenges);
+        }
+      } catch (error) {
+        console.error('데이터 불러오기 오류:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  console.log('챌린지 id:', id); // 챌린지 id 값을 로그로 출력
 
   return (
     <S.ModalWrap>
@@ -99,12 +141,13 @@ function ModalBasic({ setModalOpen }: ModalBasicProps) {
                 />
               ))}
             </S.Stars>
-            <S.Textarea></S.Textarea>
+            <S.Textarea
+              value={localDescription}
+              onChange={(e) => setLocalDescription(e.target.value)}
+            ></S.Textarea>
+
             <FormButton>
-              <FormCancelButton>취소하기</FormCancelButton>
-              <FormSubmitButton onClick={handleChallengeSubmit}>
-                등록하기
-              </FormSubmitButton>
+              <FormSubmitButton onClick={sendReview}>등록하기</FormSubmitButton>
             </FormButton>
           </S.AuthWrap>
         </S.ModalBox>

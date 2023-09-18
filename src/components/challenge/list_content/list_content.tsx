@@ -50,6 +50,7 @@ const ListContent = () => {
             category: challenge.category,
             like_users: challenge.like_users,
           }));
+
           setChallengeList(challenges);
         }
       } catch (error) {
@@ -80,7 +81,7 @@ const ListContent = () => {
 
   return (
     <>
-      <ListTab selectedCategory={selectedCategory} />
+      {/* <ListTab selectedCategory={selectedCategory} /> */}
 
       <S.OptionSelect onChange={handleSelectChange}>
         <option value="latest">최신순</option>

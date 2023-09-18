@@ -46,12 +46,14 @@ export const TabMenu = styled.ul`
   }
 `;
 
+export const Wrap = styled.div``;
+
 export const Desc = styled.div`
   text-align: left;
 `;
 
 export const StatusWrap = styled.div`
-  padding-top: 70px;
+  padding: 30px 0 50px;
   h2 {
     font-size: 24px;
     padding-bottom: 23px;

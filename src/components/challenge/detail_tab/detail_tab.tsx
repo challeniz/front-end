@@ -7,6 +7,7 @@ import CommentBox from '../../comment/commentbox/comment';
 import { apiInstance } from '../../../utils/api';
 import moment from 'moment';
 import AuthList from '../../common/auth_list/auth_list';
+import Comment from '../detail_comment/detail_comment';
 
 export const Tab: React.FC = () => {
   const { id } = useParams();
@@ -94,9 +95,6 @@ export const Tab: React.FC = () => {
         {currentTab === 0 ? (
           <>
             <S.DetailWrap>
-              <h2>참여자 후기</h2>
-            </S.DetailWrap>
-            <S.DetailWrap>
               <h2>챌린지 소개</h2>
               <ul>
                 <li>{challengeInfo.description}</li>
@@ -116,9 +114,10 @@ export const Tab: React.FC = () => {
                 />
               </S.CalendarWrap>
             </S.DetailWrap>
-            {/* <S.DetailWrap>
-              <CommentBox></CommentBox>
-            </S.DetailWrap> */}
+            <S.DetailWrap>
+              <h2>참여자 후기</h2>
+              <Comment />
+            </S.DetailWrap>
           </>
         ) : (
           <AuthList />
