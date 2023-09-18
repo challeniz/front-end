@@ -43,21 +43,21 @@ export const LogoImg = styled.img`
 
 export const HeaderNav = styled.nav`
   height: 100%;
-  width: 50%;
+  width: 60%;
   cursor: pointer;
 `;
 
 export const NavList = styled.ul`
   display: flex;
   height: 100%;
-  padding-left: 50px;
+  padding-left: 40px;
 `;
 
 export const NavItem = styled.li`
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-weight: 500;
   margin: 0 10px;
   transition: background-color 0.2s;

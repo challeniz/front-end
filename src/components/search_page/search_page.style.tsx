@@ -13,7 +13,7 @@ export const Search = styled.div`
   padding-top: 60px;
 `;
 export const SearchTitle = styled.h1`
-  font-size: 40px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -25,19 +25,23 @@ export const SearchTitleColor = styled.span`
 `;
 export const SearchBox = styled.div`
   box-sizing: border-box;
-  font-size: 25px;
-  width: 623px;
+  font-size: 16px;
+  width: 200px;
   margin: 0 auto;
   position: relative;
 `;
 
 export const SearchBoxInput = styled.input`
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #030303;
+  width: 260px;
+  height: 32px;
+  padding: 8px;
   background-color: transparent;
-  font-size: 25px;
-  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #dbdbdb;
+  color: #999;
+  border-radius: 10px;
+  background: var(--system-materials-sml-thick, rgba(250, 250, 250, 0.93));
+  transition: opacity 0.3s;
 
   &:focus-visible {
     outline: none;
@@ -51,13 +55,17 @@ export const ContentsWrap = styled.div`
 
 export const StyledCiSearch = styled(FaSearch)`
   cursor: pointer;
-  position: absolute;
-  bottom: 12px;
-  right: 11px;
-  width: 1.5em;
-  height: 1.5em;
+  position: relative;
+  top: -14px;
+ left: 100px; 
+  width: 1.2em;
+  height: 1.2em;
 `;
 
+export const Button = styled.button`
+background-color: transparent;
+
+`
 export const ContentsList = styled.div`
   margin: 180px auto;
 `;

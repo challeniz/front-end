@@ -6,7 +6,7 @@ import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
 import ChallengeBox from '../challenge_box/challenge_box';
-
+import SearchPage from '../../search_page/search_page';
 interface Challenge {
   like: boolean;
   title: string;
@@ -77,15 +77,16 @@ const ListContent = () => {
   };
 
   const sortedChallenges = sortChallenges(challengeList, sortCategory);
-console.log("값",sortedChallenges)
+
   return (
     <>
       <ListTab selectedCategory={selectedCategory} />
 
-      <select onChange={handleSelectChange}>
+      <S.OptionSelect onChange={handleSelectChange}>
         <option value="latest">최신순</option>
         <option value="popularity">인기순</option>
-      </select>
+      </S.OptionSelect>
+      {/* <SearchPage /> */}
 
       <ChallengeBox
         selectedCategory={selectedCategory}

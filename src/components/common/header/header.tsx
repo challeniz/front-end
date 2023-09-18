@@ -12,7 +12,7 @@ import {
 } from 'react-icons/fa6';
 import { FaUserCircle } from 'react-icons/fa';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-
+import SearchPage from '../../search_page/search_page';
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const updateScroll = () => {
@@ -96,6 +96,9 @@ const Header = () => {
             </Link>
             <S.NavItem onClick={handleChallengeCreationClick}>
               챌린지 개설하기
+            </S.NavItem>
+            <S.NavItem>
+              <SearchPage />
             </S.NavItem>
           </S.NavList>
         </S.HeaderNav>
