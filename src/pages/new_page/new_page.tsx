@@ -58,7 +58,6 @@ const NewPage = () => {
 
   // 챌린지 개설 버튼 클릭 시 실행
   const handleChallengeSubmit = () => {
-    console.log('데이터2', data);
     const {
       title,
       description,
@@ -69,7 +68,6 @@ const NewPage = () => {
       recru_end_date,
       tag,
     } = data;
-    console.log('뉴패이지', title);
 
     if (title.trim() === '' || title == null) {
       alert('주제를 입력하세요.');
