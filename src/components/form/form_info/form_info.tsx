@@ -16,7 +16,7 @@ import {
 } from '../form_button/form_button';
 import FormAgreeBox from '../form_agree/form_agree';
 import TagBox from '../tag_box/tag_box';
-// import useImageUploader from '../../../hook/imgfiler';
+
 import axios from 'axios';
 import WhiteBox from '../white_box/white_box/white_box';
 import WhiteBoxContents from '../white_box/white_box_contents/white_box_contents';

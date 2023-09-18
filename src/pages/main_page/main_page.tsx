@@ -21,7 +21,6 @@ const MainPage = () => {
     <S.BackWhite>
       <Header />
       <SlideBnner />
-      <SearchPage />
       <Wrapper>
         <S.ContentsList>
           <S.ProgressList>

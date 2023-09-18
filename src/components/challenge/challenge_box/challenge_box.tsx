@@ -94,8 +94,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
       })
     : challenges;
 
-  console.log(filteredChallengeList);
-
   return (
     <S.ListWrap>
       <S.ContentsWrap>

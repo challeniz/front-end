@@ -6,7 +6,7 @@ import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
 import ChallengeBox from '../challenge_box/challenge_box';
-
+import SearchPage from '../../search_page/search_page';
 interface Challenge {
   like: boolean;
   title: string;
@@ -22,27 +22,15 @@ interface Challenge {
 const ListContent = () => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [selectedSort, setSelectedSort] = useState<string>('latest'); // 초기 정렬 방식 설정
-  const [filteredChallenges, setFilteredChallenges] = useState<Challenge[]>([]); // filteredChallenges 상태 추가
+  const [sortCategory, setSortCategory] = useState<string>('');
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
-    setSelectedSort(selectedValue); // 선택한 정렬 방식 업데이트
+    setSortCategory(selectedValue);
   };
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
-  };
-
-  const sortChallenges = (challenges: Challenge[], category: string) => {
-    if (category === 'popularity') {
-      return challenges
-        .slice()
-        .sort((a, b) => b.like_users.length - a.like_users.length);
-    } else if (category === 'alphabetical') {
-      return challenges.slice().sort((a, b) => a.title.localeCompare(b.title));
-    }
-    return challenges;
   };
 
   useEffect(() => {
@@ -73,26 +61,39 @@ const ListContent = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    // 정렬 방식에 따라 데이터를 필터링
-    const filtered = sortChallenges(challengeList, selectedSort);
-    setFilteredChallenges(filtered);
-  }, [selectedSort, challengeList]);
+  const sortChallenges = (challenges: Challenge[], category: string) => {
+    if (category === 'popularity') {
+      return challenges
+        .slice()
+        .sort((a, b) => b.like_users.length - a.like_users.length);
+    } else if (category === 'latest') {
+      return challenges
+        .slice()
+        .sort(
+          (a, b) =>
+            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+        );
+    }
+    return challenges;
+  };
+
+  const sortedChallenges = sortChallenges(challengeList, sortCategory);
 
   return (
     <>
       {/* <ListTab selectedCategory={selectedCategory} /> */}
 
-      <select onChange={handleSelectChange} value={selectedSort}>
+      <S.OptionSelect onChange={handleSelectChange}>
+        <option value="latest">최신순</option>
         <option value="popularity">인기순</option>
-        <option value="alphabetical">가나다순</option>
-      </select>
+      </S.OptionSelect>
+      {/* <SearchPage /> */}
 
       <ChallengeBox
         selectedCategory={selectedCategory}
         handleCategoryClick={handleCategoryClick}
         challenges={challengeList}
-        filteredChallenges={filteredChallenges}
+        filteredChallenges={sortedChallenges}
       />
     </>
   );
