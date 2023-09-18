@@ -72,7 +72,6 @@ export const DetailWrap = styled.div`
 
 export const CalendarWrap = styled.div`
   width: 100%;
-  height: 310px;
 
   .fc {
     width: 100%;

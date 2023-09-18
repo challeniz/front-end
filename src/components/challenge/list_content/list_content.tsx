@@ -22,15 +22,29 @@ interface Challenge {
 const ListContent = () => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedSort, setSelectedSort] = useState<string>('latest'); // 초기 정렬 방식 설정
+  const [filteredChallenges, setFilteredChallenges] = useState<Challenge[]>([]); // filteredChallenges 상태 추가
+
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
-    setSelectedCategory(selectedValue);
-    console.log(selectedValue); // 이 줄을 추가하여 선택한 값을 콘솔에 출력합니다.
+    setSelectedSort(selectedValue); // 선택한 정렬 방식 업데이트
   };
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
   };
+
+  const sortChallenges = (challenges: Challenge[], category: string) => {
+    if (category === 'popularity') {
+      return challenges
+        .slice()
+        .sort((a, b) => b.like_users.length - a.like_users.length);
+    } else if (category === 'alphabetical') {
+      return challenges.slice().sort((a, b) => a.title.localeCompare(b.title));
+    }
+    return challenges;
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,6 +62,7 @@ const ListContent = () => {
             category: challenge.category,
             like_users: challenge.like_users,
           }));
+
           setChallengeList(challenges);
         }
       } catch (error) {
@@ -58,40 +73,26 @@ const ListContent = () => {
     fetchData();
   }, []);
 
-  const sortChallenges = (challenges: Challenge[], category: string) => {
-    if (category === 'popularity') {
-      return challenges
-        .slice()
-        .sort((a, b) => b.like_users.length - a.like_users.length);
-    } else if (category === 'latest') {
-      return challenges
-        .slice()
-        .sort(
-          (a, b) =>
-            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
-        );
-    }
-    return challenges;
-  };
-
-  const sortedChallenges = sortChallenges(challengeList, selectedCategory);
-  console.log('데이터확인', sortedChallenges);
-  console.log('selectedCategory:', selectedCategory);
+  useEffect(() => {
+    // 정렬 방식에 따라 데이터를 필터링
+    const filtered = sortChallenges(challengeList, selectedSort);
+    setFilteredChallenges(filtered);
+  }, [selectedSort, challengeList]);
 
   return (
     <>
-      <ListTab selectedCategory={selectedCategory} />
+      {/* <ListTab selectedCategory={selectedCategory} /> */}
 
-      <select onChange={handleSelectChange}>
-        <option value="latest">최신순</option>
+      <select onChange={handleSelectChange} value={selectedSort}>
         <option value="popularity">인기순</option>
+        <option value="alphabetical">가나다순</option>
       </select>
 
       <ChallengeBox
         selectedCategory={selectedCategory}
         handleCategoryClick={handleCategoryClick}
         challenges={challengeList}
-        filteredChallenges={challengeList}
+        filteredChallenges={filteredChallenges}
       />
     </>
   );

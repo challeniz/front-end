@@ -33,7 +33,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   selectedCategory,
   handleCategoryClick,
   challenges = [],
-  filteredChallenges = challenges,
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [wishCount, setWishCount] = useState(808);
@@ -89,14 +88,14 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
     setWishCount((prevCount) => prevCount + 1);
   };
 
-const filteredChallengeList = selectedCategory
-  ? filteredChallenges.filter(challenge => {return (challenge.category === selectedCategory)})
-  : filteredChallenges;
+  const filteredChallengeList = selectedCategory
+    ? challenges.filter((challenge) => {
+        return challenge.category === selectedCategory;
+      })
+    : challenges;
 
+  console.log(filteredChallengeList);
 
-console.log('filteredChallenges:', filteredChallenges);
-
-  console.log('filteredChallengeList:', filteredChallengeList);
   return (
     <S.ListWrap>
       <S.ContentsWrap>
