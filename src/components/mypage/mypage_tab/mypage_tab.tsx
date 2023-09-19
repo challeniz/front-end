@@ -6,6 +6,7 @@ import CompleteInfo from '../complete_info/complete_info';
 import { apiInstance } from '../../../utils/api';
 import AuthList from '../../common/auth_list/auth_list';
 import Badge from '../badge/badge';
+import CreateInfo from '../create_info/create_info';
 
 const menuArr = [
   { name: '내 챌린지 현황', content: 'Tab menu ONE' },
@@ -36,6 +37,12 @@ export const MyPageTab: React.FC = () => {
 
       {currentTab === 0 && (
         <S.Wrap>
+          <S.StatusWrap>
+            <h2>개설한 챌린지</h2>
+            <S.StatusGrid>
+              <CreateInfo />
+            </S.StatusGrid>
+          </S.StatusWrap>
           <S.StatusWrap>
             <h2>참여중인 챌린지</h2>
             <S.StatusGrid>
