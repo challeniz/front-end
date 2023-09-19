@@ -8,10 +8,12 @@ import {
   FormSubmitButton,
 } from '../../form/form_button/form_button';
 import { apiInstance } from '../../../utils/api';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 interface ModalBasicProps {
   setModalOpen: (open: boolean) => void;
+  id: string;
+  title?: string;
   star?: number; // star를 props로 받음
   description?: string; // description을 props로 받음
   onSubmit: (star: number, description: string) => void; // onSubmit을 추가
@@ -19,24 +21,31 @@ interface ModalBasicProps {
 
 interface Challenge {
   id: string;
+  title: string; // title 프로퍼티 추가
 }
 
 function ModalBasic({
   setModalOpen,
+  id,
   star,
   description,
   onSubmit,
 }: ModalBasicProps) {
-  const { id } = useParams();
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
-  console.log('id:', id); // id 값을 로그로 출력
+  const [challengeData, setChallengeData] = useState<Challenge[]>([]);
+  const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(
+    null
+  ); // selectedChallenge 상태 추가
+  const [selectedStar, setSelectedStar] = useState<number>(0);
+  const [score, setScore] = useState<number>(0);
+
   // 모달 끄기 (X버튼 onClick 이벤트 핸들러)
   const closeModal = () => {
     setModalOpen(false);
   };
+  const navigate = useNavigate();
 
   // 모달 외부 클릭시 끄기 처리
-  // Modal 창을 useRef로 취득
   const modalRef = useRef<HTMLDivElement>(null);
 
   // 이벤트 핸들러 함수
@@ -70,25 +79,34 @@ function ModalBasic({
   const [localDescription, setLocalDescription] = useState<string>(
     description || ''
   );
+
   const handleStarClick = (index: number) => {
-    let clickStates = [...clicked];
-    for (let i = 0; i < 5; i++) {
-      clickStates[i] = i <= index ? true : false;
-    }
-    setClicked(clickStates);
+    const newClicked = clicked.map((_, i) => i <= index);
+    setClicked(newClicked);
+    const clickedCount = newClicked.filter((isClicked) => isClicked).length;
+    setSelectedStar(clickedCount);
+
+    // score 상태를 업데이트
+    const newScore = clickedCount;
+    setScore(newScore);
+
+    console.log(clickedCount);
   };
+
+  const clickedCount = clicked.filter((isClicked) => isClicked).length;
 
   const sendReview = async () => {
     try {
-      const score = star || 0; // star 값이 없으면 0으로 설정
-      const response = await apiInstance.post(`/review/${id}`, {
-        star,
-        description: localDescription,
+      const response = await apiInstance.post('/review', {
+        challengeId: id,
+        star: clickedCount, // 클릭한 별의 갯수를 전송
+        content: localDescription,
       });
 
       if (response.status === 201) {
         alert('리뷰가 정상적으로 등록되었습니다.');
-        onSubmit(score, localDescription); // onSubmit 콜백 함수 호출
+        onSubmit(clickedCount, localDescription); // 클릭한 별의 갯수를 사용하여 onSubmit 콜백 호출
+        navigate(`/detail/${id}`);
       } else {
         console.error('리뷰 전송 중 오류가 발생했습니다.');
         // 오류 처리 코드 추가
@@ -99,29 +117,6 @@ function ModalBasic({
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiInstance.get(`/challenges/${id}`);
-        const data = response.data;
-
-        if (data.length > 0) {
-          const challenges = data.map((challenge: any) => ({
-            id: challenge._id,
-          }));
-
-          setChallengeList(challenges);
-        }
-      } catch (error) {
-        console.error('데이터 불러오기 오류:', error);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
-  console.log('챌린지 id:', id); // 챌린지 id 값을 로그로 출력
-
   return (
     <S.ModalWrap>
       <S.ModalContainer ref={modalRef}>
@@ -131,6 +126,7 @@ function ModalBasic({
         <S.ModalBox>
           <S.AuthWrap>
             <h2>후기 작성하기</h2>
+            <h3>{id}</h3>
             <S.Stars>
               {clicked.map((isClicked, idx) => (
                 <ImStarFull

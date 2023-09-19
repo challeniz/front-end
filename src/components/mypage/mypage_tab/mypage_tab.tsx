@@ -8,6 +8,7 @@ import AuthList from '../../common/auth_list/auth_list';
 import Badge from '../badge/badge';
 import MypageCheck from '../mypage_check/mypage_check';
 
+
 const menuArr = [
   { name: '내 챌린지 현황', content: 'Tab menu ONE' },
   { name: '내 등급・배지', content: 'Tab menu TWO' },
@@ -37,6 +38,12 @@ export const MyPageTab: React.FC = () => {
 
       {currentTab === 0 && (
         <S.Wrap>
+          <S.StatusWrap>
+            <h2>개설한 챌린지</h2>
+            <S.StatusGrid>
+              <CreateInfo />
+            </S.StatusGrid>
+          </S.StatusWrap>
           <S.StatusWrap>
             <h2>참여중인 챌린지</h2>
             <S.StatusGrid>

@@ -8,8 +8,8 @@ interface ModalBasicProps {
     description: string;
     img: string;
   };
-  postDate: string; // 오늘의 날짜를 받아올 prop 추가
-  userName: string; // 유저 이름을 받아올 prop 추가
+  postDate: string;
+  userName: string;
 }
 
 function ModalBasic({
