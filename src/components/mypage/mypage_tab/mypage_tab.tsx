@@ -6,6 +6,7 @@ import CompleteInfo from '../complete_info/complete_info';
 import { apiInstance } from '../../../utils/api';
 import AuthList from '../../common/auth_list/auth_list';
 import Badge from '../badge/badge';
+import MypageCheck from '../mypage_check/mypage_check';
 
 const menuArr = [
   { name: '내 챌린지 현황', content: 'Tab menu ONE' },
@@ -73,8 +74,13 @@ export const MyPageTab: React.FC = () => {
           </S.StatusWrap>
         </>
       )}
-
-      {currentTab === 2 && <></>}
+   {currentTab === 2 && (
+        <>
+        <div className='CheckWrap'>
+        <MypageCheck />
+        </div>
+        </>
+      )}
     </div>
   );
 };

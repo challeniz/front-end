@@ -17,6 +17,7 @@ interface Challenge {
   category: string;
   mainImg: string;
   like_users: string;
+  recru_open_date: string;
 }
 
 const ListContent = () => {
@@ -49,6 +50,9 @@ const ListContent = () => {
             id: challenge._id,
             category: challenge.category,
             like_users: challenge.like_users,
+            recru_open_date: new Date(
+              challenge.recru_open_date
+            ).toLocaleDateString(),
           }));
 
           setChallengeList(challenges);
@@ -71,7 +75,8 @@ const ListContent = () => {
         .slice()
         .sort(
           (a, b) =>
-            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+            new Date(b.recru_open_date).getTime() -
+            new Date(a.recru_open_date).getTime()
         );
     }
     return challenges;
@@ -81,7 +86,7 @@ const ListContent = () => {
 
   return (
     <>
-      {/* <ListTab selectedCategory={selectedCategory} /> */}
+      <ListTab selectedCategory={selectedCategory} />
 
       <S.OptionSelect onChange={handleSelectChange}>
         <option value="latest">최신순</option>

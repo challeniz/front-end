@@ -20,6 +20,7 @@ export interface Challenge {
   category: string;
   mainImg: string;
   like_users: string;
+  recru_open_date: string;
 }
 
 export interface ChallengeBoxProps {
@@ -33,6 +34,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   selectedCategory,
   handleCategoryClick,
   challenges = [],
+  filteredChallenges = challenges,
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [wishCount, setWishCount] = useState(808);
@@ -89,10 +91,10 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   };
 
   const filteredChallengeList = selectedCategory
-    ? challenges.filter((challenge) => {
+    ? filteredChallenges.filter((challenge) => {
         return challenge.category === selectedCategory;
       })
-    : challenges;
+    : filteredChallenges;
 
   return (
     <S.ListWrap>

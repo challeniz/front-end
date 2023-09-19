@@ -1,5 +1,5 @@
 /* eslint-disable no-template-curly-in-string */
-import React, { useState, useEffect,useRef  } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as S from './search_page.style';
 import { apiInstance } from '../../utils/api';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
@@ -28,8 +28,6 @@ const SearchPage = () => {
   const [searched, setSearched] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const [filteredChallenges, setFilteredChallenges] = useState<Challenge[]>([]);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchBoxRef = useRef<HTMLDivElement>(null);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -65,43 +63,42 @@ const SearchPage = () => {
       console.error('Error fetching data:', error);
     }
   };
-  const handleSearchOpen = () => {
-    setIsSearchOpen(!isSearchOpen);
-  };
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        searchBoxRef.current &&
-        !searchBoxRef.current.contains(event.target as Node)
-      ) {
-        setIsSearchOpen(false);
-      }
-    };
+  // const handleSearchOpen = () => {
+  //   setIsSearchOpen(!isSearchOpen);
+  // };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (
+  //       searchBoxRef.current &&
+  //       !searchBoxRef.current.contains(event.target as Node)
+  //     ) {
+  //       setIsSearchOpen(false);
+  //     }
+  //   };
 
-    document.addEventListener('mousedown', handleClickOutside);
+  //   document.addEventListener('mousedown', handleClickOutside);
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, []);
 
   return (
     <>
-      <S.SearchBox ref={searchBoxRef}>
+      <S.SearchBox>
         <form onSubmit={handleSubmit}>
           <S.SearchBoxInput
             type="text"
             placeholder="찾고 싶은 챌린지를 검색하세요."
             value={inputValue}
             onChange={handleInputChange}
-            style={{ opacity: isSearchOpen ? 1 : 0 }}
           />
 
-          <S.Button type="submit" onClick={handleSearchOpen}>
+          {/* <S.Button type="submit" onClick={handleSearchOpen}>
             <S.StyledCiSearch
               style={{ visibility: isSearchOpen ? 'hidden' : 'visible' }}
             />
-          </S.Button>
+          </S.Button> */}
         </form>
       </S.SearchBox>
     </>

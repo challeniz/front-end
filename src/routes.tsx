@@ -11,7 +11,7 @@ import MyPrivacy from './pages/my_privacy/ my_privacy';
 import EditPage from './pages/edit_page/edit_page';
 import SearchPage from './components/search_page/search_page';
 import AboutPage from './pages/aboutpage/aboutpage';
-import SearchResult from './components/search_page/search';
+import SearchResult from './components/search_page/search_result';
 export const ROUTE = {
   MAIN: {
     path: '/',
@@ -85,7 +85,7 @@ export const ROUTE = {
     link: '/aboutpage',
     element: AboutPage,
   },
-SEARCHRESULT: {
+  SEARCHRESULT: {
     path: '/results',
     link: '/results',
     element: SearchResult,
