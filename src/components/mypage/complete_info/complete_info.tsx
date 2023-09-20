@@ -17,10 +17,17 @@ interface ModalBasicProps {
   onSubmit: (star: number, description: string) => void; // onSubmit을 추가
 }
 
+interface Challenge {
+  mainImg: string;
+  title: string;
+  start_date: string;
+  end_date: string;
+  id: string;
+}
+
 const CompleteInfo = () => {
   const [userId, setUserId] = useState<string>('');
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
-  const [challengeData, setChallengeData] = useState<Challenge | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [star, setStar] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
@@ -28,40 +35,44 @@ const CompleteInfo = () => {
     null
   );
   const { id } = useParams();
+  const [challengeData, setChallengeData] = useState<Challenge[]>([]);
 
   const handleChallengeClick = (challenge: Challenge) => {
-    setChallengeData(challenge);
     setSelectedChallenge(challenge);
     setModalOpen(true);
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchUserData() {
       try {
-        const response = await apiInstance.get(`/challenges/${id}`);
-        const data = response.data;
-
-        if (data.length > 0) {
-          const challenges = data.map((challenge: any) => ({
-            id: challenge._id,
-          }));
-
-          setChallengeList(challenges);
+        const challengeResponse = await apiInstance.get('/users/mypageChall');
+        if (challengeResponse.status === 200) {
+          const challenges: Challenge[] =
+            challengeResponse.data.finishChallenge.map((challenge: any) => ({
+              ...challenge,
+              title: challenge.title,
+              mainImg: challenge.mainImg,
+              start_date: new Date(challenge.start_date).toLocaleDateString(),
+              end_date: new Date(challenge.end_date).toLocaleDateString(),
+              id: challenge._id,
+            }));
+          setChallengeData(challenges);
         }
       } catch (error) {
-        console.error('데이터 불러오기 오류:', error);
+        console.error('Error fetching data:', error);
       }
-    };
+    }
 
-    fetchData();
+    fetchUserData();
   }, [id]);
 
   const handleChallengeSubmit = async (star: number, description: string) => {
     try {
       const score = star;
-      const response = await apiInstance.post(`/review/${id}`, {
+      const response = await apiInstance.post('/review', {
+        challengeId: id,
         star: score,
-        description: description,
+        content: description,
       });
       const data = response.data;
 
@@ -79,32 +90,40 @@ const CompleteInfo = () => {
 
   return (
     <S.StatusWrap>
-      <S.InfoWrap>
-        <S.StyledImg />
-        <S.InfoFlex>
-          <div>
-            <h3>물 마시기</h3>
-            <h4>2023.08.01 ~ 2023.08.31</h4>
-          </div>
-          <S.PercentWrap>
-            <p>달성률</p>
-            <h5>
-              100<span>%</span>
-            </h5>
-          </S.PercentWrap>
-        </S.InfoFlex>
-        <S.ButtonAuth onClick={() => handleChallengeClick(selectedChallenge!)}>
-          후기 작성하기
-        </S.ButtonAuth>
-        {modalOpen && (
-          <ModalBasic
-            setModalOpen={setModalOpen}
-            star={star}
-            description={description}
-            onSubmit={handleChallengeSubmit}
-          />
-        )}
-      </S.InfoWrap>
+      {challengeData.map((challenge, index) => (
+        <S.InfoWrap>
+          <S.StyledImg />
+          <S.InfoFlex>
+            <div>
+              <h3>{challenge.title}</h3>
+              <h4>
+                {challenge.start_date} ~ {challenge.end_date}
+              </h4>
+            </div>
+            <S.PercentWrap>
+              <p>달성률</p>
+              <h5>
+                100<span>%</span>
+              </h5>
+            </S.PercentWrap>
+          </S.InfoFlex>
+          <S.ButtonAuth
+            onClick={() => handleChallengeClick(selectedChallenge!)}
+          >
+            후기 작성하기
+          </S.ButtonAuth>
+          {modalOpen && (
+            <ModalBasic
+              setModalOpen={setModalOpen}
+              title={challenge.title}
+              star={star}
+              description={description}
+              onSubmit={handleChallengeSubmit}
+              id={challenge.id}
+            />
+          )}
+        </S.InfoWrap>
+      ))}
     </S.StatusWrap>
   );
 };
