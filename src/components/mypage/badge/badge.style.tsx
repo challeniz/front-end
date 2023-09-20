@@ -1,21 +1,39 @@
 import styled from 'styled-components';
 
+export const BadgeTitle = styled.div`
+  background-color: #f2efff;
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 40px;
+
+  h3 {
+    font-size: 19px;
+    font-weight: 700;
+  }
+`;
+
 export const BadgeWrap = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding-top: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 40px 0;
   gap: 50px;
 
   div {
     text-align: center;
 
     p {
-      font-size: 20px;
+      font-size: 18px;
       padding-top: 15px;
+      font-weight: 700;
+    }
+
+    img {
+      filter: grayscale(1);
     }
   }
 `;
 
 export const Img = styled.img`
-  width: 120px;
+  width: 91px;
+  height: 91px;
 `;

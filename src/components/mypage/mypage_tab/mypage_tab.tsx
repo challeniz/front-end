@@ -8,6 +8,7 @@ import AuthList from '../../common/auth_list/auth_list';
 import Badge from '../badge/badge';
 import MypageCheck from '../mypage_check/mypage_check';
 import CreateInfo from '../create_info/create_info';
+import Grade from '../grade/grade';
 
 const menuArr = [
   { name: '내 챌린지 현황', content: 'Tab menu ONE' },
@@ -70,7 +71,7 @@ export const MyPageTab: React.FC = () => {
           <S.StatusWrap>
             <h2>현재 등급</h2>
             <S.StatusGrid>
-              <StatusInfo />
+              <Grade />
             </S.StatusGrid>
           </S.StatusWrap>
           <S.StatusWrap>
