@@ -74,11 +74,9 @@ export const MyPageTab: React.FC = () => {
           </S.StatusWrap>
         </>
       )}
-   {currentTab === 2 && (
+      {currentTab === 2 && (
         <>
-        <div className='CheckWrap'>
-        <MypageCheck />
-        </div>
+          <MypageCheck />
         </>
       )}
     </div>

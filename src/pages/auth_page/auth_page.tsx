@@ -72,7 +72,7 @@ const AuthPage: React.FC = () => {
 
   //유효성 및 데이터
   const handleChallengeSubmit = async () => {
-    console.log('데이터2', data);
+
 
     try {
       if (text.trim() === '' || text == null) {
@@ -97,13 +97,12 @@ const AuthPage: React.FC = () => {
         alert('이미지 파일이 존재하지 않습니다.');
         return;
       }
-      console.log('check', isImageSelected);
+
       const response = await apiInstance.post(`/posts/upload/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('API 응답:', response);
       if (response.status === 201) {
         console.log('response', response);
         // 챌린지 생성 성공 후 추가 로직
