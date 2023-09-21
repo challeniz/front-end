@@ -69,7 +69,7 @@ export const MyPageTab: React.FC = () => {
       {currentTab === 1 && (
         <>
           <S.StatusWrap>
-            <h2>현재 등급</h2>
+            <h2>회원 등급</h2>
             <S.StatusGrid>
               <Grade />
             </S.StatusGrid>

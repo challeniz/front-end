@@ -97,11 +97,9 @@ const Header = () => {
             <S.NavItem onClick={handleChallengeCreationClick}>
               챌린지 개설하기
             </S.NavItem>
-            <S.NavItem>
-              <SearchPage />
-            </S.NavItem>
           </S.NavList>
         </S.HeaderNav>
+        <SearchPage />
         <S.LoginBox>
           <S.LoginList>
             <S.LoginItem>

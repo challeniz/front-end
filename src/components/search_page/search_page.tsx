@@ -63,25 +63,6 @@ const SearchPage = () => {
       console.error('Error fetching data:', error);
     }
   };
-  // const handleSearchOpen = () => {
-  //   setIsSearchOpen(!isSearchOpen);
-  // };
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     if (
-  //       searchBoxRef.current &&
-  //       !searchBoxRef.current.contains(event.target as Node)
-  //     ) {
-  //       setIsSearchOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener('mousedown', handleClickOutside);
-
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, []);
 
   return (
     <>
@@ -93,12 +74,9 @@ const SearchPage = () => {
             value={inputValue}
             onChange={handleInputChange}
           />
-
-          {/* <S.Button type="submit" onClick={handleSearchOpen}>
-            <S.StyledCiSearch
-              style={{ visibility: isSearchOpen ? 'hidden' : 'visible' }}
-            />
-          </S.Button> */}
+          <S.Button type="submit">
+            <S.StyledCiSearch />
+          </S.Button>
         </form>
       </S.SearchBox>
     </>
