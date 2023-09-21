@@ -57,10 +57,8 @@ const Header = () => {
             <S.NavItem>챌리니즈 소개</S.NavItem>
             <Link to={ROUTE.LISTPAGE.link}>
               <S.NavItem>
-                <Link to={`${ROUTE.LISTPAGE.link}?category=`}>
-                  챌린지 둘러보기
-                </Link>
-                <S.SubMenu>
+                <Link to={ROUTE.LISTPAGE.link}>챌린지 둘러보기</Link>
+                {/* <S.SubMenu>
                   <S.InnerLi>
                     <FaHeartPulse />
                     <Link to={`${ROUTE.LISTPAGE.link}?category=건강`}>
@@ -91,7 +89,7 @@ const Header = () => {
                       환경
                     </Link>
                   </S.InnerLi>
-                </S.SubMenu>
+                </S.SubMenu> */}
               </S.NavItem>
             </Link>
             <S.NavItem onClick={handleChallengeCreationClick}>
