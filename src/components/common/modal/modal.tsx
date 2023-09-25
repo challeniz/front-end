@@ -9,7 +9,7 @@ interface ModalBasicProps {
     img: string;
   };
   postDate: string;
-  userName: string;
+  userName?: string;
 }
 
 function ModalBasic({

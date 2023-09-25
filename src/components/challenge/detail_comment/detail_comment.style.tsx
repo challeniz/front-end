@@ -30,6 +30,9 @@ export const CommentTitle = styled.div`
     height: 1.5em;
     color: #d0d0d0;
   }
+  .yellowStar {
+    color: #fcc419;
+  }
 `;
 
 export const CommentContent = styled.div`

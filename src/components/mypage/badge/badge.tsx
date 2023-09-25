@@ -1,8 +1,38 @@
+import React, { useEffect, useState } from 'react';
 import * as S from './badge.style';
+import { apiInstance } from '../../../utils/api';
+
+interface badge {
+  obtain: Boolean;
+}
 
 const Badge = () => {
+  const [badges, setBadges] = useState([]);
+  const [userInfo, setUserInfo] = useState({
+    id: '',
+  });
+
+  useEffect(() => {
+    async function fetchBadges() {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await apiInstance.get('/badges');
+        if (token) {
+          if (response.status === 200) {
+            setBadges(response.data);
+            console.log(response.data);
+          }
+        }
+      } catch (error) {
+        console.error('배지 정보 가져오기 오류', error);
+      }
+    }
+
+    fetchBadges();
+  }, []);
+
   return (
-    <>
+    <div>
       <S.BadgeTitle>
         <h3>활동 배지</h3>
         <S.BadgeWrap>
@@ -54,7 +84,7 @@ const Badge = () => {
           </div>
         </S.BadgeWrap>
       </S.BadgeTitle>
-    </>
+    </div>
   );
 };
 
