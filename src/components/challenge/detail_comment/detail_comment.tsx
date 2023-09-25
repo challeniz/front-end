@@ -6,11 +6,11 @@ import { apiInstance } from '../../../utils/api';
 
 interface Review {
   id: string;
-  title: string;
   content: string;
   star: number;
   create_date: string;
   user: string;
+  name: string;
 }
 
 const Comment = () => {
@@ -22,13 +22,14 @@ const Comment = () => {
     async function fetchReviews() {
       try {
         const response = await apiInstance.get(`/review/${id}`);
-
         if (response.status === 200) {
-          // 응답 데이터가 리뷰 배열로 가정됩니다
           const fetchedReviews: Review[] = response.data.map(
             (challenge: any) => ({
-              ...challenge,
-              create_date: new Date(challenge.create_date).toLocaleDateString(),
+              ...challenge.review,
+              create_date: new Date(
+                challenge.review.create_date
+              ).toLocaleDateString(),
+              name: challenge.name,
             })
           );
           setReviews(fetchedReviews);
@@ -45,21 +46,6 @@ const Comment = () => {
   const [mypageInfo, setMypageInfo] = useState({
     name: '',
   });
-
-  useEffect(() => {
-    // API를 통해 유저 정보 가져오기
-    apiInstance
-      .get('/users/mypageInfo')
-      .then((response) => {
-        const userData = response.data;
-        setMypageInfo({
-          name: userData.name,
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-      });
-  }, []);
 
   // 리뷰의 총 개수 계산
   const totalReviews = reviews.length;
@@ -91,7 +77,7 @@ const Comment = () => {
       {reviews.slice(0, showAllReviews ? undefined : 3).map((review, index) => (
         <S.CommentContent key={index}>
           <S.CommentFlex>
-            <h3>{mypageInfo.name}</h3>
+            <h3>{review.name}</h3>
             <h4>{review.create_date}</h4>
             <div>
               {Array.from({ length: review.star }).map((_, idx) => (
@@ -102,7 +88,6 @@ const Comment = () => {
               ))}
             </div>
           </S.CommentFlex>
-          <h5>{review.title}</h5>
           <p>{review.content}</p>
         </S.CommentContent>
       ))}

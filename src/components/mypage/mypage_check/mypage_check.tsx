@@ -9,7 +9,7 @@ interface MypageCheckProps {}
 interface Challenge {
   description: string;
   img: string;
-  userName: string;
+  // user: string;
   postDate: string;
   id: string;
 }
@@ -34,7 +34,7 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
 
         if (data) {
           const challenges: Challenge[] = data.map((challenge: any) => ({
-            userName: challenge.user.name,
+            // userName: challenge.user.name,
             img: challenge.img,
             description: challenge.description,
             title: challenge.title,
@@ -48,11 +48,13 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
           if (token) {
             setUserInfo({
               id: String(token),
-            }); console.log('User Info:', userInfo);
+            });
+            console.log('User Info:', userInfo);
 
             const hasParticipated = challenges.some(
               (challenge) => challenge.id === String(token)
-            ); console.log('Has Participated:', hasParticipated);
+            );
+            console.log('Has Participated:', hasParticipated);
             setIsParticipated(hasParticipated);
           }
         }
@@ -95,7 +97,7 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
               setModalOpen={setModalOpen}
               challengeData={challengeData}
               postDate={challengeData.postDate}
-              userName={challengeData.userName}
+              // userName={challengeData.user}
             />
           )}
         </S.AuthGrid>
