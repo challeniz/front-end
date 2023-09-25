@@ -17,6 +17,7 @@ export interface ChallengeFormDataType {
   recru_open_date: string;
   recru_end_date: string;
   tag: string[];
+  mainImg: string;
 }
 
 const NewPage = () => {
@@ -46,6 +47,7 @@ const NewPage = () => {
     recru_open_date: '',
     recru_end_date: '',
     tag: [],
+    mainImg: '',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,6 +70,7 @@ const NewPage = () => {
       recru_open_date,
       recru_end_date,
       tag,
+      mainImg,
     } = data;
     console.log('뉴패이지', title);
 
@@ -90,6 +93,7 @@ const NewPage = () => {
           recru_open_date,
           recru_end_date,
           tag,
+          mainImg,
         })
         .then((response) => {
           if (response.status === 201) {

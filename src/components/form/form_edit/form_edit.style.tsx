@@ -61,7 +61,7 @@ export const AvatarWrapper = styled.div`
   overflow: hidden;
   cursor: pointer;
   background-color: #ddd;
-  background-image: url('https://i.ibb.co/B4LTSRF/preview.jpg');
+  // background-image: url('https://i.ibb.co/B4LTSRF/preview.jpg');
 `;
 
 export const AvatarImage = styled.img`
