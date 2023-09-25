@@ -70,7 +70,10 @@ export const StyledHeartButton = styled.img`
 `;
 
 export const TabWrap = styled.div`
-  margin: 20px 0;
+  display: flex;
+  align-items: center;
+
+  margin: 15px 0;
 `;
 
 export const TabStyled = styled.a`
@@ -82,8 +85,8 @@ export const TabStyled = styled.a`
 `;
 
 export const H3Styled = styled.h3`
-  font-size: 25px;
-  padding-bottom: 20px;
+  font-size: 24px;
+  padding-bottom: 10px;
   max-width: 300px;
   white-space: nowrap;
   overflow: hidden;
@@ -98,7 +101,7 @@ export const H3Styled = styled.h3`
 `;
 
 export const H4Styled = styled.h4`
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
   color: #686868;
   display: flex;
@@ -108,5 +111,46 @@ export const H4Styled = styled.h4`
     width: 1.2em;
     height: 1.2em;
     padding-right: 5px;
+  }
+`;
+
+export const Status = styled.p`
+  border-radius: 15px;
+  padding: 8px 14px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+
+  &.black {
+    background-color: #000;
+  }
+  &.blue {
+    background-color: #339af0;
+  }
+  &.yellow {
+    background-color: #ff6224;
+  }
+`;
+
+export const InfoWrap = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 17px;
+  display: flex;
+`;
+
+export const Users = styled.p`
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  padding: 3px 7px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+
+  svg {
+    padding-right: 5px;
+    width: 1.5em;
+    height: 1.5em;
   }
 `;

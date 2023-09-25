@@ -4,13 +4,12 @@ import { BsCalendarRange } from 'react-icons/bs';
 import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
-import ListTab from '../list_tab/list_tab';
 import EmptyHeartImg from '../../../assets/image/heart.png';
 import HeartImg from '../../../assets/image/heart_red.png';
-
+import { AiOutlineUser } from 'react-icons/ai';
 import Countdown from '../../../hook/Countdown/Countdown';
+import classnames from 'classnames';
 
-// 예시로 Challenge 타입을 정의
 export interface Challenge {
   like: boolean;
   title: string;
@@ -20,8 +19,10 @@ export interface Challenge {
   id: string;
   category: string;
   mainImg: string;
-  like_users: string;
+  like_users: string[];
   recru_open_date: string;
+  users: string[];
+  status: string;
 }
 
 export interface ChallengeBoxProps {
@@ -56,6 +57,8 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
             id: challenge._id,
             category: challenge.category,
             like_users: challenge.like_users,
+            users: challenge.users || [],
+            status: challenge.status,
           }));
           setChallengeList(challenges);
         }
@@ -80,8 +83,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
       });
 
       setChallengeList(updatedChallengeList);
-
-      // 서버에 좋아요 상태 업데이트 요청
       await apiInstance.patch(`/challenges/zzim/${challengeId}`);
     } catch (error) {
       console.error(`Error updating challenge like status:`, error);
@@ -107,11 +108,28 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
                 onClick={() => wishCountHandler(challenge.id)}
               />
               <Countdown targetDate={new Date(challenge.start_date)} />
+              <S.InfoWrap>
+                <S.Status
+                  className={classnames({
+                    yellow: challenge.status === '모집 중',
+                    blue: challenge.status === '진행 중',
+                    black: challenge.status === '완료',
+                  })}
+                >
+                  {challenge.status}
+                </S.Status>
+              </S.InfoWrap>
             </S.ImgStyled>
             <S.TabWrap>
-              {challenge.tag.map((tag, index) => (
-                <S.TabStyled key={index}>{tag}</S.TabStyled>
-              ))}
+              <S.Users>
+                <AiOutlineUser />
+                {challenge.users.length}명
+              </S.Users>
+              <div>
+                {challenge.tag.map((tag, index) => (
+                  <S.TabStyled key={index}>{tag}</S.TabStyled>
+                ))}
+              </div>
             </S.TabWrap>
             <Link to={`${ROUTE.DETAILPAGE.link}/${challenge.id}`}>
               <S.H3Styled>{challenge.title}</S.H3Styled>
