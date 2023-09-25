@@ -84,9 +84,7 @@ export const MyPageTab: React.FC = () => {
       )}
       {currentTab === 2 && (
         <>
-          <div className="CheckWrap">
-            <MypageCheck />
-          </div>
+          <MypageCheck />
         </>
       )}
     </div>

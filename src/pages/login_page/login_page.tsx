@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 // import {
 //   Memvership, EmailPW, InputTitle, InputWrap, Input, UserIcon,
 //   ErrorMessageWrap, BtnCenter, SubmitBtn, NoMemberShipWrap, NoMemberShip, JoinMemberBtn } from './login_page.styles';
@@ -16,10 +16,21 @@ import { apiInstance } from '../../utils/api';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true); //이메일, 패스워드가 맞게 작동할때 버튼이 활성화 되는 기능
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+
+  const loginButtonRef = useRef<HTMLButtonElement>(null);
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    buttonClickFunction: () => void
+  ) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      buttonClickFunction(); // Trigger the login action
+    }
+  };
 
   const navigate = useNavigate(); // 로그인 페이지에서 로그인 버튼 누르고 성공할 시 메인 페이지로 넘어가는 기능
 
@@ -80,6 +91,7 @@ const LoginPage = () => {
       alert('로그인에 실패하였습니다..');
     }
   };
+  console.log(passwordInputRef.current);
 
   return (
     <Wrapper>
@@ -103,6 +115,9 @@ const LoginPage = () => {
             type="text"
             value={email}
             onChange={handleEmail}
+            onKeyDown={(e) =>
+              handleKeyDown(e, () => passwordInputRef.current?.focus())
+            }
             placeholder="test@gmail.com"
           />
         </S.InputWrap>
@@ -130,6 +145,8 @@ const LoginPage = () => {
             type="password"
             value={password}
             onChange={handlePassword}
+            ref={passwordInputRef} 
+            onKeyDown={(e) => handleKeyDown(e, onClickLoginBtn)}
             placeholder="영문, 숫자, 특수문자 포함 10자 이상"
           />
         </S.InputWrap>
@@ -143,7 +160,11 @@ const LoginPage = () => {
 
       {/* 이메일, 비밀번호 입력 후 버튼 활성화 */}
       <S.BtnCenter>
-        <S.SubmitBtn onClick={onClickLoginBtn} disabled={notAllow}>
+        <S.SubmitBtn
+          ref={loginButtonRef}
+          onClick={onClickLoginBtn}
+          disabled={notAllow}
+        >
           로그인
         </S.SubmitBtn>
       </S.BtnCenter>
