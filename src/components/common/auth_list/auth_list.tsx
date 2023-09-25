@@ -11,6 +11,7 @@ interface Challenge {
   img: string;
   userName: string;
   postDate: string;
+  title:string;
 }
 
 const AuthList: React.FC<AuthListProps> = () => {

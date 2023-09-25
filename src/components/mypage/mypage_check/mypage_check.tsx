@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiInstance } from '../../../utils/api';
 import ModalBasic from '../../common/modal/modal';
-import FullCalendar from '@fullcalendar/react';
 import * as S from './mypage_check.style';
 
 interface MypageCheckProps {}
@@ -12,55 +11,71 @@ interface Challenge {
   img: string;
   userName: string;
   postDate: string;
+  id: string;
 }
 
 const MypageCheck: React.FC<MypageCheckProps> = () => {
-
-
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-
-  // 모달창 노출
-  const showModal = () => {
-    setModalOpen(true);
-  };
-  // challengeList 상태를 이곳으로 이동
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [challengeData, setChallengeData] = useState<Challenge | null>(null);
   const { id } = useParams();
+  const [userInfo, setUserInfo] = useState({
+    id: '',
+  });
+  const [isParticipated, setIsParticipated] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 인증 데이터를 가져오는 요청
-        const response = await apiInstance.get(`/posts/challenges/${id}`);
+        const token = localStorage.getItem('token');
+        console.log('token', token);
+        const response = await apiInstance.get('/posts');
         const data = response.data;
 
-        console.log('데이터', data);
-        if (data.length > 0) {
-          const challenges = data.map((challenge: any) => ({
+        if (data) {
+          const challenges: Challenge[] = data.map((challenge: any) => ({
             userName: challenge.user.name,
             img: challenge.img,
             description: challenge.description,
             title: challenge.title,
             postDate: challenge.post_date,
+            id: challenge._id,
           }));
+
+          console.log('인증목록', challenges);
           setChallengeList(challenges);
+
+          if (token) {
+            setUserInfo({
+              id: String(token),
+            }); console.log('User Info:', userInfo);
+
+            const hasParticipated = challenges.some(
+              (challenge) => challenge.id === String(token)
+            ); console.log('Has Participated:', hasParticipated);
+            setIsParticipated(hasParticipated);
+          }
         }
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
       }
     };
+
     fetchData();
-  }, [id]);
+  }, []);
+
   const handleChallengeClick = (challenge: Challenge) => {
     const postDate = new Date(challenge.postDate);
-    // 년, 월, 일을 추출하여 포맷팅
     const formattedDate = `${postDate.getFullYear()}년 ${
       postDate.getMonth() + 1
     }월 ${postDate.getDate()}일`;
-    // challengeData에 포맷팅된 게시 날짜 설정
     challenge.postDate = formattedDate;
     setChallengeData(challenge);
     showModal();
+  };
+
+  const showModal = () => {
+    setModalOpen(true);
   };
 
   return (
