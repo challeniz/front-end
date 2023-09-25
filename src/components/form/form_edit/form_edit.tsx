@@ -4,6 +4,7 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
+  useCallback,
 } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useImageUploader from '../../../hook/imgfiler';
@@ -34,6 +35,7 @@ interface ChallengeFormDataType {
   recru_open_date: string;
   recru_end_date: string;
   tag: string[];
+  mainImg: string;
 }
 
 interface TagBoxProps {
@@ -62,6 +64,8 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [existingChallengeData, setExistingChallengeData] =
     useState<ChallengeFormDataType | null>(null);
+  const [input, setInput] = useState<string>('');
+  const [localTags, setLocalTags] = useState<string[]>([]);
 
   // 태그 관련 상태와 함수들을 정의
   const [tags, setTags] = useState<string[]>([]);
@@ -77,6 +81,7 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
     recru_open_date: '',
     recru_end_date: '',
     tag: [],
+    mainImg: '',
   });
 
   //태그
@@ -120,8 +125,13 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
           cate: challengeData.challenge.category,
           description: challengeData.challenge.description,
           tag: challengeData.challenge.tag,
+          recru_open_date: challengeData.challenge.recru_open_date,
+          recru_end_date: challengeData.challenge.recru_end_date,
+          start_date: challengeData.challenge.start_date,
+          end_date: challengeData.challenge.end_date,
+          mainImg: challengeData.challenge.mainImg,
         }));
-        console.log(challengeData.challenge.tag);
+        console.log('mainImg:', challengeData.challenge.mainImg); // mainImg를 console.log로 출력
       } catch (error) {
         console.error('Error:', error);
       }
@@ -262,51 +272,24 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
           <div>
             <S.InputContent>
               <S.LabelStyled htmlFor="formName">주제</S.LabelStyled>
-              <S.InputStyled
-                type="text"
-                id="formName"
-                name="title"
-                value={data.title}
-                onChange={handleTitleChange}
-              />
-              {!isTitleValid && (
-                <S.ErrorMessage>
-                  주제는 3자 이상 15자 이하로 입력해주세요.
-                </S.ErrorMessage>
-              )}
+              <p>{data.title}</p>
             </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formCate">카테고리</S.LabelStyled>
-              <S.SelectStyled
-                id="formCate"
-                value={data.cate} // 선택된 값이 상태로부터 표시됨
-                onChange={handleChangeSelect} // 선택값 변경 시 상태 업데이트
-              >
-                <option value="건강">건강</option>
-                <option value="취미">취미</option>
-                <option value="식습관">식습관</option>
-                <option value="공부">공부</option>
-                <option value="환경">환경</option>
-              </S.SelectStyled>
+              <p>{data.cate}</p>
             </S.InputContent>
-            {/* <S.InputContent className="formDate">
+            <S.InputContent className="formDate">
               <S.LabelStyled htmlFor="formDage">모집 시작일</S.LabelStyled>
-              <DateSelector onSelectDateRange={handleDateRangeSelect} />
-              {!selectedStartDate && (
-                <S.ErrorMessage>모집 시작일을 선택해주세요.</S.ErrorMessage>
-              )}
+              <p>
+                {data.recru_open_date} ~ {data.recru_end_date}
+              </p>
             </S.InputContent>
             <S.InputContent className="formDate">
               <S.LabelStyled htmlFor="formDage">챌린지 기간</S.LabelStyled>
-              <WeekSelector
-                selectedDate={selectedStartDate}
-                recruEndDate={selectedEndDate}
-                onSelectWeek={handleWeekSelection}
-              />
-              {!endDate && (
-                <S.ErrorMessage>챌린지기간을 선택해주세요.</S.ErrorMessage>
-              )}
-            </S.InputContent> */}
+              <p>
+                {data.start_date} ~ {data.end_date}
+              </p>
+            </S.InputContent>
             <S.InputContent>
               <S.LabelStyled htmlFor="formImg">대표 이미지</S.LabelStyled>
               <S.AvatarWrapper
@@ -316,8 +299,8 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
                   }
                 }}
               >
-                {selectedImage && (
-                  <S.AvatarImage src={URL.createObjectURL(selectedImage)} />
+                {data.mainImg && typeof data.mainImg === 'string' && (
+                  <S.AvatarImage src={data.mainImg} />
                 )}
               </S.AvatarWrapper>
               <S.InputImg

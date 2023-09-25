@@ -14,7 +14,7 @@ import useImageUploader from '../../hook/imgfiler';
 
 interface AuthDataType {
   description: string;
-  file: string;
+  file: File | null;
 }
 
 const AuthPage: React.FC = () => {
@@ -24,7 +24,7 @@ const AuthPage: React.FC = () => {
   const { id } = useParams();
   const [data, setData] = useState<AuthDataType>({
     description: '',
-    file: '',
+    file: null,
   });
 
   // 내용
@@ -32,6 +32,8 @@ const AuthPage: React.FC = () => {
     const inputValue = e.target.value;
     if (inputValue.length <= 70) {
       setText(inputValue);
+
+      setData((prevData) => ({ ...prevData, description: inputValue }));
     }
   };
 
@@ -59,21 +61,20 @@ const AuthPage: React.FC = () => {
     if (selectedFile) {
       setIsImageSelected(true);
       setSelectedImage(selectedFile); // 이미지 선택됨
+
+      // data 상태를 업데이트합니다.
+      setData((prevData) => ({ ...prevData, file: selectedFile }));
     } else {
       setIsImageSelected(false);
       setSelectedImage(null); // 이미지 선택되지 않음
       alert('이미지를 선택해주세요.');
     }
-    console.log('이미지1', selectedFile);
-    console.log('이미지', imgSrc);
   };
 
   const navigate = useNavigate();
 
   //유효성 및 데이터
   const handleChallengeSubmit = async () => {
-    console.log('데이터2', data);
-
     try {
       if (text.trim() === '' || text == null) {
         alert('내용을 입력하세요.');
@@ -83,7 +84,7 @@ const AuthPage: React.FC = () => {
 
       const formData = new FormData();
       formData.append('description', text);
-
+      console.log("데이터", text)
       if (fileInput.current) {
         const selectedFile =
           fileInput.current.files && fileInput.current.files[0];
@@ -92,18 +93,21 @@ const AuthPage: React.FC = () => {
         } else {
           alert('이미지를 선택해주세요.');
           return;
-        }
+        }  console.log("데이터", selectedFile)
       } else {
         alert('이미지 파일이 존재하지 않습니다.');
         return;
-      }
-      console.log('check', isImageSelected);
-      const response = await apiInstance.post(`/posts/upload/${id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log('API 응답:', response);
+      }  console.log("데이터",formData)
+      const response = await apiInstance.post(
+        `/posts/upload/${id}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      console.log('데이터', response);
       if (response.status === 201) {
         console.log('response', response);
         // 챌린지 생성 성공 후 추가 로직

@@ -5,8 +5,9 @@ import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
-import HeartImg from '../../../assets/image/heart_red.png';
 import EmptyHeartImg from '../../../assets/image/heart.png';
+import HeartImg from '../../../assets/image/heart_red.png';
+
 import Countdown from '../../../hook/Countdown/Countdown';
 
 // 예시로 Challenge 타입을 정의
@@ -66,28 +67,25 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   }, []);
 
   const wishCountHandler = async (challengeId: string) => {
-    const updatedChallengeList = challengeList.map((challenge) => {
-      if (challenge.id === challengeId) {
-        const newLikeValue = !challenge.like;
-        try {
-          if (newLikeValue) {
-            apiInstance.patch(`/challenges/zzim/${challenge.id}`);
-          } else {
-            apiInstance.patch(`/challenges/zzim/${challenge.id}`);
-          }
-        } catch (error) {
-          console.error(`Error updating challenge like status:`, error);
+    try {
+      const updatedChallengeList = challengeList.map((challenge) => {
+        if (challenge.id === challengeId) {
+          const newLikeValue = challenge.like;
+          return {
+            ...challenge,
+            like: newLikeValue,
+          };
         }
-        return {
-          ...challenge,
-          like: newLikeValue,
-        };
-      }
-      return challenge;
-    });
+        return challenge;
+      });
 
-    setChallengeList(updatedChallengeList);
-    setWishCount((prevCount) => prevCount + 1);
+      setChallengeList(updatedChallengeList);
+
+      // 서버에 좋아요 상태 업데이트 요청
+      await apiInstance.patch(`/challenges/zzim/${challengeId}`);
+    } catch (error) {
+      console.error(`Error updating challenge like status:`, error);
+    }
   };
 
   const filteredChallengeList = selectedCategory

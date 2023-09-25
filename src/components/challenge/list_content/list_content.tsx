@@ -86,7 +86,10 @@ const ListContent = () => {
 
   return (
     <>
-      <ListTab selectedCategory={selectedCategory} />
+      <ListTab
+        selectedCategory={selectedCategory}
+        handleCategoryClick={handleCategoryClick}
+      />
 
       <S.OptionSelect onChange={handleSelectChange}>
         <option value="latest">최신순</option>

@@ -1,10 +1,11 @@
 import React from 'react';
 import * as S from './list_tab.style';
-import { Link, useLocation } from 'react-router-dom'; // useLocation 추가
+import { Link } from 'react-router-dom';
 import { ROUTE } from '../../../routes';
 
 interface ListTabProps {
   selectedCategory: string;
+  handleCategoryClick: (category: string) => void;
 }
 
 const menuArr = [
@@ -16,30 +17,21 @@ const menuArr = [
   { name: '환경', content: '환경', category: '환경' },
 ];
 
-const ListTab: React.FC<ListTabProps> = ({ selectedCategory }) => {
-  const location = useLocation();
-
-  // URL 파라미터에서 category 값을 가져오기
-  const currentCategory = new URLSearchParams(location.search).get('category');
-
+const ListTab: React.FC<ListTabProps> = ({
+  selectedCategory,
+  handleCategoryClick,
+}) => {
   return (
     <S.TabMenu>
       {menuArr.map((menu, index) => (
         <li
           key={index}
           className={
-            currentCategory === menu.category ? 'submenu focused' : 'submenu'
+            selectedCategory === menu.category ? 'submenu focused' : 'submenu'
           }
+          onClick={() => handleCategoryClick(menu.category)}
         >
-          <Link
-            to={
-              menu.category
-                ? `${ROUTE.LISTPAGE.link}?category=${menu.category}`
-                : ROUTE.LISTPAGE.link
-            }
-          >
-            {menu.name}
-          </Link>
+          {menu.name}
         </li>
       ))}
     </S.TabMenu>

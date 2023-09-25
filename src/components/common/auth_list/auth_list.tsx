@@ -11,6 +11,7 @@ interface Challenge {
   img: string;
   userName: string;
   postDate: string;
+  title:string;
 }
 
 const AuthList: React.FC<AuthListProps> = () => {
@@ -38,7 +39,7 @@ const AuthList: React.FC<AuthListProps> = () => {
         // 인증 데이터를 가져오는 요청
         const response = await apiInstance.get(`/posts/challenges/${id}`);
         const data = response.data;
-        console.log('인증하기', data[0]);
+
         if (data.length > 0) {
           const challenges = data.map((challenge: any) => ({
             userName: challenge.user.name,
