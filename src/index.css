@@ -106,7 +106,7 @@ code {
 .Title{
   background: linear-gradient(90deg, rgba(116,192,252,1) 0%, rgba(34,139,230,1) 94%);
   width: 100vw;
-  height: 50vh;
+  height: 70vh;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -234,4 +234,14 @@ cursor: pointer;
   width: 510px;
   height: 380px;
   margin-left: 120px;
+}
+.TitleCheck1{
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color:#fff;
 }
