@@ -12,6 +12,10 @@ export const InfoFlex = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 10px 0 15px;
+
+  h3:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const StyledImg = styled.div`

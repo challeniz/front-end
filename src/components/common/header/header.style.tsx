@@ -5,7 +5,6 @@ export const HeaderWrapper = styled.div`
   position: sticky;
   top: 0px;
   padding: 0px 80px;
-  cursor: pointer;
   height: 90px;
   box-sizing: border-box;
   border-bottom: 1px solid #e6e6e6;
@@ -42,35 +41,40 @@ export const LogoImg = styled.img`
 `;
 
 export const HeaderNav = styled.nav`
-  height: 100%;
   width: 60%;
-  cursor: pointer;
 `;
 
 export const NavList = styled.ul`
   display: flex;
-  height: 100%;
   padding-left: 40px;
 `;
 
 export const NavItem = styled.li`
+  cursor: pointer;
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  padding: 10px 10px;
+  padding: 0px 25px;
   font-weight: 500;
-  margin: 0 10px;
   transition: background-color 0.2s;
   position: relative;
   display: flex;
-  height: 100%;
   font-size: 18px;
+  transition: 0.2s;
 
   &:hover {
     color: #339af0;
-    ul {
-      visibility: visible;
-    }
+  }
+  &:hover:after {
+    position: absolute;
+    content: '';
+    width: 7px;
+    height: 7px;
+    top: -5px;
+    left: 15px;
+    border-radius: 50%;
+    background-color: #339af0;
+    transition: 0.2s;
   }
 `;
 

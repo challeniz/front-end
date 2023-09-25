@@ -1,8 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './mypage_info.style';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
-import Wrapper from '../../common/wrapper/wrapper';
 import useImageUploader from '../../../hook/imgfiler';
 import { apiInstance } from '../../../utils/api';
 
@@ -49,7 +48,7 @@ const MyInfo: React.FC<MyInfoProps> = () => {
       <S.PageTxt>
         <ul>
           <li>
-            <span>{mypageInfo.name}</span> 님
+            환영합니다! <span>{mypageInfo.name}</span> 님
           </li>
           <li>
             현재등급은 <span>{mypageInfo.grade}</span>입니다.

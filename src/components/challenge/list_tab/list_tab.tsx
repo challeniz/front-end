@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './list_tab.style';
-import { Link } from 'react-router-dom';
-import { ROUTE } from '../../../routes';
 import { Challenge } from '../list_content/list_content';
-import ChallengeBox from '../challenge_box/challenge_box';
 
 interface ListTabProps {
   selectedCategory: string;

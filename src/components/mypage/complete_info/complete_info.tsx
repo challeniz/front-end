@@ -10,12 +10,6 @@ interface Challenge {
   userName: string;
   postDate: string;
 }
-interface ModalBasicProps {
-  setModalOpen: (open: boolean) => void;
-  star: number;
-  description: string;
-  onSubmit: (star: number, description: string) => void; // onSubmit을 추가
-}
 
 interface Challenge {
   mainImg: string;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { apiInstance } from '../../../utils/api';
 import ModalBasic from '../../common/modal/modal';
 import * as S from './mypage_check.style';
@@ -9,16 +8,16 @@ interface MypageCheckProps {}
 interface Challenge {
   description: string;
   img: string;
-  // user: string;
+  name: string;
   postDate: string;
   id: string;
+  title: string;
 }
 
 const MypageCheck: React.FC<MypageCheckProps> = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [challengeData, setChallengeData] = useState<Challenge | null>(null);
-  const { id } = useParams();
   const [userInfo, setUserInfo] = useState({
     id: '',
   });
@@ -32,37 +31,23 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
         const response = await apiInstance.get('/posts');
         const data = response.data;
 
-        if (data) {
-          const challenges: Challenge[] = data.map((challenge: any) => ({
-            // userName: challenge.user.name,
-            img: challenge.img,
-            description: challenge.description,
+        if (data.length > 0) {
+          const challenges = data.map((challenge: any) => ({
+            name: challenge.posts.user ? challenge.posts.user.name : '',
+            img: challenge.posts.img,
+            description: challenge.posts.description,
             title: challenge.title,
-            postDate: challenge.post_date,
-            id: challenge._id,
+            postDate: challenge.posts.post_date,
+            id: challenge.posts._id,
           }));
-
           console.log('인증목록', challenges);
           setChallengeList(challenges);
-
-          if (token) {
-            setUserInfo({
-              id: String(token),
-            });
-            console.log('User Info:', userInfo);
-
-            const hasParticipated = challenges.some(
-              (challenge) => challenge.id === String(token)
-            );
-            console.log('Has Participated:', hasParticipated);
-            setIsParticipated(hasParticipated);
-          }
         }
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
       }
     };
-
+    console.log(challengeData);
     fetchData();
   }, []);
 
@@ -97,7 +82,7 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
               setModalOpen={setModalOpen}
               challengeData={challengeData}
               postDate={challengeData.postDate}
-              // userName={challengeData.user}
+              userName={challengeData.name}
             />
           )}
         </S.AuthGrid>

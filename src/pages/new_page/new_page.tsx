@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import Wrapper from '../../components/common/wrapper/wrapper';
@@ -20,7 +20,7 @@ export interface ChallengeFormDataType {
 }
 
 const NewPage = () => {
-  const [isAgreed, setIsAgreed] = useState(false);
+  const [isAgreed] = useState(false);
   const [topic, setTopic] = useState<string>('');
   const [isImageSelected, setIsImageSelected] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);

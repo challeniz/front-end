@@ -39,7 +39,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   filteredChallenges = challenges,
 }) => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
-  const [wishCount, setWishCount] = useState(808);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,7 +72,8 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
     try {
       const updatedChallengeList = challengeList.map((challenge) => {
         if (challenge.id === challengeId) {
-          const newLikeValue = challenge.like;
+          const newLikeValue = !challenge.like; // 현재 상태의 반대 값을 얻습니다.
+          console.log(`Challenge ${challengeId} like status: ${newLikeValue}`);
           return {
             ...challenge,
             like: newLikeValue,
