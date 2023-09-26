@@ -39,24 +39,24 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
             title: challenge.title,
             postDate: challenge.posts.post_date,
             id: challenge.posts._id,
-          }));
+          })); 
           console.log('인증목록', challenges);
-          setChallengeList(challenges);
-        }
+          setChallengeList(challenges);  
+        } 
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
       }
     };
-    console.log(challengeData);
+    console.log(challengeData)
     fetchData();
   }, []);
 
   const handleChallengeClick = (challenge: Challenge) => {
-    const postDate = new Date(challenge.postDate);
-    const formattedDate = `${postDate.getFullYear()}년 ${
-      postDate.getMonth() + 1
-    }월 ${postDate.getDate()}일`;
-    challenge.postDate = formattedDate;
+    // const postDate = new Date(challenge.postDate);
+    // const formattedDate = `${postDate.getFullYear()}년 ${
+    //   postDate.getMonth() + 1
+    // }월 ${postDate.getDate()}일`;
+    // challenge.postDate = formattedDate;
     setChallengeData(challenge);
     showModal();
   };
@@ -65,28 +65,42 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
     setModalOpen(true);
   };
 
+  // 각 타이틀별로 그룹핑
+  const groupedChallenges: { [key: string]: Challenge[] } = {};
+  challengeList.forEach(challenge => {
+    if (groupedChallenges[challenge.title]) {
+      groupedChallenges[challenge.title].push(challenge);
+    } else {
+      groupedChallenges[challenge.title] = [challenge];
+    }
+  });
+
   return (
-    <>
+    <> 
       <S.AuthWrap>
-        {challengeData && <h1>{challengeData.title}</h1>}
-        <S.AuthGrid>
-          {challengeList.map((challenge, index) => (
-            <S.ImgWrap
-              key={index}
-              onClick={() => handleChallengeClick(challenge)}
-            >
-              <img src={challenge.img} alt="Challenge Image" />
-            </S.ImgWrap>
-          ))}
-          {modalOpen && challengeData && (
-            <ModalBasic
-              setModalOpen={setModalOpen}
-              challengeData={challengeData}
-              postDate={challengeData.postDate}
-              userName={challengeData.name}
-            />
-          )}
-        </S.AuthGrid>
+        {Object.entries(groupedChallenges).map(([title, challenges], index) => (
+          <div key={index}>
+            <h1>{title}</h1>
+            <S.AuthGrid>
+              {challenges.map((challenge, index) => (
+                <S.ImgWrap
+                  key={index}
+                  onClick={() => handleChallengeClick(challenge)}
+                >
+                  <img src={challenge.img} alt="Challenge Image" />
+                </S.ImgWrap>
+              ))}
+            </S.AuthGrid>
+          </div>
+        ))}
+        {modalOpen && challengeData && (
+          <ModalBasic
+            setModalOpen={setModalOpen}
+            challengeData={challengeData}
+            postDate={challengeData.postDate}
+            userName={challengeData.name}
+          />
+        )}
       </S.AuthWrap>
     </>
   );

@@ -10,6 +10,8 @@ interface ModalBasicProps {
   };
   postDate: string;
   userName?: string;
+  name?:string
+
 }
 
 function ModalBasic({
@@ -17,6 +19,7 @@ function ModalBasic({
   challengeData,
   postDate,
   userName,
+  name,
 }: ModalBasicProps) {
   // 모달 끄기 (X버튼 onClick 이벤트 핸들러)
   const closeModal = () => {
@@ -58,7 +61,7 @@ function ModalBasic({
             <span>인증 날짜:</span> {postDate}
           </S.PostDay>
           <S.PostName>
-            <span>인증한 챌리니:</span> {userName}
+            <span>인증한 챌리니:</span> {userName || name}
           </S.PostName>
           <S.AuthWrap>
             <S.ImgBox>

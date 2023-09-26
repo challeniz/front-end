@@ -60,7 +60,7 @@ const AboutPage = () => {
         <div className="TitleCheck1">
           <div className="ListTxt">
             <h1 className="H1Styled2">
-            다양한 챌린지에 참여하여 배지를 <span>획득해보세요</span>
+              다양한 챌린지에 참여하여 배지를 <span>획득해보세요</span>
             </h1>
             <br />
             <p>
@@ -71,19 +71,13 @@ const AboutPage = () => {
           </div>
           <img src={badge} alt="badge" className="badge" />
         </div>
-        <div className="TitleCheck">
-          {/* 인증사진을 목업스타일이나 인증모음샷으로 수정하는거 어떤지 물어보기 */}
-          <img src={check} alt="check" className="check" />
+        <div className="Title">
           <div className="CheckTxt">
             <h1 className="H1Styled2">
-            실시간 후기를 통해 챌리니들과  <span>소통 해보아요!</span>
+              실시간 후기를 통해 챌리니들과 <span>소통 해보아요!</span>
             </h1>
             <br />
-            <p>
-              text of the printing and typesetting industry. Lorem Ipsum has
-              been the industry's standard dummy text ever since the 1500s, when
-              an unknow
-            </p>
+        <div className='ReviewBox'></div>
           </div>
         </div>
       </Wrapper>
