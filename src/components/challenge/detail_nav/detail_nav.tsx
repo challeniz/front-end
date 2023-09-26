@@ -4,10 +4,19 @@ import { apiInstance } from '../../../utils/api';
 import { Link, useParams } from 'react-router-dom';
 import { ROUTE } from '../../../routes';
 
+interface Challenge {
+  description: string;
+  img: string;
+  userName: string;
+  postDate: string;
+  title: string;
+}
+
 const DetailNav = () => {
   const { id } = useParams();
   const [isLiked, setIsLiked] = useState(false);
   const [isParticipated, setIsParticipated] = useState(false);
+  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
 
   // 스크롤시 nav 위치 수정
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -17,12 +26,10 @@ const DetailNav = () => {
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
     return () => {
-      // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
       window.removeEventListener('scroll', updateScroll);
     };
-  }, []); // 두 번째 파라미터로 빈 배열을 넣어 최초 렌더링 시에만 실행되도록 설정
+  }, []);
 
-  // 챌린지 데이터 호출
   const [challengeInfo, setChallengeInfo] = useState({
     like: false,
     title: '',
@@ -49,16 +56,13 @@ const DetailNav = () => {
   };
 
   useEffect(() => {
-    // 로컬 스토리지에서 찜하기 상태 가져오기
     const storedIsLiked = localStorage.getItem('isLiked');
 
-    // 로컬 스토리지에 'isLiked' 키가 존재하고, 값이 null이 아닌 경우에만 파싱하여 설정
     if (storedIsLiked !== null) {
       setIsLiked(JSON.parse(storedIsLiked));
     }
   }, []);
 
-  //
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -95,6 +99,49 @@ const DetailNav = () => {
 
     fetchData();
   }, [id]);
+
+  const [isCertificationEnabled, setIsCertificationEnabled] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiInstance.get(`/posts/challenges/${id}`);
+        const data = response.data;
+        if (data.length > 0) {
+          const challenges = data.map((challenge: any) => ({
+            postDate: challenge.post_date,
+          }));
+          setChallengeList(challenges);
+
+          // 오늘 날짜를 가져옵니다.
+          const todayDate = getTodayDate();
+
+          // postDates 배열을 생성합니다.
+          const postDates = challenges.map(
+            (challenge: { postDate: any }) => challenge.postDate
+          );
+          console.log('인증날짜', postDates);
+          console.log('오늘날짜', todayDate);
+          if (postDates.includes(todayDate)) {
+            console.log('오늘 인증 가능한 챌린지가 있습니다.');
+          } else {
+            console.log('오늘 인증 가능한 챌린지가 없습니다.');
+          }
+        }
+      } catch (error) {
+        console.error('데이터 가져오기 오류:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  // 오늘 날짜를 가져오는 함수
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toLocaleDateString();
+  };
+
   return (
     <S.DetailNavs
       className={scrollPosition < 100 ? 'DetailNavs' : 'ScrollNavs'}

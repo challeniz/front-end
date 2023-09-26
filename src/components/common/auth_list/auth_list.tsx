@@ -11,7 +11,7 @@ interface Challenge {
   img: string;
   userName: string;
   postDate: string;
-  title:string;
+  title: string;
 }
 
 const AuthList: React.FC<AuthListProps> = () => {
@@ -60,7 +60,6 @@ const AuthList: React.FC<AuthListProps> = () => {
 
   const handleChallengeClick = (challenge: Challenge) => {
     const postDate = new Date(challenge.postDate);
-    // 년, 월, 일을 추출하여 포맷팅
     const formattedDate = `${postDate.getFullYear()}년 ${
       postDate.getMonth() + 1
     }월 ${postDate.getDate()}일`;

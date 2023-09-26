@@ -16,42 +16,30 @@ interface Challenge {
 const StatusInfo = () => {
   const { id } = useParams();
   const [challengeData, setChallengeData] = useState<Challenge[]>([]);
+
   useEffect(() => {
-    async function fetchUserData() {
+    async function fetchChallengeData() {
       try {
         const challengeResponse = await apiInstance.get('/users/mypageChall');
-        const data = challengeResponse.data;
-
-        if (data && data.challenge && data.challenge.length > 0) {
-          const challengeArray = data.challenge;
-
-          const processedChallenges = challengeArray.map(
-            (challenge: Challenge) => {
-              const startDate = new Date(challenge.start_date);
-              const endDate = new Date(challenge.end_date);
-
-              return {
-                image: challenge.mainImg,
-                title: challenge.title,
-                start_date: `${startDate.getFullYear()}년 ${
-                  startDate.getMonth() + 1
-                }월 ${startDate.getDate()}일`,
-                end_date: `${endDate.getFullYear()}년 ${
-                  endDate.getMonth() + 1
-                }월 ${endDate.getDate()}일`,
-                id: challenge.id,
-              };
-            }
+        if (challengeResponse.status === 200) {
+          const challenges: Challenge[] = challengeResponse.data.challenge.map(
+            (challenge: any) => ({
+              ...challenge,
+              start_date: new Date(challenge.start_date).toLocaleDateString(),
+              end_date: new Date(challenge.end_date).toLocaleDateString(),
+              mainImg: challenge.mainImg,
+              id: challenge._id,
+            })
           );
 
-          setChallengeData(processedChallenges);
+          setChallengeData(challenges);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching challenge data:', error);
       }
     }
 
-    fetchUserData();
+    fetchChallengeData();
   }, []);
 
   return (

@@ -7,18 +7,23 @@ interface Grade {
 }
 
 const Grade = () => {
-  const [grade, setGrade] = useState<string | null>(null);
+  const [grades, setGrades] = useState<Grade[]>([]);
+  const [userInfo, setUserInfo] = useState({
+    id: '',
+  });
 
   useEffect(() => {
-    async function fetchGrade() {
+    async function fetchBadges() {
       try {
         const token = localStorage.getItem('token');
         const response = await apiInstance.get('/badges');
         if (token) {
           if (response.status === 200) {
-            const user = response.data.user;
-            const userGrade = user.grade; // user 객체에서 grade를 가져옴
-            setGrade(userGrade);
+            const gradeList = response.data.user;
+            const gradeArray: Grade[] = gradeList.map((gradeInfo: any) => ({
+              grade: gradeInfo.grade,
+            }));
+            setGrades(gradeArray);
             console.log(response.data);
           }
         }
@@ -27,9 +32,8 @@ const Grade = () => {
       }
     }
 
-    fetchGrade();
+    fetchBadges();
   }, []);
-
   return (
     <S.GradeTitle>
       <h3>회원 등급</h3>
@@ -81,7 +85,7 @@ const Grade = () => {
       <S.MyGrade>
         <div>
           <h5>내 등급</h5>
-          <p>{grade}</p> {/* user 객체에서 직접 grade 속성값을 가져옴 */}
+          <p></p>
         </div>
         <div>
           <h5>챌린지 인증</h5>

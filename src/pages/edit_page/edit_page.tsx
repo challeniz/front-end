@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import FormEdit from '../../components/form/form_edit/form_edit';
-import NoticeForm from '../../components/form/form_notice/from_notice';
 import * as S from './edit_page.style';
 
 import { apiInstance } from '../../utils/api';
