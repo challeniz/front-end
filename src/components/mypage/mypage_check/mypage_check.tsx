@@ -68,6 +68,7 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
   return (
     <>
       <S.AuthWrap>
+        {challengeData && <h1>{challengeData.title}</h1>}
         <S.AuthGrid>
           {challengeList.map((challenge, index) => (
             <S.ImgWrap
