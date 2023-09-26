@@ -37,7 +37,7 @@ export const PageTxt = styled.div`
     margin-bottom: 25px;
     font-weight: 400;
     font-size: 33px;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
 
     span {
       font-size: 36px;
@@ -47,10 +47,11 @@ export const PageTxt = styled.div`
 
   li:nth-child(2) {
     font-size: 27px;
-    letter-spacing: 1px;
+
     span {
       font-size: 27px;
       font-weight: 700;
+      letter-spacing: 4px;
     }
   }
 `;

@@ -27,6 +27,7 @@ const CreateInfo = () => {
               start_date: new Date(challenge.start_date).toLocaleDateString(),
               end_date: new Date(challenge.end_date).toLocaleDateString(),
               mainImg: challenge.mainImg,
+              id: challenge._id,
             }));
 
           setLikeUserData(challenges);

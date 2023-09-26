@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
 import ChallengeBox from '../challenge_box/challenge_box';
 import SearchPage from '../../search_page/search_page';
-interface Challenge {
+
+export interface Challenge {
   like: boolean;
   title: string;
   start_date: string;
@@ -16,14 +17,25 @@ interface Challenge {
   id: string;
   category: string;
   mainImg: string;
-  like_users: string;
+  like_users: string[];
   recru_open_date: string;
+  users: string[];
+  status: string;
+}
+
+// ListTabProps 인터페이스 수정
+interface ListTabProps {
+  selectedCategory: string;
+  handleCategoryClick: (category: string) => void;
+  challenges: Challenge[]; // 추가
+  challengeCount: number; // 추가
 }
 
 const ListContent = () => {
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [sortCategory, setSortCategory] = useState<string>('');
+  const [challengeCount, setChallengeCount] = useState<number>(0);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
@@ -53,9 +65,12 @@ const ListContent = () => {
             recru_open_date: new Date(
               challenge.recru_open_date
             ).toLocaleDateString(),
+            status: challenge.status,
+            users: challenge.users,
           }));
 
           setChallengeList(challenges);
+          setChallengeCount(challenges.length);
         }
       } catch (error) {
         console.error('데이터 불러오기 오류:', error);
@@ -89,6 +104,7 @@ const ListContent = () => {
       <ListTab
         selectedCategory={selectedCategory}
         handleCategoryClick={handleCategoryClick}
+        challenges={challengeList}
       />
 
       <S.OptionSelect onChange={handleSelectChange}>

@@ -1,5 +1,20 @@
 import styled from 'styled-components';
 
+export const ListTite = styled.div`
+  display: flex;
+  padding-bottom: 50px;
+  align-items: flex-end;
+
+  h2 {
+    font-size: 35px;
+    padding-right: 15px;
+  }
+
+  p {
+    font-size: 17px;
+  }
+`;
+
 export const TabMenu = styled.ul`
   border-bottom: 1px solid #000;
   display: flex;

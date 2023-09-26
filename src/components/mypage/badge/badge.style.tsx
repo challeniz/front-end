@@ -27,8 +27,17 @@ export const BadgeWrap = styled.div`
       font-weight: 700;
     }
 
+    h5 {
+      padding-top: 10px;
+      font-weight: 400;
+      font-size: 17px;
+    }
+
     img {
       filter: grayscale(1);
+    }
+    .on {
+      filter: inherit !important;
     }
   }
 `;

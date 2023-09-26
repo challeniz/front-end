@@ -57,11 +57,9 @@ function ModalBasic({
           <AiOutlineClose />
         </button>
         <S.ModalBox>
-          {/* 오늘의 날짜 표시 */}
           <S.PostDay>
             <span>인증 날짜:</span> {postDate}
           </S.PostDay>
-          {/* 사용자 이름 표시 */}
           <S.PostName>
             <span>인증한 챌리니:</span> {userName || name}
           </S.PostName>

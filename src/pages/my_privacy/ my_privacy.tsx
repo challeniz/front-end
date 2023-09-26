@@ -55,7 +55,7 @@ const MyPrivacy = () => {
 
     fetchUserInfo();
   }, []);
-  // 닉네임 수정 기능 로직 ---> 이게 맞나?
+
   const fixNameHandler = (event: any) => {
     const updatedUserInfo = { ...userInfo, name: event.target.value };
     setUserInfo(updatedUserInfo);
@@ -96,7 +96,6 @@ const MyPrivacy = () => {
     }
   };
 
-  // 전화번호 수정 기능 로직 ---> 이게 맞나?
   const fixPhoneHandler = (event: any) => {
     const updatedUserInfo = { ...userInfo, phone: event.target.value };
     setUserInfo(updatedUserInfo);
@@ -114,7 +113,6 @@ const MyPrivacy = () => {
     }
   };
 
-  // 이메일 수정 기능 로직 ---> 이게 맞나?
   const fixEmailHandler = (event: any) => {
     const updatedUserInfo = { ...userInfo, email: event.target.value };
     setUserInfo(updatedUserInfo);
