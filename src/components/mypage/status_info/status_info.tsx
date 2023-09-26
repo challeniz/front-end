@@ -22,15 +22,16 @@ const StatusInfo = () => {
       try {
         const challengeResponse = await apiInstance.get('/users/mypageChall');
         if (challengeResponse.status === 200) {
-          const challenges: Challenge[] = challengeResponse.data.challenge.map(
-            (challenge: any) => ({
-              ...challenge,
-              start_date: new Date(challenge.start_date).toLocaleDateString(),
-              end_date: new Date(challenge.end_date).toLocaleDateString(),
-              mainImg: challenge.mainImg,
-              id: challenge._id,
-            })
-          );
+          const challenges: Challenge[] =
+            challengeResponse.data.updateActiveChallenge.map(
+              (challenge: any) => ({
+                ...challenge,
+                start_date: new Date(challenge.start_date).toLocaleDateString(),
+                end_date: new Date(challenge.end_date).toLocaleDateString(),
+                mainImg: challenge.mainImg,
+                id: challenge._id,
+              })
+            );
 
           setChallengeData(challenges);
         }
