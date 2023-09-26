@@ -42,14 +42,16 @@ const CompleteInfo = () => {
         const challengeResponse = await apiInstance.get('/users/mypageChall');
         if (challengeResponse.status === 200) {
           const challenges: Challenge[] =
-            challengeResponse.data.finishChallenge.map((challenge: any) => ({
-              ...challenge,
-              title: challenge.title,
-              mainImg: challenge.mainImg,
-              start_date: new Date(challenge.start_date).toLocaleDateString(),
-              end_date: new Date(challenge.end_date).toLocaleDateString(),
-              id: challenge._id,
-            }));
+            challengeResponse.data.updateCreateChallenge.map(
+              (challenge: any) => ({
+                ...challenge,
+                title: challenge.title,
+                mainImg: challenge.mainImg,
+                start_date: new Date(challenge.start_date).toLocaleDateString(),
+                end_date: new Date(challenge.end_date).toLocaleDateString(),
+                id: challenge._id,
+              })
+            );
           setChallengeData(challenges);
         }
       } catch (error) {
