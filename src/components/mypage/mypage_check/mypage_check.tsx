@@ -28,7 +28,7 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
       try {
         const token = localStorage.getItem('token');
         console.log('token', token);
-        const response = await apiInstance.get('/posts');
+        const response = await apiInstance.get('/posts/my');
         const data = response.data;
 
         if (data.length > 0) {
@@ -39,15 +39,15 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
             title: challenge.title,
             postDate: challenge.posts.post_date,
             id: challenge.posts._id,
-          })); 
+          }));
           console.log('인증목록', challenges);
-          setChallengeList(challenges);  
-        } 
+          setChallengeList(challenges);
+        }
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
       }
     };
-    console.log(challengeData)
+    console.log(challengeData);
     fetchData();
   }, []);
 
@@ -67,7 +67,7 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
 
   // 각 타이틀별로 그룹핑
   const groupedChallenges: { [key: string]: Challenge[] } = {};
-  challengeList.forEach(challenge => {
+  challengeList.forEach((challenge) => {
     if (groupedChallenges[challenge.title]) {
       groupedChallenges[challenge.title].push(challenge);
     } else {
@@ -76,7 +76,7 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
   });
 
   return (
-    <> 
+    <>
       <S.AuthWrap>
         {Object.entries(groupedChallenges).map(([title, challenges], index) => (
           <div key={index}>
