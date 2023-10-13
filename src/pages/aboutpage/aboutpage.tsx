@@ -6,6 +6,7 @@ import about from '../../assets/image/about.png';
 import list from '../../assets/image/about_list.png';
 import check from '../../assets/image/about_check.png';
 import badge from '../../assets/image/about_badge.png';
+import chat from '../../assets/image/about_chat.png';
 import styled from 'styled-components';
 const AboutPage = () => {
   return (
@@ -58,7 +59,7 @@ const AboutPage = () => {
           </div>
         </div>
         <div className="TitleCheck1">
-          <div className="ListTxt">
+          <div className="BadgeTxt">
             <h1 className="H1Styled2">
               다양한 챌린지에 참여하여 배지를 <span>획득해보세요</span>
             </h1>
@@ -71,16 +72,62 @@ const AboutPage = () => {
           </div>
           <img src={badge} alt="badge" className="badge" />
         </div>
-        <div className="Title">
-          <div className="CheckTxt">
-            <h1 className="H1Styled2">
-              실시간 후기를 통해 챌리니들과 <span>소통 해보아요!</span>
-            </h1>
-            <br />
-        <div className='ReviewBox'></div>
+      </Wrapper>
+      <div className="TitleCheck2">
+        <img src={chat} alt="chat" className="chat" />
+        <div className="CheckTxt">
+          <h1 className="H1Styled2">
+            언제 어디서든, <span>1:1 상담 가능합니다.</span>
+          </h1>
+          <br />
+          <p>
+            text of the printing and typesetting industry. Lorem Ipsum has been
+            the industry's standard dummy text ever since the 1500s, when an
+            unknow
+          </p>
+        </div>
+      </div>
+
+      <div className="Title2">
+        <div className="TitleBox">
+          <h1>챌린지 이용방법</h1>
+        </div>
+        <div className="HowChall">
+          <div className="How1">
+            <span className="Num">01</span>
+            <div className="HowTxt">
+          
+              <p>참여하고싶은 챌린지를 찾아보세요</p>
+            </div>
+          </div>
+          <div className="How1">
+            <span className="Num">01</span>
+            <div className="HowTxt">
+          
+              <p>참여하고싶은 챌린지를 찾아보세요</p>
+            </div>
+          </div> <div className="How1">
+            <span className="Num">01</span>
+            <div className="HowTxt">
+          
+              <p>참여하고싶은 챌린지를 찾아보세요</p>
+            </div>
+          </div> <div className="How1">
+            <span className="Num">01</span>
+            <div className="HowTxt">
+          
+              <p>참여하고싶은 챌린지를 찾아보세요</p>
+            </div>
+          </div> <div className="How1">
+            <span className="Num">01</span>
+            <div className="HowTxt">
+          
+              <p>참여하고싶은 챌린지를 찾아보세요</p>
+            </div>
           </div>
         </div>
-      </Wrapper>
+      </div>
+
       <Footer />
     </div>
   );

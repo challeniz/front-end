@@ -229,11 +229,22 @@ cursor: pointer;
   flex-wrap: wrap;
   background-color:#fff;
 }
+.BadgeTxt{
+  
+  width: 50%;
+  margin-top: 60px;
 
+}
 .badge{
   width: 510px;
   height: 380px;
   margin-left: 120px;
+  margin-top: 60px;
+
+}
+
+.BadgeTxt p{
+  margin-left: 5vw;
 }
 .TitleCheck1{
   width: 100vw;
@@ -244,4 +255,71 @@ cursor: pointer;
   align-items: center;
   flex-wrap: wrap;
   background-color:#fff;
+}
+
+.TitleCheck2{
+  background: linear-gradient(180deg, rgb(133, 196, 245) 0%, rgb(84, 163, 232) 94%);
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+
+.chat{
+  width: 410px;
+  height: 300px;
+  margin-left: 120px;
+}
+.Title2{
+
+  width: 100vw;
+
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #F3F9FE;
+  padding: 50px 0 55px
+}
+
+.TitleBox{
+
+  max-width:300px;
+  margin: 0 auto;
+
+}
+.TitleBox h1{
+  font-size:36px;
+  line-height:46px;
+  letter-spacing: -0.5px;
+  color: #494E66;
+}
+.How1{
+  max-width: 558px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+.Num{
+
+  font-size:60px;
+  font-weight: 800;
+  color: #b0e1fd;
+
+
+}
+.HowTxt{
+  max-width: 558px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  padding: 0 20px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: -0.5px;
 }
