@@ -3798,9 +3798,6 @@ fs-readdir-recursive@^1.1.0:
 fs.realpath@^1.0.0:
   version "1.0.0"
 
-fsevents@^2.3.2, fsevents@~2.3.2:
-  version "2.3.3"
-
 fullcalendar@*:
   version "6.1.8"
   dependencies:
