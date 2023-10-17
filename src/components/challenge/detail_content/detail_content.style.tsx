@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const DetailContents = styled.div`
   width: 67%;
+
+  @media (max-width: 420px) {
+    width: 100%;
+  }
 `;
 
 export const H2Styled = styled.h2`
@@ -28,4 +32,10 @@ export const ImgStyledWrapper = styled.div`
     height: 100%;
     object-fit: cover;
   }
+
+  @media (max-width: 420px) {
+    height: 210px;
+  }
 `;
+
+export const MobileInfo = styled.div``;

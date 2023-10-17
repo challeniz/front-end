@@ -50,24 +50,11 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
         if (data.length > 0) {
           const challenges = data.map((challenge: any) => ({
             title: challenge.title,
-            recru_open_date: challenge.recru_open_date,
-            recru_end_date: challenge.recru_end_date,
-            start_date: challenge.start_date,
-            end_date: challenge.end_date,
-            posts: challenge.posts.length > 0 ? challenge.posts : [],
+            postDate: challenge.posts.post_date,
+            id: challenge.posts._id,
           }));
-          console.log(data);
-          const date = data.map((challenge: any) => ({
-            recru_open_date: challenge.recru_open_date,
-            recru_end_date: challenge.recru_end_date,
-            start_date: challenge.start_date,
-            end_date: challenge.end_date,
-            title: challenge.title,
-          }));
-
+          console.log('인증목록', challenges);
           setChallengeList(challenges);
-          setChallengeInfo(date);
-          console.log('날짜', date);
         }
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
@@ -102,10 +89,10 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
   };
 
   // 각 타이틀별로 그룹핑
-  const groupedChallenges: { [key: string]: [] } = {};
+  const groupedChallenges: { [key: string]: Challenge[] } = {};
   challengeList.forEach((challenge) => {
-    if (challenge.posts.length > 0) {
-      groupedChallenges[challenge.title] = challenge.posts;
+    if (groupedChallenges[challenge.title]) {
+      groupedChallenges[challenge.title].push(challenge);
     } else {
       groupedChallenges[challenge.title] = [];
     }

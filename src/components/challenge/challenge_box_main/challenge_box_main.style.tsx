@@ -40,6 +40,10 @@ export const ImgStyled = styled.div`
   margin: 0 auto;
   border: 1px solid #eeeeee;
 
+  @media (max-width: 420px) {
+    height: 160px;
+  }
+
   &.thumbnail {
     width: 100%;
     height: 100%;
@@ -65,6 +69,10 @@ export const StyledHeartButton = styled.img`
 
 export const TabWrap = styled.div`
   margin: 20px 0;
+
+  @media (max-width: 420px) {
+    margin: 10px 0;
+  }
 `;
 
 export const TabStyled = styled.a`
@@ -73,6 +81,10 @@ export const TabStyled = styled.a`
   padding: 4px 15px;
   font-size: 13px;
   margin-right: 5px;
+
+  @media (max-width: 420px) {
+    font-size: 10px;
+  }
 `;
 
 export const H3Styled = styled.h3`
@@ -84,6 +96,11 @@ export const H3Styled = styled.h3`
   text-overflow: ellipsis;
   font-weight: 500;
   letter-spacing: -0.8px;
+
+  @media (max-width: 420px) {
+    font-size: 18px;
+    padding-bottom: 5px;
+  }
 
   &:hover {
     text-decoration: underline;
@@ -97,6 +114,10 @@ export const H4Styled = styled.h4`
   color: #686868;
   display: flex;
   align-items: center;
+
+  @media (max-width: 420px) {
+    font-size: 11px;
+  }
 
   svg {
     width: 1.2em;

@@ -1,8 +1,8 @@
-/* eslint-disable no-template-curly-in-string */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import * as S from './search_page.style';
 import { apiInstance } from '../../utils/api';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export interface Challenge {
   like: boolean;
@@ -22,6 +22,8 @@ interface ChallengeBoxProps {
 }
 
 const SearchPage = () => {
+  const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1024px)' });
+
   const [inputValue, setInputValue] = useState('');
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [noResults, setNoResults] = useState(false);
@@ -29,6 +31,7 @@ const SearchPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const searchBoxRef = useRef<HTMLDivElement>(null);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
@@ -60,25 +63,27 @@ const SearchPage = () => {
       location.state = { challenges: filteredChallenges };
       navigate('/results', { state: { challenges: filteredChallenges } });
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('데이터 가져오기 오류:', error);
     }
   };
 
   return (
     <>
-      <S.SearchBox>
-        <form onSubmit={handleSubmit}>
-          <S.SearchBoxInput
-            type="text"
-            placeholder="찾고 싶은 챌린지를 검색하세요."
-            value={inputValue}
-            onChange={handleInputChange}
-          />
-          <S.Button type="submit">
-            <S.StyledCiSearch />
-          </S.Button>
-        </form>
-      </S.SearchBox>
+      {isDesktopOrLaptop && (
+        <S.SearchBox>
+          <form onSubmit={handleSubmit}>
+            <S.SearchBoxInput
+              type="text"
+              placeholder="찾고 싶은 챌린지를 검색하세요."
+              value={inputValue}
+              onChange={handleInputChange}
+            />
+            <S.Button type="submit">
+              <S.StyledCiSearch />
+            </S.Button>
+          </form>
+        </S.SearchBox>
+      )}
     </>
   );
 };
