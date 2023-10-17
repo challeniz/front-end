@@ -54,7 +54,6 @@ const Header = () => {
         </S.Logo>
         <S.HeaderNav>
           <S.NavList>
-            <S.NavItem>챌리니즈 소개</S.NavItem>
             <Link to={ROUTE.LISTPAGE.link}>
               <S.NavItem>
                 <Link to={ROUTE.LISTPAGE.link}>챌린지 둘러보기</Link>

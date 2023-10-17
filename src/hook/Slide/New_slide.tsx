@@ -41,6 +41,22 @@ const NewSlide = () => {
     fetchChallenges();
   }, []);
 
+  let slidesPerView = 4;
+
+  if (window.innerWidth <= 768) {
+    slidesPerView = 2;
+  } else if (window.innerWidth <= 1024) {
+    slidesPerView = 3;
+  }
+
+  let spaceBetween = 50;
+
+  if (window.innerWidth <= 768) {
+    spaceBetween = 10;
+  } else if (window.innerWidth <= 1024) {
+    spaceBetween = 20;
+  }
+
   const slides = challenges.map((challenge, index) => (
     <SwiperSlide key={index}>
       <ChallengeBox
@@ -67,12 +83,12 @@ const NewSlide = () => {
     <S.SlideWrap>
       <Swiper
         modules={[Navigation]}
-        spaceBetween={50}
-        slidesPerView={4}
+        spaceBetween={spaceBetween}
+        slidesPerView={slidesPerView}
         pagination={{ clickable: true }}
         navigation={{
-          prevEl: '.prevNew', // 클래스 이름 수정
-          nextEl: '.nextNew', // 클래스 이름 수정
+          prevEl: '.prevNew',
+          nextEl: '.nextNew',
         }}
         onSwiper={(swiper) => {
           sliderRef.current = swiper;

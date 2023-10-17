@@ -21,6 +21,22 @@ export const HeaderWrapper = styled.div`
     transition: 0.3s;
   }
 
+  @media (max-width: 1400px) {
+    padding: 0 40px;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 40px;
+  }
+
+  @media (max-width: 420px) {
+    padding: 0 40px;
+  }
+
   @media (max-width: 930px) {
     padding: 0 40px;
   }
@@ -34,6 +50,10 @@ export const HeaderContainer = styled.header`
 
 export const Logo = styled.div`
   width: 180px;
+
+  @media (max-width: 768px) {
+    width: 130px;
+  }
 `;
 
 export const LogoImg = styled.img`
@@ -61,6 +81,15 @@ export const NavItem = styled.li`
   display: flex;
   font-size: 18px;
   transition: 0.2s;
+
+  @media (max-width: 1024px) {
+    padding: 0 10px;
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 
   &:hover {
     color: #339af0;
@@ -101,6 +130,10 @@ export const LoginItem = styled.li`
   position: relative;
   width: 135px;
   height: 100%;
+
+  @media (max-width: 768px) {
+    width: auto;
+  }
 
   &:hover {
     ul {

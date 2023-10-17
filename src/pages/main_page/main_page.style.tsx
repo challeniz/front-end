@@ -23,12 +23,21 @@ export const ProgressList = styled.ul`
   align-items: center;
   justify-content: space-between;
 
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
   li {
     margin: 0 8px;
   }
 
   li:nth-child(1) {
     font-size: 30px;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   li:nth-child(2),
