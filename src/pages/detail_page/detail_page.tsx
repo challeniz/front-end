@@ -13,6 +13,7 @@ const DetailPage = () => {
       <S.PageBack>
         <Wrapper>
           <S.Detail>
+            
             <DetailContent></DetailContent>
             <DetailNav></DetailNav>
           </S.Detail>
@@ -20,7 +21,7 @@ const DetailPage = () => {
       </S.PageBack>
       <Footer />
     </>
-  );
+  );  
 };
 
 export default DetailPage;

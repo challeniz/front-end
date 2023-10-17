@@ -12,10 +12,14 @@ export const InputContent = styled.div`
   &.flex-start {
     align-items: flex-start;
   }
+
 `;
 export const LabelStyled = styled.label`
   font-size: 18px;
   width: 160px;
+  @media (min-width:370px) {
+    font-size: 15px;
+  }
 `;
 
 export const InputStyled = styled.input`
@@ -29,6 +33,12 @@ export const InputStyled = styled.input`
 
   &:focus {
     outline: none;
+  }
+  @media (min-width:370px) {
+    font-size: 15px;
+    width: 306px;
+    height: 27px;
+    padding: 0 10px;
   }
 `;
 
@@ -44,10 +54,33 @@ export const ImgWrap = styled.div`
     width: 100%;
     height: 100%;
   }
+  @media (min-width:370px) {
+    width: 100%;
+
+    img {
+      width:300px;
+      height: 100%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const ContentWrap = styled.div`
   display: flex;
+
+   @media (min-width:370px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 export const TextWrap = styled.div`
   display: flex;
@@ -79,6 +112,29 @@ export const TextWrap = styled.div`
     display: flex;
     align-items: center;
   }
+  @media (min-width:370px) {
+    h5 {
+      font-size: 12px;
+      padding-bottom: 5px;
+    }
+    h2 {
+      font-size: 20px;
+      padding-bottom: 10px;
+      width:300px;
+    }
+    h4 {
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: -1px;
+      width: 300px;
+    }
+    h6 {
+      font-size: 14px;
+      width: 300px;
+    
+    }
+  }
+
 `;
 
 export const StyledCiUser = styled(CiUser)`
