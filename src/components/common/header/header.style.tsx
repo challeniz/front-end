@@ -1,4 +1,5 @@
 import { FaUserCircle } from 'react-icons/fa';
+import { BiMenu } from 'react-icons/bi';
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
@@ -30,15 +31,12 @@ export const HeaderWrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 0 40px;
+    padding: 0 30px;
   }
 
   @media (max-width: 420px) {
-    padding: 0 40px;
-  }
-
-  @media (max-width: 930px) {
-    padding: 0 40px;
+    padding: 0 20px;
+    height: 65px;
   }
 `;
 
@@ -52,7 +50,7 @@ export const Logo = styled.div`
   width: 180px;
 
   @media (max-width: 768px) {
-    width: 130px;
+    width: 150px;
   }
 `;
 
@@ -148,6 +146,11 @@ export const StyledCiUser = styled(FaUserCircle)`
   }
 `;
 
+export const StyledCiMenu = styled(BiMenu)`
+  width: 2em;
+  height: 2em;
+`;
+
 export const SubMenu = styled.ul`
   visibility: hidden;
   position: absolute;
@@ -163,6 +166,25 @@ export const SubMenu = styled.ul`
 
   button {
     background-color: transparent;
+  }
+`;
+
+export const MobileMenu = styled.ul`
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #fff;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  transform: translateX(200px);
+  box-shadow: -1px 0 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+
+  &.open {
+    transform: translateX(0);
   }
 `;
 

@@ -100,8 +100,6 @@ const DetailNav = () => {
     fetchData();
   }, [id]);
 
-  const [isCertificationEnabled, setIsCertificationEnabled] = useState(true);
-
   useEffect(() => {
     const fetchData = async () => {
       try {

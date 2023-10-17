@@ -14,4 +14,8 @@ export const WrapperBlock = styled.div`
   @media (max-width: 768px) {
     padding: 40px 30px;
   }
+
+  @media (max-width: 420px) {
+    padding: 15px 20px;
+  }
 `;

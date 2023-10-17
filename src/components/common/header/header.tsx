@@ -3,15 +3,6 @@ import * as S from './header.style';
 import { ROUTE } from '../../../routes';
 import { Link, useNavigate } from 'react-router-dom';
 import LogoImage from '../../../assets/image/logo.png';
-import {
-  FaHeartPulse,
-  FaBowlFood,
-  FaLeaf,
-  FaBook,
-  FaCat,
-} from 'react-icons/fa6';
-import { FaUserCircle } from 'react-icons/fa';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import SearchPage from '../../search_page/search_page';
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -21,6 +12,8 @@ const Header = () => {
 
   const token = 'token';
   const user = localStorage.getItem(token);
+
+  const isMobileView = window.innerWidth <= 420;
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
@@ -57,38 +50,6 @@ const Header = () => {
             <Link to={ROUTE.LISTPAGE.link}>
               <S.NavItem>
                 <Link to={ROUTE.LISTPAGE.link}>챌린지 둘러보기</Link>
-                {/* <S.SubMenu>
-                  <S.InnerLi>
-                    <FaHeartPulse />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=건강`}>
-                      건강
-                    </Link>
-                  </S.InnerLi>
-                  <S.InnerLi>
-                    <FaCat />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=취미`}>
-                      취미
-                    </Link>
-                  </S.InnerLi>
-                  <S.InnerLi>
-                    <FaBowlFood />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=식습관`}>
-                      식습관
-                    </Link>
-                  </S.InnerLi>
-                  <S.InnerLi>
-                    <FaBook />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=공부`}>
-                      공부
-                    </Link>
-                  </S.InnerLi>
-                  <S.InnerLi>
-                    <FaLeaf />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=환경`}>
-                      환경
-                    </Link>
-                  </S.InnerLi>
-                </S.SubMenu> */}
               </S.NavItem>
             </Link>
             <S.NavItem onClick={handleChallengeCreationClick}>
@@ -100,33 +61,63 @@ const Header = () => {
         <S.LoginBox>
           <S.LoginList>
             <S.LoginItem>
-              <S.StyledCiUser />
-              <S.SubMenu>
-                {!user ? (
-                  <>
-                    <Link to={'/login'}>
-                      <S.InnerLi>로그인</S.InnerLi>
-                    </Link>
-                    <Link to={'/joinpage'}>
-                      <S.InnerLi>회원가입</S.InnerLi>
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Link to={'/mypage'}>
-                      <S.InnerLi>마이페이지</S.InnerLi>
-                    </Link>
-                    <button
-                      onClick={() => {
-                        localStorage.removeItem('token');
-                        window.location.reload();
-                      }}
-                    >
-                      <S.InnerLi>로그아웃</S.InnerLi>
-                    </button>
-                  </>
-                )}
-              </S.SubMenu>
+              {isMobileView ? <S.StyledCiMenu /> : <S.StyledCiUser />}
+
+              {isMobileView ? (
+                <S.MobileMenu>
+                  {!user ? (
+                    <>
+                      <Link to={'/login'}>
+                        <S.InnerLi>로그인</S.InnerLi>
+                      </Link>
+                      <Link to={'/joinpage'}>
+                        <S.InnerLi>회원가입</S.InnerLi>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link to={'/mypage'}>
+                        <S.InnerLi>마이페이지</S.InnerLi>
+                      </Link>
+                      <button
+                        onClick={() => {
+                          localStorage.removeItem('token');
+                          window.location.reload();
+                        }}
+                      >
+                        <S.InnerLi>로그아웃</S.InnerLi>
+                      </button>
+                    </>
+                  )}
+                </S.MobileMenu>
+              ) : (
+                <S.SubMenu>
+                  {!user ? (
+                    <>
+                      <Link to={'/login'}>
+                        <S.InnerLi>로그인</S.InnerLi>
+                      </Link>
+                      <Link to={'/joinpage'}>
+                        <S.InnerLi>회원가입</S.InnerLi>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link to={'/mypage'}>
+                        <S.InnerLi>마이페이지</S.InnerLi>
+                      </Link>
+                      <button
+                        onClick={() => {
+                          localStorage.removeItem('token');
+                          window.location.reload();
+                        }}
+                      >
+                        <S.InnerLi>로그아웃</S.InnerLi>
+                      </button>
+                    </>
+                  )}
+                </S.SubMenu>
+              )}
             </S.LoginItem>
           </S.LoginList>
         </S.LoginBox>

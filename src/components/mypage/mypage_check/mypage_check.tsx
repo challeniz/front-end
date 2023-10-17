@@ -2,25 +2,41 @@ import React, { useState, useEffect } from 'react';
 import { apiInstance } from '../../../utils/api';
 import ModalBasic from '../../common/modal/modal';
 import * as S from './mypage_check.style';
-
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import moment from 'moment';
+import img from '../../../assets/image/heart.png';
 interface MypageCheckProps {}
 
 interface Challenge {
-  description: string;
-  img: string;
-  name: string;
+  recru_open_date: string;
+  recru_end_date: string;
+  start_date: string;
+  end_date: string;
+  title: string;
+  posts: [];
+}
+interface updatedChallenge {
+  challengeData: {
+    description: string;
+    img: string;
+  };
   postDate: string;
-  id: string;
+  name?: string;
+}
+interface dateInfo {
+  recru_open_date: string;
+  recru_end_date: string;
+  start_date: string;
+  end_date: string;
   title: string;
 }
-
 const MypageCheck: React.FC<MypageCheckProps> = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
-  const [challengeData, setChallengeData] = useState<Challenge | null>(null);
-  const [userInfo, setUserInfo] = useState({
-    id: '',
-  });
+  const [challengeData, setChallengeData] = useState<updatedChallenge>();
+  const [challengeInfo, setChallengeInfo] = useState<dateInfo[]>([]);
+
   const [isParticipated, setIsParticipated] = useState(false);
 
   useEffect(() => {
@@ -30,12 +46,9 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
         console.log('token', token);
         const response = await apiInstance.get('/posts/my');
         const data = response.data;
-
+        console.log('Received data:', data);
         if (data.length > 0) {
           const challenges = data.map((challenge: any) => ({
-            name: challenge.posts.user ? challenge.posts.user.name : '',
-            img: challenge.posts.img,
-            description: challenge.posts.description,
             title: challenge.title,
             postDate: challenge.posts.post_date,
             id: challenge.posts._id,
@@ -51,16 +64,26 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
     fetchData();
   }, []);
 
-  const handleChallengeClick = (challenge: Challenge) => {
-    // const postDate = new Date(challenge.postDate);
-    // const formattedDate = `${postDate.getFullYear()}년 ${
-    //   postDate.getMonth() + 1
-    // }월 ${postDate.getDate()}일`;
-    // challenge.postDate = formattedDate;
-    setChallengeData(challenge);
+  const handleChallengeClick = (post: any) => {
+    const postDate = new Date(post.post_date);
+    const formattedDate = `${postDate.getFullYear()}년 ${
+      postDate.getMonth() + 1
+    }월 ${postDate.getDate()}일`;
+
+    const challengeData = {
+      description: post.description,
+      img: post.img,
+    };
+
+    const updatedChallenge: updatedChallenge = {
+      challengeData,
+      postDate: formattedDate,
+      name: post.user.name,
+    };
+    setChallengeData(updatedChallenge);
+
     showModal();
   };
-
   const showModal = () => {
     setModalOpen(true);
   };
@@ -71,32 +94,79 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
     if (groupedChallenges[challenge.title]) {
       groupedChallenges[challenge.title].push(challenge);
     } else {
-      groupedChallenges[challenge.title] = [challenge];
+      groupedChallenges[challenge.title] = [];
     }
   });
 
+  const getEventsForChallenge = (challenge: dateInfo) => {
+    const recruOpenDate = moment(challenge.recru_open_date).format();
+    const recruEndDate = moment(challenge.recru_end_date).format();
+    const startDate = moment(challenge.start_date).format();
+    const endDate = moment(challenge.end_date).format();
+
+    return [
+      {
+        title: '모집기간',
+        start: recruOpenDate,
+        end: recruEndDate,
+        classNames: 'event1-class',
+      },
+      {
+        title: '진행기간',
+        start: startDate,
+        end: endDate,
+        classNames: 'event2-class',
+      },
+    ];
+  };
   return (
     <>
       <S.AuthWrap>
-        {Object.entries(groupedChallenges).map(([title, challenges], index) => (
-          <div key={index}>
-            <h1>{title}</h1>
-            <S.AuthGrid>
-              {challenges.map((challenge, index) => (
-                <S.ImgWrap
-                  key={index}
-                  onClick={() => handleChallengeClick(challenge)}
-                >
-                  <img src={challenge.img} alt="Challenge Image" />
-                </S.ImgWrap>
-              ))}
-            </S.AuthGrid>
-          </div>
-        ))}
+        {Object.entries(groupedChallenges).map(([title, challenges], index) => {
+          const currentChallenge = challengeList.find(
+            (challenge) => challenge.title === title
+          );
+
+          if (!currentChallenge) return null;
+
+          return (
+            <div key={index}>
+              <h1 style={{ fontSize: '24px', padding: '20px 0 10px 20px' }}>
+                {title}
+              </h1>
+              <S.FullCalendarDisplay>
+                <S.FullCalendarDiv>
+                  <FullCalendar
+                    plugins={[dayGridPlugin]}
+                    initialView="dayGridMonth"
+                    weekends={true}
+                    locale="ko"
+                    events={getEventsForChallenge(currentChallenge)}
+                    height="210px"
+                  />
+                </S.FullCalendarDiv>
+                <S.AuthGrid>
+                  {challenges.map((challenge, index) => (
+                    <S.ImgWrap
+                      key={index}
+                      onClick={() => handleChallengeClick(challenge)}
+                    >
+                      <img
+                        src={challengeData?.challengeData.img}
+                        alt="Challenge Image"
+                      />
+                    </S.ImgWrap>
+                  ))}
+                </S.AuthGrid>
+              </S.FullCalendarDisplay>
+            </div>
+          );
+        })}
+
         {modalOpen && challengeData && (
           <ModalBasic
             setModalOpen={setModalOpen}
-            challengeData={challengeData}
+            challengeData={challengeData.challengeData}
             postDate={challengeData.postDate}
             userName={challengeData.name}
           />
