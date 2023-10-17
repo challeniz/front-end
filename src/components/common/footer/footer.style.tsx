@@ -9,6 +9,10 @@ export const FooterBox = styled.div`
   text-align: center;
   padding: 40px 150px;
 
+  @media (max-width: 420px) {
+    padding: 30px;
+  }
+
   h1 {
     color: #eaeaea;
     text-align: center;

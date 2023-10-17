@@ -66,12 +66,28 @@ const MainSlide = () => {
     }
   }, []);
 
+  let slidesPerView = 4;
+
+  if (window.innerWidth <= 768) {
+    slidesPerView = 2;
+  } else if (window.innerWidth <= 1024) {
+    slidesPerView = 3;
+  }
+
+  let spaceBetween = 50;
+
+  if (window.innerWidth <= 768) {
+    spaceBetween = 10;
+  } else if (window.innerWidth <= 1024) {
+    spaceBetween = 20;
+  }
+
   return (
     <S.SlideWrap>
       <Swiper
         modules={[Navigation]}
-        spaceBetween={50}
-        slidesPerView={4}
+        spaceBetween={spaceBetween}
+        slidesPerView={slidesPerView}
         pagination={{ clickable: true }}
         navigation={{
           prevEl: '.prevUsers',

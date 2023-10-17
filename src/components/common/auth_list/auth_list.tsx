@@ -62,8 +62,7 @@ const AuthList: React.FC<AuthListProps> = () => {
     const postDate = new Date(challenge.postDate);
     const formattedDate = `${postDate.getFullYear()}년 ${
       postDate.getMonth() + 1
-    }월 ${postDate.getDate()}일`;
-    // challengeData에 포맷팅된 게시 날짜 설정
+    }월 ${postDate.getUTCDate()}일`;
     challenge.postDate = formattedDate;
     setChallengeData(challenge);
     showModal();

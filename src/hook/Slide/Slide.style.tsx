@@ -18,4 +18,10 @@ export const PageWrap = styled.div`
     margin-right: 10px;
     color: #474747;
   }
+
+  @media (max-width: 420px) {
+    div {
+      display: none;
+    }
+  }
 `;
