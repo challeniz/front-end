@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 export const PopularList = styled.div`
   margin-bottom: 180px;
+
+  @media (max-width: 420px) {
+    margin-bottom: 60px;
+  }
 `;
 export const ContentsWrap = styled.div`
   // display: grid;
@@ -11,9 +15,17 @@ export const ContentsWrap = styled.div`
 `;
 export const NewList = styled.div`
   margin-bottom: 180px;
+
+  @media (max-width: 420px) {
+    margin-bottom: 60px;
+  }
 `;
 export const ContentsList = styled.div`
   margin: 40px auto 180px;
+
+  @media (max-width: 420px) {
+    margin: 30px auto 60px;
+  }
 `;
 
 export const ProgressList = styled.ul`
@@ -23,12 +35,21 @@ export const ProgressList = styled.ul`
   align-items: center;
   justify-content: space-between;
 
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
   li {
     margin: 0 8px;
   }
 
   li:nth-child(1) {
     font-size: 30px;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   li:nth-child(2),

@@ -6,7 +6,7 @@ export const BaseButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 18px;
-  @media (min-width:370px) {
+  @media (max-width:420px) {
     padding: 10px 42px;
     font-size: 16px;
   }

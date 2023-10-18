@@ -17,7 +17,7 @@ export const InputContent = styled.div`
 export const LabelStyled = styled.label`
   font-size: 18px;
   width: 160px;
-  @media (min-width:370px) {
+  @media (max-width:420px) {
     font-size: 15px;
   }
 `;
@@ -34,7 +34,7 @@ export const InputStyled = styled.input`
   &:focus {
     outline: none;
   }
-  @media (min-width:370px) {
+  @media (max-width:420px) {
     font-size: 15px;
     width: 306px;
     height: 27px;
@@ -54,7 +54,7 @@ export const ImgWrap = styled.div`
     width: 100%;
     height: 100%;
   }
-  @media (min-width:370px) {
+  @media (max-width:420px) {
     width: 100%;
 
     img {
@@ -72,12 +72,12 @@ export const ImgWrap = styled.div`
 export const ContentWrap = styled.div`
   display: flex;
 
-   @media (min-width:370px) {
+  @media (max-width:420px) {
     display: flex;
     flex-direction: column;
   }
 
-  @media (min-width: 768px) {
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
   }
@@ -112,7 +112,7 @@ export const TextWrap = styled.div`
     display: flex;
     align-items: center;
   }
-  @media (min-width:370px) {
+  @media (max-width:420px) {
     h5 {
       font-size: 12px;
       padding-bottom: 5px;

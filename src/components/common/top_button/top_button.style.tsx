@@ -26,4 +26,10 @@ export const ScrollButton = styled.button<{ show: boolean }>`
       transition: 0.3s;
     }
   }
+
+  @media (max-width: 420px) {
+    padding: 6px 10px;
+    bottom: 80px;
+    right: 13px;
+  }
 `;

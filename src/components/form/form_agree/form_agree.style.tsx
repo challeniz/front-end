@@ -34,9 +34,8 @@ export const AgreeBox = styled.div`
       text-decoration: underline;
     }
   }
-  @media (min-width:370px) {
+  @media (max-width:420px) {
     padding: 10px 15px;
-    margin-right: 20px;
     margin-left: 20px;
     .agree-title {
       font-size: 12px;
@@ -64,13 +63,13 @@ export const StyledUl = styled.ul`
   margin-left: 20px;
   color: #545454;
   list-style: disc;
-  @media (min-width:370px) {
+  @media (max-width:420px) {
     font-size: 14px;
   }
 `;
 export const StyledP = styled.p`
 font-size:16px;
-@media (min-width:370px) {
+@media (max-width:420px) {
   font-size: 14px;
 }
 `;

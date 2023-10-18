@@ -49,15 +49,20 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
             recru_end_date: challenge.recru_end_date,
             start_date: challenge.start_date,
             end_date: challenge.end_date,
-           
+
             posts: challenge.posts.length > 0 ? challenge.posts : [],
           }));
           console.log(challenges);
           console.log(challenges.post_date);
-          const date = challenges.map((challenge: any) => ({
-            title: challenge.title,
-            post_date: challenge.posts.post_date,
-          }));
+          const date = challenges.map((challenge: any) => {
+            const post_dates = challenge.posts.map(
+              (post: any) => post.post_date
+            );
+            return {
+              title: challenge.title,
+              post_dates: post_dates,
+            };
+          });
 
           setChallengeList(challenges);
           setChallengeInfo(date);
@@ -104,18 +109,21 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
       groupedChallenges[challenge.title] = [];
     }
   });
-
-  const getEventsForChallenge = (challenge: dateInfo) => {
-    const psotDates = moment(challenge.post_date).format();
-    return [
-      {
+  const getEventsForChallenge = (challenge: Challenge) => {
+    const events = challenge.posts.map((post: any) => {
+      const postDate = moment(post.post_date).format();
+      return {
         title: '모집기간',
-        start: psotDates,
-        end: psotDates,
+        start: postDate,
+        end: postDate,
         classNames: 'event1-class',
-      },
-    ];
+      };
+    });
+  
+    return events;
   };
+  
+
   return (
     <>
       <S.AuthWrap>
