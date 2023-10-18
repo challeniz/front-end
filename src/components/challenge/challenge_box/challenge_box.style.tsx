@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import HeartButton from '../heart/heart';
 import { AiOutlineHeart } from 'react-icons/ai';
 
-export const ListWrap = styled.div``;
+export const ListWrap = styled.div`
+  padding: 10px 0 40px;
+`;
 
 export const CategoryTab = styled.div`
   display: flex;
@@ -30,6 +32,12 @@ export const ContentsWrap = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 40px;
   grid-row-gap: 50px;
+
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+  }
 `;
 
 export const ImgStyled = styled.div`
@@ -41,6 +49,10 @@ export const ImgStyled = styled.div`
   overflow: hidden;
   margin: 0 auto;
   border: 1px solid #eeeeee;
+
+  @media (max-width: 420px) {
+    height: 185px;
+  }
 
   &.thumbnail {
     width: 100%;
@@ -68,8 +80,12 @@ export const StyledHeartButton = styled.img`
 export const TabWrap = styled.div`
   display: flex;
   align-items: center;
-
   margin: 15px 0;
+
+  @media (max-width: 420px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 `;
 
 export const TabStyled = styled.a`
@@ -78,6 +94,12 @@ export const TabStyled = styled.a`
   padding: 4px 15px;
   font-size: 13px;
   margin-right: 5px;
+
+  @media (max-width: 420px) {
+    padding: 4px 11px;
+    font-size: 11px;
+    margin-right: 3px;
+  }
 `;
 
 export const H3Styled = styled.h3`
@@ -89,6 +111,11 @@ export const H3Styled = styled.h3`
   text-overflow: ellipsis;
   font-weight: 500;
   letter-spacing: -0.8px;
+
+  @media (max-width: 420px) {
+    max-width: 150px;
+    font-size: 18px;
+  }
 
   &:hover {
     text-decoration: underline;
@@ -103,6 +130,10 @@ export const H4Styled = styled.h4`
   display: flex;
   align-items: center;
 
+  @media (max-width: 420px) {
+    font-size: 11px;
+  }
+
   svg {
     width: 1.2em;
     height: 1.2em;
@@ -116,6 +147,11 @@ export const Status = styled.p`
   color: #fff;
   font-size: 13px;
   font-weight: 500;
+
+  @media (max-width: 420px) {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
 
   &.black {
     background-color: #000;
@@ -143,6 +179,10 @@ export const Users = styled.p`
   display: flex;
   align-items: center;
   margin-right: 8px;
+
+  @media (max-width: 420px) {
+    margin-bottom: 10px;
+  }
 
   svg {
     padding-right: 5px;

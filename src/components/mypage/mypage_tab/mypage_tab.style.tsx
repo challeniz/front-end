@@ -22,6 +22,14 @@ export const TabMenu = styled.ul`
     font-weight: 600;
     justify-content: center;
     width: calc(100% / 2);
+
+    @media (max-width: 420px) {
+      font-size: 14px;
+      padding: 0 15px 15px;
+    }
+  }
+  @media (max-width: 420px) {
+    margin-top: 30px;
   }
 
   .focused {
@@ -57,6 +65,10 @@ export const StatusWrap = styled.div`
   h2 {
     font-size: 24px;
     padding-bottom: 23px;
+
+    @media (max-width: 420px) {
+      font-size: 17px;
+    }
   }
   h3 {
     font-size: 18px;
