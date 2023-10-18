@@ -15,6 +15,7 @@ const DetailPage = () => {
       <S.PageBack>
         <Wrapper>
           <S.Detail>
+            
             <DetailContent></DetailContent>
             {isMobileView ? null : <DetailNav></DetailNav>}{' '}
           </S.Detail>
@@ -22,7 +23,7 @@ const DetailPage = () => {
       </S.PageBack>
       <Footer />
     </>
-  );
+  );  
 };
 
 export default DetailPage;

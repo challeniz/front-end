@@ -6,6 +6,10 @@ export const BaseButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 18px;
+  @media (max-width:420px) {
+    padding: 10px 42px;
+    font-size: 16px;
+  }
 `;
 
 export const FormButtonWrap = styled.div`
@@ -22,4 +26,5 @@ export const SubmitButton = styled(BaseButton)`
   color: white;
   margin-left: 30px;
   font-weight: 600;
+
 `;

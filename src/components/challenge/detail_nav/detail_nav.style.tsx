@@ -39,6 +39,21 @@ export const DetailNavs = styled.div`
       padding-right: 4px;
     }
   }
+  @media (min-width:370px) {
+    &.DetailNavs {
+      position: sticky;
+      top: 60px;
+      width: 28%;
+      height: 450px;
+      border-radius: 20px;
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 20%);
+      padding: 37px 40px;
+      background-color: #fff;
+    }
+    &.ScrollNavs {
+      display:none;
+    }
+  }
 `;
 export const DetailTag = styled.a`
   font-size: 16px;
