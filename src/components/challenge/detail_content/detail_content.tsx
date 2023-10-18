@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import * as S from './detail_content.style';
 import { Tab } from '../detail_tab/detail_tab';
 import { apiInstance } from '../../../utils/api';
+import { Link, useParams } from 'react-router-dom';
+import { ROUTE } from '../../../routes';
+
+const formatDate = (date: string) => {
+  const formattedDate = new Date(date);
+  const year = formattedDate.getFullYear();
+  const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
+  const day = String(formattedDate.getDate()).padStart(2, '0');
+  return `${year}년 ${month}월 ${day}일`;
+};
 
 const DetailContent = () => {
   const [image, setImage] = useState('');
@@ -38,8 +47,8 @@ const DetailContent = () => {
             tag: data.challenge.tag,
             count: data.count,
             id: data.challenge._id,
-            recru_open_date: data.challenge.recru_open_date,
-            recru_end_date: data.challenge.recru_end_date,
+            recru_open_date: formatDate(data.challenge.recru_open_date),
+            recru_end_date: formatDate(data.challenge.recru_end_date),
           }));
 
           const response = await apiInstance.get('/users/mypageInfo');
@@ -72,6 +81,19 @@ const DetailContent = () => {
           {challengeInfo.recru_end_date}
         </h4>
         <h3>{challengeInfo.title}</h3>
+        <div>
+          <button>공유하기</button>
+          <button>찜하기</button>
+        </div>
+        {isParticipated ? (
+          <Link to={`${ROUTE.AUTHPAGE.link}/${challengeInfo.id}`}>
+            <button>챌린지 인증하기</button>
+          </Link>
+        ) : (
+          <Link to={`${ROUTE.APPPAGE.link}/${challengeInfo.id}`}>
+            <button>챌린지 참여하기</button>
+          </Link>
+        )}
       </S.MobileInfo>
       <Tab />
     </S.DetailContents>
