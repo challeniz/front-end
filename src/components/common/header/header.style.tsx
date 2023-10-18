@@ -1,5 +1,6 @@
 import { FaUserCircle } from 'react-icons/fa';
 import { BiMenu } from 'react-icons/bi';
+import { AiOutlineClose } from 'react-icons/ai';
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
@@ -151,6 +152,11 @@ export const StyledCiMenu = styled(BiMenu)`
   height: 2em;
 `;
 
+export const StyledCiClose = styled(AiOutlineClose)`
+  width: 2em;
+  height: 2em;
+`;
+
 export const SubMenu = styled.ul`
   visibility: hidden;
   position: absolute;
@@ -167,24 +173,9 @@ export const SubMenu = styled.ul`
   button {
     background-color: transparent;
   }
-`;
 
-export const MobileMenu = styled.ul`
-  display: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 200px;
-  height: 100%;
-  background-color: #fff;
-  z-index: 1000;
-  transition: transform 0.3s ease;
-  transform: translateX(200px);
-  box-shadow: -1px 0 10px rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
-
-  &.open {
-    transform: translateX(0);
+  @media (max-width: 420px) {
+    display: none;
   }
 `;
 

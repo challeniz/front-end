@@ -11,6 +11,17 @@ export const PageBox = styled.div`
 
   a {
     margin-left: auto;
+
+    @media (max-width: 420px) {
+      margin-left: inherit;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 420px) {
+    padding: 20px;
+    flex-direction: column;
+    height: auto;
   }
 `;
 
@@ -18,6 +29,12 @@ export const AvatarWrapper = styled.div`
   width: 226px;
   height: 226px;
   margin-right: 86px;
+
+  @media (max-width: 420px) {
+    width: 140px;
+    height: 140px;
+    margin-right: 0px;
+  }
 `;
 
 export const AvatarImage = styled.img`
@@ -43,6 +60,11 @@ export const PageTxt = styled.div`
       font-size: 36px;
       font-weight: 700;
     }
+
+    @media (max-width: 420px) {
+      font-size: 20px;
+      margin-bottom: 0px;
+    }
   }
 
   li:nth-child(2) {
@@ -52,6 +74,10 @@ export const PageTxt = styled.div`
       font-size: 27px;
       font-weight: 700;
       letter-spacing: 4px;
+    }
+
+    @media (max-width: 420px) {
+      font-size: 20px;
     }
   }
 `;
@@ -65,6 +91,12 @@ export const PageBtn = styled.button`
   cursor: pointer;
   margin-left: auto;
   padding: 20px 50px;
+
+  @media (max-width: 420px) {
+    margin-left: inherit;
+    width: 100%;
+    margin-top: 20px;
+  }
 `;
 
 export const InputStyled = styled.input`

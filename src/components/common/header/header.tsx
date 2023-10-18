@@ -4,8 +4,11 @@ import { ROUTE } from '../../../routes';
 import { Link, useNavigate } from 'react-router-dom';
 import LogoImage from '../../../assets/image/logo.png';
 import SearchPage from '../../search_page/search_page';
+import MobileMenu from '../mobile_menu/mobile_menu';
+
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // 추가: 모바일 메뉴 상태 관리
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
@@ -28,11 +31,16 @@ const Header = () => {
           '챌린지를 개설하려면 먼저 로그인하세요. 로그인 페이지로 이동하시겠습니까?'
         )
       ) {
-        navigate('/login'); // 로그인 페이지로 이동
+        navigate('/login');
       }
     } else {
-      navigate(ROUTE.NEWPAGE.link); // 챌린지 개설 페이지로 이동
+      navigate(ROUTE.NEWPAGE.link);
     }
+  };
+
+  // 추가: 모바일 메뉴 토글 함수
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -61,67 +69,48 @@ const Header = () => {
         <S.LoginBox>
           <S.LoginList>
             <S.LoginItem>
-              {isMobileView ? <S.StyledCiMenu /> : <S.StyledCiUser />}
-
               {isMobileView ? (
-                <S.MobileMenu>
-                  {!user ? (
-                    <>
-                      <Link to={'/login'}>
-                        <S.InnerLi>로그인</S.InnerLi>
-                      </Link>
-                      <Link to={'/joinpage'}>
-                        <S.InnerLi>회원가입</S.InnerLi>
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <Link to={'/mypage'}>
-                        <S.InnerLi>마이페이지</S.InnerLi>
-                      </Link>
-                      <button
-                        onClick={() => {
-                          localStorage.removeItem('token');
-                          window.location.reload();
-                        }}
-                      >
-                        <S.InnerLi>로그아웃</S.InnerLi>
-                      </button>
-                    </>
-                  )}
-                </S.MobileMenu>
+                isMobileMenuOpen ? (
+                  <S.StyledCiClose onClick={toggleMobileMenu} />
+                ) : (
+                  <S.StyledCiMenu onClick={toggleMobileMenu} />
+                )
               ) : (
-                <S.SubMenu>
-                  {!user ? (
-                    <>
-                      <Link to={'/login'}>
-                        <S.InnerLi>로그인</S.InnerLi>
-                      </Link>
-                      <Link to={'/joinpage'}>
-                        <S.InnerLi>회원가입</S.InnerLi>
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <Link to={'/mypage'}>
-                        <S.InnerLi>마이페이지</S.InnerLi>
-                      </Link>
-                      <button
-                        onClick={() => {
-                          localStorage.removeItem('token');
-                          window.location.reload();
-                        }}
-                      >
-                        <S.InnerLi>로그아웃</S.InnerLi>
-                      </button>
-                    </>
-                  )}
-                </S.SubMenu>
+                <S.StyledCiUser />
               )}
+              <S.SubMenu>
+                {!user ? (
+                  <>
+                    <Link to={'/login'}>
+                      <S.InnerLi>로그인</S.InnerLi>
+                    </Link>
+                    <Link to={'/joinpage'}>
+                      <S.InnerLi>회원가입</S.InnerLi>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to={'/mypage'}>
+                      <S.InnerLi>마이페이지</S.InnerLi>
+                    </Link>
+                    <button
+                      onClick={() => {
+                        localStorage.removeItem('token');
+                        window.location.reload();
+                      }}
+                    >
+                      <S.InnerLi>로그아웃</S.InnerLi>
+                    </button>
+                  </>
+                )}
+              </S.SubMenu>
             </S.LoginItem>
           </S.LoginList>
         </S.LoginBox>
       </S.HeaderContainer>
+
+      {/* 추가: 모바일 메뉴 컴포넌트 */}
+      {isMobileMenuOpen && isMobileView && <MobileMenu />}
     </S.HeaderWrapper>
   );
 };
