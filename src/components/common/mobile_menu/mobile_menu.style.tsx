@@ -18,9 +18,6 @@ export const MenuWrap = styled.div`
   li {
     border-bottom: 1px solid #ddd;
     padding: 20px 30px;
-  }
-
-  a {
     font-size: 22px;
     font-weight: 500;
   }
@@ -38,14 +35,19 @@ export const MenuWrap = styled.div`
     font-size: 16px;
     font-weight: 500;
   }
+`;
 
-  button.login {
-    border: 1px solid #339af0;
-    background-color: #fff;
-  }
-  button.join {
-    background-color: #339af0;
-    border: 1px solid #339af0;
-    color: #fff;
+export const Button1 = styled.button`
+  border: 1px solid #339af0;
+  background-color: #fff;
+`;
+
+export const Button2 = styled.button`
+  background-color: #339af0;
+  border: 1px solid #339af0;
+  color: #fff;
+
+  button {
+    backgroun-color: none;
   }
 `;

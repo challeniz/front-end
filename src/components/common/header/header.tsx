@@ -78,7 +78,32 @@ const Header = () => {
               ) : (
                 <S.StyledCiUser />
               )}
-              <S.SubMenu>{/* ... 나머지 코드 */}</S.SubMenu>
+              <S.SubMenu>
+                {!user ? (
+                  <>
+                    <Link to={'/login'}>
+                      <S.InnerLi>로그인</S.InnerLi>
+                    </Link>
+                    <Link to={'/joinpage'}>
+                      <S.InnerLi>회원가입</S.InnerLi>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to={'/mypage'}>
+                      <S.InnerLi>마이페이지</S.InnerLi>
+                    </Link>
+                    <button
+                      onClick={() => {
+                        localStorage.removeItem('token');
+                        window.location.reload();
+                      }}
+                    >
+                      <S.InnerLi>로그아웃</S.InnerLi>
+                    </button>
+                  </>
+                )}
+              </S.SubMenu>
             </S.LoginItem>
           </S.LoginList>
         </S.LoginBox>
