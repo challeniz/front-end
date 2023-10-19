@@ -43,7 +43,7 @@ const FormAgreeBox = ({
               id="agree-chk"
             />
             <label className="agree-text" htmlFor="agree-chk">
-              위의 내용을 모두 읽어보았으며, 이에 모두 동의합니다.
+              위의 내용을 모두 읽어보았으며, <span>이에 모두 동의합니다.</span>
             </label>
           </S.AgreeBox>
         </WhiteBoxContents>

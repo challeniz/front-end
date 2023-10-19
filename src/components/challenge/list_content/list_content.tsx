@@ -68,7 +68,7 @@ const ListContent = () => {
             status: challenge.status,
             users: challenge.users,
           }));
-
+          console.log("데이터",challenges)
           setChallengeList(challenges);
           setChallengeCount(challenges.length);
         }
@@ -84,14 +84,14 @@ const ListContent = () => {
     if (category === 'popularity') {
       return challenges
         .slice()
-        .sort((a, b) => b.like_users.length - a.like_users.length);
+        .sort((a, b) => b.users.length - a.users.length);
     } else if (category === 'latest') {
       return challenges
         .slice()
         .sort(
           (a, b) =>
-            new Date(b.recru_open_date).getTime() -
-            new Date(a.recru_open_date).getTime()
+            new Date(b.start_date).getTime() -
+            new Date(a.start_date).getTime()
         );
     }
     return challenges;

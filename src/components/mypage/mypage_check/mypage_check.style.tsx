@@ -38,5 +38,16 @@ export const FullCalendarDiv = styled.div`
     width: 100%;
     height: 100%;
   }
-
+  .fc-event-time,
+  .fc-event-title {
+    display: none;
+  }
+  .fc-daygrid-event-dot {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .fc-daygrid-day-number{
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
