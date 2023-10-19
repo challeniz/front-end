@@ -180,9 +180,6 @@ const DetailNav = () => {
       )}
       <S.DetailInfo>
         <S.PStyled>
-          <Link to={`${ROUTE.EDITPAGE.link}/${id}`}>수정</Link>
-        </S.PStyled>
-        <S.PStyled>
           <S.StyledCiUser />
           현재 {challengeInfo.count}명 참여 중
         </S.PStyled>

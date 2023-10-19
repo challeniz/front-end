@@ -39,7 +39,7 @@ export const DetailNavs = styled.div`
       padding-right: 4px;
     }
   }
-  @media (min-width:370px) {
+  @media (max-width: 420px) {
     &.DetailNavs {
       position: sticky;
       top: 60px;
@@ -51,7 +51,7 @@ export const DetailNavs = styled.div`
       background-color: #fff;
     }
     &.ScrollNavs {
-      display:none;
+      display: none;
     }
   }
 `;
