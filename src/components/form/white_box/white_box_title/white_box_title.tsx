@@ -9,6 +9,12 @@ const WhiteTitleBlock = styled.div`
     font-weight:700;
     font-size: 20px;
   }
+     @media (max-width:420px) {
+   h2 {
+
+    font-size: 18px;
+  }
+    }
 `
 
 interface WhiteTitleProps {

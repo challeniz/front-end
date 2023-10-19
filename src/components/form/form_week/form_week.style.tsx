@@ -2,6 +2,16 @@ import styled from 'styled-components';
 
 export const WeekWrap = styled.div`
   position: relative;
+
+  @media (max-width: 420px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+  }
 `;
 
 export const Button = styled.button`
@@ -20,6 +30,14 @@ export const Button = styled.button`
   }
   &:nth-child(1) {
     margin-right: 5px;
+  }
+   @media (max-width: 420px) {
+     padding: 4px 12px;
+     font-size: 14px;
+     & + & {
+      margin: 5px 5px;
+    }
+  
   }
 `;
 

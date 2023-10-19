@@ -11,11 +11,22 @@ export const InputContent = styled.div`
   &.formDate {
     margin-bottom: 90px;
   }
+  @media (max-width: 420px) {
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    &.formDate {
+      margin-bottom: 20px;
+    }
+  }
+
 `;
 
 export const LabelStyled = styled.label`
   font-size: 18px;
   width: 160px;
+  @media (max-width: 420px) {
+    font-size: 16px;
+  }
 `;
 
 export const InputStyled = styled.input`
@@ -26,6 +37,12 @@ export const InputStyled = styled.input`
   border: 1px solid #cfcfcf;
   font-size: 16px;
   padding: 0 15px;
+
+  @media (max-width: 420px) {
+    width: 380px;
+    height: 30px;
+    padding: 0 10px;
+  }
 `;
 
 export const SelectStyled = styled.select`
@@ -36,6 +53,11 @@ export const SelectStyled = styled.select`
   border: 1px solid #cfcfcf;
   font-size: 16px;
   padding: 0 15px;
+  @media (max-width: 420px) {
+    width: 380px;
+    height: 30px;
+    padding: 0 10px;
+  }
 `;
 
 export const TextareaStyled = styled.textarea`
@@ -62,7 +84,14 @@ export const AvatarWrapper = styled.div`
   cursor: pointer;
   background-color: #ddd;
   background-image: url('https://i.ibb.co/B4LTSRF/preview.jpg');
+     @media (max-width: 420px) {
+    width: 100%;
+  height: 200px;
+    }
+  
+  }
 `;
+
 
 export const AvatarImage = styled.img`
   width: 100%;

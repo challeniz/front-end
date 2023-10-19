@@ -43,16 +43,18 @@ export const AgreeBox = styled.div`
       width: 64px;
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 4px;
+    }
     }
     input {
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 25px;
       margin-right: 5px;
     }
     .agree-text{
       font-size:14px;
       line-height: 1.4;
-      text-align: center;
+
       span {
         display: block;
       }

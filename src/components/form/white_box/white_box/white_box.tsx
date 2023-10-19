@@ -5,6 +5,9 @@ const WhiteBlock = styled.div`
   width: 100%;
   background-color: #fff;
   margin-bottom: 60px;
+  @media (max-width:420px) {
+  margin-bottom: 30px;
+}
 `;
 
 interface WhiteProps {
