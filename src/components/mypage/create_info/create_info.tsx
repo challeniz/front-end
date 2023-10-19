@@ -13,7 +13,7 @@ interface Challenge {
 }
 
 const CreateInfo = () => {
-  const { id } = useParams();
+
   const [likeUserData, setLikeUserData] = useState<Challenge[]>([]);
 
   useEffect(() => {

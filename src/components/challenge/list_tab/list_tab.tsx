@@ -22,20 +22,20 @@ const ListTab: React.FC<ListTabProps> = ({
   handleCategoryClick,
   challenges,
 }) => {
-  // 카테고리에 따른 챌린지 개수를 세는 함수
   const countChallengesByCategory = (category: string) => {
     return challenges.filter((challenge) => {
       if (category === '전체') {
-        return true; // '전체' 카테고리면 모든 챌린지를 포함
+        return true; 
       }
       return challenge.category === category;
     }).length;
   };
 
-  // 초기값을 '전체'로 설정
+  
   const [currentCategory, setCurrentCategory] = useState('전체');
   const [challengeCount, setChallengeCount] = useState(challenges.length);
 
+ 
   useEffect(() => {
     setCurrentCategory(selectedCategory || '전체');
     setChallengeCount(countChallengesByCategory(selectedCategory || '전체'));

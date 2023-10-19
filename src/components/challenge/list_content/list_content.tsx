@@ -4,6 +4,7 @@ import { apiInstance } from '../../../utils/api';
 import ListTab from '../list_tab/list_tab';
 import ChallengeBox from '../challenge_box/challenge_box';
 
+
 export interface Challenge {
   like: boolean;
   title: string;
@@ -64,6 +65,7 @@ const ListContent = () => {
             status: challenge.status,
             users: challenge.users,
           }));
+       
           setChallengeList(challenges);
           setChallengeCount(challenges.length);
         }
@@ -77,13 +79,16 @@ const ListContent = () => {
 
   const sortChallenges = (challenges: Challenge[], category: string) => {
     if (category === 'popularity') {
-      return challenges.slice().sort((a, b) => b.users.length - a.users.length);
+      return challenges
+        .slice()
+        .sort((a, b) => b.users.length - a.users.length);
     } else if (category === 'latest') {
       return challenges
         .slice()
         .sort(
           (a, b) =>
-            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+            new Date(b.start_date).getTime() -
+            new Date(a.start_date).getTime()
         );
     }
     return challenges;
@@ -103,7 +108,7 @@ const ListContent = () => {
         <option value="latest">최신순</option>
         <option value="popularity">인기순</option>
       </S.OptionSelect>
-      {/* <SearchPage /> */}
+    
 
       <ChallengeBox
         selectedCategory={selectedCategory}
