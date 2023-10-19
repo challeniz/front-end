@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as S from './challenge_box_main.style';
 import { BsCalendarRange } from 'react-icons/bs';
 import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import HeartImg from '../../../assets/image/heart_red.png';
 import EmptyHeartImg from '../../../assets/image/heart.png';
+import HeartImg from '../../../assets/image/heart_red.png';
 
 // 예시로 Challenge 타입을 정의
 export interface Challenge {
@@ -17,7 +17,6 @@ export interface Challenge {
   end_date: string;
   tag: string[];
   id: string;
-  
   category: string;
   mainImg: string;
 }
@@ -36,7 +35,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   challenge,
 }) => {
   const [wishCount, setWishCount] = useState(808);
-  const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
 
   const wishCountHandler = async (challengeId: string) => {
     const newLikeValue = !challenge.like;
@@ -46,7 +44,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
       } else {
         await apiInstance.patch(`/challenges/zzim/${challengeId}`);
       }
-      console.log(newLikeValue);
     } catch (error) {
       console.error(`Error updating challenge like status:`, error);
     }
@@ -57,11 +54,11 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
     <S.ContentWrap>
       <S.ImgStyled>
         <img src={challenge.mainImg} alt="Challenge" />
-        {/* <S.StyledHeartButton
+        <S.StyledHeartButton
           src={challenge.like ? HeartImg : EmptyHeartImg}
           alt={challenge.like ? 'Liked' : 'Not Liked'}
           onClick={() => wishCountHandler(challenge.id)}
-        /> */}
+        />
       </S.ImgStyled>
       <S.TabWrap>
         {challenge.tag.map((tag, index) => (

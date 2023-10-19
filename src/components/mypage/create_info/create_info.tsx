@@ -22,13 +22,15 @@ const CreateInfo = () => {
         const challengeResponse = await apiInstance.get('/users/mypageChall');
         if (challengeResponse.status === 200) {
           const challenges: Challenge[] =
-            challengeResponse.data.createChallenge.map((challenge: any) => ({
-              ...challenge,
-              start_date: new Date(challenge.start_date).toLocaleDateString(),
-              end_date: new Date(challenge.end_date).toLocaleDateString(),
-              mainImg: challenge.mainImg,
-              id: challenge._id,
-            }));
+            challengeResponse.data.updateCreateChallenge.map(
+              (challenge: any) => ({
+                ...challenge,
+                start_date: new Date(challenge.start_date).toLocaleDateString(),
+                end_date: new Date(challenge.end_date).toLocaleDateString(),
+                mainImg: challenge.mainImg,
+                id: challenge._id,
+              })
+            );
 
           setLikeUserData(challenges);
         }

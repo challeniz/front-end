@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as S from './mypage_tab.style';
 import StatusInfo from '../status_info/status_info';
 import HeartInfo from '../heart_info/heart_info';
 import CompleteInfo from '../complete_info/complete_info';
-import { apiInstance } from '../../../utils/api';
-import AuthList from '../../common/auth_list/auth_list';
 import Badge from '../badge/badge';
 import MypageCheck from '../mypage_check/mypage_check';
 import CreateInfo from '../create_info/create_info';

@@ -83,7 +83,7 @@ const Grade = () => {
       <S.MyGrade>
         <div>
           <h5>내 등급</h5>
-          <p>{grade?.grade}</p> {/* user 객체에서 직접 grade 속성값을 가져옴 */}
+          <p>{grade?.grade}</p> 
         </div>
         <div>
           <h5>챌린지 인증</h5>

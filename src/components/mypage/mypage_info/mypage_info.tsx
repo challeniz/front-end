@@ -18,7 +18,6 @@ const MyInfo: React.FC<MyInfoProps> = () => {
   });
 
   useEffect(() => {
-    // API를 통해 유저 정보 가져오기
     apiInstance
       .get('/users/mypageInfo')
       .then((response) => {

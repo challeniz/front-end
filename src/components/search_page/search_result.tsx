@@ -31,7 +31,6 @@ const SearchResult = () => {
   useEffect(() => {
     setNoResults(challenges.length === 0);
   }, [challenges]);
-  console.log('결과', challenges);
   return (
     <>
       <Header />

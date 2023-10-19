@@ -77,11 +77,7 @@ const TagBox: React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
           ...prevData,
           tag: challengeData.challenge.tag,
         }));
-
-        // Initialize localTags with the API data
         setLocalTags(challengeData.challenge.tag);
-
-        console.log(challengeData.challenge.tag);
       } catch (error) {
         console.error('Error:', error);
       }
