@@ -20,8 +20,6 @@ interface Challenge {
 }
 
 const CompleteInfo = () => {
-  const [userId, setUserId] = useState<string>('');
-  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [star, setStar] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
@@ -94,12 +92,6 @@ const CompleteInfo = () => {
                 {challenge.start_date} ~ {challenge.end_date}
               </h4>
             </div>
-            <S.PercentWrap>
-              <p>달성률</p>
-              <h5>
-                100<span>%</span>
-              </h5>
-            </S.PercentWrap>
           </S.InfoFlex>
           <S.ButtonAuth
             onClick={() => handleChallengeClick(selectedChallenge!)}

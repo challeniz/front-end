@@ -57,12 +57,6 @@ const StatusInfo = () => {
                 {challenge.start_date} ~ {challenge.end_date}
               </h4>
             </div>
-            <S.PercentWrap>
-              <p>달성률</p>
-              <h5>
-                70<span>%</span>
-              </h5>
-            </S.PercentWrap>
           </S.InfoFlex>
           <Link to={`${ROUTE.AUTHPAGE.link}/${challenge.id}`}>
             <S.ButtonAuth>챌린지 인증하기</S.ButtonAuth>

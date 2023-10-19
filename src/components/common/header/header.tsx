@@ -38,7 +38,6 @@ const Header = () => {
     }
   };
 
-  // 추가: 모바일 메뉴 토글 함수
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };

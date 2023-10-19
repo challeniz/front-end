@@ -2,8 +2,8 @@
 
 - 배포용 IP 주소
 - 테스트 계정 <br>
-  ID : <br>
-  PW :
+  ID : admin@admin.com<br>
+  PW : test123123!!
 
 <br>
 <br>

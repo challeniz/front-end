@@ -35,7 +35,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   challenge,
 }) => {
   const [wishCount, setWishCount] = useState(808);
-  const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
 
   const wishCountHandler = async (challengeId: string) => {
     const newLikeValue = !challenge.like;
@@ -45,7 +44,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
       } else {
         await apiInstance.patch(`/challenges/zzim/${challengeId}`);
       }
-      console.log(newLikeValue);
     } catch (error) {
       console.error(`Error updating challenge like status:`, error);
     }

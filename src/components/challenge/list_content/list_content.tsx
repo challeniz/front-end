@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './list_content.style';
-import { BsCalendarRange } from 'react-icons/bs';
 import { apiInstance } from '../../../utils/api';
-import { ROUTE } from '../../../routes';
-import { Link } from 'react-router-dom';
 import ListTab from '../list_tab/list_tab';
 import ChallengeBox from '../challenge_box/challenge_box';
-import SearchPage from '../../search_page/search_page';
 
 export interface Challenge {
   like: boolean;
@@ -68,7 +64,6 @@ const ListContent = () => {
             status: challenge.status,
             users: challenge.users,
           }));
-          console.log("데이터",challenges)
           setChallengeList(challenges);
           setChallengeCount(challenges.length);
         }
@@ -82,16 +77,13 @@ const ListContent = () => {
 
   const sortChallenges = (challenges: Challenge[], category: string) => {
     if (category === 'popularity') {
-      return challenges
-        .slice()
-        .sort((a, b) => b.users.length - a.users.length);
+      return challenges.slice().sort((a, b) => b.users.length - a.users.length);
     } else if (category === 'latest') {
       return challenges
         .slice()
         .sort(
           (a, b) =>
-            new Date(b.start_date).getTime() -
-            new Date(a.start_date).getTime()
+            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
         );
     }
     return challenges;

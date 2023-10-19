@@ -36,7 +36,6 @@ const ListTab: React.FC<ListTabProps> = ({
   const [currentCategory, setCurrentCategory] = useState('전체');
   const [challengeCount, setChallengeCount] = useState(challenges.length);
 
-  // 카테고리가 변경될 때마다 해당 카테고리에 대한 챌린지 개수를 업데이트
   useEffect(() => {
     setCurrentCategory(selectedCategory || '전체');
     setChallengeCount(countChallengesByCategory(selectedCategory || '전체'));

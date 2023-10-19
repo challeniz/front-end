@@ -36,7 +36,6 @@ const DetailContent = () => {
       try {
         const response = await apiInstance.get(`/challenges/${id}`);
         const data = response.data;
-        console.log('Fetched data:', data);
 
         if (data) {
           setChallengeInfo((prevChallengeInfo) => ({
@@ -57,7 +56,6 @@ const DetailContent = () => {
           setUserInfo({
             id: currentUserID.id,
           });
-          console.log('유저아이디', currentUserID);
 
           const hasParticipated = data.challenge.users.includes(currentUserID);
           setIsParticipated(hasParticipated);

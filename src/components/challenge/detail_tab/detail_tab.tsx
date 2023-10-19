@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import * as S from './detail_tab.style';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import CommentBox from '../../comment/commentbox/comment';
 import { apiInstance } from '../../../utils/api';
 import moment from 'moment';
 import AuthList from '../../common/auth_list/auth_list';

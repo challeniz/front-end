@@ -93,13 +93,13 @@ const Grade = () => {
           <h5>다음 등급까지 남은 인증</h5>
           {grade ? (
             grade.verifiCount <= 14 ? (
-              <p>{14 - grade.verifiCount}</p>
+              <p>{14 - grade.verifiCount}개</p>
             ) : grade.verifiCount < 30 ? (
-              <p>{29 - grade.verifiCount}</p>
+              <p>{29 - grade.verifiCount}개</p>
             ) : grade.verifiCount < 50 ? (
-              <p>{49 - grade.verifiCount}</p>
+              <p>{49 - grade.verifiCount}개</p>
             ) : (
-              <p>{grade.verifiCount}</p>
+              <p>{grade.verifiCount}개</p>
             )
           ) : (
             <p>등급 정보를 불러올 수 없습니다.</p>

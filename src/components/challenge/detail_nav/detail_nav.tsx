@@ -68,7 +68,6 @@ const DetailNav = () => {
       try {
         const response = await apiInstance.get(`/challenges/${id}`);
         const data = response.data;
-        console.log('Fetched data:', data);
 
         if (data) {
           setChallengeInfo((prevChallengeInfo) => ({
@@ -87,7 +86,6 @@ const DetailNav = () => {
           setUserInfo({
             id: currentUserID.id,
           });
-          console.log('유저아이디', currentUserID);
 
           const hasParticipated = data.challenge.users.includes(currentUserID);
           setIsParticipated(hasParticipated);
@@ -110,21 +108,6 @@ const DetailNav = () => {
             postDate: challenge.post_date,
           }));
           setChallengeList(challenges);
-
-          // 오늘 날짜를 가져옵니다.
-          const todayDate = getTodayDate();
-
-          // postDates 배열을 생성합니다.
-          const postDates = challenges.map(
-            (challenge: { postDate: any }) => challenge.postDate
-          );
-          console.log('인증날짜', postDates);
-          console.log('오늘날짜', todayDate);
-          if (postDates.includes(todayDate)) {
-            console.log('오늘 인증 가능한 챌린지가 있습니다.');
-          } else {
-            console.log('오늘 인증 가능한 챌린지가 없습니다.');
-          }
         }
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
@@ -133,12 +116,6 @@ const DetailNav = () => {
 
     fetchData();
   }, [id]);
-
-  // 오늘 날짜를 가져오는 함수
-  const getTodayDate = () => {
-    const today = new Date();
-    return today.toLocaleDateString();
-  };
 
   return (
     <S.DetailNavs

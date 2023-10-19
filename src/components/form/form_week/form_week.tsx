@@ -52,10 +52,6 @@ const WeekSelector: React.FC<WeekSelectorProps> = ({
       calculatedEndDate.setDate(calculatedEndDate.getDate() + 7 * selectedWeek); // 선택한 주차에 따라 계산
       setStartDate(calculatedStartDate);
       setEndDate(calculatedEndDate);
-
-      // startDate와 endDate를 출력
-      console.log('startDate:', startDate);
-      console.log('endDate:', endDate);
     }
   }, [selectedDate, recruEndDate, selectedWeek]);
 

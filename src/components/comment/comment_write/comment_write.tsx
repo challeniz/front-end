@@ -4,11 +4,10 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { ImStarFull } from 'react-icons/im';
 import {
   FormButton,
-  FormCancelButton,
   FormSubmitButton,
 } from '../../form/form_button/form_button';
 import { apiInstance } from '../../../utils/api';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface ModalBasicProps {
   setModalOpen: (open: boolean) => void;
@@ -27,15 +26,9 @@ interface Challenge {
 function ModalBasic({
   setModalOpen,
   id,
-  star,
   description,
   onSubmit,
 }: ModalBasicProps) {
-  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
-  const [challengeData, setChallengeData] = useState<Challenge[]>([]);
-  const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(
-    null
-  ); // selectedChallenge 상태 추가
   const [selectedStar, setSelectedStar] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
 
@@ -89,8 +82,6 @@ function ModalBasic({
     // score 상태를 업데이트
     const newScore = clickedCount;
     setScore(newScore);
-
-    console.log(clickedCount);
   };
 
   const clickedCount = clicked.filter((isClicked) => isClicked).length;

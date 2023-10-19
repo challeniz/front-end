@@ -1,11 +1,5 @@
-import React, {
-  ChangeEvent,
-  useEffect,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { ChangeEvent, useState, Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useImageUploader from '../../../hook/imgfiler';
 import DateSelector from '../form_date/form_date';
 import WeekSelector from '../form_week/form_week';
@@ -70,7 +64,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
 
   //태그
   const handleChangeTags = (newTags: string[]) => {
-    console.log('newTags', newTags);
     setData((prevData) => ({
       ...prevData,
       tag: newTags as string[],
@@ -105,7 +98,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         alert('챌린지설명을 입력하세요.');
       } else if (tag.length === 0) {
         alert('태그를 입력하세요.');
-        console.log('설명', tags);
       } else if (!isAgreed) {
         alert('챌린지를 개설하려면 약관에 동의해야 합니다.');
       }
@@ -125,7 +117,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         formData.append('start_date', startDate.toISOString());
         formData.append('end_date', endDate.toISOString());
       }
-      console.log(endDate);
       if (fileInput.current) {
         const selectedFile =
           fileInput.current.files && fileInput.current.files[0];
@@ -158,9 +149,9 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        console.log('error', error.response);
+        console.error('error', error.response);
       } else {
-        console.log('error', error);
+        console.error('error', error);
       }
     }
   };
@@ -173,7 +164,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       ...prevData,
       [name]: value,
     }));
-    console.log(data.cate);
   };
 
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -182,7 +172,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       ...prevData,
       cate: value,
     }));
-    console.log(value);
   };
 
   // 이미지지업로드
@@ -202,7 +191,6 @@ const FormInfo: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       setSelectedImage(null); // 이미지 선택되지 않음
       alert('이미지를 선택해주세요.');
     }
-    console.log('이미지', selectedFile);
   };
 
   const handleDateRangeSelect = (
