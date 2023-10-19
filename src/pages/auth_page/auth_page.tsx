@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as S from './auth_page.style';
 import { ROUTE } from '../../routes';
 import Header from '../../components/common/header/header';
@@ -45,9 +45,8 @@ const AuthPage: React.FC = () => {
 
   const handleCancelClick = () => {
     if (window.confirm('정말 취소하겠습니까?')) {
-      // setSelectedImage(null);
-      setImageButtonText('사진 넣기'); //사진 삭제
-      setText(''); // 텍스트 지우기
+      setImageButtonText('사진 넣기');
+      setText('');
     }
   };
 
@@ -60,20 +59,18 @@ const AuthPage: React.FC = () => {
     const selectedFile = e.target.files && e.target.files[0];
     if (selectedFile) {
       setIsImageSelected(true);
-      setSelectedImage(selectedFile); // 이미지 선택됨
+      setSelectedImage(selectedFile);
 
-      // data 상태를 업데이트합니다.
       setData((prevData) => ({ ...prevData, file: selectedFile }));
     } else {
       setIsImageSelected(false);
-      setSelectedImage(null); // 이미지 선택되지 않음
+      setSelectedImage(null);
       alert('이미지를 선택해주세요.');
     }
   };
 
   const navigate = useNavigate();
 
-  //유효성 및 데이터
   const handleChallengeSubmit = async () => {
     try {
       if (text.trim() === '' || text == null) {
@@ -84,7 +81,7 @@ const AuthPage: React.FC = () => {
 
       const formData = new FormData();
       formData.append('description', text);
-      console.log("데이터", text)
+
       if (fileInput.current) {
         const selectedFile =
           fileInput.current.files && fileInput.current.files[0];
@@ -93,21 +90,16 @@ const AuthPage: React.FC = () => {
         } else {
           alert('이미지를 선택해주세요.');
           return;
-        }  console.log("데이터", selectedFile)
+        }
       } else {
         alert('이미지 파일이 존재하지 않습니다.');
         return;
-      }  console.log("데이터",formData)
-      const response = await apiInstance.post(
-        `/posts/upload/${id}`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
-      console.log('데이터', response);
+      }
+      const response = await apiInstance.post(`/posts/upload/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       if (response.status === 201) {
         console.log('response', response);
         // 챌린지 생성 성공 후 추가 로직
@@ -140,7 +132,6 @@ const AuthPage: React.FC = () => {
                       }
                     }}
                   >
-                    {/* 선택된 이미지 미리보기 */}
                     {selectedImage && (
                       <S.StyledImage src={URL.createObjectURL(selectedImage)} />
                     )}
@@ -165,7 +156,6 @@ const AuthPage: React.FC = () => {
                 <S.FormSubmitButton onClick={handleChallengeSubmit}>
                   <Link to={ROUTE.DETAILPAGE.link}>등록하기</Link>
                 </S.FormSubmitButton>
-                {/* <S.FormCancelButton onClick={joinHandler} ></S.FormCancelButton>  */}
               </S.FormButton>
             </WhiteBoxContents>
           </WhiteBox>

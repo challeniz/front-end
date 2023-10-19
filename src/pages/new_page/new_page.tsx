@@ -39,7 +39,7 @@ const NewPage = () => {
   // 이미지 선택
   const handleIsImageSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
-    setSelectedFile(file); // 선택된 파일 상태 업데이트
+    setSelectedFile(file); 
     if (file) {
       setIsImageSelected(true);
     } else {

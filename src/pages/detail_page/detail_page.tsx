@@ -7,7 +7,7 @@ import DetailContent from '../../components/challenge/detail_content/detail_cont
 import DetailNav from '../../components/challenge/detail_nav/detail_nav';
 
 const DetailPage = () => {
-  const isMobileView = window.innerWidth <= 420; // 스크린 너비 확인
+  const isMobileView = window.innerWidth <= 420;
 
   return (
     <>
@@ -15,7 +15,6 @@ const DetailPage = () => {
       <S.PageBack>
         <Wrapper>
           <S.Detail>
-            
             <DetailContent></DetailContent>
             {isMobileView ? null : <DetailNav></DetailNav>}{' '}
           </S.Detail>

@@ -146,7 +146,6 @@ const ApplicationPage: React.FC = () => {
             email: data.email,
           });
         }
-        console.log(response.data);
       } catch (error) {
         console.error('챌린지 정보가 없습니다', error);
       }

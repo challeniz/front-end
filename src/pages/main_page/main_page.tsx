@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import MainSlide from '../../hook/Slide/Users_slide';
 import OngoingSlide from '../../hook/Slide/Ongoing_slide';
 import NewSlide from '../../hook/Slide/New_slide';
-import SearchPage from '../../components/search_page/search_page';
+
 import channelService from '../../channelService';
 export interface ChallengeBoxProps {
   selectedCategory: string;
@@ -22,10 +22,10 @@ const MainPage = () => {
     channelService.loadScript();
   }, []);
 
-  // 2. 부팅
+
   useEffect(() => {
     channelService.boot({
-      pluginKey: 'bbe1fcfa-411a-4ac0-b3be-a0df4b992f35', // 여기에 적절한 플러그인 키를 입력하세요.
+      pluginKey: 'bbe1fcfa-411a-4ac0-b3be-a0df4b992f35', 
     });
   }, []);
 

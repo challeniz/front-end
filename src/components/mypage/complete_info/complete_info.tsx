@@ -21,6 +21,7 @@ interface Challenge {
 }
 
 const CompleteInfo = () => {
+  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [star, setStar] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
@@ -41,14 +42,16 @@ const CompleteInfo = () => {
         const challengeResponse = await apiInstance.get('/users/mypageChall');
         if (challengeResponse.status === 200) {
           const challenges: Challenge[] =
-            challengeResponse.data.finishChallenge.map((challenge: any) => ({
-              ...challenge,
-              title: challenge.title,
-              mainImg: challenge.mainImg,
-              start_date: new Date(challenge.start_date).toLocaleDateString(),
-              end_date: new Date(challenge.end_date).toLocaleDateString(),
-              id: challenge._id,
-            }));
+            challengeResponse.data.updateCreateChallenge.map(
+              (challenge: any) => ({
+                ...challenge,
+                title: challenge.title,
+                mainImg: challenge.mainImg,
+                start_date: new Date(challenge.start_date).toLocaleDateString(),
+                end_date: new Date(challenge.end_date).toLocaleDateString(),
+                id: challenge._id,
+              })
+            );
           setChallengeData(challenges);
         }
       } catch (error) {
@@ -73,11 +76,9 @@ const CompleteInfo = () => {
         alert('리뷰가 성공적으로 등록되었습니다!');
       } else {
         console.error('리뷰 전송 중 오류가 발생했습니다.');
-        // 오류 처리 코드 추가
       }
     } catch (error) {
       console.error('오류 발생:', error);
-      // 오류 처리 코드 추가
     }
   };
 
@@ -94,6 +95,12 @@ const CompleteInfo = () => {
                 {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
               </h4>
             </div>
+            <S.PercentWrap>
+              <p>달성률</p>
+              <h5>
+                100<span>%</span>
+              </h5>
+            </S.PercentWrap>
           </S.InfoFlex>
           <S.ButtonAuth
             onClick={() => handleChallengeClick(selectedChallenge!)}

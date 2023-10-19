@@ -7,7 +7,7 @@ import list from '../../assets/image/about_list.png';
 import check from '../../assets/image/about_check.png';
 import badge from '../../assets/image/about_badge.png';
 import chat from '../../assets/image/about_chat.png';
-import styled from 'styled-components';
+
 const AboutPage = () => {
   return (
     <div>

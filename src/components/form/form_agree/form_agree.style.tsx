@@ -28,6 +28,7 @@ export const AgreeBox = styled.div`
 
   .agree-text {
     font-weight: 600;
+    line-height: 1.6;
 
     &:hover {
       cursor: pointer;
@@ -48,7 +49,7 @@ export const AgreeBox = styled.div`
       margin-right: auto;
       margin-bottom: 4px;
     }
-    }
+    
     input {
       width: 16px;
       height: 25px;
