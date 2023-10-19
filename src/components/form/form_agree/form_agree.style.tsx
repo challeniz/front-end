@@ -37,6 +37,9 @@ export const AgreeBox = styled.div`
   @media (max-width:420px) {
     padding: 10px 15px;
     margin-left: 20px;
+    span {
+      display: block;
+    }
     .agree-title {
       font-size: 12px;
       padding: 0px 10px;
@@ -55,9 +58,7 @@ export const AgreeBox = styled.div`
       font-size:14px;
       line-height: 1.4;
 
-      span {
-        display: block;
-      }
+      
     }
   }
 `;

@@ -29,6 +29,12 @@ const LoginPage = () => {
     if (e.key === 'Enter') {
       e.preventDefault();
       buttonClickFunction(); // Trigger the login action
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      if (buttonClickFunction === onClickLoginBtn) {
+        passwordInputRef.current?.focus()
+        loginButtonRef.current?.focus(); 
+      }
     }
   };
 
