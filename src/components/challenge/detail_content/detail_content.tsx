@@ -57,7 +57,7 @@ const DetailContent = () => {
           setUserInfo({
             id: currentUserID.id,
           });
-          console.log('유저아이디', currentUserID);
+      
 
           const hasParticipated = data.challenge.users.includes(currentUserID);
           setIsParticipated(hasParticipated);

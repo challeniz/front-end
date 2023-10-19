@@ -1,11 +1,10 @@
-import React, { useState, useEffect, FormEventHandler } from 'react';
+import React, { useState, useEffect, } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as S from './app_page.style';
 import * as D from '../../components/form/form_agree/form_agree.style';
 import Wrapper from '../../components/common/wrapper/wrapper';
 import WhiteBox from '../../components/form/white_box/white_box/white_box';
 import Header from '../../components/common/header/header';
-// import { ROUTE } from '../../routes';
 import Footer from '../../components/common/footer/footer';
 import WhiteBoxTitle from '../../components/form/white_box/white_box_title/white_box_title';
 import WhiteBoxContents from '../../components/form/white_box/white_box_contents/white_box_contents';
@@ -14,7 +13,7 @@ import {
   FormCancelButton,
   FormSubmitButton,
 } from '../../components/form/form_button/form_button';
-// import axios from 'axios';
+
 import { apiInstance } from '../../utils/api';
 
 interface FormData {
@@ -90,21 +89,6 @@ const ApplicationPage: React.FC = () => {
     setIsAgreed(isChecked);
   };
 
-  // const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-  //   event.preventDefault();
-
-  //   const userData = {
-  //     name: form.name,
-  //     phone: form.phone,
-  //     email: form.email,
-  //   };
-  //   try {
-  //     await apiInstance.patch(`/challenges/subscription/${id}`, userData);
-  //     console.log('참가 신청이 완료되었습니다.');
-  //   } catch (error) {
-  //     console.error('참가 신청이 실패하였습니다', error);
-  //   }
-  // };
 
   const handleChallengeSubmit = async () => {
     // 챌린지 생성 API 호출
@@ -154,7 +138,7 @@ const ApplicationPage: React.FC = () => {
             email: data.email,
           });
         }
-        console.log(response.data);
+      
       } catch (error) {
         console.error('챌린지 정보가 없습니다', error);
       }

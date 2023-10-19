@@ -20,7 +20,6 @@ interface Challenge {
 }
 
 const CompleteInfo = () => {
-  const [userId, setUserId] = useState<string>('');
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [star, setStar] = useState<number>(0);
@@ -76,11 +75,9 @@ const CompleteInfo = () => {
         alert('리뷰가 성공적으로 등록되었습니다!');
       } else {
         console.error('리뷰 전송 중 오류가 발생했습니다.');
-        // 오류 처리 코드 추가
       }
     } catch (error) {
       console.error('오류 발생:', error);
-      // 오류 처리 코드 추가
     }
   };
 

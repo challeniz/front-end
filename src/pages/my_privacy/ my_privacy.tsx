@@ -26,27 +26,27 @@ const MyPrivacy = () => {
   });
 
   const [userInfo, setUserInfo] = useState({
-    name: '', // 빈값이 초기값이 아니라 회원가입할때 사용되었던 정보가 초기값으로 되어있어야 출력이된다?
+    name: '', 
     phone: '',
     email: '',
-    password: '', // 비밀번호 추가
-    confirmPassword: '', // 비밀번호 확인 추가
+    password: '', 
+    confirmPassword: '', 
   });
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기 (실제 토큰 키로 대체)
+        const token = localStorage.getItem('token'); 
         console.log('token', token);
         const response = await apiInstance.get('/users/mypageInfo');
-        const userData = response.data; // 서버 응답에서 사용자 데이터 추출
+        const userData = response.data; 
 
         setUserInfo({
           name: userData.name,
           phone: userData.phone,
           email: userData.email,
-          password: userInfo.password, // 수정된 비밀번호
-          confirmPassword: userInfo.confirmPassword, // 수정된 비밀번호 확인
+          password: userInfo.password, 
+          confirmPassword: userInfo.confirmPassword, 
         });
       } catch (error) {
         console.error('사용자 정보를 불러오는 동안 오류 발생:', error);
@@ -73,26 +73,26 @@ const MyPrivacy = () => {
     }
   };
 
-  //회원 탈퇴 기능
+
   const deleteBtnHandler = async () => {
     try {
-      const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기 (실제 토큰 키로 대체)
+      const token = localStorage.getItem('token');
 
-      // 회원 탈퇴를 위한 요청을 보내기
+
       await apiInstance.delete('/users/withdrawal', {
         headers: {
-          Authorization: `Bearer ${token}`, // 토큰을 헤더에 포함하여 보내기
+          Authorization: `Bearer ${token}`, 
         },
       });
 
-      // 회원 탈퇴 성공 후 필요한 처리
+ 
       alert('회원 탈퇴가 완료되었습니다.');
       localStorage.removeItem('token');
-      navigate('/'); // 탈퇴 성공 시 홈 페이지로 이동
+      navigate('/'); 
       console.log('회원 탈퇴가 완료되었습니다.');
     } catch (error) {
       console.error('회원 탈퇴 도중 오류 발생:', error);
-      // 오류 처리를 여기에 추가해주세요.
+  
     }
   };
 
