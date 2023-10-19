@@ -53,7 +53,7 @@
 # 🖥️ 3. 기술 스택
 
 ---
-# 🟦 Front-end Stack 🟦
+## 🟦 Front-end Stack 🟦
 <div align="center">
 <img src="https://img.shields.io/badge/typescript-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>
@@ -63,10 +63,15 @@
 <img src="https://img.shields.io/badge/VScode-2F80ED?style=flat-square&logo=vsco&logoColor=white"/>
 </div>
 <br>
-<br>
-<br>
-# 🟦 Cowork tools 🟦
 
+## 🟦 Cowork tools 🟦
+<div align="center">
+<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"/>
+<img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/>
+ <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
+<img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=Postman&logoColor=white"/>
+<img src="https://img.shields.io/badge/♥︎Gather-004088?style=flat-square&logo=gather&logoColor=white"/>
+</div>
 # 🧷 4. APi 문서
 
 ---
