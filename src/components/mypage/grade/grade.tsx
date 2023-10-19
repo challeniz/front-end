@@ -4,10 +4,11 @@ import { apiInstance } from '../../../utils/api';
 
 interface Grade {
   grade: string;
+  verifiCount: number;
 }
 
 const Grade = () => {
-  const [grade, setGrade] = useState<string | null>(null);
+  const [grade, setGrade] = useState<Grade|null>(null);
 
   useEffect(() => {
     async function fetchGrade() {
@@ -17,9 +18,10 @@ const Grade = () => {
         if (token) {
           if (response.status === 200) {
             const user = response.data.user;
-            const userGrade = user.grade; // user 객체에서 grade를 가져옴
+            const grade = user.grade;
+            const verifiCount = user.verifiCount;
+            const userGrade = { grade, verifiCount };
             setGrade(userGrade);
-            console.log(response.data);
           }
         }
       } catch (error) {
@@ -81,15 +83,27 @@ const Grade = () => {
       <S.MyGrade>
         <div>
           <h5>내 등급</h5>
-          <p>{grade}</p> {/* user 객체에서 직접 grade 속성값을 가져옴 */}
+          <p>{grade?.grade}</p> {/* user 객체에서 직접 grade 속성값을 가져옴 */}
         </div>
         <div>
           <h5>챌린지 인증</h5>
-          <p>2개</p>
+          <p>{grade?.verifiCount}개</p>
         </div>
         <div>
           <h5>다음 등급까지 남은 인증</h5>
-          <p>14개</p>
+          {grade ? (
+            grade.verifiCount <= 14 ? (
+              <p>{14 - grade.verifiCount}</p>
+            ) : grade.verifiCount < 30 ? (
+              <p>{29 - grade.verifiCount}</p>
+            ) : grade.verifiCount < 50 ? (
+              <p>{49 - grade.verifiCount}</p>
+            ) : (
+              <p>{grade.verifiCount}</p>
+            )
+          ) : (
+          <p>등급 정보를 불러올 수 없습니다.</p>
+        )}
         </div>
       </S.MyGrade>
     </S.GradeTitle>

@@ -26,14 +26,16 @@ const LoginPage = () => {
     e: React.KeyboardEvent<HTMLInputElement>,
     buttonClickFunction: () => void
   ) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Tab') {
       e.preventDefault();
-      buttonClickFunction(); // Trigger the login action
-    } else if (e.key === 'Tab') {
+      buttonClickFunction(); 
+    } else if (e.key === 'Enter') {
       e.preventDefault();
       if (buttonClickFunction === onClickLoginBtn) {
-        passwordInputRef.current?.focus()
-        loginButtonRef.current?.focus(); 
+        passwordInputRef.current?.focus();
+      } else {
+        loginButtonRef.current?.focus();
+
       }
     }
   };
@@ -183,32 +185,6 @@ const LoginPage = () => {
         </Link>
       </S.NoMemberShipWrap>
 
-      {/* 소셜로그인 */}
-      {/* <SocialLogin>SNS계정으로 로그인</SocialLogin> */}
-
-      {/* 소셜로그인 이모티콘 틀*/}
-      {/* <IconWrap>
-        <Kakao>
-          <a
-            href="https://www.flaticon.com/kr/free-icons/-"
-            title="카카오 톡 아이콘"
-          ></a>
-          <img
-            src={require('../../assets/icon/free-icon-kakao-talk-4494622.png')}
-            alt="아이콘"
-          />
-        </Kakao>
-        <Google>
-          <a
-            href="https://www.flaticon.com/kr/free-icons/"
-            title="구글 아이콘"
-          ></a>
-          <img
-            src={require('../../assets/icon/free-icon-search-281764.png')}
-            alt="아이콘"
-          />
-        </Google>
-      </IconWrap> */}
     </Wrapper>
   );
 };
