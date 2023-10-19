@@ -26,27 +26,27 @@ const MyPrivacy = () => {
   });
 
   const [userInfo, setUserInfo] = useState({
-    name: '', 
+    name: '',
     phone: '',
     email: '',
-    password: '', 
-    confirmPassword: '', 
+    password: '',
+    confirmPassword: '',
   });
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const token = localStorage.getItem('token'); 
+        const token = localStorage.getItem('token');
         console.log('token', token);
         const response = await apiInstance.get('/users/mypageInfo');
-        const userData = response.data; 
+        const userData = response.data;
 
         setUserInfo({
           name: userData.name,
           phone: userData.phone,
           email: userData.email,
-          password: userInfo.password, 
-          confirmPassword: userInfo.confirmPassword, 
+          password: userInfo.password,
+          confirmPassword: userInfo.confirmPassword,
         });
       } catch (error) {
         console.error('사용자 정보를 불러오는 동안 오류 발생:', error);
@@ -54,7 +54,7 @@ const MyPrivacy = () => {
     };
 
     fetchUserInfo();
-  }, []);
+  });
 
   const fixNameHandler = (event: any) => {
     const updatedUserInfo = { ...userInfo, name: event.target.value };
@@ -73,26 +73,22 @@ const MyPrivacy = () => {
     }
   };
 
-
   const deleteBtnHandler = async () => {
     try {
       const token = localStorage.getItem('token');
 
-
       await apiInstance.delete('/users/withdrawal', {
         headers: {
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
       });
 
- 
       alert('회원 탈퇴가 완료되었습니다.');
       localStorage.removeItem('token');
-      navigate('/'); 
+      navigate('/');
       console.log('회원 탈퇴가 완료되었습니다.');
     } catch (error) {
       console.error('회원 탈퇴 도중 오류 발생:', error);
-  
     }
   };
 
@@ -188,12 +184,11 @@ const MyPrivacy = () => {
 
   const fixBtnHandler = async () => {
     try {
-      const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기 (실제 토큰 키로 대체)
       const updatedUserData = {
-        name: userInfo.name, // 수정된 이름 정보
-        phone: userInfo.phone, // 수정된 전화번호 정보
-        email: userInfo.email, // 수정된 이메일
-        password: userInfo.password, // 비밀번호 값 추가
+        name: userInfo.name,
+        phone: userInfo.phone,
+        email: userInfo.email,
+        password: userInfo.password,
       };
       // 수정할 데이터를 담은 객체를 서버로 전송합니다.
       await apiInstance.patch('/users/mypageInfo', updatedUserData);
