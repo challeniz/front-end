@@ -59,7 +59,27 @@
 
 ---
 
-이미지 or 사용한 언어 로고 정리해서 넣기
+## 🟦 Front-end Stack 🟦
+
+<div align="center">
+<img src="https://img.shields.io/badge/typescript-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>
+<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=flat-square&logo=styledcomponents&logoColor=white"/>
+<img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white"/>
+<img src="https://img.shields.io/badge/prettier-F7B93E?style=flat-square&logo=prettier&logoColor=white"/>
+<img src="https://img.shields.io/badge/VScode-2F80ED?style=flat-square&logo=vsco&logoColor=white"/>
+</div>
+<br>
+
+## 🟦 Cowork tools 🟦
+
+<div align="center">
+<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"/>
+<img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/>
+ <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
+<img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=Postman&logoColor=white"/>
+<img src="https://img.shields.io/badge/♥︎Gather-004088?style=flat-square&logo=gather&logoColor=white"/>
+</div>
 
 <br>
 <br>
