@@ -3,24 +3,20 @@ import * as S from './header.style';
 import { ROUTE } from '../../../routes';
 import { Link, useNavigate } from 'react-router-dom';
 import LogoImage from '../../../assets/image/logo.png';
-import {
-  FaHeartPulse,
-  FaBowlFood,
-  FaLeaf,
-  FaBook,
-  FaCat,
-} from 'react-icons/fa6';
-import { FaUserCircle } from 'react-icons/fa';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import SearchPage from '../../search_page/search_page';
+import MobileMenu from '../mobile_menu/mobile_menu';
+
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // 추가: 모바일 메뉴 상태 관리
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
 
   const token = 'token';
   const user = localStorage.getItem(token);
+
+  const isMobileView = window.innerWidth <= 420;
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
@@ -35,11 +31,16 @@ const Header = () => {
           '챌린지를 개설하려면 먼저 로그인하세요. 로그인 페이지로 이동하시겠습니까?'
         )
       ) {
-        navigate('/login'); // 로그인 페이지로 이동
+        navigate('/login');
       }
     } else {
-      navigate(ROUTE.NEWPAGE.link); // 챌린지 개설 페이지로 이동
+      navigate(ROUTE.NEWPAGE.link);
     }
+  };
+
+  // 추가: 모바일 메뉴 토글 함수
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -54,42 +55,9 @@ const Header = () => {
         </S.Logo>
         <S.HeaderNav>
           <S.NavList>
-            <S.NavItem>챌리니즈 소개</S.NavItem>
             <Link to={ROUTE.LISTPAGE.link}>
               <S.NavItem>
                 <Link to={ROUTE.LISTPAGE.link}>챌린지 둘러보기</Link>
-                {/* <S.SubMenu>
-                  <S.InnerLi>
-                    <FaHeartPulse />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=건강`}>
-                      건강
-                    </Link>
-                  </S.InnerLi>
-                  <S.InnerLi>
-                    <FaCat />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=취미`}>
-                      취미
-                    </Link>
-                  </S.InnerLi>
-                  <S.InnerLi>
-                    <FaBowlFood />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=식습관`}>
-                      식습관
-                    </Link>
-                  </S.InnerLi>
-                  <S.InnerLi>
-                    <FaBook />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=공부`}>
-                      공부
-                    </Link>
-                  </S.InnerLi>
-                  <S.InnerLi>
-                    <FaLeaf />
-                    <Link to={`${ROUTE.LISTPAGE.link}?category=환경`}>
-                      환경
-                    </Link>
-                  </S.InnerLi>
-                </S.SubMenu> */}
               </S.NavItem>
             </Link>
             <S.NavItem onClick={handleChallengeCreationClick}>
@@ -101,7 +69,15 @@ const Header = () => {
         <S.LoginBox>
           <S.LoginList>
             <S.LoginItem>
-              <S.StyledCiUser />
+              {isMobileView ? (
+                isMobileMenuOpen ? (
+                  <S.StyledCiClose onClick={toggleMobileMenu} />
+                ) : (
+                  <S.StyledCiMenu onClick={toggleMobileMenu} />
+                )
+              ) : (
+                <S.StyledCiUser />
+              )}
               <S.SubMenu>
                 {!user ? (
                   <>
@@ -132,6 +108,9 @@ const Header = () => {
           </S.LoginList>
         </S.LoginBox>
       </S.HeaderContainer>
+
+      {/* 추가: 모바일 메뉴 컴포넌트 */}
+      {isMobileMenuOpen && isMobileView && <MobileMenu />}
     </S.HeaderWrapper>
   );
 };

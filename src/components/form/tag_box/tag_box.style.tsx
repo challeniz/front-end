@@ -34,6 +34,20 @@ export const TagForm = styled.form`
     &:hover {
     }
   }
+  @media (max-width: 420px) {
+    input {
+      width: 220px;
+      height: 25px;
+      font-size: 10px;
+      padding: 0 10px;
+    }
+    button {
+      padding-right: 4px;
+      padding-left: 4px;
+      font-size: 12px;
+      width: 56px;
+      margin-left: 10px;
+    }
 `;
 
 export const Tag = styled.div`

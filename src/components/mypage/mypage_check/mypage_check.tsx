@@ -15,6 +15,7 @@ interface Challenge {
   end_date: string;
   title: string;
   posts: [];
+  post_date: string;
 }
 interface updatedChallenge {
   challengeData: {
@@ -25,19 +26,13 @@ interface updatedChallenge {
   name?: string;
 }
 interface dateInfo {
-  recru_open_date: string;
-  recru_end_date: string;
-  start_date: string;
-  end_date: string;
-  title: string;
+  post_date: string;
 }
 const MypageCheck: React.FC<MypageCheckProps> = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [challengeData, setChallengeData] = useState<updatedChallenge>();
   const [challengeInfo, setChallengeInfo] = useState<dateInfo[]>([]);
-
-  const [isParticipated, setIsParticipated] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,16 +49,20 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
             recru_end_date: challenge.recru_end_date,
             start_date: challenge.start_date,
             end_date: challenge.end_date,
+
             posts: challenge.posts.length > 0 ? challenge.posts : [],
           }));
-          console.log(data);
-          const date = data.map((challenge: any) => ({
-            recru_open_date: challenge.recru_open_date,
-            recru_end_date: challenge.recru_end_date,
-            start_date: challenge.start_date,
-            end_date: challenge.end_date,
-            title: challenge.title,
-          }));
+          console.log(challenges);
+          console.log(challenges.post_date);
+          const date = challenges.map((challenge: any) => {
+            const post_dates = challenge.posts.map(
+              (post: any) => post.post_date
+            );
+            return {
+              title: challenge.title,
+              post_dates: post_dates,
+            };
+          });
 
           setChallengeList(challenges);
           setChallengeInfo(date);
@@ -73,7 +72,7 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
         console.error('데이터 가져오기 오류:', error);
       }
     };
-    console.log(challengeData);
+
     fetchData();
   }, []);
 
@@ -110,28 +109,21 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
       groupedChallenges[challenge.title] = [];
     }
   });
-
-  const getEventsForChallenge = (challenge: dateInfo) => {
-    const recruOpenDate = moment(challenge.recru_open_date).format();
-    const recruEndDate = moment(challenge.recru_end_date).format();
-    const startDate = moment(challenge.start_date).format();
-    const endDate = moment(challenge.end_date).format();
-
-    return [
-      {
+  const getEventsForChallenge = (challenge: Challenge) => {
+    const events = challenge.posts.map((post: any) => {
+      const postDate = moment(post.post_date).format();
+      return {
         title: '모집기간',
-        start: recruOpenDate,
-        end: recruEndDate,
+        start: postDate,
+        end: postDate,
         classNames: 'event1-class',
-      },
-      {
-        title: '진행기간',
-        start: startDate,
-        end: endDate,
-        classNames: 'event2-class',
-      },
-    ];
+      };
+    });
+  
+    return events;
   };
+  
+
   return (
     <>
       <S.AuthWrap>

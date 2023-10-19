@@ -1,4 +1,6 @@
 import { FaUserCircle } from 'react-icons/fa';
+import { BiMenu } from 'react-icons/bi';
+import { AiOutlineClose } from 'react-icons/ai';
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
@@ -21,8 +23,21 @@ export const HeaderWrapper = styled.div`
     transition: 0.3s;
   }
 
-  @media (max-width: 930px) {
+  @media (max-width: 1400px) {
     padding: 0 40px;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 30px;
+  }
+
+  @media (max-width: 420px) {
+    padding: 0 20px;
+    height: 65px;
   }
 `;
 
@@ -34,6 +49,10 @@ export const HeaderContainer = styled.header`
 
 export const Logo = styled.div`
   width: 180px;
+
+  @media (max-width: 768px) {
+    width: 150px;
+  }
 `;
 
 export const LogoImg = styled.img`
@@ -61,6 +80,15 @@ export const NavItem = styled.li`
   display: flex;
   font-size: 18px;
   transition: 0.2s;
+
+  @media (max-width: 1024px) {
+    padding: 0 10px;
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 
   &:hover {
     color: #339af0;
@@ -102,6 +130,10 @@ export const LoginItem = styled.li`
   width: 135px;
   height: 100%;
 
+  @media (max-width: 768px) {
+    width: auto;
+  }
+
   &:hover {
     ul {
       visibility: visible;
@@ -113,6 +145,16 @@ export const StyledCiUser = styled(FaUserCircle)`
   width: 2em;
   height: 2em;
   }
+`;
+
+export const StyledCiMenu = styled(BiMenu)`
+  width: 2em;
+  height: 2em;
+`;
+
+export const StyledCiClose = styled(AiOutlineClose)`
+  width: 2em;
+  height: 2em;
 `;
 
 export const SubMenu = styled.ul`
@@ -130,6 +172,10 @@ export const SubMenu = styled.ul`
 
   button {
     background-color: transparent;
+  }
+
+  @media (max-width: 420px) {
+    display: none;
   }
 `;
 

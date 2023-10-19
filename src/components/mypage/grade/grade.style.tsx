@@ -13,6 +13,10 @@ export const GradeTitle = styled.div`
   .title-top {
     padding: 40px 0;
   }
+
+  @media (max-width: 420px) {
+    padding: 30px 20px;
+  }
 `;
 
 export const GradeWrap = styled.div`
@@ -20,6 +24,11 @@ export const GradeWrap = styled.div`
   grid-template-columns: repeat(4, 1fr);
   padding: 40px 0;
   gap: 50px;
+
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px 0;
+  }
 
   div {
     text-align: center;
@@ -41,11 +50,20 @@ export const GradeWrap = styled.div`
     &:nth-child(4):after {
       display: none;
     }
+    @media (max-width: 420px) {
+      &:nth-child(2):after {
+        display: none;
+      }
+    }
 
     p {
       font-size: 20px;
       padding-top: 15px;
       font-weight: 800;
+
+      @media (max-width: 420px) {
+        font-size: 16px;
+      }
     }
     .grade1 {
       color: #f06e64;
@@ -65,6 +83,10 @@ export const GradeWrap = styled.div`
 export const Img = styled.img`
   width: 91px;
   height: 91px;
+  @media (max-width: 420px) {
+    width: 70px;
+    height: 70px;
+  }
 `;
 
 export const GradeInfo = styled.div`
@@ -72,6 +94,10 @@ export const GradeInfo = styled.div`
   align-items: center;
   border-bottom: 1px solid #d9d9d9;
   padding-bottom: 40px;
+
+  @media (max-width: 420px) {
+    flex-wrap: wrap;
+  }
   .gradeBox {
     display: flex;
     align-items: center;
@@ -83,6 +109,11 @@ export const GradeInfo = styled.div`
     font-weight: 600;
     padding: 30px 0;
     width: calc(100% / 4);
+
+    @media (max-width: 420px) {
+      width: calc(100% / 2);
+      font-size: 16px;
+    }
 
     span {
       font-size: 19px;
@@ -110,8 +141,14 @@ export const MyGrade = styled.div`
   display: flex;
   justify-content: space-around;
 
+  @media (max-width: 420px) {
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
   div {
     text-align: center;
+    padding: 10px 0;
 
     h5 {
       font-size: 17px;
@@ -120,6 +157,10 @@ export const MyGrade = styled.div`
     p {
       font-size: 23px;
       font-weight: 700;
+      @media (max-width: 420px) {
+        color: #339af0;
+        font-size: 19px;
+      }
     }
   }
 `;

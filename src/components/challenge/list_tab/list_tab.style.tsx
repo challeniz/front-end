@@ -5,13 +5,24 @@ export const ListTite = styled.div`
   padding-bottom: 50px;
   align-items: flex-end;
 
+  @media (max-width: 420px) {
+    padding: 20px 0;
+  }
+
   h2 {
     font-size: 35px;
     padding-right: 15px;
+
+    @media (max-width: 420px) {
+      font-size: 23px;
+    }
   }
 
   p {
     font-size: 17px;
+    @media (max-width: 420px) {
+      font-size: 15px;
+    }
   }
 `;
 
@@ -25,6 +36,12 @@ export const TabMenu = styled.ul`
   margin-top: 10px;
   justify-contents: center;
 
+  @media (max-width: 420px) {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-bottom: none;
+  }
+
   .submenu {
     display: flex;
     padding: 0 25px 15px;
@@ -34,6 +51,16 @@ export const TabMenu = styled.ul`
     color: #787878;
     cursor: pointer;
     font-weight: 600;
+
+    @media (max-width: 420px) {
+      flex-wrap: wrap;
+      border-radius: 20px;
+      border: 1px solid #787878;
+      padding: 8px;
+      width: calc(100% / 3.1);
+      justify-content: center;
+      margin-bottom: 10px;
+    }
   }
 
   .focused {
@@ -50,6 +77,12 @@ export const TabMenu = styled.ul`
       background-color: #339af0;
       height: 5px;
       border-radius: 10px;
+
+      @media (max-width: 420px) {
+        background-color: #339af0;
+        border: 1px solid #339af0;
+        color: #fff;
+      }
     }
   }
 

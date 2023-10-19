@@ -34,9 +34,45 @@ export const AgreeBox = styled.div`
       text-decoration: underline;
     }
   }
+  @media (max-width:420px) {
+    padding: 10px 15px;
+    margin-left: 20px;
+    span {
+      display: block;
+    }
+    .agree-title {
+      font-size: 12px;
+      padding: 0px 10px;
+      width: 64px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 4px;
+    }
+    }
+    input {
+      width: 16px;
+      height: 25px;
+      margin-right: 5px;
+    }
+    .agree-text{
+      font-size:14px;
+      line-height: 1.4;
+
+      
+    }
+  }
 `;
 export const StyledUl = styled.ul`
   margin-left: 20px;
   color: #545454;
   list-style: disc;
+  @media (max-width:420px) {
+    font-size: 14px;
+  }
+`;
+export const StyledP = styled.p`
+font-size:16px;
+@media (max-width:420px) {
+  font-size: 14px;
+}
 `;
