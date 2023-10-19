@@ -1,46 +1,87 @@
-# Getting Started with Create React App
+# 📡 1. VM <배포용 IP 주소>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 배포용 IP 주소
+- 테스트 계정 <br>
+  ID : <br>
+  PW :
 
-## Available Scripts
+<br>
+<br>
+<br>
 
-In the project directory, you can run:
+# 🔎 2. 서비스 소개 및 기능
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🏡 2-1. 서비스 소개
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 서비스 소개1
+- 서비스 소개2
+- 서비스 소개3 등등 .. 추가
 
-### `npm test`
+## 📷 2-2. 데모영상
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ <details>
+  <summary>회원가입 / 로그인</summary>
+  내용 넣기
+ </details>
+ <details>
+  <summary>챌린지 개설</summary>
+  내용 넣기
+ </details>
+ <details>
+  <summary>챌린지 참여</summary>
+  내용 넣기
+ </details>
+ <details>
+  <summary>챌린지 인증</summary>
+  내용 넣기
+ </details>
+ <details>
+  <summary>마이페이지</summary>
+  내용 넣기
+ </details>
+ <details>
+  <summary>회원정보 수정</summary>
+  내용 넣기
+ </details>
 
-### `npm run build`
+<br>
+<br>
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 🖥️ 3. 기술 스택
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+이미지 or 사용한 언어 로고 정리해서 넣기
 
-### `npm run eject`
+<br>
+<br>
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# 🧷 4. APi 문서
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+API 문서 정리해서 넣기
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<br>
+<br>
+<br>
 
-## Learn More
+# 🖌️ 5. Figma 문서
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+https://www.figma.com/file/SeHE7w071S1xGn4sIPuWYz/%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B5%AC%EC%84%B1?type=design&node-id=1%3A23&mode=design&t=qudcxdSc2iRZEVee-1
+
+<br>
+<br>
+<br>
+
+# 🙋🏻 7. What did I do
+
+---
+
+각자 구현한 기능 넣기 (개인)
