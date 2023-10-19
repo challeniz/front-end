@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import Wrapper from '../../components/common/wrapper/wrapper';
@@ -19,7 +20,17 @@ export interface ChallengeFormDataType {
   tag: string[];
 }
 
+const token = 'token';
+
 const NewPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem(token);
+    if (!user) {
+      navigate('/');
+    }
+  }, [navigate]);
   const [isAgreed] = useState(false);
   const [topic, setTopic] = useState<string>('');
   const [isImageSelected, setIsImageSelected] = useState(false);

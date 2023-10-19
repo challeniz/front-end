@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import * as S from './complete_info.style';
 import { apiInstance } from '../../../utils/api';
 import ModalBasic from '../../comment/comment_write/comment_write';
+import moment from 'moment';
 
 interface Challenge {
   description: string;
@@ -89,7 +90,8 @@ const CompleteInfo = () => {
             <div>
               <h3>{challenge.title}</h3>
               <h4>
-                {challenge.start_date} ~ {challenge.end_date}
+                {moment(challenge.start_date).format('YYYY년 MM월 DD일')} ~{' '}
+                {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
               </h4>
             </div>
           </S.InfoFlex>

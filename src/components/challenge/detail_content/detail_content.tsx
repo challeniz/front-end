@@ -50,6 +50,8 @@ const DetailContent = () => {
             recru_end_date: formatDate(data.challenge.recru_end_date),
           }));
 
+          setImage(data.challenge.mainImg);
+
           const response = await apiInstance.get('/users/mypageInfo');
           const currentUserID = response.data._id;
 

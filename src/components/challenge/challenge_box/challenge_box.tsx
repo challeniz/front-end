@@ -6,6 +6,7 @@ import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import EmptyHeartImg from '../../../assets/image/heart.png';
 import HeartImg from '../../../assets/image/heart_red.png';
+import moment from 'moment';
 import { AiOutlineUser } from 'react-icons/ai';
 import Countdown from '../../../hook/Countdown/Countdown';
 import classnames from 'classnames';
@@ -135,7 +136,8 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
             </Link>
             <S.H4Styled>
               <BsCalendarRange />
-              {challenge.start_date} ~ {challenge.end_date}
+              {moment(challenge.start_date).format('YYYY년 MM월 DD일')} ~{' '}
+              {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
             </S.H4Styled>
           </S.ContentWrap>
         ))}
