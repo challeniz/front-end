@@ -18,8 +18,8 @@
 ## 🔗 1-1. 배포 주소
 
 > IP 주소 : challeniz.mooo.com/api <br>
-> 프론트 GITHUB : <br>
-> 백엔드 GITHUB : <br>
+> 프론트 GITHUB : https://github.com/challeniz/front-end <br>
+> 백엔드 GITHUB : https://github.com/challeniz/back-end<br>
 
 <br>
 
