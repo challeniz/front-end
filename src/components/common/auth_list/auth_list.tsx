@@ -27,16 +27,11 @@ const AuthList: React.FC<AuthListProps> = () => {
 
   // challengeList 상태를 이곳으로 이동
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
-
-  const [challengeData, setChallengeData] = useState<Challenge | null>(null); // challengeData 타입 변경
-
-  // 사용자 이름 상태
-  const [userName, setUserName] = useState<string>('');
+  const [challengeData, setChallengeData] = useState<Challenge | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 인증 데이터를 가져오는 요청
         const response = await apiInstance.get(`/posts/challenges/${id}`);
         const data = response.data;
 

@@ -6,6 +6,7 @@ import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
 import EmptyHeartImg from '../../../assets/image/heart.png';
 import HeartImg from '../../../assets/image/heart_red.png';
+import moment from 'moment';
 import { AiOutlineUser } from 'react-icons/ai';
 import Countdown from '../../../hook/Countdown/Countdown';
 import classnames from 'classnames';
@@ -34,7 +35,6 @@ export interface ChallengeBoxProps {
 
 const ChallengeBox: React.FC<ChallengeBoxProps> = ({
   selectedCategory,
-  handleCategoryClick,
   challenges = [],
   filteredChallenges = challenges,
 }) => {
@@ -58,6 +58,7 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
             like_users: challenge.like_users,
             users: challenge.users || [],
             status: challenge.status,
+            mainImg: challenge.mainImg,
           }));
           setChallengeList(challenges);
         }
@@ -73,7 +74,6 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
       const updatedChallengeList = challengeList.map((challenge) => {
         if (challenge.id === challengeId) {
           const newLikeValue = !challenge.like; // 현재 상태의 반대 값을 얻습니다.
-          console.log(`Challenge ${challengeId} like status: ${newLikeValue}`);
           return {
             ...challenge,
             like: newLikeValue,
@@ -136,7 +136,8 @@ const ChallengeBox: React.FC<ChallengeBoxProps> = ({
             </Link>
             <S.H4Styled>
               <BsCalendarRange />
-              {challenge.start_date} ~ {challenge.end_date}
+              {moment(challenge.start_date).format('YYYY년 MM월 DD일')} ~{' '}
+              {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
             </S.H4Styled>
           </S.ContentWrap>
         ))}

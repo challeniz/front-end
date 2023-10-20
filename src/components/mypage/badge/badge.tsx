@@ -30,7 +30,6 @@ const Badge = () => {
               img: badge.img,
             }));
             setBadges(badgeArray);
-            console.log(response.data);
           }
         }
       } catch (error) {
@@ -46,7 +45,7 @@ const Badge = () => {
       <S.BadgeTitle>
         <h3>활동 배지</h3>
         <S.BadgeWrap>
-          {badges.slice(0, 5).map((badge, index) => (
+          {badges.slice(0, 4).map((badge, index) => (
             <div key={index}>
               <S.Img
                 src={badge.img}
@@ -63,7 +62,7 @@ const Badge = () => {
       <S.BadgeTitle>
         <h3>목표 배지</h3>
         <S.BadgeWrap>
-          {badges.slice(6, 10).map((badge, index) => (
+          {badges.slice(5, 10).map((badge, index) => (
             <div key={index}>
               <S.Img
                 src={badge.img}

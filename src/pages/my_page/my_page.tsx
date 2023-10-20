@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from './my_page.style';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
@@ -8,6 +9,15 @@ import 'react-calendar/dist/Calendar.css';
 import MyInfo from '../../components/mypage/mypage_info/mypage_info';
 
 const MyPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = 'token';
+    const user = localStorage.getItem(token);
+    if (!user) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   return (
     <>

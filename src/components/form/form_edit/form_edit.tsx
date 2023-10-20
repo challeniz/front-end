@@ -4,27 +4,21 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
-  useCallback,
 } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useImageUploader from '../../../hook/imgfiler';
-import DateSelector from '../form_date/form_date';
-import WeekSelector from '../form_week/form_week';
 import {
   FormButton,
   FormCancelButton,
   FormSubmitButton,
 } from '../form_button/form_button';
 import TagBox from '../tag_box/tag_box';
-// import useImageUploader from '../../../hook/imgfiler';
 import axios from 'axios';
 import WhiteBox from '../white_box/white_box/white_box';
 import WhiteBoxContents from '../white_box/white_box_contents/white_box_contents';
 import WhiteBoxTitle from '../white_box/white_box_title/white_box_title';
 import * as S from './form_edit.style';
 import { apiInstance } from '../../../utils/api';
-import ChallengeBox from '../../challenge/challenge_box/challenge_box';
-import { channel } from 'diagnostics_channel';
 
 interface ChallengeFormDataType {
   title: string;
@@ -36,13 +30,6 @@ interface ChallengeFormDataType {
   recru_end_date: string;
   tag: string[];
   mainImg: string;
-}
-
-interface TagBoxProps {
-  tags: string[];
-  onChangeTags: (tags: string[]) => void;
-  children?: React.ReactNode;
-  value?: string[];
 }
 
 interface FormInfoProps {
@@ -62,10 +49,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const [existingChallengeData, setExistingChallengeData] =
-    useState<ChallengeFormDataType | null>(null);
-  const [input, setInput] = useState<string>('');
-  const [localTags, setLocalTags] = useState<string[]>([]);
 
   // 태그 관련 상태와 함수들을 정의
   const [tags, setTags] = useState<string[]>([]);
@@ -86,7 +69,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
 
   //태그
   const handleChangeTags = (newTags: string[]) => {
-    console.log('newTags', newTags);
     setData((prevData) => ({
       ...prevData,
       tag: newTags as string[],
@@ -131,7 +113,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
           end_date: challengeData.challenge.end_date,
           mainImg: challengeData.challenge.mainImg,
         }));
-        console.log('mainImg:', challengeData.challenge.mainImg); // mainImg를 console.log로 출력
       } catch (error) {
         console.error('Error:', error);
       }
@@ -151,7 +132,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         alert('챌린지설명을 입력하세요.');
       } else if (tag.length === 0) {
         alert('태그를 입력하세요.');
-        console.log('설명', tags);
       }
 
       const formData = new FormData();
@@ -169,7 +149,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
         formData.append('start_date', startDate.toISOString());
         formData.append('end_date', endDate.toISOString());
       }
-      console.log(endDate);
       if (fileInput.current) {
         const selectedFile =
           fileInput.current.files && fileInput.current.files[0];
@@ -202,9 +181,9 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        console.log('error', error.response);
+        console.error('error', error.response);
       } else {
-        console.log('error', error);
+        console.error('error', error);
       }
     }
   };
@@ -215,7 +194,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       ...prevData,
       cate: value,
     }));
-    console.log(value);
   };
 
   // 이미지지업로드
@@ -235,7 +213,6 @@ const FormEdit: React.FC<FormInfoProps> = (props: FormInfoProps) => {
       setSelectedImage(null); // 이미지 선택되지 않음
       alert('이미지를 선택해주세요.');
     }
-    console.log('이미지', selectedFile);
   };
 
   const handleDateRangeSelect = (

@@ -4,6 +4,7 @@ import * as S from './status_info.style';
 import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 interface Challenge {
   mainImg: string;
@@ -54,15 +55,10 @@ const StatusInfo = () => {
             <div>
               <h3>{challenge.title}</h3>
               <h4>
-                {challenge.start_date} ~ {challenge.end_date}
+                {moment(challenge.start_date).format('YYYY년 MM월 DD일')} ~{' '}
+                {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
               </h4>
             </div>
-            <S.PercentWrap>
-              <p>달성률</p>
-              <h5>
-                70<span>%</span>
-              </h5>
-            </S.PercentWrap>
           </S.InfoFlex>
           <Link to={`${ROUTE.AUTHPAGE.link}/${challenge.id}`}>
             <S.ButtonAuth>챌린지 인증하기</S.ButtonAuth>

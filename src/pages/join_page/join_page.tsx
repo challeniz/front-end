@@ -37,7 +37,6 @@ const JoinPage = () => {
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-
     if (emailRegex.test(email)) {
       setEmailValid(true);
     } else {
@@ -47,7 +46,6 @@ const JoinPage = () => {
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-
     if (passwordRegex.test(password)) {
       setPasswordValid(true);
     } else {
@@ -58,7 +56,6 @@ const JoinPage = () => {
   const handleConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const confirmPasswordValue = e.target.value;
     setConfirmPw(confirmPasswordValue);
-
     if (password === confirmPasswordValue) {
       setConfirmPwValid(true);
     } else {
@@ -68,7 +65,6 @@ const JoinPage = () => {
 
   const handleNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickName(e.target.value);
-
     if (nickNameRegex.test(nickName)) {
       setConfirmNickNameValid(true);
     } else {

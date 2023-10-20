@@ -3,6 +3,7 @@ import * as S from './heart_info.style';
 import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link, useParams } from 'react-router-dom';
+import moment from 'moment';
 
 interface Challenge {
   mainImg: string;
@@ -83,7 +84,8 @@ const HeartInfo = () => {
                 <h3>{challenge.title}</h3>
               </Link>
               <h4>
-                {challenge.start_date} ~ {challenge.end_date}
+                {moment(challenge.start_date).format('YYYY년 MM월 DD일')} ~{' '}
+                {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
               </h4>
             </div>
           </S.InfoFlex>

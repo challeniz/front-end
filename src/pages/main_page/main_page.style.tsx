@@ -1,6 +1,5 @@
-import { CiCircleChevLeft, CiCircleChevRight, CiSearch } from 'react-icons/ci';
+import { CiCircleChevLeft, CiCircleChevRight } from 'react-icons/ci';
 import styled from 'styled-components';
-import Slider from 'react-slick';
 export const PopularList = styled.div`
   margin-bottom: 180px;
 

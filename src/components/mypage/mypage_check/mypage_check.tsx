@@ -38,10 +38,8 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        console.log('token', token);
         const response = await apiInstance.get('/posts/my');
         const data = response.data;
-        console.log('Received data:', data);
         if (data.length > 0) {
           const challenges = data.map((challenge: any) => ({
             title: challenge.title,
@@ -52,8 +50,6 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
 
             posts: challenge.posts.length > 0 ? challenge.posts : [],
           }));
-          console.log(challenges);
-          console.log(challenges.post_date);
           const date = challenges.map((challenge: any) => {
             const post_dates = challenge.posts.map(
               (post: any) => post.post_date
@@ -66,7 +62,6 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
 
           setChallengeList(challenges);
           setChallengeInfo(date);
-          console.log('날짜', date);
         }
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
@@ -119,10 +114,9 @@ const MypageCheck: React.FC<MypageCheckProps> = () => {
         classNames: 'event1-class',
       };
     });
-  
+
     return events;
   };
-  
 
   return (
     <>

@@ -3,6 +3,7 @@ import * as S from './create_info.style';
 import { apiInstance } from '../../../utils/api';
 import { ROUTE } from '../../../routes';
 import { Link, useParams } from 'react-router-dom';
+import moment from 'moment';
 
 interface Challenge {
   mainImg: string;
@@ -22,13 +23,15 @@ const CreateInfo = () => {
         const challengeResponse = await apiInstance.get('/users/mypageChall');
         if (challengeResponse.status === 200) {
           const challenges: Challenge[] =
-            challengeResponse.data.createChallenge.map((challenge: any) => ({
-              ...challenge,
-              start_date: new Date(challenge.start_date).toLocaleDateString(),
-              end_date: new Date(challenge.end_date).toLocaleDateString(),
-              mainImg: challenge.mainImg,
-              id: challenge._id,
-            }));
+            challengeResponse.data.updateCreateChallenge.map(
+              (challenge: any) => ({
+                ...challenge,
+                start_date: new Date(challenge.start_date).toLocaleDateString(),
+                end_date: new Date(challenge.end_date).toLocaleDateString(),
+                mainImg: challenge.mainImg,
+                id: challenge._id,
+              })
+            );
 
           setLikeUserData(challenges);
         }
@@ -51,7 +54,8 @@ const CreateInfo = () => {
             <div>
               <h3>{challenge.title}</h3>
               <h4>
-                {challenge.start_date} ~ {challenge.end_date}
+                {moment(challenge.start_date).format('YYYY년 MM월 DD일')} ~{' '}
+                {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
               </h4>
             </div>
           </S.InfoFlex>

@@ -64,11 +64,9 @@ export const TabMenu = styled.ul`
   }
 
   .focused {
-    color: #fff;
+    color: #339af0;
     position: relative;
     font-weight: 600;
-    background-color: #339af0;
-    border: 1px solid #339af0;
 
     &::before {
       content: '';
@@ -81,7 +79,9 @@ export const TabMenu = styled.ul`
       border-radius: 10px;
 
       @media (max-width: 420px) {
-        display: none;
+        background-color: #339af0;
+        border: 1px solid #339af0;
+        color: #fff;
       }
     }
   }

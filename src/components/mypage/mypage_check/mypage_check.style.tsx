@@ -46,8 +46,23 @@ export const FullCalendarDiv = styled.div`
     margin-left: auto;
     margin-right: auto;
   }
-  .fc-daygrid-day-number{
+  .fc-daygrid-day-number {
     margin-left: auto;
     margin-right: auto;
+  }
+  .fc-daygrid-event-harness {
+    right: 0px !important;
+    top: -20px !important;
+    height: 100%;
+  }
+  .fc-h-event {
+    height: 200%;
+    opacity: 0.5;
+  }
+  .fc-direction-ltr .fc-daygrid-event.fc-event-start {
+    margin-left: 0px;
+  }
+  .fc-direction-ltr .fc-daygrid-event.fc-event-end {
+    margin-right: 0px;
   }
 `;

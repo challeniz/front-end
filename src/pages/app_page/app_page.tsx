@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as S from './app_page.style';
 import * as D from '../../components/form/form_agree/form_agree.style';
@@ -13,12 +13,11 @@ import {
   FormCancelButton,
   FormSubmitButton,
 } from '../../components/form/form_button/form_button';
-
 import { apiInstance } from '../../utils/api';
 
 interface FormData {
   name: string;
-  phone: string; // phone 프로퍼티 추가
+  phone: string;
   email: string;
 }
 
@@ -28,7 +27,18 @@ const initialFormState: FormData = {
   email: '',
 };
 
+const token = 'token';
+
 const ApplicationPage: React.FC = () => {
+  const navigate1 = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem(token);
+    if (!user) {
+      navigate1('/');
+    }
+  }, [navigate1]);
+
   const { id } = useParams();
   const [challengeInfo, setChallengeInfo] = useState({
     description: '',
@@ -89,9 +99,7 @@ const ApplicationPage: React.FC = () => {
     setIsAgreed(isChecked);
   };
 
-
   const handleChallengeSubmit = async () => {
-    // 챌린지 생성 API 호출
     if (!isAgreed) {
       alert('약관에 동의해야 합니다.');
       return;
@@ -138,7 +146,6 @@ const ApplicationPage: React.FC = () => {
             email: data.email,
           });
         }
-      
       } catch (error) {
         console.error('챌린지 정보가 없습니다', error);
       }

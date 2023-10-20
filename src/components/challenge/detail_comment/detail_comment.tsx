@@ -43,10 +43,6 @@ const Comment = () => {
     fetchReviews();
   }, [id]);
 
-  const [mypageInfo, setMypageInfo] = useState({
-    name: '',
-  });
-
   // 리뷰의 총 개수 계산
   const totalReviews = reviews.length;
 

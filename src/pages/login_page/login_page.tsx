@@ -9,7 +9,6 @@ import {
 import { ROUTE } from '../../routes';
 import { apiInstance } from '../../utils/api';
 
-
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,11 +35,10 @@ const LoginPage = () => {
     }
   };
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-
     if (emailRegex.test(email)) {
       setEmailValid(true);
     } else {
@@ -50,7 +48,6 @@ const LoginPage = () => {
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-
     if (passwordRegex.test(password)) {
       setPasswordValid(true);
     } else {
@@ -92,7 +89,6 @@ const LoginPage = () => {
       <S.Memvership>회원 로그인</S.Memvership>
 
       <S.EmailPW>
-   
         <S.InputTitle>이메일 주소</S.InputTitle>
         <S.InputWrap>
           <S.UserIcon>
@@ -128,6 +124,7 @@ const LoginPage = () => {
             <a
               href="https://www.flaticon.com/kr/free-icons/"
               title="키 아이콘"
+              aria-label="키 아이콘 링크입니다."
             ></a>
             <img
               src={require('../../assets/icon/free-icon-key-566076.png')}

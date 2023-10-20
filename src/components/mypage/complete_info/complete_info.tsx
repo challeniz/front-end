@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import * as S from './complete_info.style';
 import { apiInstance } from '../../../utils/api';
 import ModalBasic from '../../comment/comment_write/comment_write';
+import moment from 'moment';
 
 interface Challenge {
   description: string;
@@ -41,16 +42,14 @@ const CompleteInfo = () => {
         const challengeResponse = await apiInstance.get('/users/mypageChall');
         if (challengeResponse.status === 200) {
           const challenges: Challenge[] =
-            challengeResponse.data.updateCreateChallenge.map(
-              (challenge: any) => ({
-                ...challenge,
-                title: challenge.title,
-                mainImg: challenge.mainImg,
-                start_date: new Date(challenge.start_date).toLocaleDateString(),
-                end_date: new Date(challenge.end_date).toLocaleDateString(),
-                id: challenge._id,
-              })
-            );
+            challengeResponse.data.finishChallenge.map((challenge: any) => ({
+              ...challenge,
+              title: challenge.title,
+              mainImg: challenge.mainImg,
+              start_date: new Date(challenge.start_date).toLocaleDateString(),
+              end_date: new Date(challenge.end_date).toLocaleDateString(),
+              id: challenge._id,
+            }));
           setChallengeData(challenges);
         }
       } catch (error) {
@@ -84,13 +83,16 @@ const CompleteInfo = () => {
   return (
     <S.StatusWrap>
       {challengeData.map((challenge, index) => (
-        <S.InfoWrap>
-          <S.StyledImg />
+        <S.InfoWrap key={index}>
+          <S.ImgWrap>
+            <img src={challenge.mainImg} alt="Challenge" />
+          </S.ImgWrap>
           <S.InfoFlex>
             <div>
               <h3>{challenge.title}</h3>
               <h4>
-              {challenge.start_date} ~ {challenge.end_date}
+                {moment(challenge.start_date).format('YYYY년 MM월 DD일')} ~{' '}
+                {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
               </h4>
             </div>
           </S.InfoFlex>

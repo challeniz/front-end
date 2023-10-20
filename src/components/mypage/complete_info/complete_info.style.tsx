@@ -11,49 +11,21 @@ export const InfoFlex = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin: 10px 0 15px;
 `;
 
-export const StyledImg = styled.div`
+export const ImgWrap = styled.div`
   width: 300px;
-  height: 117px;
-  background-color: #d9d9d9;
-  border-radius: 10px;
+  height: 126px;
+  border-radius: 23px;
   margin-bottom: 14px;
-`;
+  position: relative;
 
-export const TagEdit = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  a {
-    font-size: 14px;
-    padding: 5px 13px;
-    background-color: #ccc;
-    border-radius: 5px;
-    margin-right: 8px;
-    cursor: pointer;
-  }
-`;
-
-export const InfoWrap = styled.div`
-  display: flex;
-  width: 300px;
-  flex-direction: column;
-`;
-
-export const PercentWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  h5 {
-    font-size: 30px;
-    font-weight: 600;
-
-    span {
-      font-size: 18px;
-      font-weight: 500;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
   }
 `;
 
@@ -70,4 +42,10 @@ export const ButtonAuth = styled.div`
     background-color: #339af0;
     color: #fff;
   }
+`;
+
+export const InfoWrap = styled.div`
+  display: flex;
+  width: 300px;
+  flex-direction: column;
 `;

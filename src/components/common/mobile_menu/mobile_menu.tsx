@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as S from './mobile_menu.style';
 import { ROUTE } from '../../../routes';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const token = 'token';
 const user = localStorage.getItem(token);

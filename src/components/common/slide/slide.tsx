@@ -1,10 +1,8 @@
 import React from 'react';
 import * as S from './slide.style';
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { AiOutlineLeft } from 'react-icons/ai';
 import { ROUTE } from '../../../routes';
 import banner1 from '../../../assets/image/banner.jpg';
 import banner2 from '../../../assets/image/banner_2.jpg';

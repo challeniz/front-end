@@ -23,16 +23,18 @@ export const StyledImg = styled.div`
 `;
 
 export const ImgWrap = styled.div`
+  width: 300px;
+  height: 126px;
+  border-radius: 23px;
+  margin-bottom: 14px;
+  position: relative;
+
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
   }
-`;
-
-export const InfoWrap = styled.div`
-  // display: flex;
-  // width: 300px;
-  // flex-direction: column;
 `;
 
 export const ButtonAuth = styled.div`
