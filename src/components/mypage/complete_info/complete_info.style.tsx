@@ -11,7 +11,7 @@ export const InfoFlex = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin: 10px 0 15px;
 `;
 
 export const ImgWrap = styled.div`
@@ -29,41 +29,6 @@ export const ImgWrap = styled.div`
   }
 `;
 
-export const TagEdit = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  a {
-    font-size: 14px;
-    padding: 5px 13px;
-    background-color: #ccc;
-    border-radius: 5px;
-    margin-right: 8px;
-    cursor: pointer;
-  }
-`;
-
-export const InfoWrap = styled.div`
-  display: flex;
-  width: 300px;
-  flex-direction: column;
-`;
-
-export const PercentWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  h5 {
-    font-size: 30px;
-    font-weight: 600;
-
-    span {
-      font-size: 18px;
-      font-weight: 500;
-    }
-  }
-`;
-
 export const ButtonAuth = styled.div`
   border-radius: 10px;
   border: 1px solid #339af0;
@@ -77,4 +42,10 @@ export const ButtonAuth = styled.div`
     background-color: #339af0;
     color: #fff;
   }
+`;
+
+export const InfoWrap = styled.div`
+  display: flex;
+  width: 300px;
+  flex-direction: column;
 `;

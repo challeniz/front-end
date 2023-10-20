@@ -64,6 +64,7 @@ const ListContent = () => {
             ).toLocaleDateString(),
             status: challenge.status,
             users: challenge.users,
+            mainImg: challenge.mainImg,
           }));
        
           setChallengeList(challenges);
