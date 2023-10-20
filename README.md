@@ -1,4 +1,4 @@
-# 🙌 1. 챌리니즈
+# 1. 챌리니즈
 
 > ### 함께 도전하는 즐거움! 챌리니즈 입니다.
 >
@@ -42,7 +42,7 @@
 <br>
 <br>
 
-# 💡 2. 프로젝트 소개 및 기능
+# 2. 프로젝트 소개 및 기능
 
 ## 📁 2-1. 프로젝트 소개
 
@@ -98,7 +98,7 @@
 <br>
 <br>
 
-# 🔧 3. 기술 스택
+# 3. 기술 스택
 
 ## ✔️ Frond-end
 
@@ -138,7 +138,7 @@
 <br>
 <br>
 
-# 🎨 4. Figma 문서
+# 4. Figma 문서
 
 https://www.figma.com/file/SeHE7w071S1xGn4sIPuWYz/%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B5%AC%EC%84%B1?type=design&node-id=1%3A23&mode=design&t=qudcxdSc2iRZEVee-1
 
@@ -146,7 +146,7 @@ https://www.figma.com/file/SeHE7w071S1xGn4sIPuWYz/%ED%8E%98%EC%9D%B4%EC%A7%80-%E
 <br>
 <br>
 
-# 🙋‍♀️ 5. What did i do
+# 5. What did i do
 
 ---
 
