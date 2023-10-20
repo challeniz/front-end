@@ -1,13 +1,13 @@
+<a href="challeniz.mooo.com/api"><img src="https://cdn.discordapp.com/attachments/984416996366114866/1164795546687508502/image_29.png?ex=65448363&is=65320e63&hm=5bdde810aba5a29d7fa5831e673b8490de0f9be6799a18ea8b63637dcdcdd228&"></a>
+
 # 1. 챌리니즈
 
 > ### 함께 도전하는 즐거움! 챌리니즈 입니다.
 >
 > 엘리스코딩 SW엔지니어트랙 5기 팀프로젝트 <br>
-> 개발 기간 : 2023.08 ~ 2023.10 <br> > <br>
+> 개발 기간 : 2023.08 ~ 2023.10 <br>
 
 <br>
-
-<img src="https://cdn.discordapp.com/attachments/984416996366114866/1164795546687508502/image_29.png?ex=65448363&is=65320e63&hm=5bdde810aba5a29d7fa5831e673b8490de0f9be6799a18ea8b63637dcdcdd228&">
 
 <br>
 <br>
