@@ -90,15 +90,9 @@ const CompleteInfo = () => {
             <div>
               <h3>{challenge.title}</h3>
               <h4>
-                {challenge.start_date} ~ {challenge.end_date}
+              {challenge.start_date} ~ {challenge.end_date}
               </h4>
             </div>
-            <S.PercentWrap>
-              <p>달성률</p>
-              <h5>
-                100<span>%</span>
-              </h5>
-            </S.PercentWrap>
           </S.InfoFlex>
           <S.ButtonAuth
             onClick={() => handleChallengeClick(selectedChallenge!)}

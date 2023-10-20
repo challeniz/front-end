@@ -53,7 +53,7 @@ const DetailContent = () => {
 
           const response = await apiInstance.get('/users/mypageInfo');
           const currentUserID = response.data._id;
-
+          setImage(data.challenge.mainImg);
           setUserInfo({
             id: currentUserID.id,
           });
