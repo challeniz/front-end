@@ -28,13 +28,13 @@
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href=""><img src="https://cdn.discordapp.com/attachments/1123912547830071367/1129223692094799902/image.png?ex=65444d84&is=6531d884&hm=749559416a2c6d0bc240f9add4298a0e86ca09393b02e4637c545b0bd7a7e0f5&" style="width:100%;" alt=""/><br /><sub><b>FE : 이윤지</b></sub></a><br />
+      <td align="center"><img src="https://cdn.discordapp.com/attachments/1123912547830071367/1129223692094799902/image.png?ex=65444d84&is=6531d884&hm=749559416a2c6d0bc240f9add4298a0e86ca09393b02e4637c545b0bd7a7e0f5&" style="width:100%;" alt=""/><br /><sub><b>FE : 이윤지</b></sub><br />
       <a href="https://github.com/devuoon">
       <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"/></a></td>
-      <td align="center"><a href=""><img src="https://cdn.discordapp.com/attachments/1139860740522655764/1164794358357311499/IMG_7160.PNG?ex=65448247&is=65320d47&hm=9049a59e17636fd761afb3df9f80aa7fb1e115109223eb5b7b530d9cac766942&" style="width:100%;" alt=""/><br /><sub><b>FE : 김다솔 </b></sub></a><br />
+      <td align="center"><img src="https://cdn.discordapp.com/attachments/1139860740522655764/1164794358357311499/IMG_7160.PNG?ex=65448247&is=65320d47&hm=9049a59e17636fd761afb3df9f80aa7fb1e115109223eb5b7b530d9cac766942&" style="width:100%;" alt=""/><br /><sub><b>FE : 김다솔 </b></sub><br />
        <a href="https://github.com/da22sol">
       <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"/></a></td>
-      <td align="center"><a href=""><img src="https://cdn.discordapp.com/attachments/1123912547830071367/1129223870675689502/1689298240585.png?ex=65444dae&is=6531d8ae&hm=80bcc153eb22cb89bcdbf4495355e3a366f9c30e4405f5511fc4c4defc87c8df&" style="width:100%;" alt=""/><br /><sub><b>BE : 허정주 </b></sub></a><br />
+      <td align="center"><img src="https://cdn.discordapp.com/attachments/1123912547830071367/1129223870675689502/1689298240585.png?ex=65444dae&is=6531d8ae&hm=80bcc153eb22cb89bcdbf4495355e3a366f9c30e4405f5511fc4c4defc87c8df&" style="width:100%;" alt=""/><br /><sub><b>BE : 허정주 </b></sub><br />
        <a href="https://github.com/wjdwnwbel">
       <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"/></a></td>
      <tr/>
