@@ -1,19 +1,58 @@
-# 📡 1. VM <배포용 IP 주소>
+# 🙌 1. 챌리니즈
 
-- 배포용 IP 주소
-- 테스트 계정 <br>
-  ID : admin@admin.com<br>
-  PW : test123123!!
+> ### 함께 도전하는 즐거움! 챌리니즈 입니다.
+>
+> 엘리스코딩 SW엔지니어트랙 5기 팀프로젝트 <br>
+> 개발 기간 : 2023.08 ~ 2023.10 <br> > <br>
+
+<br>
+
+<img src="https://cdn.discordapp.com/attachments/984416996366114866/1164795546687508502/image_29.png?ex=65448363&is=65320e63&hm=5bdde810aba5a29d7fa5831e673b8490de0f9be6799a18ea8b63637dcdcdd228&">
+
+<br>
+<br>
+
+## 🔗 1-1. 배포 주소
+
+> IP 주소 : challeniz.mooo.com/api <br>
+> 프론트 GITHUB : <br>
+> 백엔드 GITHUB : <br>
+
+<br>
+
+## 👨‍👧‍👦 1-2. 개발팀 소개
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href=""><img src="https://cdn.discordapp.com/attachments/1123912547830071367/1129223692094799902/image.png?ex=65444d84&is=6531d884&hm=749559416a2c6d0bc240f9add4298a0e86ca09393b02e4637c545b0bd7a7e0f5&" style="width:100%;" alt=""/><br /><sub><b>FE : 이윤지</b></sub></a><br />
+      <a href="https://github.com/devuoon">
+      <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"/></a></td>
+      <td align="center"><a href=""><img src="https://cdn.discordapp.com/attachments/1139860740522655764/1164794358357311499/IMG_7160.PNG?ex=65448247&is=65320d47&hm=9049a59e17636fd761afb3df9f80aa7fb1e115109223eb5b7b530d9cac766942&" style="width:100%;" alt=""/><br /><sub><b>FE : 김다솔 </b></sub></a><br />
+       <a href="https://github.com/da22sol">
+      <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"/></a></td>
+      <td align="center"><a href=""><img src="https://cdn.discordapp.com/attachments/1123912547830071367/1129223870675689502/1689298240585.png?ex=65444dae&is=6531d8ae&hm=80bcc153eb22cb89bcdbf4495355e3a366f9c30e4405f5511fc4c4defc87c8df&" style="width:100%;" alt=""/><br /><sub><b>BE : 허정주 </b></sub></a><br />
+       <a href="https://github.com/wjdwnwbel">
+      <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"/></a></td>
+     <tr/>
+  </tbody>
+</table>
 
 <br>
 <br>
 <br>
 
-# 🔎 2. 서비스 소개 및 기능
+# 💡 2. 프로젝트 소개 및 기능
 
----
+## 📁 2-1. 프로젝트 소개
 
-## 🏡 2-1. 서비스 소개
+### 나에게 필요한 좋은 습관들 혼자 하기 힘드신가요?
+
+아침기상, 운동, 책읽기, 취미연습까지 나에게 필요한 작은 도전들, 같은 목표를 가진 사람들과 함께 도전하면 끝까지 해낼 수 있습니다. 이제는 작심 3일이 아닌 작심 30일은 해봅시다!
+
+<br>
+
+## 📆 2-2. 주요 기능
 
 - 원하는 챌린지를 개설해서 다른 사용자들과 함께 도전할 수 있다.
 - 개설된 챌린지 중 선택하여 여러가지 챌린지를 참여할 수 있다.
@@ -24,7 +63,11 @@
 
 <br>
 
-## 📷 2-2. 데모영상
+## 💻 2-3. 페이지별 화면
+
+<br>
+
+## 🎬 2-4. 데모영상
 
  <details>
   <summary>회원가입 / 로그인</summary>
@@ -55,11 +98,9 @@
 <br>
 <br>
 
-# 🖥️ 3. 기술 스택
+# 🔧 3. 기술 스택
 
----
-
-## 🟦 Front-end Stack 🟦
+## ✔️ Frond-end
 
 <div>
 <img src="https://img.shields.io/badge/typescript-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
@@ -71,7 +112,19 @@
 </div>
 <br>
 
-## 🟦 Cowork tools 🟦
+## ✔️ Back-end
+
+<div>
+<img src="https://img.shields.io/badge/node.js-339933?style=flat-square&logo=Node.js&logoColor=white">
+<img src="https://img.shields.io/badge/mongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white">
+<img src="https://img.shields.io/badge/express-000000?style=flat-square&logo=express&logoColor=white">
+<img src="https://img.shields.io/badge/linux-FCC624?style=flat-square&logo=linux&logoColor=black"> 
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=flat-square&logo=amazonaws&logoColor=white"> 
+</div>
+
+<br>
+
+## ✔️ Cowork tools
 
 <div>
 <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"/>
@@ -85,9 +138,7 @@
 <br>
 <br>
 
-# 🖌️ 4. Figma 문서
-
----
+# 🎨 4. Figma 문서
 
 https://www.figma.com/file/SeHE7w071S1xGn4sIPuWYz/%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B5%AC%EC%84%B1?type=design&node-id=1%3A23&mode=design&t=qudcxdSc2iRZEVee-1
 
@@ -95,8 +146,11 @@ https://www.figma.com/file/SeHE7w071S1xGn4sIPuWYz/%ED%8E%98%EC%9D%B4%EC%A7%80-%E
 <br>
 <br>
 
-# 🙋🏻 5. What did I do
+# 🙋‍♀️ 5. What did i do
 
 ---
 
-각자 구현한 기능 넣기 (개인)
+<details>
+  <summary></summary>
+  내용 넣기
+ </details>
