@@ -8,7 +8,7 @@ interface Grade {
 }
 
 const Grade = () => {
-  const [grade, setGrade] = useState<Grade|null>(null);
+  const [grade, setGrade] = useState<Grade | null>(null);
 
   useEffect(() => {
     async function fetchGrade() {
@@ -83,7 +83,7 @@ const Grade = () => {
       <S.MyGrade>
         <div>
           <h5>내 등급</h5>
-          <p>{grade?.grade}</p> 
+          <p>{grade?.grade}</p>
         </div>
         <div>
           <h5>챌린지 인증</h5>
@@ -93,17 +93,17 @@ const Grade = () => {
           <h5>다음 등급까지 남은 인증</h5>
           {grade ? (
             grade.verifiCount <= 14 ? (
-              <p>{14 - grade.verifiCount}</p>
+              <p>{14 - grade.verifiCount}개</p>
             ) : grade.verifiCount < 30 ? (
-              <p>{29 - grade.verifiCount}</p>
+              <p>{29 - grade.verifiCount}개</p>
             ) : grade.verifiCount < 50 ? (
-              <p>{49 - grade.verifiCount}</p>
+              <p>{49 - grade.verifiCount}개</p>
             ) : (
-              <p>{grade.verifiCount}</p>
+              <p>{grade.verifiCount}개</p>
             )
           ) : (
-          <p>등급 정보를 불러올 수 없습니다.</p>
-        )}
+            <p>등급 정보를 불러올 수 없습니다.</p>
+          )}
         </div>
       </S.MyGrade>
     </S.GradeTitle>

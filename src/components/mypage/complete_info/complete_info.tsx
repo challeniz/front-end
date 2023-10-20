@@ -42,16 +42,14 @@ const CompleteInfo = () => {
         const challengeResponse = await apiInstance.get('/users/mypageChall');
         if (challengeResponse.status === 200) {
           const challenges: Challenge[] =
-            challengeResponse.data.updateCreateChallenge.map(
-              (challenge: any) => ({
-                ...challenge,
-                title: challenge.title,
-                mainImg: challenge.mainImg,
-                start_date: new Date(challenge.start_date).toLocaleDateString(),
-                end_date: new Date(challenge.end_date).toLocaleDateString(),
-                id: challenge._id,
-              })
-            );
+            challengeResponse.data.finishChallenge.map((challenge: any) => ({
+              ...challenge,
+              title: challenge.title,
+              mainImg: challenge.mainImg,
+              start_date: new Date(challenge.start_date).toLocaleDateString(),
+              end_date: new Date(challenge.end_date).toLocaleDateString(),
+              id: challenge._id,
+            }));
           setChallengeData(challenges);
         }
       } catch (error) {
@@ -85,8 +83,10 @@ const CompleteInfo = () => {
   return (
     <S.StatusWrap>
       {challengeData.map((challenge, index) => (
-        <S.InfoWrap>
-          <S.StyledImg />
+        <S.InfoWrap key={index}>
+          <S.ImgWrap>
+            <img src={challenge.mainImg} alt="Challenge" />
+          </S.ImgWrap>
           <S.InfoFlex>
             <div>
               <h3>{challenge.title}</h3>
@@ -95,12 +95,6 @@ const CompleteInfo = () => {
                 {moment(challenge.end_date).format('YYYY년 MM월 DD일')}
               </h4>
             </div>
-            <S.PercentWrap>
-              <p>달성률</p>
-              <h5>
-                100<span>%</span>
-              </h5>
-            </S.PercentWrap>
           </S.InfoFlex>
           <S.ButtonAuth
             onClick={() => handleChallengeClick(selectedChallenge!)}
