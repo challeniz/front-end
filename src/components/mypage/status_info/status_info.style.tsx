@@ -49,24 +49,6 @@ export const InfoWrap = styled.div`
   flex-direction: column;
 `;
 
-export const PercentWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  p {
-    padding-bottom: 15px;
-  }
-
-  h5 {
-    font-size: 38px;
-
-    span {
-      font-size: 18px;
-      font-weight: 500;
-    }
-  }
-`;
-
 export const ButtonAuth = styled.div`
   border-radius: 10px;
   border: 1px solid #339af0;

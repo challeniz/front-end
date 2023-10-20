@@ -11,7 +11,7 @@ export const InfoFlex = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0 15px;
+  margin-bottom: 15px;
 `;
 
 export const ImgWrap = styled.div`
