@@ -20,13 +20,14 @@ const Header = () => {
 
   const isMobileView = window.innerWidth <= 420;
 
+  // 이 부분을 async 함수로 변경
   useEffect(() => {
     const fetchData = async () => {
-      const response = await apiInstance.patch('users/logout');
+      const response = await apiInstance.patch('api/users/logout');
       const storedToken = localStorage.getItem('token');
     };
 
-    fetchData();
+    fetchData(); // async 함수 호출
   }, []);
 
   const navigate = useNavigate();
@@ -101,15 +102,7 @@ const Header = () => {
                     <button
                       onClick={() => {
                         localStorage.removeItem('token');
-
-                        apiInstance
-                          .patch('users/logout')
-                          .then((response) => {
-                            window.location.reload();
-                          })
-                          .catch((error) => {
-                            console.error('로그아웃 실패:', error);
-                          });
+                        window.location.reload();
                       }}
                     >
                       <S.InnerLi>로그아웃</S.InnerLi>
