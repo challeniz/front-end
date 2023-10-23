@@ -1,94 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import * as S from './auth_list.style';
-import ModalBasic from '../modal/modal';
-import { apiInstance } from '../../../utils/api';
+import styled from 'styled-components';
+import HeartImg from '../../../assets/image/heart_red.png';
 
-interface AuthListProps {}
+export const AuthWrap = styled.div`
+  padding: 0px 0 100px;
+`;
 
-interface Challenge {
-  description: string;
-  img: string;
-  userName: string;
-  postDate: string;
-  title: string;
-}
+export const AuthGrid = styled.div`
+display: flex;
+grid-template-columns: repeat(4, 1fr);
+grid-column-gap: 10px;
+grid-row-gap: 20px;
+flex-wrap: wrap;
 
-const AuthList: React.FC<AuthListProps> = () => {
-  // 모달창 노출 여부 state
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+`;
 
-  // 모달창 노출
-  const showModal = () => {
-    setModalOpen(true);
-  };
-  
+export const ImgWrap = styled.div`
+  background-color: #d9d9d9;
+  width: calc(100% /4.2);
+  height: 210px;
+  cursor: pointer;
+`;
 
-  const { id } = useParams();
+export const CalendarWrap = styled.div`
+  width: 100%;
+  height: 310px;
 
-  // challengeList 상태를 이곳으로 이동
-  const [challengeList, setChallengeList] = useState<Challenge[]>([]);
-  const [challengeData, setChallengeData] = useState<Challenge | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiInstance.get(`/posts/challenges/${id}`);
-        const data = response.data;
-     
-        if (data.length > 0) {
-          const challenges = data.map((challenge: any) => ({
-            userName: challenge.user.name,
-            img: challenge.img,
-            description: challenge.description,
-            title: challenge.title,
-            postDate: challenge.post_date,
-          }));
-          setChallengeList(challenges);
-        }
-      } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
-  const handleChallengeClick = (challenge: Challenge) => {
-    const postDate = new Date(challenge.postDate);
-    const formattedDate = `${postDate.getFullYear()}년 ${postDate.getMonth() + 1}월 ${postDate.getUTCDate()}일`;
-  
-    const modifiedChallenge = { ...challenge, postDate: formattedDate };
-  
-    setChallengeData(modifiedChallenge);
-    showModal();
-  };
-  
-
-  return (
-    <>
-      <S.AuthWrap>
-        <S.AuthGrid>
-          {challengeList.map((challenge, index) => (
-            <S.ImgWrap
-              key={index}
-              onClick={() => handleChallengeClick(challenge)}
-            >
-              <img src={challenge.img} alt="Challenge Image" />
-            </S.ImgWrap>
-          ))}
-          {modalOpen && challengeData && (
-            <ModalBasic
-              setModalOpen={setModalOpen}
-              challengeData={challengeData}
-              postDate={challengeData.postDate}
-              userName={challengeData.userName}
-            />
-          )}
-        </S.AuthGrid>
-      </S.AuthWrap>
-    </>
-  );
-};
-
-export default AuthList;
+  .fc {
+    width: 100%;
+    height: 100%;
+  }
+  .fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0px;
+  }
+  .fc .fc-toolbar-title {
+    font-size: 15px;
+  }
+  .fc .fc-button {
+    font-size: 14px;
+    padding: 4px 10px;
+  }
+  .fc .fc-view-harness {
+    font-size: 11px;
+  }
+  .fc-event-main img {
+    width: 30px;
+    height: 30px;
+  }
+  .fc-h-event {
+    background-color: #f9f518;
+    border: 1px solid #f9f518;
+    display: block;
+    height: 15px;
+  }
+  .fc-daygrid-event {
+    border-radius: 10px;
+  }
+  .event1-class {
+    /* 스타일 커스터마이징 */
+  }
+  .event2-class {
+    background-image: url(${HeartImg});
+    background-size: cover;
+    border: none;
+    width: 43px;
+    height: 43px;
+    background-color: transparent;
+    position: absolute;
+    top: -21px;
+    left: 0px;
+  }
+`;
