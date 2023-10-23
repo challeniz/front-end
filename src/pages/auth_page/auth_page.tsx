@@ -26,7 +26,7 @@ const AuthPage: React.FC = () => {
     description: '',
     file: null,
   });
-
+  const navigate = useNavigate();
   // 내용
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;
@@ -47,6 +47,7 @@ const AuthPage: React.FC = () => {
     if (window.confirm('정말 취소하겠습니까?')) {
       setImageButtonText('사진 넣기');
       setText('');
+      navigate(`/detail/${id}`)
     }
   };
 
@@ -69,7 +70,7 @@ const AuthPage: React.FC = () => {
     }
   };
 
-  const navigate = useNavigate();
+
 
   const handleChallengeSubmit = async () => {
     try {
