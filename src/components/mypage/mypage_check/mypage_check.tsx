@@ -5,7 +5,7 @@ import * as S from './mypage_check.style';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import moment from 'moment';
-import img from '../../../assets/image/heart.png';
+
 interface MypageCheckProps {}
 
 interface Challenge {
