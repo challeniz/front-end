@@ -112,6 +112,7 @@
 <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white"/>
 <img src="https://img.shields.io/badge/prettier-F7B93E?style=flat-square&logo=prettier&logoColor=white"/>
 <img src="https://img.shields.io/badge/VScode-2F80ED?style=flat-square&logo=vsco&logoColor=white"/>
+<img src="https://img.shields.io/badge/chatbot-0066FF?style=flat-square&logo=chatbot&logoColor=white">  
 </div>
 <br>
 
@@ -119,10 +120,13 @@
 
 <div>
 <img src="https://img.shields.io/badge/node.js-339933?style=flat-square&logo=Node.js&logoColor=white">
+<img src="https://img.shields.io/badge/nestjs-E0234E?style=flat-square&logo=nestjs&logoColor=white">
 <img src="https://img.shields.io/badge/mongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white">
-<img src="https://img.shields.io/badge/express-000000?style=flat-square&logo=express&logoColor=white">
-<img src="https://img.shields.io/badge/linux-FCC624?style=flat-square&logo=linux&logoColor=black"> 
-<img src="https://img.shields.io/badge/amazonaws-232F3E?style=flat-square&logo=amazonaws&logoColor=white"> 
+<img src="https://img.shields.io/badge/ubuntu-E95420?style=flat-square&logo=ubuntu&logoColor=black"> 
+<img src="https://img.shields.io/badge/pm2-2B037A?style=flat-square&logo=pm2&logoColor=white">
+<img src="https://img.shields.io/badge/nginx-009639?style=flat-square&logo=nginx&logoColor=white">  
+<img src="https://img.shields.io/badge/jsonwebtokens-000000?style=flat-square&logo=jsonwebtokens&logoColor=white">
+<img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white"/>  
 </div>
 
 <br>
