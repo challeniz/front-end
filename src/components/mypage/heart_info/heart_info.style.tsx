@@ -11,7 +11,7 @@ export const InfoFlex = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0 15px;
+  margin-bottom: 15px;
 
   h3:hover {
     text-decoration: underline;
@@ -33,12 +33,6 @@ export const ImgWrap = styled.div`
   }
 `;
 
-export const InfoWrap = styled.div`
-  // display: flex;
-  // width: 300px;
-  // flex-direction: column;
-`;
-
 export const ButtonAuth = styled.div`
   border-radius: 10px;
   border: 1px solid #339af0;
@@ -52,4 +46,10 @@ export const ButtonAuth = styled.div`
     background-color: #339af0;
     color: #fff;
   }
+`;
+
+export const InfoWrap = styled.div`
+  display: flex;
+  width: 300px;
+  flex-direction: column;
 `;

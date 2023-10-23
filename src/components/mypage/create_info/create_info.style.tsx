@@ -11,15 +11,7 @@ export const InfoFlex = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0 15px;
-`;
-
-export const StyledImg = styled.div`
-  width: 100%;
-  height: 117px;
-  background-color: #d9d9d9;
-  border-radius: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
 `;
 
 export const ImgWrap = styled.div`
@@ -50,4 +42,10 @@ export const ButtonAuth = styled.div`
     background-color: #339af0;
     color: #fff;
   }
+`;
+
+export const InfoWrap = styled.div`
+  display: flex;
+  width: 300px;
+  flex-direction: column;
 `;

@@ -14,7 +14,6 @@ interface Challenge {
 }
 
 const CreateInfo = () => {
-
   const [likeUserData, setLikeUserData] = useState<Challenge[]>([]);
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const CreateInfo = () => {
   return (
     <S.StatusWrap>
       {likeUserData.map((challenge, index) => (
-        <div key={index}>
+        <S.InfoWrap key={index}>
           <S.ImgWrap>
             <img src={challenge.mainImg} alt="Challenge" />
           </S.ImgWrap>
@@ -62,7 +61,7 @@ const CreateInfo = () => {
           <Link to={`${ROUTE.APPPAGE.link}/${challenge.id}`}>
             <S.ButtonAuth>챌린지 참여하기</S.ButtonAuth>
           </Link>
-        </div>
+        </S.InfoWrap>
       ))}
     </S.StatusWrap>
   );
