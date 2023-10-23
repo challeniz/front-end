@@ -6,15 +6,16 @@ export const AuthWrap = styled.div`
 `;
 
 export const AuthGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 20px;
+  display: flex;
+  grid-column-gap: 10px;
   grid-row-gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 export const ImgWrap = styled.div`
   background-color: #d9d9d9;
-  width: 100%;
+  width: calc(100% / 4.2);
   height: 210px;
   cursor: pointer;
 `;
