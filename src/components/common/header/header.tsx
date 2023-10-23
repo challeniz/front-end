@@ -20,16 +20,6 @@ const Header = () => {
 
   const isMobileView = window.innerWidth <= 420;
 
-  // 이 부분을 async 함수로 변경
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await apiInstance.patch('api/users/logout');
-      const storedToken = localStorage.getItem('token');
-    };
-
-    fetchData(); // async 함수 호출
-  }, []);
-
   const navigate = useNavigate();
 
   const handleChallengeCreationClick = () => {
