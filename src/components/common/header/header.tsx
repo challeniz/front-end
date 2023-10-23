@@ -5,10 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import LogoImage from '../../../assets/image/logo.png';
 import SearchPage from '../../search_page/search_page';
 import MobileMenu from '../mobile_menu/mobile_menu';
+import { apiInstance } from '../../../utils/api';
 
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // 추가: 모바일 메뉴 상태 관리
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
@@ -19,8 +21,14 @@ const Header = () => {
   const isMobileView = window.innerWidth <= 420;
 
   useEffect(() => {
-    window.addEventListener('scroll', updateScroll);
-  });
+    const fetchData = async () => {
+      const response = await apiInstance.patch('users/logout');
+      const storedToken = localStorage.getItem('token');
+    };
+
+    fetchData();
+  }, []);
+
   const navigate = useNavigate();
 
   const handleChallengeCreationClick = () => {
@@ -55,9 +63,7 @@ const Header = () => {
         <S.HeaderNav>
           <S.NavList>
             <Link to={ROUTE.LISTPAGE.link}>
-              <S.NavItem>
-                <Link to={ROUTE.LISTPAGE.link}>챌린지 둘러보기</Link>
-              </S.NavItem>
+              <S.NavItem>챌린지 둘러보기</S.NavItem>
             </Link>
             <S.NavItem onClick={handleChallengeCreationClick}>
               챌린지 개설하기
@@ -95,7 +101,15 @@ const Header = () => {
                     <button
                       onClick={() => {
                         localStorage.removeItem('token');
-                        window.location.reload();
+
+                        apiInstance
+                          .patch('users/logout')
+                          .then((response) => {
+                            window.location.reload();
+                          })
+                          .catch((error) => {
+                            console.error('로그아웃 실패:', error);
+                          });
                       }}
                     >
                       <S.InnerLi>로그아웃</S.InnerLi>
