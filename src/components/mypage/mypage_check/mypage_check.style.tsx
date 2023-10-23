@@ -34,6 +34,9 @@ export const FullCalendarDisplay = styled.div`
 export const FullCalendarDiv = styled.div`
   width: 400px;
   font-size: 10px;
+ .fc-daygrid-block-event{
+  display:none;
+ }
   .fc {
     width: 100%;
     height: 100%;
@@ -50,19 +53,7 @@ export const FullCalendarDiv = styled.div`
     margin-left: auto;
     margin-right: auto;
   }
-  .fc-daygrid-event-harness {
-    right: 0px !important;
-    top: -20px !important;
-    height: 100%;
-  }
-  .fc-h-event {
-    height: 200%;
-    opacity: 0.5;
-  }
-  .fc-direction-ltr .fc-daygrid-event.fc-event-start {
-    margin-left: 0px;
-  }
-  .fc-direction-ltr .fc-daygrid-event.fc-event-end {
-    margin-right: 0px;
-  }
+
+  
+
 `;

@@ -80,7 +80,7 @@ export const MyPageTab: React.FC = () => {
           </S.StatusWrap>
         </>
       )}
-      {currentTab === 2 && (
+          {currentTab === 2 && (
         <>
           <MypageCheck />
         </>

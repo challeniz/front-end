@@ -22,6 +22,7 @@ const AuthList: React.FC<AuthListProps> = () => {
   const showModal = () => {
     setModalOpen(true);
   };
+  
 
   const { id } = useParams();
 
@@ -34,7 +35,7 @@ const AuthList: React.FC<AuthListProps> = () => {
       try {
         const response = await apiInstance.get(`/posts/challenges/${id}`);
         const data = response.data;
-
+     
         if (data.length > 0) {
           const challenges = data.map((challenge: any) => ({
             userName: challenge.user.name,
@@ -55,13 +56,14 @@ const AuthList: React.FC<AuthListProps> = () => {
 
   const handleChallengeClick = (challenge: Challenge) => {
     const postDate = new Date(challenge.postDate);
-    const formattedDate = `${postDate.getFullYear()}년 ${
-      postDate.getMonth() + 1
-    }월 ${postDate.getUTCDate()}일`;
-    challenge.postDate = formattedDate;
-    setChallengeData(challenge);
+    const formattedDate = `${postDate.getFullYear()}년 ${postDate.getMonth() + 1}월 ${postDate.getUTCDate()}일`;
+  
+    const modifiedChallenge = { ...challenge, postDate: formattedDate };
+  
+    setChallengeData(modifiedChallenge);
     showModal();
   };
+  
 
   return (
     <>
