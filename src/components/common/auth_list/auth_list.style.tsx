@@ -19,6 +19,11 @@ export const ImgWrap = styled.div`
   width: calc(100% /4.2);
   height: 210px;
   cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const CalendarWrap = styled.div`
