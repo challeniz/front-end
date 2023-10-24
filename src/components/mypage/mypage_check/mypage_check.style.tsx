@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import HeartImg from '../../../assets/image/heart_red.png';
 import FullCalendar from '@fullcalendar/react';
+
 export const AuthWrap = styled.div`
   padding: 0px 0 100px;
 `;
@@ -19,6 +20,11 @@ export const ImgWrap = styled.div`
   width: 100%;
   height: 210px;
   cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 export const MypageH1 = styled.h1`
   font-size: 28px;
