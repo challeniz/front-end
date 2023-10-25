@@ -40,7 +40,11 @@ export const FullCalendarDisplay = styled.div`
 export const FullCalendarDiv = styled.div`
   width: 400px;
   font-size: 10px;
+  .fc-daygrid-block-event {
+    display:none;
+  }
 
+  
   .fc {
     width: 100%;
     height: 100%;

@@ -15,7 +15,7 @@ interface Challenge {
 }
 
 const AuthList: React.FC<AuthListProps> = () => {
-  // 모달창 노출 여부 state
+
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   // 모달창 노출

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect } from 'react';
 import { apiInstance } from '../../../utils/api';
 import ModalBasic from '../../common/modal/modal';
@@ -9,13 +10,14 @@ import moment from 'moment';
 interface MypageCheckProps {}
 
 interface Challenge {
-  recru_open_date: string;
-  recru_end_date: string;
-  start_date: string;
-  end_date: string;
   title: string;
   posts: [];
   post_date: string;
+  description: string;
+  img: string;
+  user?: {
+    name: string;
+  };
 }
 interface updatedChallenge {
   challengeData: {
@@ -28,7 +30,7 @@ interface updatedChallenge {
 interface dateInfo {
   post_date: string;
 }
-const MypageCheck= () => {
+const MypageCheck = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [challengeData, setChallengeData] = useState<updatedChallenge>();
@@ -40,24 +42,22 @@ const MypageCheck= () => {
         const token = localStorage.getItem('token');
         const response = await apiInstance.get('/posts/my');
         const data = response.data;
-       
+
         if (data.length > 0) {
           const challenges = data.map((challenge: any) => ({
             title: challenge.title,
-            recru_open_date: challenge.recru_open_date,
-            recru_end_date: challenge.recru_end_date,
-            start_date: challenge.start_date,
-            end_date: challenge.end_date,
-
             posts: challenge.posts.length > 0 ? challenge.posts : [],
+            
           }));
-          const date = challenges.map((challenge: any) => { 
+          const date = challenges.map((challenge: any) => {
             const post_dates = challenge.posts.map(
               (post: any) => post.post_date
-            );    console.log(post_dates)       
+            );
+    
             return {
               title: challenge.title,
               post_dates: post_dates,
+              
             };
           });
 
@@ -72,27 +72,29 @@ const MypageCheck= () => {
     fetchData();
   }, []);
 
-  const handleChallengeClick = (post: any) => {
-    const postDate = new Date(post.post_date);
-    
+  const handleChallengeClick = (challenge: Challenge) => {
+    console.log(challenge);
+    const postDate = new Date(challenge.post_date);
     const formattedDate = `${postDate.getFullYear()}년 ${
       postDate.getMonth() + 1
     }월 ${postDate.getDate()}일`;
 
     const challengeData = {
-      description: post.description,
-      img: post.img,
+      description: challenge.description,
+      img: challenge.img,
     };
 
     const updatedChallenge: updatedChallenge = {
       challengeData,
       postDate: formattedDate,
-      name: post.user.name,
+      name: challenge.user?.name,
+   
     };
     setChallengeData(updatedChallenge);
 
     showModal();
   };
+
   const showModal = () => {
     setModalOpen(true);
   };
@@ -110,7 +112,7 @@ const MypageCheck= () => {
     const events = challenge.posts.map((post: any) => {
       const postDate = moment(post.post_date).format();
       return {
-        title: '모집기간',
+        title: '인증기간',
         start: postDate,
         end: postDate,
         classNames: 'event1-class',
@@ -121,9 +123,10 @@ const MypageCheck= () => {
   };
 
   return (
-  <> 
+    <>
       <S.AuthWrap>
         {Object.entries(groupedChallenges).map(([title, challenges], index) => {
+  
           const currentChallenge = challengeList.find(
             (challenge) => challenge.title === title
           );
@@ -148,14 +151,12 @@ const MypageCheck= () => {
                 </S.FullCalendarDiv>
                 <S.AuthGrid>
                   {challenges.map((challenge, index) => (
+                    
                     <S.ImgWrap
                       key={index}
                       onClick={() => handleChallengeClick(challenge)}
                     >
-                      <img
-                        src={challengeData?.challengeData.img}
-                        alt="Challenge Image"
-                      />
+                      <img src={challenge["img"]} alt="Challenge Image" />
                     </S.ImgWrap>
                   ))}
                 </S.AuthGrid>
@@ -173,7 +174,7 @@ const MypageCheck= () => {
           />
         )}
       </S.AuthWrap>
-    </> 
+    </>
   );
 };
 
