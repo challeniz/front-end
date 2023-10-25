@@ -12,6 +12,7 @@ interface Challenge {
   start_date: string;
   end_date: string;
   id: string;
+  isPost: boolean;
 }
 
 const StatusInfo = () => {
@@ -31,6 +32,7 @@ const StatusInfo = () => {
                 end_date: new Date(challenge.end_date).toLocaleDateString(),
                 mainImg: challenge.mainImg,
                 id: challenge._id,
+                isPost: challenge.isPost,
               })
             );
 
@@ -60,9 +62,14 @@ const StatusInfo = () => {
               </h4>
             </div>
           </S.InfoFlex>
-          <Link to={`${ROUTE.AUTHPAGE.link}/${challenge.id}`}>
-            <S.ButtonAuth>챌린지 인증하기</S.ButtonAuth>
-          </Link>
+
+          {challenge.isPost ? (
+            <S.ButtonNoAuth>인증 완료</S.ButtonNoAuth>
+          ) : (
+            <Link to={`${ROUTE.AUTHPAGE.link}/${challenge.id}`}>
+              <S.ButtonAuth>챌린지 인증하기</S.ButtonAuth>
+            </Link>
+          )}
         </S.InfoWrap>
       ))}
     </S.StatusWrap>

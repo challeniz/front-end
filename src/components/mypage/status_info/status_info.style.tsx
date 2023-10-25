@@ -62,4 +62,17 @@ export const ButtonAuth = styled.div`
     background-color: #339af0;
     color: #fff;
   }
+ 
+`;
+export const ButtonNoAuth = styled.div`
+  border-radius: 10px;
+  border: 1px solid #C7CDD2;
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+  padding: 16px 0;
+  cursor: pointer;
+  enabled: true;
+  background-color: #C7CDD2;
+  color: #fff;
 `;
