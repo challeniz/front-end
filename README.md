@@ -72,6 +72,18 @@
 
 ## 🎬 2-4. 데모영상
 
+
+ <details>
+  <summary>메인 페이지</summary>
+<p align = "left">
+  <img src = "https://github.com/challeniz/front-end/assets/133936131/d9c068e7-7e34-4ac9-bc6e-d9dfe5e79291" width = "500">
+</p>
+
+   
+* 챌린지 목록 슬라이드 버튼 
+* 검색창에서 원하는 챌리지 찾기 가능
+ </details>
+
  <details>
   <summary>회원가입 / 로그인</summary>
    
@@ -79,13 +91,19 @@
 <p align = "left">
   <img src = "https://github.com/challeniz/front-end/assets/133936131/61c8801d-79aa-415d-a70b-e84532c8cd99" width = "500">
 </p>
+
+* "중복확인" 버튼은 입력된 이메일이 이미 사용 중인지 확인할수있음. 
+* "가입하기" 버튼은 유효한 이메일이 제공될 때까지 비활성화 
    
    ### 📍 로그인
 <p align = "left">
   <img src = "https://github.com/challeniz/front-end/assets/133936131/6498a52b-97d7-4594-82f1-6e5daf037a39" width = "500">
 </p>
-   
+
+* JWT refreshToken 을 이용한 인증 인가
+* useState 훅을 사용하여 이메일과 비밀번호를 관리하고, 이메일과 비밀번호의 유효성 상태를 관리
  </details>
+
  <details>
   <summary>챌린지 개설</summary>
   <p align = "left">
@@ -109,10 +127,6 @@
     <p align = "left">
   <img src = "https://github.com/challeniz/front-end/assets/133936131/6031983c-802b-45f8-95fe-3db0f3b8eab2" width = "500">
 </p>
- </details>
- <details>
-  <summary>회원정보 수정</summary>
-  내용 넣기
  </details>
 
 <br>
