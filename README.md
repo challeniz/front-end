@@ -113,6 +113,11 @@
   <p align = "left">
   <img src = "https://github.com/challeniz/front-end/assets/133936131/a90f4119-f7e8-40fa-adf5-f009cde433b5" width = "500">
 </p>
+
+
+*  시작일을 선택하면 자동으로 금주 일요일까지 모집기간이 설정됨
+*  상세페이지에서 챌린지모집기간,첼린지진행기간을 확인할수있음
+*  마이페이지에 개설한 챌린지로 생성됨
  </details>
  <details>
   <summary>챌린지 참여</summary>
@@ -121,6 +126,9 @@
   <p align = "left">
   <img src = "https://github.com/challeniz/front-end/assets/133936131/8c01a8c5-dced-4c38-931c-a6f4314e3ac4" width = "500">
 </p>
+
+*  참여하기를 누르면 자동으로 참여자의 정보가 입력됨
+*  마이페이지에서 참여중인 챌린지 확인 가능
  </details>
  <details>
   <summary>챌린지 인증</summary>
@@ -129,6 +137,9 @@
   <p align = "left">
   <img src = "https://github.com/challeniz/front-end/assets/133936131/00e1bc26-cce1-4963-b3c3-345bfaeb7204" width = "500">
 </p>
+
+*  하루에 한번 인증하기를 완료하면 인증완료 버튼변경됨
+*  챌린지 상세페이지에서도 인증확인 가능
  </details>
  <details>
   <summary>마이페이지</summary>
@@ -137,6 +148,10 @@
 <p align = "left">
   <img src = "https://github.com/challeniz/front-end/assets/133936131/6031983c-802b-45f8-95fe-3db0f3b8eab2" width = "500">
 </p>
+
+*  개설챌릱,참여챌린지,완료챌린지 확인 가능
+*  나의 등급과 인증갯수, 획득한 뱃지를 볼 수 있음
+*  다음등급까지 남은 인증갯수 확인 가능 
  </details>
 
 <br>
