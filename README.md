@@ -74,7 +74,8 @@
 
  <details>
   <summary>회원가입 / 로그인</summary>
-  내용 넣기
+![로그인](https://github.com/challeniz/front-end/assets/133936131/6498a52b-97d7-4594-82f1-6e5daf037a39)
+
  </details>
  <details>
   <summary>챌린지 개설</summary>
