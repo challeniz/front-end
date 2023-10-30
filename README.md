@@ -74,8 +74,13 @@
 
  <details>
   <summary>회원가입 / 로그인</summary>
-
-   ### 로그인
+   
+  ### 📍 회원가입
+<p align = "left">
+  <img src = "https://github.com/challeniz/front-end/assets/133936131/61c8801d-79aa-415d-a70b-e84532c8cd99" width = "500">
+</p>
+   
+   ### 📍 로그인
 <p align = "left">
   <img src = "https://github.com/challeniz/front-end/assets/133936131/6498a52b-97d7-4594-82f1-6e5daf037a39" width = "500">
 </p>
@@ -83,19 +88,27 @@
  </details>
  <details>
   <summary>챌린지 개설</summary>
-  내용 넣기
+  <p align = "left">
+  <img src = "https://github.com/challeniz/front-end/assets/133936131/a90f4119-f7e8-40fa-adf5-f009cde433b5" width = "500">
+</p>
  </details>
  <details>
   <summary>챌린지 참여</summary>
-  내용 넣기
+  <p align = "left">
+  <img src = "https://github.com/challeniz/front-end/assets/133936131/8c01a8c5-dced-4c38-931c-a6f4314e3ac4" width = "500">
+</p>
  </details>
  <details>
   <summary>챌린지 인증</summary>
-  내용 넣기
+  <p align = "left">
+  <img src = "https://github.com/challeniz/front-end/assets/133936131/00e1bc26-cce1-4963-b3c3-345bfaeb7204" width = "500">
+</p>
  </details>
  <details>
   <summary>마이페이지</summary>
-  내용 넣기
+    <p align = "left">
+  <img src = "https://github.com/challeniz/front-end/assets/133936131/6031983c-802b-45f8-95fe-3db0f3b8eab2" width = "500">
+</p>
  </details>
  <details>
   <summary>회원정보 수정</summary>
