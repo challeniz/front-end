@@ -68,6 +68,25 @@
 
 ## 💻 2-3. 페이지별 화면
 
+
+
+
+
+|  |  |
+| ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------|
+|   <img src = "https://github.com/challeniz/front-end/assets/133936131/ef7b96b2-1f23-42e0-8c25-38a8a1885df8" width = "500"> | <img src = "https://github.com/challeniz/front-end/assets/133936131/60de5b9e-0341-4201-a06f-f26949ae5d8b" width = "500"> |
+| 메인 페이지(1) | 메인 페이지(2) |
+| <img width="500" alt="가입" src="https://github.com/challeniz/front-end/assets/133936131/379da4ed-cfce-4006-9e5c-0e7e445ef3e2"> |<img width="500" alt="로그인" src="https://github.com/challeniz/front-end/assets/133936131/87550264-c8f2-4ff5-ba9f-38982d522b07">|
+| 회원가입 | 로그인 |
+| <img width="500" alt="카테고리1" src="https://github.com/challeniz/front-end/assets/133936131/b06afb3d-e0ee-4adc-b78a-14d9a4559a59"> |   <img width="500" alt="카테고리2" src="https://github.com/challeniz/front-end/assets/133936131/6af1c221-81ed-4e2b-884a-a3cf90002758">  |
+| 전체보기 | 카테고리-취미
+|   <img src = "https://github.com/challeniz/front-end/assets/133936131/c6237dd7-fa9e-4469-bc71-0a61f7a0301e" width = "500"> | <img src = "https://github.com/challeniz/front-end/assets/133936131/8b236bcb-d353-47d4-96f9-14f462e3f95b" width = "500"> |
+| 개설하기  | 챌린지 상세페이지 |
+|  <img src = "https://github.com/challeniz/front-end/assets/133936131/ea20fe69-ec8f-4203-8e8c-0608c2bad97f" width = "500"> |  <img src = "https://github.com/challeniz/front-end/assets/133936131/707a2ac8-36ce-40ca-9748-64be7f37e61b" width = "500">  |
+| 마이페이지 - 내챌린지현황 | 마이페이지 - 내등급,배지 |
+|  <img src = "https://github.com/challeniz/front-end/assets/133936131/5609156c-fbba-474c-b887-f1bf31133930)" width = "500"> |  <img src = "https://github.com/challeniz/front-end/assets/133936131/21f53a2f-bef1-4277-b2e9-4fb1a21aa7fa" width = "500">  |
+| 마이페이지 - 내인증 현황 | 마이페이지 - 내정보 수정|
+
 <br>
 
 ## 🎬 2-4. 데모영상
