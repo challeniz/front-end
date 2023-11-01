@@ -28,7 +28,7 @@ interface updatedChallenge {
 interface dateInfo {
   post_date: string;
 }
-const MypageCheck= () => {
+const MypageCheck: React.FC<MypageCheckProps> = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [challengeList, setChallengeList] = useState<Challenge[]>([]);
   const [challengeData, setChallengeData] = useState<updatedChallenge>();
@@ -40,7 +40,6 @@ const MypageCheck= () => {
         const token = localStorage.getItem('token');
         const response = await apiInstance.get('/posts/my');
         const data = response.data;
-       
         if (data.length > 0) {
           const challenges = data.map((challenge: any) => ({
             title: challenge.title,
@@ -51,10 +50,10 @@ const MypageCheck= () => {
 
             posts: challenge.posts.length > 0 ? challenge.posts : [],
           }));
-          const date = challenges.map((challenge: any) => { 
+          const date = challenges.map((challenge: any) => {
             const post_dates = challenge.posts.map(
               (post: any) => post.post_date
-            );    console.log(post_dates)       
+            );
             return {
               title: challenge.title,
               post_dates: post_dates,
@@ -74,7 +73,6 @@ const MypageCheck= () => {
 
   const handleChallengeClick = (post: any) => {
     const postDate = new Date(post.post_date);
-    
     const formattedDate = `${postDate.getFullYear()}년 ${
       postDate.getMonth() + 1
     }월 ${postDate.getDate()}일`;
@@ -121,7 +119,7 @@ const MypageCheck= () => {
   };
 
   return (
-  <> 
+    <>
       <S.AuthWrap>
         {Object.entries(groupedChallenges).map(([title, challenges], index) => {
           const currentChallenge = challengeList.find(
@@ -173,7 +171,7 @@ const MypageCheck= () => {
           />
         )}
       </S.AuthWrap>
-    </> 
+    </>
   );
 };
 
